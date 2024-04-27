@@ -9,8 +9,7 @@
                             <h1>Refer friends and earn upto <span>$50,000</span></h1>
                             <p>They get 10% OFF their first assignment, and you earn 10% commission from their task when their
                                 task is
-                                complete...amazing, right?!</p>
-        
+                                complete...amazing, right?!</p>        
                             <form action="">
                                 <div class="input-group refer-email mb-3">
                                     <input type="text" class="form-control" placeholder="Your friend’s email ID"
@@ -20,8 +19,7 @@
                                             title="Essay Help" width="32" height="32">
                                     </button>
                                 </div>
-                            </form>
-        
+                            </form>        
                             <div class="share-block">
                                 <button type="button" href="#" class="btn btn-copy-link">Copy link</button>
                                 <button type="button" href="#" class="btn btn-share d-md-none">Share</button>
@@ -43,8 +41,7 @@
                                             title="Essay Help" width="30" height="30">
                                     </a>
                                 </div>
-                            </div>
-        
+                            </div>        
                         </div>
                     </div>
                     <div class="col-lg-6">
@@ -56,8 +53,7 @@
                     </div>
                 </div>
             </div>
-        </div>
-        
+        </div>        
         <section class="works-sec raf-hiw-sec mt-5">
             <div class="container">
                 <div class="raf-hiw-wrapper">
@@ -67,14 +63,12 @@
                                 <h2 class="head-title">How it <span>works</span>?</h2>
                             </div>
                         </div>
-                    </div>
-        
+                    </div>        
                     <div class="row mt-md-5">
                         <div class="col-md-6 gp-div">
                             <img src="{{ asset('images/group-girl.png') }}" class="img-fluid" alt="Essay Help" title="Essay Help"
                                 width="465" height="543">
-                        </div>
-        
+                        </div>        
                         <div class="col-md-6">
                             <ul class="step-list mt-4">
                                 <li>
@@ -112,8 +106,7 @@
                     </div>
                 </div>
             </div>
-        </section>
-        
+        </section>        
         <section class="helping-hand-sec my-md-5">
             <div class="container">
                 <h2>Lend a <span>helping</span> hand!</h2>
@@ -213,8 +206,7 @@
                                 <div class="student-name">
                                     <h5 class="card-title">Sarah , Regents University, London</h5>
                                     <p class="text-muted mb-0">Apr 12, 2023</p>
-                                </div>
-        
+                                </div>        
                             </div>
                             <div class="card-body p-0">
                                 <div class="sr-list">
@@ -260,8 +252,7 @@
                                 <p class="card-text text-center">“The essay assistance I received was beyond my expectations. The team at Essay Help truly knows how to deliver quality work promptly. Will definitely use their services again!”</p>
                             </div>
                         </div>
-                    </div>
-        
+                    </div>        
                     <div class="col-md-4">
                         <div class="card student-reveiw-card h-100">
                             <div class="d-flex sr-group">
@@ -316,7 +307,7 @@
                     </div>
                 </div>
             </div>
-        </section>	
+        </section>
         <x-layout.faq />	
     </main>
 @endsection

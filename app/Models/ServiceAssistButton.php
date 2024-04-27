@@ -5,9 +5,8 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class ServiceFaq extends Model
+class ServiceAssistButton extends Model
 {
     use HasFactory;
-    protected $table = 'service_faq';
-    protected $fillable = ['service_id', 'question', 'answer'];
+    protected $fillable = ['btn_text', 'btn_url', 'service_id'];
 }

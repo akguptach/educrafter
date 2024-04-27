@@ -9,9 +9,12 @@ use App\Models\Subjects;
 use App\Models\Study_labels;
 use App\Models\Task_types;
 use App\Models\Level_study;
+use App\Models\PagesRating;
 use App\Models\Grades;
 use App\Models\Pages;
+use App\Models\PagesFaq;
 use App\Models\Referencing;
+use View;
 
 class HomeController extends Controller
 {
@@ -38,8 +41,14 @@ class HomeController extends Controller
     {
         return view('why_us');
     }
+    public function about_us()
+    {
+        return view('about_us');
+    }
     public function refer_friend()
     {
+        $page = Pages::where('seo_url_slug','services')->first();
+        $pageRating = PagesRating::where('page_id',$page->id)->get();
         return view('refer_friend');
     }
     public function faq()
@@ -49,9 +58,14 @@ class HomeController extends Controller
     }
     public function services()
     {
-        $page = Pages::where('seo_url_slug', 'services')->first();
-        return view('services', compact('page'));
+        $page = Pages::where('seo_url_slug','services')->first();
+        $pageRating = PagesRating::where('page_id',$page->id)->get();
+        $faq_page = PagesFaq::where('page_id',$page->id)->get();
+        View::share('title', $page->page_title);
+        View::share('description', $page->seo_description);
+        return view('services', compact('page','pageRating','faq_page'));
     }
+    // not in use    
     public function dissertation_writing_service()
     {
         return view('dissertation_service');

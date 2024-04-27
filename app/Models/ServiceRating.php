@@ -5,9 +5,9 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class ServiceFaq extends Model
+class ServiceRating extends Model
 {
     use HasFactory;
-    protected $table = 'service_faq';
+    protected $table = 'service_ratings';
     protected $fillable = ['service_id', 'question', 'answer'];
 }

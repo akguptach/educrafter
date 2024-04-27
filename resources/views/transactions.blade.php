@@ -6,16 +6,17 @@
                 <div class="col-md-12">
                     <ul class="nav nav-pills nav-pills-new nav-fill mb-3" id="mainTab" role="tablist">
                         <li class="nav-item" role="presentation">
-                            <a class="nav-link "  href="{{ route('order') }}"
-                                >New Orders</a>
+						       <button class="nav-link active" id="new-order-tab" data-bs-toggle="tab" data-bs-target="#new-order-tab-pane"
+                                type="button" role="tab" aria-controls="new-order-tab-pane" aria-selected="false">New Orders</button>
+                            
                         </li>
                         <li class="nav-item" role="presentation">
-                            <button class="nav-link active" id="exiting-order-tab" data-bs-toggle="tab" data-bs-target="#exiting-order-tab-pane"
+                            <button class="nav-link" id="exiting-order-tab" data-bs-toggle="tab" data-bs-target="#exiting-order-tab-pane"
                                 type="button" role="tab" aria-controls="exiting-order-tab-pane" aria-selected="false">Exiting Orders</button>
                         </li>								
                     </ul>
                     <div class="tab-content" id="mainTabContent">
-                        <div class="tab-pane fade " id="new-order-tab-pane" role="tabpanel" aria-labelledby="new-order-tab" tabindex="0">									
+                        <div class="tab-pane fade show active" id="new-order-tab-pane" role="tabpanel" aria-labelledby="new-order-tab" tabindex="0">									
                             <div class="common-theme">
                                 <div class="row gx-0">
                                     <div class="col-md-8 col-lg-9">
@@ -23,7 +24,7 @@
                                             <li class="nav-item" role="presentation">
                                                 <button class="nav-link active" id="inprocess-tab" data-bs-toggle="tab"
                                                     data-bs-target="#inprocess-tab-pane" type="button" role="tab" aria-controls="inprocess-tab-pane"
-                                                    aria-selected="true">In-process (1)</button>
+                                                    aria-selected="true">In-process (<?php echo count($orders);?>)</button>
                                             </li>
                                             <li class="nav-item" role="presentation">
                                                 <button class="nav-link" id="enquiries-tab" data-bs-toggle="tab"
@@ -59,16 +60,22 @@
                                                     </tr>
                                                 </thead>
                                                 <tbody>
+												    @foreach($orders as $arrR)
                                                     <tr>
-                                                        <th scope="row">MAS62197</th>
-                                                        <td>IT Computer Science</td>
-                                                        <td>24 Aug 2023 03:30 AM AEST</td>
-                                                        <td>1000</td>			
-                                                        <td>GBP 273.00 / 273.00</td>	
+                                                        <th scope="row">
+                                                            <a class="link" href="#" data-bs-toggle="modal" data-bs-target="#orderMessageModal">
+                                                                <a class="link" href="#" data-bs-toggle="modal" data-bs-target="#orderMessageModal">MAS{{$arrR['id']}}</a>
+                                                            </a>
+                                                        </th>
+                                                        <td>{{$arrR['subject_name']}}</td>
+                                                        <td>{{date('jS F, Y',strtotime($arrR['delivery_date']))}}</td>
+                                                        <td>{{$arrR['no_of_words']}}</td>
+                                                        <td>{{$arrR['currency_code']}} {{$arrR['price']}} / {{$arrR['price']}}</td>	
                                                         <td class="text-center">
-                                                            <a class="link" href="#">View</a>
+                                                            <a class="link" href="{{url('vieworder/'.$arrR['id'])}}">View</a>
                                                         </td>
-                                                    </tr>	
+                                                    </tr>
+													@endforeach													
                                                 </tbody>
                                             </table>
                                         </div>
@@ -96,7 +103,7 @@
                                         <p>Showing 0 to 0 of 0 entries</p>        </div>
                                 </div>
                             </div>							</div>
-                        <div class="tab-pane fade show active" id="exiting-order-tab-pane" role="tabpanel" aria-labelledby="exiting-order-tab" tabindex="0">
+                        <div class="tab-pane fade" id="exiting-order-tab-pane" role="tabpanel" aria-labelledby="exiting-order-tab" tabindex="0">
                             <div class="common-theme">	
                                 <div class="row gx-0">
                                     <div class="col-md-8 col-lg-9">
@@ -104,11 +111,11 @@
                                             <li class="nav-item" role="presentation">
                                                 <button class="nav-link active" id="delivered-tab" data-bs-toggle="tab"
                                                     data-bs-target="#delivered-tab-pane" type="button" role="tab" aria-controls="delivered-tab-pane"
-                                                    aria-selected="true">On-delivered (10)</button>
+                                                    aria-selected="true">On-delivered (<?php echo count($orders);?>)</button>
                                             </li>
                                             <li class="nav-item" role="presentation">
                                                 <button class="nav-link" id="refund-tab" data-bs-toggle="tab" data-bs-target="#refund-tab-pane"
-                                                    type="button" role="tab" aria-controls="refund-tab-pane" aria-selected="false">Delivered (2)</button>
+                                                    type="button" role="tab" aria-controls="refund-tab-pane" aria-selected="false">Delivered (0)</button>
                                             </li>
                                             <li class="nav-item" role="presentation">
                                                 <button class="nav-link" id="expired-tab" data-bs-toggle="tab" data-bs-target="#expired-tab-pane"
@@ -159,7 +166,8 @@
                                                                 <a href="#" class="link">Download and Share on Email</a>
                                                             </div>
                                                         </td>
-                                                    </tr>                                                    @endforeach 
+                                                    </tr>
+													@endforeach 
                                                 </tbody>
                                             </table>
                                         </div>

@@ -157,32 +157,30 @@
                 <div class="col-md-12 text-center">
                     <h4 class="text-success">
                         <em>
-                            “Your Password Updated Successfully, Now You Can Login”
+                            Your Password Updated Successfully, Now You Can Login
                         </em>
                     </h4>
                 </div>
                 <div class="col-md-12">
-                    <button type="button" data-bs-toggle="modal" data-bs-target="#loginModal" class="btn btn-primary w-100">
+                    <a href="{{route('login')}}" class="btn btn-primary w-100">
                             Login Now
-                    </button>
+                    </a>
                 </div>
             </div>
         @endif
-        <div class="text-center my-4 text-muted">OR</div>
+			<div class="text-center my-4 text-muted">OR</div>
 
-        <div class="row gy-3 social-auth">
-                                        <a href="#" class="btn btn-google w-100">Continue with Google</a>
-                                        <a href="#" class="btn btn-facebook w-100">Continue with Facebook</a>
-                                        <a href="#" class="btn btn-apple w-100">Continue with Apple</a>
-                                    </div>
+			<div class="row gy-3 social-auth">
+				<a href="#" class="btn btn-google w-100">Continue with Google</a>
+				<a href="#" class="btn btn-facebook w-100">Continue with Facebook</a>
+				<a href="#" class="btn btn-apple w-100">Continue with Apple</a>
+			</div>
 
-        <p class="text-center mt-4 mb-0">Don’t have an account? 
-            <a data-bs-toggle="modal" href="#signupModal"
-                                            class="link">Signup</a>
-        </p>
-        <p class="text-center mt-2 mb-0">Already Registered? 
-            <a data-bs-toggle="modal" href="#loginModal"
-                                            class="link">Login</a>
-        </p>
+			<p class="text-center mt-4 mb-0">Don’t have an account? 
+				<a href="{{route('signup')}}" class="link">Signup</a>
+			</p>
+			<p class="text-center mt-2 mb-0">Already Registered? 
+				<a  href="{{route('login')}}" class="link">Login</a>
+			</p>
+       </div>
     </div>
-</div>

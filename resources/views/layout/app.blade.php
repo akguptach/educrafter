@@ -1,4 +1,5 @@
-<x-layout.header title="{{@$title}}" meta_description="{{@$meta_description}}" />
+
+<x-layout.header title="{{@$title}}" seo_description="{{@$seo_description}}" />
 <main class="flex-shrink-0">
     @yield('content')
 </main>

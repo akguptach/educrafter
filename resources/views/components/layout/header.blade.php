@@ -1,6 +1,7 @@
 <?php
 $services = \App\Models\Service::where('website_type', 'Educrafter')->get();
 ?>
+
 <!DOCTYPE html>
 <html lang="en" class="h-100">
 
@@ -8,14 +9,8 @@ $services = \App\Models\Service::where('website_type', 'Educrafter')->get();
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta name="csrf-token" content="{{ csrf_token() }}" />
-    <meta name="description" content="{{@$meta_description}}">
-    <title>
-        @if(isset($title))
-        {{$title}}
-        @else
-        Welcome to Essay Help
-        @endif
-    </title>
+    <meta name="description" content="{{ $description ?? 'Welcome to Essay Help' }}">
+    <title>{{ $title ?? 'Welcome to Essay Help' }}</title>
     <link rel="canonical" href="https://educrafter.co/">
     <link rel="icon" href="{{ asset('images/educrafter-icon.png') }}" />
     <link rel="preconnect" href="https://fonts.googleapis.com">
