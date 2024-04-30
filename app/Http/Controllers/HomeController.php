@@ -15,6 +15,8 @@ use App\Models\Pages;
 use App\Models\PagesFaq;
 use App\Models\Referencing;
 use View;
+use DB;
+
 
 class HomeController extends Controller
 {
@@ -47,8 +49,8 @@ class HomeController extends Controller
     }
     public function refer_friend()
     {
-        $page = Pages::where('seo_url_slug','services')->first();
-        $pageRating = PagesRating::where('page_id',$page->id)->get();
+        $page = Pages::where('seo_url_slug', 'services')->first();
+        $pageRating = PagesRating::where('page_id', $page->id)->get();
         return view('refer_friend');
     }
     public function faq()
@@ -58,12 +60,12 @@ class HomeController extends Controller
     }
     public function services()
     {
-        $page = Pages::where('seo_url_slug','services')->first();
-        $pageRating = PagesRating::where('page_id',$page->id)->get();
-        $faq_page = PagesFaq::where('page_id',$page->id)->get();
+        $page = Pages::where('seo_url_slug', 'services')->first();
+        $pageRating = PagesRating::where('page_id', $page->id)->get();
+        $faq_page = PagesFaq::where('page_id', $page->id)->get();
         View::share('title', $page->page_title);
         View::share('description', $page->seo_description);
-        return view('services', compact('page','pageRating','faq_page'));
+        return view('services', compact('page', 'pageRating', 'faq_page'));
     }
     // not in use    
     public function dissertation_writing_service()
@@ -101,5 +103,18 @@ class HomeController extends Controller
     public function dissertation_online()
     {
         return view('dissertation_online');
+    }
+    public function contanctSave(Request $request)
+    {        
+        $contactData = [
+            'name' => $request->input('c_name'),
+            'email' => $request->input('c_email_id'),
+            'mobile_number' => $request->input('c_mobile_no'),
+            'service' => $request->input('studylabel_id'),
+            'write_us' => $request->input('c_message'),
+        ];
+        $contact = \App\Models\ContactForm::create($contactData);
+        return redirect()->route('contact-us')->with('success', 'Enquery Form Created Successfully!');
+
     }
 }

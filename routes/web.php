@@ -43,6 +43,7 @@ Route::get('/Physics_help', [Home::class, 'physics_help'])->name('Physics_help')
 Route::get('/Research_paper_online', [Home::class, 'research_paper_online'])->name('Research_paper_online');
 Route::get('/Dissertation_online', [Home::class, 'dissertation_online'])->name('Dissertation_online');
 Route::get('/dateformat', [Home::class, 'dateformat'])->name('dateformat');
+Route::post('/contact_form', [Home::class, 'contanctSave'])->name('contanct_save');
 Route::get('/pages/{sku}', [Pages::class, 'index'])->name('pages.index');
 Route::get('/term', [Pages::class, 'terms_condtion'])->name('term');
 Route::get('/blog', [Blog::class, 'index'])->name('blog');
@@ -59,7 +60,6 @@ Route::post('/login', [Auth::class, 'login'])->name('login');
 Route::get('/order', [Order::class, 'index'])->name('order');
 Route::post('/price', [Order::class, 'checkprice'])->name('price');
 
-
 Route::middleware('auth')->group(function () {
     Route::get('/payment', [Payment::class, 'index']);
     Route::post('/pay', [Payment::class, 'pay'])->name('pay');
@@ -71,7 +71,6 @@ Route::middleware('auth')->group(function () {
     Route::get('/statements', [Order::class, 'statements'])->name('order.statements');
     Route::post('/neworder', [Order::class, 'create'])->name('neworder');
     Route::post('/process-attachment', [Order::class, 'processAttachment'])->name('process-attachment');
-
     Route::get('/profile', [Student::class, 'profile'])->name('student.profile');
     Route::post('/update-profile', [Student::class, 'updateProfile'])->name('student.update.profile');
     Route::get('/changepass', [Student::class, 'changepass'])->name('student.changepass');

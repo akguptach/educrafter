@@ -17,9 +17,9 @@
             <div class="row  align-items-center">
                 <div class="col-lg-6">
                     <div class="masthead-left">
-                        <h5>{{$data->seo_meta}}</h5>
+                        <h5>{{$data->service->service_name}}</h5>
                         {!!$data->seo_title !!}
-                        <p>{{$data->seo_description}}</p>
+                        <p>{!!$data->service->short_description!!}</p>
                         <form action="{{$data->button_url}}">
                             <button type="submit" class="btn btn-primary w-100">{{$data->button_title}}</button>
                         </form>
@@ -109,8 +109,8 @@
                 </div>
             </div>
             <div class="row gy-4">
-                @if($data->service && $data->service->specification)
-                @foreach($data->service->specification as $specification)
+                @if($data->service && $data->service->whyEducrafter)
+                @foreach($data->service->whyEducrafter as $specification)
                 <div class="col-md-4">
                     <div class="work-card h-100">
                         <picture>
@@ -198,7 +198,7 @@
 
         </div>
     </section>
-    <section class="mb-5">
+    <!--<section class="mb-5">
         <div class="container">
             <div class="assign-box">
                 <div class="row">
@@ -220,7 +220,7 @@
                 </div>
             </div>
         </div>
-    </section>
+    </section>-->
 
 
 
