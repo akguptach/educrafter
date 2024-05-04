@@ -1,6 +1,117 @@
 @extends('layout.app',['title'=>$title])
 @section('content')
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@100..900&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&family=Zilla+Slab:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400;1,500;1,600;1,700&display=swap" rel="stylesheet">
 <style>
+.poppins-thin {
+  font-family: "Poppins", sans-serif;
+  font-weight: 100;
+  font-style: normal;
+}
+
+.poppins-extralight {
+  font-family: "Poppins", sans-serif;
+  font-weight: 200;
+  font-style: normal;
+}
+
+.poppins-light {
+  font-family: "Poppins", sans-serif;
+  font-weight: 300;
+  font-style: normal;
+}
+
+.poppins-regular {
+  font-family: "Poppins", sans-serif;
+  font-weight: 400;
+  font-style: normal;
+}
+
+.poppins-medium {
+  font-family: "Poppins", sans-serif;
+  font-weight: 500;
+  font-style: normal;
+}
+
+.poppins-semibold {
+  font-family: "Poppins", sans-serif;
+  font-weight: 600;
+  font-style: normal;
+}
+
+.poppins-bold {
+  font-family: "Poppins", sans-serif;
+  font-weight: 700;
+  font-style: normal;
+}
+
+.poppins-extrabold {
+  font-family: "Poppins", sans-serif;
+  font-weight: 800;
+  font-style: normal;
+}
+
+.poppins-black {
+  font-family: "Poppins", sans-serif;
+  font-weight: 900;
+  font-style: normal;
+}
+
+.poppins-thin-italic {
+  font-family: "Poppins", sans-serif;
+  font-weight: 100;
+  font-style: italic;
+}
+
+.poppins-extralight-italic {
+  font-family: "Poppins", sans-serif;
+  font-weight: 200;
+  font-style: italic;
+}
+
+.poppins-light-italic {
+  font-family: "Poppins", sans-serif;
+  font-weight: 300;
+  font-style: italic;
+}
+
+.poppins-regular-italic {
+  font-family: "Poppins", sans-serif;
+  font-weight: 400;
+  font-style: italic;
+}
+
+.poppins-medium-italic {
+  font-family: "Poppins", sans-serif;
+  font-weight: 500;
+  font-style: italic;
+}
+
+.poppins-semibold-italic {
+  font-family: "Poppins", sans-serif;
+  font-weight: 600;
+  font-style: italic;
+}
+
+.poppins-bold-italic {
+  font-family: "Poppins", sans-serif;
+  font-weight: 700;
+  font-style: italic;
+}
+
+.poppins-extrabold-italic {
+  font-family: "Poppins", sans-serif;
+  font-weight: 800;
+  font-style: italic;
+}
+
+.poppins-black-italic {
+  font-family: "Poppins", sans-serif;
+  font-weight: 900;
+  font-style: italic;
+}
+
 .we-work-content h3 {
     color: blue;
     font-size: 18px;
@@ -10,28 +121,45 @@
     font-size: 15px !impportant;
     font-weight: 500 !important;
 }
+/* scrollbar */
+::-webkit-scrollbar {
+  width: 5px;
+  height: 5px;
+}
+
+::-webkit-scrollbar-track {
+  -webkit-box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.3);
+  -webkit-border-radius: 10px;
+  border-radius: 10px;
+}
+
+::-webkit-scrollbar-thumb {
+  -webkit-border-radius: 10px;
+  border-radius: 10px;
+  background: rgba(255, 255, 255, 0.3);
+  -webkit-box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.5);
+}
+
+::-webkit-scrollbar-thumb:window-inactive {
+  background: rgba(255, 255, 255, 0.3);
+}
+
 </style>
 <main class="flex-shrink-0">
     <div class="masthead wcu-masthead">
         <div class="container">
-            <div class="row  align-items-center">
-                <div class="col-lg-6">
-                    <div class="masthead-left">
-                        <h5>{{$data->service->service_name}}</h5>
-                        {!!$data->seo_title !!}
+            <div class="row">
+                <div class="col-lg-8">
+                    <div class="masthead-left poppins-medium" >
+                        <!--<h5 style="color:#0d6efd;">{{$data->service->service_name}}</h5>-->
+                        {!!$data->seo_title!!}
                         <p>{!!$data->service->short_description!!}</p>
-                        <form action="{{$data->button_url}}">
-                            <button type="submit" class="btn btn-primary w-100">{{$data->button_title}}</button>
-                        </form>
+						
+                        
+                        <p><a href="{{$data->button_url}}" class="btn btn-primary">{{$data->button_title}}</a></p>
+                        
                     </div>
-                </div>
-                <div class="col-lg-6">
-                    <picture>
-                        <source media="(min-width:768px)" srcset="{{ asset('images/hero-girl.png') }}">
-                        <img src="{{ asset('images/hero-girl-mobile.png') }}" class="img-fluid" alt="Essay Help"
-                            title="Essay Help" width="400" height="680">
-                    </picture>
-                    <p>Our writers are graduates of <span>top universities.</span></p>
+					<p>Our writers are graduates of <span>top universities.</span></p>
                     <div class="overflow-hidden tu-marquee">
                         <div class="horizontal-marquee">
                             <img src="{{ asset('images/universities_logo/21.png') }}" alt="EduCrafter"
@@ -58,7 +186,16 @@
                                 title="EduCrafter" height="85">
                         </div>
                     </div>
+                
                 </div>
+                <div class="col-lg-4">
+                    <picture>
+                        <source media="(min-width:768px)" srcset="{{ asset('images/hero-girl.png') }}">
+                        <img src="{{ asset('images/hero-girl-mobile.png') }}" class="img-fluid" alt="Essay Help"
+                            title="Essay Help" width="400" height="680">
+                    </picture>
+                    
+				</div>
             </div>
             <div class="row">
                 <div class="col-12">
@@ -388,7 +525,30 @@
             </div>
         </div>
     </section>
-    <section class="faq-sec">
+    
+
+    
+
+    
+	<section class="mt-3 mb-3">
+        <div class="container" style="overflow: auto;max-height: 600px;">
+            <div class="row">
+                @if($data->service && $data->service->specification)
+                @foreach($data->service->specification as $specification)
+                <div class="col-sm-6">
+                    <div class="card-body poppins-light"
+                        style="background:#F5FFF6;border-radius: 24px;padding:29px 15px 29px 15px;margin-bottom: 10px;text-align:left">
+                        <h2 style="font-size: 1.5rem;text-align: left;" class="poppins-bold">{{$specification->title}}</h2>
+                        <p style="">{!!$specification->description!!}</p>
+                    </div>
+                </div>
+                @endforeach
+                @endif
+            </div>
+        </div>
+    </section>
+	
+	<section class="faq-sec">
         <div class="container">
             <div class="faq-box">
                 <div class="hiw-head">
@@ -421,28 +581,8 @@
         </div>
     </section>
 
-
-    <section class="mt-3 mb-3">
-        <div class="container" style="overflow: auto;">
-            <div class="row">
-                @if($data->service && $data->service->specification)
-                @foreach($data->service->specification as $specification)
-                <div class="col-sm-6">
-                    <div class="card-body text-center"
-                        style="background:#F5FFF6;border-radius: 24px;padding:29px 15px 29px 15px;margin-bottom: 10px;">
-                        <h3 style="font-size: 1.5rem;text-align: left;">{{$specification->title}}</h3>
-                        <p style="text-align:justify">{{$specification->description}}</p>
-                    </div>
-                </div>
-                @endforeach
-                @endif
-            </div>
-        </div>
-    </section>
-
-
-
-    <section class="faq-sec">
+	
+   <section class="faq-sec">
         <div class="container">
             <div class="faq-box">
                 <div class="hiw-head">
@@ -470,7 +610,9 @@
             </div>
         </div>
     </section>
-    <section class="trophy-sec mb-5">
+    
+
+	<section class="trophy-sec mb-5">
         <div class="container">
             <div class="tripy-box">
                 <div class="row">

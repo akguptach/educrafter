@@ -74,7 +74,7 @@
 						<a class="nav-link px-0" href="{{ route('order') }}">Referral Program</a>
 					</li>
 				</ul>
-				<h2>Tools</h2>
+				<h2 style="margin-bottom: 0px;margin-top: 10px;">Tools</h2>
 				<ul class="nav flex-column">
 					<li class="nav-item">
 						<a class="nav-link px-0" aria-current="page" href="#">Free Essay Writing Tools</a>
@@ -83,7 +83,7 @@
 						<a class="nav-link px-0" href="#">Plagiarism Checker</a>
 					</li>
 					<li class="nav-item">
-						<a class="nav-link px-0" href="{{ route('order') }}">Citation Generators</a>
+						<a class="nav-link px-0" href="{{ route('order')}}">Citation Generators</a>
 					</li>
 				</ul>
 			</div>
@@ -100,7 +100,16 @@
 						<a class="nav-link px-0">Support@Essayhelp.co</a>
 					</li>
 				</ul>
-				
+				<div class="pt-2">
+					<a href="#">
+						<img src="{{ asset('images/DMCA.png')}}" width="100" height="40">
+					</a>
+				</div>
+				<h6 class="pt-2">We accept</h6>
+				<div class="">
+
+				</div>
+
 			</div>
 		</div>
 		<hr class="opacity-25 my-md-5">

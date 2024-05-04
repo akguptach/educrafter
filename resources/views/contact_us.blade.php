@@ -33,10 +33,12 @@
         white-space: nowrap;
     }
 </style>
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@10"></script>
+
 
 <section class="order-sec">
     <div class="container">
-        <form class="order-form" id="contact_form" name="contact_form" enctype="multipart/form-data" method="POST" action="{{route('contanct_save')}}">
+        <form class="order-form" method="POST" id="contact_form" name="contact_form" enctype="multipart/form-data">
             <div class="row">
                 @csrf
                 <div class="col-md-8">
@@ -50,7 +52,7 @@
                                 <div class="mb-3">
                                     <label for="c_name" class="form-label">Your Name</label>
                                     <div class="input-group">
-                                        <input name="c_name" id="c_name" type="text" class="form-control text-start"  required />
+                                        <input name="c_name" id="c_name" type="text" class="form-control text-start" required />
                                     </div>
                                 </div>
                             </div>
@@ -58,14 +60,14 @@
                                 <div class="mb-3">
                                     <label for="c_email_id" class="form-label">Your Email Id</label>
                                     <div class="input-group">
-                                        <input name="c_email_id" id="c_email_id" type="email" class="form-control text-start" required pattern="[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$"/>
+                                        <input name="c_email_id" id="c_email_id" type="email" class="form-control text-start" required pattern="[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$" />
                                     </div>
                                 </div>
                             </div>
                             <div class="col-md-6">
                                 <div class="mb-3">
                                     <label for="c_mobile_no" class="form-label">Your Mobile No./Whatapp No.</label>
-                                    <input name="c_mobile_no" id="c_mobile_no" type="text" class="form-control text-start"   required pattern="[0-9]{10,14}" min="10" mix ="13"/>
+                                    <input name="c_mobile_no" id="c_mobile_no" type="text" class="form-control text-start" required pattern="[0-9]{10,14}" min="10" mix="13" />
                                 </div>
                             </div>
                             <div class="col-md-6">
@@ -79,7 +81,6 @@
                                         <option value="Letter of recommendation">Letter of recommendation</option>
                                         <option value="Personal Statement">Personal Statement</option>
                                         <option value="Scholarship Essay Writing">Scholarship Essay Writing</option>
-
                                     </select>
                                 </div>
                             </div>
@@ -89,12 +90,11 @@
                                 </div>
                             </div>
                             <div class="col-md-12">
-                                <button type="submit" class="btn btn-primary w-100" name="btn_checkout">Submit</button>
+                                <button type="button" class="btn btn-primary w-100" id="btn_checkout" name="btn_checkout">Submit</button>
                             </div>
                         </div>
                     </div>
                 </div>
-
                 <div class="col-md-4">
                     <div class="sticky-top">
                         <div class="order-summary os-theme">
@@ -109,13 +109,8 @@
                                 <div class="col-12">
                                     <p>Office Call No. +44 7845 411128</p>
                                 </div>
-
                             </div>
-
-
-
                         </div>
-
                         <div class="whn-block">
                             <h3>What happens next?</h3>
                             <p>We will assign a tutor who's an expert in your subject. We'll keep you updated on the progress.</p>
@@ -126,5 +121,48 @@
         </form>
     </div>
 </section>
-
+<script type="text/javascript">
+    $(document).ready(function() {
+        $('#btn_checkout').click(function() {
+            var formData = $('#contact_form').serialize();
+            $.ajax({
+                type: 'POST',
+                url: "{{ route('contanct_save') }}",
+                data: formData,
+                headers: {
+                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                },
+                success: function(response) {
+                    if (response.status === 2) {
+                        Swal.fire({
+                            title: "Success",
+                            text: response.message,
+                            icon: "success",
+                            timer: 3000, // 3 seconds
+                            timerProgressBar: true,
+                            onClose: () => {
+                                // Actions to be performed when the alert is closed
+                            }
+                        });
+                    } else {
+                        Swal.fire({
+                            title: "Error",
+                            text: "Something went wrong!",
+                            icon: "error",
+                            timer: 3000, // 3 seconds
+                            timerProgressBar: true,
+                            onClose: () => {
+                                // Actions to be performed when the alert is closed
+                            }
+                        });
+                    }
+                },
+                error: function(xhr, status, error) {
+                    console.error('Error occurred:', error);
+                    // Handle error if needed
+                }
+            });
+        });
+    });
+</script>
 @endsection

@@ -802,7 +802,30 @@
 </div>
 </div>
 </section>--}}
-<x-layout.faq />
+{{--<x-layout.faq />--}}
+<section class="faq-sec">
+	<div class="container">
+		<div class="faq-box">
+			<div class="hiw-head">
+				<h2 class="head-title">Frequently Asked <span>Questions</span></h2>
+			</div>
+			<div class="accordion row" id="accordionExample">
+				@foreach ($faq_page as $faq)
+				<div class="accordion-item col-sm-6">
+					<h2 class="accordion-header" id="heading<?= $faq['id']; ?>">
+						<a class="accordion-button collapsed" href="#" data-bs-toggle="collapse" data-bs-target="#collapse<?= $faq['id']; ?>" aria-expanded="true" aria-controls="collapse<?= $faq['id']; ?>">
+							<?= $faq['question']; ?>
+						</a>
+					</h2>
+					<div id="collapse<?= $faq['id']; ?>" class="accordion-collapse collapse" aria-labelledby="heading<?= $faq['id']; ?>" data-bs-parent="#accordionExample">
+						<div class="accordion-body"><?= $faq['answer']; ?></div>
+					</div>
+				</div>
+				@endforeach
+			</div>
+		</div>
+	</div>
+</section>
 <section class="trophy-sec mb-5">
 	<div class="container">
 		<div class="tripy-box">
@@ -829,7 +852,6 @@
 			<div class="col-12">
 				<div class="hiw-head">
 					<h2 class="head-title">Recent <span> Articles</span></h2>
-
 				</div>
 			</div>
 		</div>

@@ -1,29 +1,29 @@
 <?php
-
 namespace App\Http\Controllers;
-
 use App\Http\Controllers\Controller;
-use Illuminate\Http\Request;
 use Illuminate\Http\Response;
 use App\Models\Subjects;
 use App\Models\Study_labels;
 use App\Models\Task_types;
 use App\Models\Level_study;
 use App\Models\PagesRating;
+use App\Models\Faq;
 use App\Models\Grades;
-use App\Models\Pages;
+use App\Models\ServiceSeo;
 use App\Models\PagesFaq;
 use App\Models\Referencing;
+use Illuminate\Http\Request;
 use View;
 use DB;
-
-
 class HomeController extends Controller
 {
     public function index()
     {
         $data['subjects']   =   Subjects::orderBy('subject_name', 'ASC')->get()->toArray();
-        //$data['topics']     =   Study_labels::orderBy('id','desc')->get()->toArray();
+        //$data['topics']     =  Study_labels::orderBy('id','desc')->get()->toArray();
+        $page = ServiceSeo::where('seo_url_slug', 'homepage')->first();
+        // dd($page);
+        $data['faq_page'] =   PagesFaq::where('page_id',$page->service_id)->get();
         $data['task_types'] =   Task_types::where('website_type', 'Essay Help')->orderBy('id', 'desc')->get()->toArray();
         $data['levels']     =   Level_study::where('website_type', 'Essay Help')->orderBy('id', 'desc')->get()->toArray();
         $data['grades']     =   Grades::orderBy('id', 'desc')->get()->toArray();
@@ -105,7 +105,14 @@ class HomeController extends Controller
         return view('dissertation_online');
     }
     public function contanctSave(Request $request)
-    {        
+    {            
+        $request->validate([
+            'c_name' => 'required',
+            'c_email_id' => 'required|email',
+            'c_mobile_no' => 'required|numeric|min:10',
+            'studylabel_id' => 'required',
+            'c_message' => 'required',
+        ]);
         $contactData = [
             'name' => $request->input('c_name'),
             'email' => $request->input('c_email_id'),
@@ -114,7 +121,9 @@ class HomeController extends Controller
             'write_us' => $request->input('c_message'),
         ];
         $contact = \App\Models\ContactForm::create($contactData);
-        return redirect()->route('contact-us')->with('success', 'Enquery Form Created Successfully!');
-
+        return response()->json([
+            'status' => 2,
+            'message' => 'Thanks For Enquery.We will touch you soon.',
+        ]);
     }
 }
