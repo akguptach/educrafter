@@ -37,6 +37,7 @@
 
 
 <section class="order-sec">
+
     <div class="container">
         <form class="order-form" method="POST" id="contact_form" name="contact_form" enctype="multipart/form-data">
             <div class="row">
@@ -121,6 +122,54 @@
         </form>
     </div>
 </section>
+<script>
+    document.addEventListener("DOMContentLoaded", function() {
+        document.getElementById("btn_checkout").addEventListener("click", function() {
+            var name = document.getElementById("c_name").value;
+            var email = document.getElementById("c_email_id").value;
+            var mobile = document.getElementById("c_mobile_no").value;
+            var service = document.getElementById("studylabel_id").value;
+            var message = document.getElementById("c_message").value;
+
+            // Simple validation - check if fields are empty
+            if (name.trim() === "") {
+                alert("Please enter your name.");
+                return false;
+            }
+            if (email.trim() === "") {
+                alert("Please enter your email.");
+                return false;
+            }
+            if (mobile.trim() === "") {
+                document.getElementById("mobileError").innerText = "Please enter your mobile number.";
+                return false;
+            }
+            if (service.trim() === "") {
+                document.getElementById("serviceError").innerText = "Please select a service.";
+                return false;
+            }
+            if (message.trim() === "") {
+                alert("Please write a message.");
+                return false;
+            }
+
+            // Email validation
+            var emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+            if (!emailRegex.test(email)) {
+                alert("Please enter a valid email address.");
+                return false;
+            }
+            // Mobile number validation
+            var mobileRegex = /^[0-9]{10,14}$/;
+            if (!mobileRegex.test(mobile)) {
+                alert("Please enter a valid mobile number.");
+                return false;
+            }
+           
+            return false;
+        });
+    });
+</script>
 <script type="text/javascript">
     $(document).ready(function() {
         $('#btn_checkout').click(function() {
@@ -144,6 +193,8 @@
                                 // Actions to be performed when the alert is closed
                             }
                         });
+                       
+                        document.getElementById("contact_form").reset();
                     } else {
                         Swal.fire({
                             title: "Error",

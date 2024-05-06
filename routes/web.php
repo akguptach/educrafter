@@ -60,6 +60,9 @@ Route::post('/login', [Auth::class, 'login'])->name('login');
 Route::get('/order', [Order::class, 'index'])->name('order');
 Route::post('/price', [Order::class, 'checkprice'])->name('price');
 
+
+Route::post('/neworder', [Order::class, 'create'])->name('neworder');
+Route::post('/process-attachment', [Order::class, 'processAttachment'])->name('process-attachment');
 Route::middleware('auth')->group(function () {
     Route::get('/payment', [Payment::class, 'index']);
     Route::post('/pay', [Payment::class, 'pay'])->name('pay');
@@ -69,8 +72,8 @@ Route::middleware('auth')->group(function () {
     Route::any('/vieworder/{oid}', [Order::class, 'vieworder'])->name('order.vieworder');
     Route::get('/refer_friend_individual', [Order::class, 'refer_friend'])->name('order.refer_friend');
     Route::get('/statements', [Order::class, 'statements'])->name('order.statements');
-    Route::post('/neworder', [Order::class, 'create'])->name('neworder');
-    Route::post('/process-attachment', [Order::class, 'processAttachment'])->name('process-attachment');
+    //Route::post('/neworder', [Order::class, 'create'])->name('neworder');
+    //Route::post('/process-attachment', [Order::class, 'processAttachment'])->name('process-attachment');
     Route::get('/profile', [Student::class, 'profile'])->name('student.profile');
     Route::post('/update-profile', [Student::class, 'updateProfile'])->name('student.update.profile');
     Route::get('/changepass', [Student::class, 'changepass'])->name('student.changepass');

@@ -241,6 +241,14 @@ class OrderController extends Controller
             return $this->sendError('Validation Error.', $validator->errors(), 422);
         }
 
+        if (!Auth::check()) {
+            $orderRequestData = $request->all();
+            $orderRequestData['refer'] = route('order');
+            $request->session()->put('orderRequestData', $orderRequestData);
+            $request->session()->save();
+            return response()->json(['status' => 'Login require'], 401);
+        }
+
         $order = new Orders();
 
 

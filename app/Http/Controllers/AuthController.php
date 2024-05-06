@@ -1,5 +1,7 @@
-<?php                               
+<?php
+
 namespace App\Http\Controllers;
+
 use App\Models\Admin;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -9,6 +11,7 @@ use Illuminate\Support\Facades\Crypt;
 use Illuminate\Contracts\Encryption\DecryptException;
 use Validator;
 use Hash;
+
 class AuthController extends BaseController
 {
     public function loginPage(Request $request)
@@ -43,6 +46,10 @@ class AuthController extends BaseController
             'admin' => $data,
             'message' => 'Logged successfully.',
         ];
+        if ((session()->has('orderRequestData'))) {
+            $orderRequestData = session('orderRequestData');
+            $response['refer'] = $orderRequestData['refer'];
+        }
         return response()->json($response, 200);
     }
     /**

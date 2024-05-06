@@ -47,7 +47,13 @@ class StudentController extends Controller
         $student->password = Hash::make($request->password);
         $student->save();
         $token = Auth::attempt(['email' => $request->input('email'), 'password' => $request->input('password')]);
-        return $this->sendResponse([], 'User details updated successfully.');
+
+        $response = [];
+        if ((session()->has('orderRequestData'))) {
+            $orderRequestData = session('orderRequestData');
+            $response['refer'] = $orderRequestData['refer'];
+        }
+        return $this->sendResponse($response, 'User details updated successfully.');
     }
     public function profile()
     {

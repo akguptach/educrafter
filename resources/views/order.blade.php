@@ -94,6 +94,7 @@
 <main class="flex-shrink-0">
     <section class="order-sec">
         <div class="container">
+            @php($orderRequestData = session('orderRequestData'))
             <form class="order-form" id="order_form" name="order_form" enctype="multipart/form-data">
                 @csrf
                 <div class="row">
@@ -110,9 +111,10 @@
                                             <option selected>Select subject</option>
                                             @if(!empty($subjects)):
                                             @foreach ($subjects as $subject1)
-                                            <option value="<?= $subject1['id']; ?>" @if(app('request')->
-                                                input('subject_id')==$subject1['id']) {{ 'selected';}} @endif
-                                                ><?= $subject1['subject_name']; ?></option>
+                                            <option value="<?= $subject1['id']; ?>"
+                                                @if(isset($orderRequestData['subject_id']) &&
+                                                $orderRequestData['subject_id']==$subject1['id']) selected="selected"
+                                                @endif><?= $subject1['subject_name']; ?></option>
                                             @endforeach
                                             @endif
                                         </select>
@@ -125,9 +127,11 @@
                                             name="referencing_style_id">
                                             <option selected>Select Referencing Style</option>
                                             @if(!empty($referencings)): @foreach ($referencings as $referencing) <option
-                                                value="<?= $referencing['id']; ?>" @if(app('request')->
-                                                input('referencing_style_id')==$referencing['id']) {{ 'selected';}}
-                                                @endif ><?= $referencing['style']; ?></option> @endforeach
+                                                value="<?= $referencing['id']; ?>"
+                                                @if(isset($orderRequestData['referencing_style_id']) &&
+                                                $orderRequestData['referencing_style_id']==$referencing['id'])
+                                                selected="selected" @endif><?= $referencing['style']; ?></option>
+                                            @endforeach
                                             @endif
                                         </select>
                                     </div>
@@ -140,9 +144,10 @@
                                             <option selected>Select task type</option>
                                             @if(!empty($task_types)):
                                             @foreach ($task_types as $task_type)
-                                            <option value="<?= $task_type['id']; ?>" @if(app('request')->
-                                                input('task_type_id')==$task_type['id']) {{ 'selected';}} @endif
-                                                ><?= $task_type['type_name']; ?></option>
+                                            <option value="<?= $task_type['id']; ?>"
+                                                @if(isset($orderRequestData['task_type_id']) &&
+                                                $orderRequestData['task_type_id']==$task_type['id']) selected="selected"
+                                                @endif><?= $task_type['type_name']; ?></option>
                                             @endforeach
                                             @endif
                                         </select>
@@ -157,8 +162,8 @@
                                             <input type="text" class="form-control" placeholder=""
                                                 aria-label="taskDate text with button addon"
                                                 aria-describedby="button-addon1"
-                                                value="@if(app('request')->input('no_of_words')) {{ app('request')->input('no_of_words') }} @else {{ '200';}} @endif"
-                                                id="no_of_words" name="no_of_words">
+                                                value="{{@$orderRequestData['no_of_words'] ??  200}}" id="no_of_words"
+                                                name="no_of_words">
                                             <button class="btn btn-outline-secondary btn-plus" onclick="add(this)"
                                                 type="button">+</button>
                                         </div>
@@ -172,13 +177,15 @@
                                             <option selected>Select level of study</option>
                                             @if(!empty($levels)):
                                             @foreach ($levels as $level)
-                                            <option value="<?= $level['id']; ?>" @if(app('request')->
-                                                input('studylabel_id')==$level['id']) {{ 'selected';}}
+                                            <option value="<?= $level['id']; ?>"
+                                                @if(isset($orderRequestData['studylabel_id']) &&
+                                                $orderRequestData['studylabel_id']==$level['id']) selected="selected"
                                                 @endif><?= $level['level_name']; ?></option>
                                             @endforeach
                                             @endif
                                         </select>
-                                        <input type="hidden" id="uploadedFile" name="uploadedFile" />
+                                        <input type="hidden" id="uploadedFile" name="uploadedFile"
+                                            value="{{$orderRequestData['uploadedFile'] ?? ''}}" />
                                     </div>
                                 </div>
                                 <div class="col-md-6">
@@ -189,9 +196,10 @@
                                             <option selected>Select grade</option>
                                             @if(!empty($grades)):
                                             @foreach ($grades as $grade)
-                                            <option value="<?= $grade['id']; ?>" @if(app('request')->
-                                                input('grade_id')==$grade['id']) {{ 'selected';}}
-                                                @endif><?= $grade['grade_name']; ?></option>
+                                            <option value="<?= $grade['id']; ?>"
+                                                @if(isset($orderRequestData['grade_id']) &&
+                                                $orderRequestData['grade_id']==$grade['id']) selected="selected" @endif>
+                                                <?= $grade['grade_name']; ?></option>
                                             @endforeach
                                             @endif
                                         </select>
@@ -201,13 +209,23 @@
                                 <div class="col-md-12">
                                     <div class="title-task-box">
                                         <input id="title" name="title" type="text" class="form-control"
-                                            placeholder="Add a title for your Task/Project">
+                                            placeholder="Add a title for your Task/Project"
+                                            value="{{$orderRequestData['title'] ?? ''}}">
                                         <hr class="my-0">
                                         <textarea class="form-control" id="task" name="task" rows="3"
-                                            placeholder="Tell us more about your task.."></textarea>
+                                            placeholder="Tell us more about your task..">{{$orderRequestData['task'] ?? ''}}</textarea>
 
 
-                                        <div id="attachment_list" style="text-align:center;"></div>
+                                        <div id="attachment_list" style="text-align:center;">
+                                            @if(isset($orderRequestData['uploadedFile']))
+                                            <ul>
+                                                <li>
+                                                    <a href="{{$orderRequestData['uploadedFile']}}"
+                                                        target="_blank">{{$orderRequestData['uploadedFile']}}</a>
+                                                </li>
+                                            </ul>
+                                            @endif
+                                        </div>
 
                                         <div class="file-upload-box">
                                             <a for="taskFile" class="form-label" data-bs-toggle="modal"
@@ -236,8 +254,10 @@
 
                                     </div>
 
-                                    <input type="hidden" id="delivery_date" name="delivery_date" value="NA">
-                                    <input type="hidden" id="delivery_price" name="delivery_price" value="0">
+                                    <input type="hidden" id="delivery_date" name="delivery_date"
+                                        value="{{$orderRequestData['delivery_date'] ?? 'NA'}}">
+                                    <input type="hidden" id="delivery_price" name="delivery_price"
+                                        value="{{$orderRequestData['delivery_price'] ?? 0}}">
 
 
                                 </div>
@@ -321,21 +341,12 @@
                                     Conditions</a> and <a href="#" class="link">Privacy Policy</a>.
                             </p>
 
-                            @guest
-                            <div id="ordersubmit_div">
-                                <button type="button" data-bs-toggle="modal" href="#loginModal"
-                                    class="btn btn-primary w-100" id="btn_checkout"
-                                    name="btn_checkout">Checkout</button>
-                            </div>
 
-                            @endguest
-
-                            @auth
 
                             <button type="submit" class="btn btn-primary w-100" id="btn_checkout"
                                 name="btn_checkout">Checkout</button>
 
-                            @endauth
+
 
 
                         </div>
@@ -492,10 +503,10 @@ $(function() {
         // In 'rules' user have to specify all the             
         // constraints for respective fields            
         rules: {
-            title: {
+            title1: {
                 required: true,
             },
-            task: {
+            task1: {
                 required: true,
             },
         },
@@ -509,12 +520,12 @@ $(function() {
                         response.order_id) {
                         window.location.href = 'payment?id=' + response.order_id;
                     } else {
-                        window.location.reload();
+                        //window.location.reload();
                     }
                 })
                 .fail(function(xhr, status, error) {
-                    //$('#invalid_login_data').show();                        
-                    //console.error('Error:', error);                    
+                    if (xhr.status == 401)
+                        $("#loginModal").modal("show");
                 })
                 .always(function() {
                     //console.log('Request completed.');                                            
@@ -611,7 +622,7 @@ function saveAttachment(e) {
             if (attachmentSize > 100) {
                 $('#attachmentErrors').html(
                     '<div class="alert alert-danger">Attachment size more than 100 MB are not allowed.<div></div></div>'
-                    );
+                );
             } else {
                 sendAttachment('file', attachment);
             }
@@ -656,7 +667,7 @@ function sendAttachment(attachmentType, attachmentData) {
             attachmentData = '<ul>';
             (sendAttachmentResponse.attachment).forEach((item) => {
                 attachmentData += '<li><a href="' + item + '" target="_blank">' + item +
-                '</a></li>';
+                    '</a></li>';
                 $('#uploadedFile').val(item);
 
             });

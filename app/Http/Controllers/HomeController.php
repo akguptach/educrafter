@@ -8,9 +8,11 @@ use App\Models\Task_types;
 use App\Models\Level_study;
 use App\Models\PagesRating;
 use App\Models\Faq;
+use App\Models\ServiceRating;
 use App\Models\Grades;
 use App\Models\ServiceSeo;
 use App\Models\PagesFaq;
+use App\Models\Service;
 use App\Models\Referencing;
 use Illuminate\Http\Request;
 use View;
@@ -24,8 +26,8 @@ class HomeController extends Controller
         $page = ServiceSeo::where('seo_url_slug', 'homepage')->first();
         // dd($page);
         $data['faq_page'] =   PagesFaq::where('page_id',$page->service_id)->get();
-        $data['task_types'] =   Task_types::where('website_type', 'Essay Help')->orderBy('id', 'desc')->get()->toArray();
-        $data['levels']     =   Level_study::where('website_type', 'Essay Help')->orderBy('id', 'desc')->get()->toArray();
+        $data['task_types'] =   Task_types::where('website_type', 'Essay')->orderBy('id', 'desc')->get()->toArray();
+        $data['levels']     =   Level_study::where('website_type', 'Essay')->orderBy('id', 'desc')->get()->toArray();
         $data['grades']     =   Grades::orderBy('id', 'desc')->get()->toArray();
         $data['referencings']     =   Referencing::orderBy('id', 'desc')->get()->toArray();
         return view('home', $data);
@@ -49,9 +51,9 @@ class HomeController extends Controller
     }
     public function refer_friend()
     {
-        $page = Pages::where('seo_url_slug', 'services')->first();
-        $pageRating = PagesRating::where('page_id', $page->id)->get();
-        return view('refer_friend');
+     $page = Service::where('service_name', 'Refer Friend')->first();
+     $serviceRating = ServiceRating::where('service_id', $page->id)->get();
+        return view('refer_friend',compact('serviceRating'));
     }
     public function faq()
     {

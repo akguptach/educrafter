@@ -2,7 +2,7 @@
 <script src="{{ asset('js/main.min.js') }}"></script>
 <script>
 $(document).ready(function() {
-    alert("hii")
+
     $("#login_form").validate({
         // In 'rules' user have to specify all the             
         // constraints for respective fields            

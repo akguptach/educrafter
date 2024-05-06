@@ -32,8 +32,11 @@ $(document).ready(function() {
                     //$("#withlogin ul").append("<li class='nav-item'><a class='nav-link' href='{{route('order.transactions')}}'>Hi,"+response.admin.first_name+" "+response.admin.last_name+"</a></li><li class='nav-item'><a class='nav-link' href='{{route('logout')}}'>Logout</a></li>");			
                     //$('#ordersubmit_div').html('<button type="submit" class="btn btn-primary w-100" id="btn_checkout" name="btn_checkout">Checkout</button>');		
                     //console.log('Success:', response);
-
-                    window.location.href = "{{route('home')}}"
+                    if (response.refer) {
+                        window.location.href = response.refer;
+                    } else {
+                        window.location.href = "{{route('home')}}"
+                    }
                 })
                 .fail(function(xhr, status, error) {
                     $('#invalid_login_data').show();
