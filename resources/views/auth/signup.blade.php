@@ -231,7 +231,7 @@ $().ready(function() {
                     if (response.data.refer) {
                        window.location.href = response.data.refer;
                     } else {
-                       location.reload();
+                        window.location.href = '/';
                     }
 
                 })

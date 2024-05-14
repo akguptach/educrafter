@@ -100,19 +100,21 @@
                                     <th scope="col">Total Lead</th>
                                     <th scope="col">Total Order</th>
                                     <th scope="col">Total Earned</th>
-                                    <th scope="col">Action</th>
+                                    <!--<th scope="col">Action</th>-->
                                 </tr>
                             </thead>
                             <tbody>
+                            
                                 <tr>
                                     <td scope="row">Referrals</td>
-                                    <td>0</td>
-                                    <td>0</td>
-                                    <td>AUD 0.00</td>
-                                    <td>
+                                    <td>{{$referrals}}</td>
+                                    <td>{{$total_orders}}</td>
+                                    <td>AUD {{$earned}}</td>
+                                    <!--<td>
                                         <a href="#" class="link">Transaction Details</a>
-                                    </td>
+                                    </td>-->
                                 </tr>
+
                             </tbody>
                         </table>
                     </div>

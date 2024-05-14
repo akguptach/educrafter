@@ -195,7 +195,7 @@
                         <div class="assign-content">
                             <h2 style="color:#303B4F;">All assignments can be done on time</h2>
                             <p style="color:#303B4F;">Fast and professional help from certified <br> experts on EduCrafter</p>
-                            <a class="btn btn-primary" href="#" role="button" style="color: #fff;background: #3b71ed;border: 1px solid #3b71ed;">Get started</a>
+                            <a class="btn btn-primary" href="{{ route('orders') }}" role="button" style="color: #fff;background: #3b71ed;border: 1px solid #3b71ed;">Get started</a>
                         </div>
                     </div>
                     <div class="col-md-6 text-center">
@@ -207,6 +207,5 @@
             </div>
         </div>
     </section>
-    
 </main>
 @endsection

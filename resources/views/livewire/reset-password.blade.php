@@ -19,7 +19,7 @@
     </div>
     <div class="form-wrapper">
         @if($formState == 'send-email')
-            <form autocomplete="off" class="form-common" wire:submit="sendEmail">
+            <form autocomplete="off" class="" wire:submit="sendEmail">
                 <div class="row gy-3 gx-2">
                     <div class="col-md-12">
                         <div class="input-group flex-nowrap">
@@ -168,7 +168,7 @@
                 </div>
             </div>
         @endif
-			<div class="text-center my-4 text-muted">OR</div>
+			<div class="text-center my-2 text-muted">OR</div>
 
 			<div class="row gy-3 social-auth">
 				<a href="#" class="btn btn-google w-100">Continue with Google</a>

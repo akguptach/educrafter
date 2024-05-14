@@ -10,6 +10,7 @@ use App\Models\Referencing;
 use App\Models\Subjects;
 use App\Models\Task_types;
 use App\Models\Website;
+use App\Models\Referral;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
@@ -384,8 +385,22 @@ class OrderController extends Controller
 
     public function refer_friend()
     {
+
+        $referrals = Referral::where('referred_by',Auth::user()->id)->count();
+        $earned = Referral::where('referred_by',Auth::user()->id)->sum('earned');
+        $referralsList = Referral::with(['student' => fn($student) => $student->withCount('orders')])
+        ->where('referred_by',Auth::user()->id)->get();
+        $totalOrders = 0;
+        foreach($referralsList as $referralsData){
+            $totalOrders = $totalOrders+$referralsData->student->orders_count;
+        }
         $referralCode = Auth::user()->referral_code;
-        $data = array('referral_code'=>$referralCode);
+        $data = [
+            'referral_code'=>$referralCode,
+            'total_orders'=>$totalOrders,
+            'referrals'=>$referrals,
+            'earned'=>$earned
+        ];
         return view('refer_friend_individual', $data);
 
     }

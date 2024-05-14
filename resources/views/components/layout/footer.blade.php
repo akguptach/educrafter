@@ -334,7 +334,7 @@
                         </ul>
                     </div>
                 </div>
-                <div class="col-xl-3 col-lg-3 col-md-6 mb-30">
+                {{--<div class="col-xl-3 col-lg-3 col-md-6 mb-30">
                     <div class="footer-widget">
                         <div class="footer-widget-heading">
                             <h3>Tools</h3>
@@ -343,8 +343,6 @@
                             <li><a href="https://educrafter.co">Free Essay Writing Tools</a></li>
                             <li><a href="{{ route('about-us')}}">Plagiarism Checker</a></li>
                             <li><a href="https://educrafter.co/contact-us">Citation Generators</a></li>
-
-
                         </ul>
                     </div>
                     <div class="footer-widget">
@@ -357,7 +355,7 @@
                         </ul>
                     </div>
 
-                </div>
+                </div>--}}
 
 
             </div>

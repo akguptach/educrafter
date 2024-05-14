@@ -10,4 +10,9 @@ class Student extends Authenticatable
     use HasApiTokens, HasFactory, Notifiable;
     protected $table = 'student';
     protected $fillable = ['first_name','last_name','email','phone_number','password','country_code','referral_code'];
+
+    public function orders()
+    {
+        return $this->hasMany('App\Models\Orders', 'student_id');
+    }
 }

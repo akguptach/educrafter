@@ -98,7 +98,7 @@
                             </div>
 
                             <p class="text-center mt-4 mb-0">Don’t have an account? <a data-bs-toggle="modal"
-                                    href="#signupModal" class="link">Signup</a></p>
+                                    href="{{route('signup')}}" class="link">Signup</a></p>
                             <p class="text-center mt-2 mb-0">Forget Password? <a data-bs-toggle="modal"
                                     href="#forgetPasswordModal" class="link">Reset Now</a></p>
                         </div>

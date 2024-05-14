@@ -61,7 +61,7 @@
                         password</div>
                     <div id="success_register" class="success" style="display:none">Registered successfully, now you can
                         login here</div>
-                    <form action="{{route('login')}}" class="form-common" id="login_form" method="POST">
+                    <form action="{{route('login')}}" class="" id="login_form" method="POST">
                         @csrf
                         <div class="row gy-3 gx-2">
                             <div class="col-md-12">
@@ -93,7 +93,7 @@
                         </div>
                     </form>
 
-                    <div class="text-center my-4 text-muted">OR</div>
+                    <div class="text-center  text-muted">OR</div>
 
                     <div class="row gy-3 social-auth">
                         <a href="#" class="btn btn-google w-100">Continue with Google</a>
@@ -121,7 +121,7 @@
             </div>
 
             <img src="{{ asset('images/graduate-girl-small.png') }}" class="img-fluid" alt="Essay Help"
-                title="Essay Help" width="312" height="679">
+                title="Essay Help" width="211" >
         </div>
     </div>
 </div>

@@ -49,7 +49,7 @@
             </div>
 
             <img src="{{ asset('images/graduate-girl-small.png') }}" class="img-fluid" alt="Essay Help" title="Essay Help"
-                width="312" height="679">
+                width="211" >
         </div>
     </div>
 </div>

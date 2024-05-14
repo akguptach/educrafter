@@ -242,25 +242,26 @@
         </div>
     </section>
     <section class="mb-5">
-        <div class="container">
-            <div class="assign-box">
-                <div class="row">
-                    <div class="col-md-6 d-flex flex-column justify-content-end">
-                        <div class="assign-content">
-                            <h2>All assignments can be done on time</h2>
-                            <p>Fast and professional help from certified <br> experts on EduCrafter</p>
-                            <a class="btn btn-primary" href="{{route('order')}}" role="button">Get started</a>
-                        </div>
+    <div class="container">
+        <div class="assign-box">
+            <div class="row">
+                <div class="col-md-6 d-flex flex-column justify-content-end">
+                    <div class="assign-content">
+                        <h2 style="color:#303B4F;">All assignments can be done on time</h2>
+                        <p style="color:#303B4F;">Fast and professional help from certified <br> experts on EduCrafter
+                        </p>
+                        <a class="btn btn-primary" href="{{route('order')}}" role="button" style="color: #fff;background: #3b71ed;border: 1px solid #3b71ed;">Get started</a>
                     </div>
-                    <div class="col-md-6 text-center">
-                        <picture>
-                            <img src="{{ asset('images/img-01.png') }}" class="img-fluid card-img modal-img" alt="EduCrafter" title="EduCrafter" loading="lazy" width="542" height="415">
-                        </picture>
-                    </div>
+                </div>
+                <div class="col-md-6 text-center">
+                    <picture>
+                        <img src="{{ asset('images/img-01.png') }}" class="img-fluid card-img modal-img" alt="EduCrafter" title="EduCrafter" loading="lazy" width="542" height="415">
+                    </picture>
                 </div>
             </div>
         </div>
-    </section>
+    </div>
+</section>
     <section class="mt-3">
         <div class="container">
             <div class="row">

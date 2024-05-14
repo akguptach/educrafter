@@ -104,7 +104,6 @@
                     <div class="col-md-8">
                         <div class="order-summary">
                             <h2 class="border-0">Task Details</h2>
-
                             <div class="row">
                                 <div class="col-md-6">
                                     <div class="mb-3">
@@ -208,7 +207,6 @@
                                         </select>
                                     </div>
                                 </div>
-
                                 <div class="col-md-12">
                                     <div class="title-task-box">
                                         <input id="title" name="title" type="text" class="form-control"
@@ -217,8 +215,6 @@
                                         <hr class="my-0">
                                         <textarea class="form-control" id="task" name="task" rows="3"
                                             placeholder="Tell us more about your task..">{{$orderRequestData['task'] ?? ''}}</textarea>
-
-
                                         <div id="attachment_list" style="text-align:center;">
                                             @if(isset($orderRequestData['uploadedFile']))
                                             <ul>
@@ -229,12 +225,10 @@
                                             </ul>
                                             @endif
                                         </div>
-
                                         <div class="file-upload-box">
                                             <a for="taskFile" class="form-label" data-bs-toggle="modal"
                                                 href="#fileuploadModal">Attach files</a>
                                         </div>
-
                                     </div>
                                 </div>
                                 <div class="col-md-12">
@@ -245,8 +239,6 @@
 
                                     <div class="row gy-3 hours-list mb-3">
                                         <div id="error_msg"></div>
-
-
                                     </div>
                                     <div id="datepicker1">
                                         <h4 Style="text-align:center;">
@@ -254,19 +246,13 @@
                                         </h4>
                                         <ul class="donate-now custom_date_div">
                                         </ul>
-
                                     </div>
-
                                     <input type="hidden" id="delivery_date" name="delivery_date"
                                         value="{{(isset($orderRequestData['delivery_date']) && $orderRequestData['delivery_date']!='NA')?$orderRequestData['delivery_date']:'12 hours'}}">
                                     <input type="hidden" id="delivery_price" name="delivery_price"
                                         value="{{$orderRequestData['delivery_price'] ?? 0}}">
-
-
                                 </div>
-
                             </div>
-
                         </div>
                     </div>
                     <div class="col-md-4">
@@ -280,7 +266,6 @@
                                     <p class="text-end subject_div">NA</p>
                                 </div>
                             </div>
-
                             <div class="row align-items-end">
                                 <div class="col-6">
                                     <p>Referencing Style</p>
@@ -321,7 +306,6 @@
                                     <p class="text-end grade_div">NA</p>
                                 </div>
                             </div>
-
                             <div class="row align-items-end">
                                 <div class="col-6">
                                     <p>Delivery At</p>
@@ -340,20 +324,12 @@
                                 </div>
                             </div>
                             <p class="text-center text-tcnp">
-                                By proceeding to checkout you accept our <a href="#" class="link">Terms and
-                                    Conditions</a> and <a href="#" class="link">Privacy Policy</a>.
+                                By proceeding to checkout you accept our <a href="{{route('terms-and-conditions')}}" class="link">Terms and
+                                    Conditions</a> and <a href="{{route('privacy-policy')}}" class="link">Privacy Policy</a>.
                             </p>
-
-
-
                             <button type="submit" class="btn btn-primary w-100" id="btn_checkout"
                                 name="btn_checkout">Checkout</button>
-
-
-
-
                         </div>
-
                         <div class="whn-block">
                             <h3>What happens next?</h3>
                             <p>We will assign a tutor who's an expert in your subject. We'll keep you updated on the
@@ -364,7 +340,6 @@
             </form>
         </div>
     </section>
-
 </main>
 <div class="modal fade" id="fileuploadModal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
     aria-labelledby="fileuploadModalLabel" aria-hidden="true">
@@ -443,17 +418,14 @@ $(function() {
     $("#grade_id").change(function() {
         pricecal();
     });
-
     $("#no_of_words").on("keyup", function() {
         var end = this.value;
         $('.no_of_words_div').text(end);
         pricecal();
     });
-
     $(document).on("click", ".delivery_at", function() {
         console.log('------', $(this).val())
         $('.total_price').text($(this).attr('rel'));
-
         $('#delivery_price').val($(this).attr('rel'));
         $('#delivery_date').val($(this).val());
         //$('.delivery_at_div').text($(this).val());
@@ -474,12 +446,8 @@ $(function() {
         }
 
     });
-
-
-
     add = function(obj) {
         var count = $(obj).siblings('input').val();
-
         $(obj).siblings('input').val(parseInt(++count))
         //var at = $(obj).siblings('button.addToCard');
         //var valcount = at.attr("onClick").split(',');
@@ -487,10 +455,8 @@ $(function() {
         $('.no_of_words_div').text(parseInt(count));
         pricecal();
     }
-
     minus = function(obj) {
         var count = $(obj).siblings('input').val();
-
         if (count > 0) {
             $(obj).siblings('input').val(parseInt(count - 1))
             var at = $(obj).siblings('button.addToCard');
@@ -501,7 +467,6 @@ $(function() {
 
         }
     }
-
     $("#order_form").validate({
         // In 'rules' user have to specify all the             
         // constraints for respective fields            
@@ -516,7 +481,6 @@ $(function() {
         submitHandler: function(form) {
             //$('#invalid_login_data').hide();                
             var formData = $(form).serialize();
-
             $.post("{{route('neworder')}}", formData)
                 .done(function(response) {
                     if (response.status && response.status == 'order added successfully.' &&
@@ -536,19 +500,14 @@ $(function() {
             return false;
         }
     });
-
 });
-
-
 function pricecal() {
-
     $('.subject_div').text($("#subject_id option:selected").text());
     $('.referencing_style_div').text($("#referencing_style_id option:selected").text());
     $('.task_type_div').text($("#task_type_id option:selected").text());
     $('.studylabel_div').text($("#studylabel_id option:selected").text());
     $('.grade_div').text($("#grade_id option:selected").text());
     $('.no_of_words_div').text($("#no_of_words").val());
-
     var data = $('#order_form').serialize();
     $.ajax({
         type: 'post',
@@ -563,12 +522,10 @@ function pricecal() {
         success: function(response) {
             $('#error_msg').html('');
             if (response.success == 'false') {
-
                 let error = response.message;
                 $.each(error, function(index, value) {
                     $('#error_msg').append('<div class="alert alert-danger">' + value + '<div>');
                 });
-
             } else {
 
                 //$('#my_hour1').val(response.price.hour1);
@@ -595,10 +552,6 @@ function pricecal() {
                         }
                     });
                 }
-
-
-
-
             }
         },
         complete: function(response) {
@@ -606,7 +559,6 @@ function pricecal() {
         }
     });
 }
-
 function saveAttachment(e) {
     e.preventDefault();
     let attachmentList = [];
