@@ -4,7 +4,7 @@
     </a>
     <ul class="dropdown-menu" aria-labelledby="navbarDarkDropdownMenuLink" style="z-index:9999">
         <li class="px-3 user-amount">
-        <p class="mb-0">Wallet Amount: <span>AUD 320.45</span></p>
+        <p class="mb-0">Wallet Amount: <span>AUD 00.00</span></p>
         <p class="mb-0">Free Credit: <span>AUD 0</span></p>
         </li>
         <li><hr class="dropdown-divider mt-0"></li>

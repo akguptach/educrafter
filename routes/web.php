@@ -27,25 +27,30 @@ use App\Http\Controllers\ErrorController as Error;
 */
 
 Route::get('/', [Home::class, 'index'])->name('home');
-Route::get('/faq', [Home::class, 'faq'])->name('faq');
-Route::get('/why_us', [Home::class, 'why_us'])->name('why_us');
-Route::get('/refer_friend', [Home::class, 'refer_friend'])->name('refer_friend');
-Route::get('/contact-us', [Home::class, 'contact_us'])->name('contact-us');
-Route::get('/about-us', [Home::class, 'about_us'])->name('about-us');
-Route::get('/Services', [Home::class, 'services'])->name('Services');
-Route::get('/Dissertation_service', [Home::class, 'dissertation_writing_service'])->name('Dissertation_service');
-Route::get('/Research_writing_service', [Home::class, 'research_writing_service'])->name('Research_writing_service');
-Route::get('/Term_writing_service', [Home::class, 'term_writing_service'])->name('Term_writing_service');
-Route::get('/Admission_writing_service', [Home::class, 'admission_writing_service'])->name('Admission_writing_service');
-Route::get('/Edit_my_essay', [Home::class, 'edit_my_essay'])->name('Edit_my_essay');
-Route::get('/Coursework_writing_service', [Home::class, 'coursework_writing_service'])->name('Coursework_writing_service');
-Route::get('/Physics_help', [Home::class, 'physics_help'])->name('Physics_help');
-Route::get('/Research_paper_online', [Home::class, 'research_paper_online'])->name('Research_paper_online');
-Route::get('/Dissertation_online', [Home::class, 'dissertation_online'])->name('Dissertation_online');
+
+
+Route::post('/subscribe_form', [Home::class, 'subscriptionData'])->name('subscriptionData');
+
 Route::get('/dateformat', [Home::class, 'dateformat'])->name('dateformat');
 Route::post('/contact_form', [Home::class, 'contanctSave'])->name('contanct_save');
 Route::get('/pages/{sku}', [Pages::class, 'index'])->name('pages.index');
-Route::get('/term', [Pages::class, 'terms_condtion'])->name('term');
+
+
+Route::get('/faq', [Pages::class, 'faq'])->name('faq');
+Route::get('/why_us', [Pages::class, 'why_us'])->name('why_us');
+Route::get('/refer_friend', [Pages::class, 'refer_friend'])->name('refer_friend');
+Route::get('/contact-us', [Pages::class, 'contact_us'])->name('contact-us');
+Route::get('/about-us', [Pages::class, 'about_us'])->name('about-us');
+Route::get('/Services', [Pages::class, 'services'])->name('Services');
+
+
+Route::get('/terms-and-conditions', [Pages::class, 'terms_condtion'])->name('terms-and-conditions');
+Route::get('/privacy-policy', [Pages::class, 'privacy_policy'])->name('privacy-policy');
+Route::get('/refund-policy', [Pages::class, 'refund_policy'])->name('refund-policy');
+Route::get('/cookies-policy', [Pages::class, 'cookies_policy'])->name('cookies-policy');
+
+
+
 Route::get('/blog', [Blog::class, 'index'])->name('blog');
 Route::get('/blog1', [Blog::class, 'index'])->name('blog1');
 Route::get('/blog/{blog}', [Blog::class, 'view'])->name('blog.view');
@@ -53,6 +58,9 @@ Route::get('/blog/{blog}', [Blog::class, 'view'])->name('blog.view');
 
 Route::get('/login', [Auth::class, 'loginPage'])->name('login.page');
 Route::get('/signup', [Auth::class, 'signupPage'])->name('signup.page');
+
+Route::get('/refer/{referral_code}', [Auth::class, 'signupPage'])->name('signup.referral_code');
+
 Route::get('/reset-password', [Auth::class, 'resetPasswordPage'])->name('reset.password.page');
 Route::get('/404', [Error::class, 'notFound'])->name('not.found.page');
 Route::post('/signup', [Student::class, 'create'])->name('signup');
@@ -93,4 +101,5 @@ Livewire::setScriptRoute(function ($handle) {
 Livewire::setUpdateRoute(function ($handle) {
     return Route::any('/student/livewire/update', $handle);
 });
+
 Route::get('/{slug}', [Services::class, 'servicesIndex'])->name('Services.Index');

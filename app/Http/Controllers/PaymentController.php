@@ -72,12 +72,18 @@ class PaymentController extends Controller
             $amount = $order->price * 100;
             $email = $order->student->email;
             $currency_code = strtolower($order->currency_code);
+
+
             
+
+            $fmt = new \NumberFormatter('en_US', \NumberFormatter::CURRENCY);
+            $fmt->parseCurrency($currency_code."0.00", $curr);
+        
             $checkout_session = Session::create([
                 'customer_email' => $email,
                 'line_items' => [[
                     'price_data' => [
-                        'currency' => $currency_code,
+                        'currency' => $curr,
                         'product_data' => [
                             'name' => $order->subject->subject_name,
                         ],
@@ -104,7 +110,10 @@ class PaymentController extends Controller
     {
 		
         if(session()->has('payment_object') && session()->has('payment_order_id') && Orders::where('id',session('payment_order_id'))->exists()) {
+            
+            
             if(session('payment_object')->payment_status == 'paid') {
+                
                 Orders::where('id',session('payment_order_id'))->update(
                     [
                         'payment_status' => 'Success'
@@ -123,6 +132,7 @@ class PaymentController extends Controller
                 );
                 Flash::flash('payment_status','Success');
             }else {
+                // dd(session('payment_object'));
                 Orders::where('id',session('payment_order_id'))->update(
                     [
                         'payment_status' => 'Failed'
@@ -146,16 +156,13 @@ class PaymentController extends Controller
             Mail::send('email.order-data', ['order' => $order], function($message) {
                 $message->to(env("ADMIN_EMAIL"))->subject('New Order');
             });
-            return redirect()->route('order');
+            return redirect()->route('order.transactions');
         }else {
             return redirect()->back();
         }
-    }
-    
+    }    
     public function payment(Request $request)
-    {
-		
-		
+    {	
         $validator = Validator::make($request->all(), [
             'fullName' => 'required',
             'cardNumber' => 'required',
@@ -163,15 +170,12 @@ class PaymentController extends Controller
             'year' => 'required',
             'cvv' => 'required'
         ]);
-
         if ($validator->fails()) {
             $request->session()->flash('danger', $validator->errors()->first());
             return response()->redirectTo('/');
         }
-
         $token = $this->createToken($request);
-		echo $token['error'];
-		die;
+		
         if (!empty($token['error'])) {
             $request->session()->flash('danger', $token['error']);
             return response()->redirectTo('/');
@@ -180,7 +184,6 @@ class PaymentController extends Controller
             $request->session()->flash('danger', 'Payment failed.');
             return response()->redirectTo('/');
         }
-
         $charge = $this->createCharge($token['id'], 2000);
         if (!empty($charge) && $charge['status'] == 'succeeded') {
             $request->session()->flash('success', 'Payment completed.');
@@ -218,7 +221,7 @@ class PaymentController extends Controller
                 'amount' => $amount,
                 'currency' => 'usd',
                 'source' => $tokenId,
-                'description' => 'My first payment'
+                'description' => 'My first payment',
             ]);
         } catch (Exception $e) {
             $charge['error'] = $e->getMessage();

@@ -16,7 +16,7 @@ $countries = Countries::all();
 }
 </style>
 <!-- Include jQuery -->
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+
 <!-- Include intl-tel-input plugin -->
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/intl-tel-input/17.0.12/css/intlTelInput.css">
 <script src="https://cdnjs.cloudflare.com/ajax/libs/intl-tel-input/17.0.12/js/intlTelInput.min.js"></script>
@@ -76,6 +76,8 @@ $countries = Countries::all();
                             exists</div>
                         <form action="{{route('signup')}}" class="" id="signup_form" method="POST">
                             @csrf
+
+                            <input type="hidden" name="referral_code" value="{{@$referral_code}}" >
                             <div class="row gy-2 gx-1">
                                 <div class="col-md-6">
                                     <input type="text" class="form-control" placeholder="Enter your first name"

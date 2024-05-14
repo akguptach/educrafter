@@ -102,13 +102,13 @@
                             <h2>GET IN TOUCH</h2>
                             <div class="row">
                                 <div class="col-12">
-                                    <p>Office Email Id info@sopcraft.com</p>
+                                    <p>Office Email Id info@educrafter.co</p>
                                 </div>
                                 <div class="col-12">
-                                    <p>Office Whatapp No. +44 7845 411128</p>
+                                    <p>Office Whatapp No. +44 (784) 541 1128</p>
                                 </div>
                                 <div class="col-12">
-                                    <p>Office Call No. +44 7845 411128</p>
+                                    <p>Office Call No. +44 (784) 541 1128</p>
                                 </div>
                             </div>
                         </div>

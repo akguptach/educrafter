@@ -94,7 +94,10 @@
 <main class="flex-shrink-0">
     <section class="order-sec">
         <div class="container">
-            @php($orderRequestData = session('orderRequestData'))
+        
+            @php($orderSessionData = (session('orderRequestData'))?session('orderRequestData'):[])
+            
+            @php($orderRequestData = array_merge($orderSessionData,app('request')->input()))
             <form class="order-form" id="order_form" name="order_form" enctype="multipart/form-data">
                 @csrf
                 <div class="row">
@@ -255,7 +258,7 @@
                                     </div>
 
                                     <input type="hidden" id="delivery_date" name="delivery_date"
-                                        value="{{$orderRequestData['delivery_date'] ?? 'NA'}}">
+                                        value="{{(isset($orderRequestData['delivery_date']) && $orderRequestData['delivery_date']!='NA')?$orderRequestData['delivery_date']:'12 hours'}}">
                                     <input type="hidden" id="delivery_price" name="delivery_price"
                                         value="{{$orderRequestData['delivery_price'] ?? 0}}">
 

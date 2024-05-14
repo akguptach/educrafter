@@ -86,7 +86,7 @@
                         <div id="collapseTwo" class="accordion-collapse collapse" aria-labelledby="headingTwo" data-bs-parent="#accordionExample">
                             <div class="accordion-body">Sop Craft stands out through the expertise of its PhD writers, personalized approach to each client, and dedication to delivering standout SOPs and admission essays that mirror the unique qualities and aspirations of applicants.</div>
                         </div>
-                    </div>                    
+                    </div>
                 </div>
             </div>
         </div>
@@ -178,7 +178,7 @@
             </div>
 
             <div class="text-center mt-4 mt-md-5 mb-4 ">
-                <a class="btn btn-primary" href="#" role="link">Get started</a>
+                <a class="btn btn-primary" href="{{route('order')}}" role="link">Get started</a>
             </div>
         </div>
     </section>
@@ -191,9 +191,8 @@
                         <h3 class="mb-4">Still in Two Minds?<br> The Proof is in Numbers!</h3>
 
                         <p>With EduCrafter, it has never been easier to get the grades you've always wanted. Our world-class academics are ready to help.</p>
-                        <a class="btn btn-primary d-none d-md-inline-flex" href="#" role="link">Get started</a>
+                        <a class="btn btn-primary d-none d-md-inline-flex" href="{{route('order')}}" role="link">Get started</a>
                     </div>
-
                 </div>
                 <div class="col-md-6">
                     <div class="testimonial-slider">
@@ -201,9 +200,23 @@
                             @foreach ($pageRating->take(4) as $rating)
                             <div class="col-md-6 mb-2">
                                 <div class="card student-review-card p-2">
+                                    <div class="card-body p-0">
+                                        <p class="card-text" id="ratingDescriptionShort{{ $rating->id }}">
+                                            {!! Str::words(strip_tags($rating->description), 20, ' <a href="javascript:void(0)" onclick="toggleDescription(event, '.$rating->id.')" style="text-decoration: none; "> Read more...</a>') !!}
+                                        </p>
+                                        <p class="card-text" id="ratingDescriptionFull{{ $rating->id }}" style="display: none;">
+                                            {!! $rating->description !!}
+                                        </p>
+                                        <?php
+                                        $date2 = $rating->created_at;
+                                        $newDate2 = date("M d, Y", strtotime($date2));
+                                        ?>
+                                        <div class="student-name"><b>{{ $rating->address}}.</b></div>
+
+                                    </div>
                                     <div class="d-flex sr-block ">
-                                        <div class="student-photo">
-                                            <img src="{{ $rating->user_image }}" class="img-fluid" loading="lazy" alt="Student Photo" title="Student Photo" width="65" height="65">
+                                        <div class="student-photo" style="font-size: 14px;">
+                                            {{ $newDate2 }}
                                         </div>
                                         <div class="sr-list">
                                             <ul class="student-rating" data-rate="{{$rating->star_rating}}">
@@ -215,14 +228,6 @@
                                             </ul>
                                         </div>
                                     </div>
-                                    <div class="card-body p-0">
-                                        <p class="card-text">{{ $rating->description }}</p>
-                                        <?php
-                                        $date2 = $rating->created_at;
-                                        $newDate2 = date("M d, Y", strtotime($date2));
-                                        ?>
-                                        <div class="student-name"><b>{{ $rating->address}}.</b><span> {{ $newDate2 }}</span></div>
-                                    </div>
                                 </div>
                             </div>
                             @endforeach
@@ -230,7 +235,7 @@
 
                     </div>
 
-                    <a class="btn btn-primary w-100 mt-4 d-md-none" href="#" role="link">Get started</a>
+                    <a class="btn btn-primary w-100 mt-4 d-md-none" href="{{route('order')}}" role="link">Get started</a>
                 </div>
             </div>
 
@@ -244,7 +249,7 @@
                         <div class="assign-content">
                             <h2>All assignments can be done on time</h2>
                             <p>Fast and professional help from certified <br> experts on EduCrafter</p>
-                            <a class="btn btn-primary" href="#" role="button">Get started</a>
+                            <a class="btn btn-primary" href="{{route('order')}}" role="button">Get started</a>
                         </div>
                     </div>
                     <div class="col-md-6 text-center">
@@ -309,7 +314,7 @@
             </div>
 
             <div class="text-center mt-4 mt-md-5 mb-4 ">
-                <a class="btn btn-primary" href="#" role="link">Get started</a>
+                <a class="btn btn-primary" href="{{route('order')}}" role="link">Get started</a>
             </div>
         </div>
     </section>
@@ -321,7 +326,7 @@
                         <div class="tu-content" style="padding-top: 15%;">
                             <h3>The Choice of students from <span>Top Universities</span></h3>
                             <p>TRUSTED BY 100,000 + STUDENTS FROM TOP-RATED UNIVERSITIES</p>
-                            <a class="btn btn-primary d-none d-md-block" href="#" role="button">Get started</a>
+                            <a class="btn btn-primary d-none d-md-block" href="{{route('order')}}" role="button">Get started</a>
                         </div>
                     </div>
                     <div class="col-md-6">
@@ -423,7 +428,7 @@
                             </div>
 
                         </div>
-                        <a class="btn btn-primary d-md-none w-100 mt-4" href="#" role="button">Get started</a>
+                        <a class="btn btn-primary d-md-none w-100 mt-4" href="{{route('order')}}" role="button">Get started</a>
                     </div>
                 </div>
             </div>
@@ -437,18 +442,16 @@
                 </div>
                 <div class="accordion row" id="accordionExample">
                     @foreach ($faq_page as $faq)
-                        <div class="accordion-item col-sm-6">
-                            <h2 class="accordion-header" id="heading<?= $faq['id'];?>">
-                                <a class="accordion-button collapsed" href="#" data-bs-toggle="collapse"
-                                    data-bs-target="#collapse<?= $faq['id'];?>" aria-expanded="true" aria-controls="collapse<?= $faq['id'];?>">
-                                    <?= $faq['question'];?>
-                                </a>
-                            </h2>
-                            <div id="collapse<?= $faq['id'];?>" class="accordion-collapse collapse" aria-labelledby="heading<?= $faq['id'];?>"
-                                data-bs-parent="#accordionExample">
-                                <div class="accordion-body"><?= $faq['answer'];?></div>
-                            </div>
+                    <div class="accordion-item col-sm-6">
+                        <h2 class="accordion-header" id="heading<?= $faq['id']; ?>">
+                            <a class="accordion-button collapsed" href="#" data-bs-toggle="collapse" data-bs-target="#collapse<?= $faq['id']; ?>" aria-expanded="true" aria-controls="collapse<?= $faq['id']; ?>">
+                                <?= $faq['question']; ?>
+                            </a>
+                        </h2>
+                        <div id="collapse<?= $faq['id']; ?>" class="accordion-collapse collapse" aria-labelledby="heading<?= $faq['id']; ?>" data-bs-parent="#accordionExample">
+                            <div class="accordion-body"><?= $faq['answer']; ?></div>
                         </div>
+                    </div>
                     @endforeach
                 </div>
             </div>
@@ -462,7 +465,7 @@
                         <div class="assign-content">
                             <h2>Grade-Boosting Essays: </h2>
                             <p>Our Precision Writers Hit Your Academic Target Every Time</p>
-                            <a class="btn btn-primary" href="#" role="button">Get started</a>
+                            <a class="btn btn-primary" href="{{route('order')}}" role="button">Get started</a>
                         </div>
                     </div>
                     <div class="col-md-6 text-center">
@@ -474,7 +477,7 @@
             </div>
         </div>
     </section>
-    <section class="how-it-works-sec mb-5" style="background-color:#FCFCFC;">
+    {{--<section class="how-it-works-sec mb-5" style="background-color:#FCFCFC;">
         <div class="container">
             <div class="row">
                 <div class="col-12">
@@ -529,7 +532,24 @@
             </div>
 
         </div>
-    </section>
+    </section>--}}
 
 </main>
+<script>
+    function toggleDescription(event, id) {
+        event.preventDefault();
+        var shortDescription = document.getElementById("ratingDescriptionShort" + id);
+        var fullDescription = document.getElementById("ratingDescriptionFull" + id);
+
+        if (shortDescription.style.display === "none" || shortDescription.style.display === "") {
+            shortDescription.style.display = "none";
+            fullDescription.style.display = "block";
+            event.target.innerText = "Read less...";
+        } else {
+            shortDescription.style.display = "block";
+            fullDescription.style.display = "none";
+            event.target.innerText = "Read more...";
+        }
+    }
+</script>
 @endsection

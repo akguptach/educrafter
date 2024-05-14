@@ -1,11 +1,12 @@
 @extends('layout.app')
 @section('content')
-    <div class="masthead">
-        <div class="container">
-            <div class="row">
-                <h2><?= $pages['page_title'];?></h2>
-                <?= $pages['page_desc'];?>
-            </div>
-        </div>
-    </div>
+    <main class="flex-shrink-0">
+        <section class="order-sec">
+			<div class="container">
+				<div class="row">
+					{!!$page->service_description!!}
+				</div>
+			</div>
+		</section>
+    </main>
 @endsection

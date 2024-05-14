@@ -18,9 +18,9 @@ class AuthController extends BaseController
     {
         return view('auth.login');
     }
-    public function signupPage(Request $request)
+    public function signupPage($referral_code='')
     {
-        return view('auth.signup');
+        return view('auth.signup',['referral_code'=>$referral_code]);
     }
     public function resetPasswordPage(Request $request)
     {

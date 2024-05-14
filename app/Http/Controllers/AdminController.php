@@ -25,7 +25,7 @@ class AdminController extends Controller
                 ->addColumn('item_data', function($row) {
                     $style = ($row->referencingStyle == null) ? "" : $row->referencingStyle->style;
                     return '<b>'.$row->subject->subject_name.'</b> <br>
-                    <small>'.$style.', '.$row->taskType->type_name.'</small> <br>
+                    <small>'.$style.', '.$row?->taskType?->type_name.'</small> <br>
                     <small>'.$row->studyLevel->level_name.', '.$row->grade->grade_name.'</small>';
                 })
                 ->addColumn('word_count', function($row) {
@@ -42,6 +42,9 @@ class AdminController extends Controller
                     }
                 })
                 ->addColumn('delivery_date', function($row){
+                    if($row->delivery_date == 'NA'){
+                        return '';
+                    }
                     return Carbon::parse($row->delivery_date)->format('jS F, Y');
                 })
                 ->rawColumns(['student_data','item_data','payment_status'])

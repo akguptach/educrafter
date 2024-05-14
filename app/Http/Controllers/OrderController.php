@@ -93,9 +93,10 @@ class OrderController extends Controller
         $arrP = array();
         $arrP['hour1'] = 100;
         $arrP['delivery_date'] = $delivery_date;
-
+        $checked='';
         $arrP['hour2'] = $total2 . $websiteArr['currency'];
         if ($delivery_date == '12 hours') {
+            
             $str = '<li class="col-12" style="height: 60px;"><input class="delivery_at" type="radio" value="12 hours" name="custom_date_at" rel="' . $websiteArr['currency_sign'] . $total2 . '" checked /><label for="custom_date_at" >12 Hours<br>' . $websiteArr['currency_sign'] . $total2 . '</label></li>';
 
             $arrP['delivery_date_price'] = $websiteArr['currency_sign'] . $total2;
@@ -123,7 +124,12 @@ class OrderController extends Controller
             //}
 
             if ($j == 22) {
-                $str .= '<li class="col-2" style="height: 82px;margin-top:2px;"><input class="delivery_at" type="radio" value="30 days" name="custom_date_at" rel="' . $websiteArr['currency_sign'] . $total1 . '" style="height:80px;" checked /><label for="custom_date_at" >
+
+                $checked = '';
+                if ($delivery_date == '30 days') {
+                    $checked = 'checked';
+                }
+                $str .= '<li class="col-2" style="height: 82px;margin-top:2px;"><input class="delivery_at" type="radio" value="30 days" name="custom_date_at" rel="' . $websiteArr['currency_sign'] . $total1 . '" style="height:80px;" '.$checked.' /><label for="custom_date_at" >
 					<span style="float: left;width: 100%;font-size: 12px;">Delivered in</span>
 					<span style="float: left;width: 100%;font-weight: bold;font-size: 20px;">30 Days</span>
 					<span style="float: left;width: 100%;font-size:14px;color:#0a58ca;">' . $total1 . $websiteArr['currency_sign'] . '</span>
@@ -131,7 +137,11 @@ class OrderController extends Controller
                 $arrP['delivery_date_price'] = $websiteArr['currency_sign'] . $total1;
             } elseif ($j == 23) {
 
-                $str .= '<li class="col-2" style="height: 82px;margin-top:2px;"><input class="delivery_at" type="radio" value="45 days" name="custom_date_at" rel="' . $websiteArr['currency_sign'] . $total1 . '" style="height:80px;" checked /><label for="custom_date_at" >
+                $checked = '';
+                if ($delivery_date == '45 days') {
+                    $checked = 'checked';
+                }
+                $str .= '<li class="col-2" style="height: 82px;margin-top:2px;"><input class="delivery_at" type="radio" value="45 days" name="custom_date_at" rel="' . $websiteArr['currency_sign'] . $total1 . '" style="height:80px;" '.$checked.' /><label for="custom_date_at" >
 					<span style="float: left;width: 100%;font-size: 12px;">Delivered in</span>
 					<span style="float: left;width: 100%;font-weight: bold;font-size: 20px;">45 Days</span>
 					<span style="float: left;width: 100%;font-size:14px;color:#0a58ca;">' . $total1 . $websiteArr['currency_sign'] . '</span>
@@ -139,11 +149,16 @@ class OrderController extends Controller
                 $arrP['delivery_date_price'] = $websiteArr['currency_sign'] . $total1;
             } elseif ($j == 24) {
 
-                $str .= '<li class="col-2" style="height: 82px;margin-top:2px;"><input class="delivery_at" type="radio" value="60 days" name="custom_date_at" rel="' . $websiteArr['currency_sign'] . $total1 . '" style="height:80px;" checked /><label for="custom_date_at" >
+                $checked = '';
+                if ($delivery_date == '60 days') {
+                    $checked = 'checked';
+                }
+                $str .= '<li class="col-2" style="height: 82px;margin-top:2px;"><input class="delivery_at" type="radio" value="60 days" name="custom_date_at" rel="' . $websiteArr['currency_sign'] . $total1 . '" style="height:80px;" '.$checked.' /><label for="custom_date_at" >
 					<span style="float: left;width: 100%;font-size: 12px;">Delivered in</span>
 					<span style="float: left;width: 100%;font-weight: bold;font-size: 20px;">60 Days</span>
 					<span style="float: left;width: 100%;font-size:14px;color:#0a58ca;">' . $total1 . $websiteArr['currency_sign'] . '</span>
 					</label></li>';
+
                 $arrP['delivery_date_price'] = $websiteArr['currency_sign'] . $total1;
             } else {
                 $date = date("Y-m-d", strtotime(date('Y-m-d') . " +$i days"));
@@ -152,7 +167,7 @@ class OrderController extends Controller
                 $dd = date("d", strtotime(date('Y-m-d') . " +$i days"));
                 $D1 = date("D", strtotime(date('Y-m-d') . " +$i days"));
                 if ($delivery_date == $date) {
-
+ 
                     $str .= '<li class="col-2" style="height: 82px;margin-top:2px;"><input class="delivery_at" type="radio" value="' . $date . '" name="custom_date_at" rel="' . $total1 . ' ' . $websiteArr['currency_sign'] . '" style="height:80px;" checked /><label for="custom_date_at" >
 					<span style="float: left;width: 100%;font-size: 12px;">' . $D1 . '</span>
 					<span style="float: left;width: 100%;font-weight: bold;font-size: 20px;">' . $dd . '</span>
@@ -171,6 +186,7 @@ class OrderController extends Controller
                         $arrP['delivery_date_price'] = $websiteArr['currency_sign'] . $total1;
                     }
                 }
+                
             }
 
 
@@ -178,10 +194,16 @@ class OrderController extends Controller
             $j++;
         }
 
-
+        if($request->delivery_price){
+            
+            $arrP['delivery_date_price'] = $request->delivery_price;
+            $price1 = $request->delivery_price;
+        }else{
+            $price1 = $websiteArr['currency_sign'] . $total1;
+        }
 
         $arrP['custom_date'] = $str;
-        return Response::json(array('success' => 'true', 'price' => $arrP, 'price1' => $websiteArr['currency_sign'] . $total1));
+        return Response::json(array('success' => 'true', 'price' => $arrP, 'price1' => $price1));
     }
 
     public function processAttachment(Request $request)
@@ -223,8 +245,8 @@ class OrderController extends Controller
         $website_id = env('WEBSITE_ID');
 
         $validator = Validator::make($request->all(), [
-            'title' => 'required',
-            'task' => 'required',
+            //'title' => 'required',
+            //'task' => 'required',
             'subject_id' => 'required',
             'referencing_style_id' => 'required',
             'task_type_id' => 'required',
@@ -266,9 +288,16 @@ class OrderController extends Controller
 
         $attachment = $request->uploadedFile;
 
-        $order->title = $request->title;
-
-        $order->task = $request->task;
+        if($request->title)
+		{
+			$order->title = $request->title;
+		}
+        
+        if($request->task)
+		{
+			$order->task = $request->task;
+		}
+        
 
         $order->subject_id = $request->subject_id;
         $order->website_id = $website_id;
@@ -291,8 +320,10 @@ class OrderController extends Controller
         // print_r($match);
         $order->price = $match[2];
         $order->currency_code = $match[1];
-
-        $order->fileupload = $attachment;
+        if($attachment)
+		{
+			$order->fileupload = $attachment;
+		}
 
         $websiteArr = Website::where('id', $website_id)->first()->toArray();
 
@@ -353,8 +384,10 @@ class OrderController extends Controller
 
     public function refer_friend()
     {
-        $data = array();
+        $referralCode = Auth::user()->referral_code;
+        $data = array('referral_code'=>$referralCode);
         return view('refer_friend_individual', $data);
+
     }
 
     public function statements()

@@ -1,6 +1,6 @@
 <!-- Login Pop-up -->
 <div class="modal fade" id="loginModal" tabindex="-1" aria-labelledby="loginModalLabel" aria-hidden="true">
-    <div class="modal-dialog modal-lg">
+    <div class="modal-dialog modal-sm">
         <div class="modal-content">
             <div class="modal-body">
 
@@ -64,10 +64,7 @@
                                 <div class="row gy-3 gx-2">
                                     <div class="col-md-12">
                                         <div class="input-group flex-nowrap">
-                                            <span class="input-group-text" id="email-wrapping">
-                                                <img src="{{ asset('images/user-icon.svg') }}" class="img-fluid"
-                                                    alt="Essay Help" title="Essay Help" width="24" height="24">
-                                            </span>
+                                           
                                             <input type="text" class="form-control"
                                                 placeholder="Enter your email / phone number"
                                                 aria-label="Enter your email / phone number"
@@ -77,10 +74,7 @@
                                     </div>
                                     <div class="col-md-12">
                                         <div class="input-group flex-nowrap">
-                                            <span class="input-group-text" id="password-wrapping">
-                                                <img src="{{ asset('images/lock-icon.svg') }}" class="img-fluid"
-                                                    alt="Essay Help" title="Essay Help" width="24" height="24">
-                                            </span>
+                                            
                                             <input type="password" class="form-control"
                                                 placeholder="Enter your password" aria-label="Enter your password"
                                                 aria-describedby="password-wrapping" name="password"
@@ -96,9 +90,11 @@
                             <div class="text-center my-4 text-muted">OR</div>
 
                             <div class="row gy-3 social-auth">
-                                <a href="#" class="btn btn-google w-100">Continue with Google</a>
-                                <a href="#" class="btn btn-facebook w-100">Continue with Facebook</a>
-                                <a href="#" class="btn btn-apple w-100">Continue with Apple</a>
+							    <div class="col-sm-12" align="center">
+									<a href="#" class="btn btn-google" style="width: 38px;float: left;margin-left: 24%;"></a>
+									<a href="#" class="btn btn-facebook" style="width: 38px;float: left;margin-left: 3%;"></a>
+									<a href="#" class="btn btn-apple" style="width: 38px;float: left;margin-left: 3%;margin-right: 24%;"></a>
+								</div>
                             </div>
 
                             <p class="text-center mt-4 mb-0">Don’t have an account? <a data-bs-toggle="modal"

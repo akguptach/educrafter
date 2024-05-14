@@ -10,7 +10,7 @@
                                 <h5>Transaction Statement(s)</h5>
                             </div>
                             <div class="col-md-8 text-end">
-                                <h6>Wallet Amount: <b>AUD 320.45</b> | Free Credit: <b>AUD 0</b></h6>
+                                <h6>Wallet Amount: <b>AUD 00.00</b> | Free Credit: <b>AUD 0</b></h6>
                             </div>
                         </div>
                         <div class="table-responsive">
