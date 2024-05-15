@@ -50,6 +50,11 @@ class Orders extends Model
         return $this->belongsTo('App\Models\Website', 'website_id');
     }
 
+    public function payment()
+    {
+        return $this->hasOne('App\Models\Payment', 'order_id');
+    }
+
 
 
 

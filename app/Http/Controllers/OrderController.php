@@ -354,23 +354,19 @@ class OrderController extends Controller
 
     public function transactions()
     {
-
         $user_id = Auth::id();
-        $arrD = DB::table('orders')
-            ->join('subjects', 'subjects.id', '=', 'orders.subject_id')
-            ->join('websites', 'websites.id', '=', 'orders.website_id')
-            ->join('task_types', 'task_types.id', '=', 'orders.task_type_id')
-            ->join('level_study', 'level_study.id', '=', 'orders.studylabel_id')
-            ->join('grades', 'grades.id', '=', 'orders.grade_id')
-            ->join('referencing_style', 'referencing_style.id', '=', 'orders.referencing_style_id')
-            ->select('orders.*', 'subjects.subject_name', 'websites.website_name', 'task_types.type_name', 'level_study.level_name', 'grades.grade_name', 'referencing_style.style')
-            ->where('orders.student_id', $user_id)
-            ->orderBy('orders.id', 'desc')
-            ->get();
+        $delivered = Orders::where('student_id', $user_id)
+            ->where('status', 'DELIVERED');
 
-        $data['orders'] = json_decode(json_encode($arrD), true);
+        $inprocess = Orders::where('student_id', $user_id)
+        ->where('payment_status', 'Success');
 
-        return view('transactions', $data);
+        $enquiries = Orders::where('student_id', $user_id)
+            ->where('payment_status', 'Failed');
+
+            
+
+        return view('transactions', compact('delivered','inprocess','enquiries'));
     }
 
     public function vieworder(OrderRequestMessageRequest $request, $id)
@@ -408,6 +404,7 @@ class OrderController extends Controller
     public function statements()
     {
         $data = array();
-        return view('statements', $data);
+        $orders = Orders::with(['payment'])->whereHas('payment')->where('student_id',Auth::user()->id)->paginate(10);
+        return view('statements', compact('orders'));
     }
 }
