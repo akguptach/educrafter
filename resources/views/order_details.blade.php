@@ -111,8 +111,8 @@
                                 </div>
                                 <div class="col-12">
                                 <div style="overflow-wrap: anywhere;">
-                                    <a class="float-right" href="{{$data->teacherAssigned->attachment}}" target="_blank"
-                            href="{{$data->teacherAssigned->attachment}}">{{$data->teacherAssigned->attachment}}</a></div>
+                                    <a class="float-right" href="{{@$data->teacherAssigned->attachment}}" target="_blank"
+                            href="{{@$data->teacherAssigned->attachment}}">{{@$data->teacherAssigned->attachment}}</a></div>
                                 </div>
                             </div>
 

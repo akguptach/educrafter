@@ -21,6 +21,7 @@ use App\Services\OrderService;
 use App\Http\Requests\OrderRequestMessageRequest;
 use Illuminate\Support\Facades\Mail;
 
+
 class OrderController extends Controller
 {
 
@@ -432,6 +433,13 @@ class OrderController extends Controller
             $result = $this->orderService->saveOrderMessage($request, $id);
             return redirect()->back()->with($result['status'], $result['message']);
         }
+
+        DB::table('student_order_messages')
+            ->where('order_id', $id)
+            ->where('receivertable_type', \App\Models\Student::class)
+            ->where('receivertable_id', Auth::user()->id)
+            ->update(array('read' => 1));
+
         return view('order_details', $this->orderService->orderDetails($id, $user_id));
     }
 
