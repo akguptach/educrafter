@@ -12,6 +12,7 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Validation\Rule;
 use Validator;
 use Hash;
+use Illuminate\Support\Facades\Mail;
 
 class StudentController extends Controller
 {
@@ -71,6 +72,22 @@ class StudentController extends Controller
             $orderRequestData = session('orderRequestData');
             $response['refer'] = $orderRequestData['refer'];
         }
+
+
+        $data = ['url'=>'https://educrafter.co/login','student'=>$request->first_name];
+        try {
+            Mail::send('email.signup', $data, function ($message) use ($data, $request) {
+                $message->from(env('MAIL_FROM_ADDRESS'), env('MAIL_FROM_NAME'));
+                $message->subject("Signup");
+                $message->to($request->email);
+            });
+
+        } catch (\Exception $e) {
+            echo $e; die;
+        }
+
+
+
         return $this->sendResponse($response, 'User details updated successfully.');
     }
     public function profile()
