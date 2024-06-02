@@ -53,14 +53,14 @@
                                     <p class="text-end subject_div">{{$data->subject->subject_name}}</p>
                                 </div>
                             </div>
-                            <div class="row align-items-end">
+                            <?php /*<div class="row align-items-end">
                                 <div class="col-6">
                                     <p>Task Topic</p>
                                 </div>
                                 <div class="col-6">
                                     <p class="text-end task_topic_div">{{$data->task_topic}}</p>
                                 </div>
-                            </div>
+                            </div>*/ ?>
                             <div class="row align-items-end">
                                 <div class="col-6">
                                     <p>Task type</p>
@@ -103,6 +103,19 @@
                                     <p class="text-ta text-end total_price">{{$data->currency_code}}{{$data->price}}</p>
                                 </div>
                             </div>
+
+                            <hr class="opacity-25" />
+                            <div class="row align-items-center">
+                                <div class="col-12">
+                                    <p class="text-tp">Teacher's Attachment</p>
+                                </div>
+                                <div class="col-12">
+                                <div style="overflow-wrap: anywhere;">
+                                    <a class="float-right" href="{{$data->teacherAssigned->attachment}}" target="_blank"
+                            href="{{$data->teacherAssigned->attachment}}">{{$data->teacherAssigned->attachment}}</a></div>
+                                </div>
+                            </div>
+
 
                         </div>
 

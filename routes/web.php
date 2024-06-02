@@ -39,6 +39,7 @@ Route::get('/pages/{sku}', [Pages::class, 'index'])->name('pages.index');
 Route::get('/faq', [Pages::class, 'faq'])->name('faq');
 Route::get('/why_us', [Pages::class, 'why_us'])->name('why_us');
 Route::get('/refer_friend', [Pages::class, 'refer_friend'])->name('refer_friend');
+Route::post('/refer_a_friend', [Pages::class, 'refer_a_friend'])->name('refer_a_friend');
 Route::get('/contact-us', [Pages::class, 'contact_us'])->name('contact-us');
 Route::get('/about-us', [Pages::class, 'about_us'])->name('about-us');
 Route::get('/Services', [Pages::class, 'services'])->name('Services');

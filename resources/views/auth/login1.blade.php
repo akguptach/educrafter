@@ -22,7 +22,7 @@
         padding: 25px;
         margin: 25px;
         background-color: white;
-        border-radius: 15px;
+        border-radius: 25px;
     }
 </style>
 <div class="row masthead">

@@ -1,18 +1,39 @@
 @extends('layout.auth')
 @section('content')
 <style>
-.masthead {
-    padding-top: 0px !important;
-}
+    body {
+        background: hsla(241, 90%, 70%, 1);
+
+        background: linear-gradient(135deg, hsla(241, 90%, 70%, 1) 0%, hsla(186, 90%, 62%, 1) 100%);
+
+        background: -moz-linear-gradient(135deg, hsla(241, 90%, 70%, 1) 0%, hsla(186, 90%, 62%, 1) 100%);
+
+        background: -webkit-linear-gradient(135deg, hsla(241, 90%, 70%, 1) 0%, hsla(186, 90%, 62%, 1) 100%);
+
+        filter: progid: DXImageTransform.Microsoft.gradient(startColorstr="#6F6DF7", endColorstr="#45E3F5", GradientType=1);
+    }
+
+    .masthead {
+        padding-top: 0px !important;
+
+    }
+
+    .loginform {
+        padding: 25px;
+        margin: 25px;
+        background-color: white;
+        border-radius: 15px;
+    }
 </style>
-<div class="row">
-    <div class="col-md-6">
+<div class="row masthead">
+    <div class="offset-md-4">
+    </div>
+    <div class="col-md-4 loginform">
         <div class="signup-form">
-            <div class="justify-content-between px-3" align="center">
+            <div class=" " style="text-align:center;">
                 <a class="navbar-brand mx-auto mx-md-start" href="https://educrafter.co">
                     <picture>
-
-                        <svg width="159" height="23" viewBox="0 0 159 23" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <svg width="155" height="23" viewBox="0 0 159 23" fill="none" xmlns="http://www.w3.org/2000/svg">
                             <g clip-path="url(#clip0_2371_12428)">
                                 <path d="M1 10.7369C1 6.32298 1 4.11601 2.28702 2.67908C2.41042 2.5413 2.5413 2.41042 2.67908 2.28702C4.11601 1 6.32298 1 10.7369 1H12.2631C16.677 1 18.884 1 20.3209 2.28702C20.4587 2.41042 20.5896 2.5413 20.713 2.67908C22 4.11601 22 6.32298 22 10.7369V12.2631C22 16.677 22 18.884 20.713 20.3209C20.5896 20.4587 20.4587 20.5896 20.3209 20.713C18.884 22 16.677 22 12.2631 22H1V10.7369Z" fill="white"></path>
                                 <circle cx="2.16934" cy="21.0851" r="6.71622" fill="black"></circle>
@@ -29,28 +50,17 @@
                                 </clipPath>
                             </defs>
                         </svg>
-
                     </picture>
                 </a>
             </div>
-
-            @livewire('reset-password')
+            <div class="form-main mt-4">
+                <div class="form-wrapper">
+                    @livewire('reset-password')
+                </div>
+            </div>
         </div>
     </div>
-    <div class="col-md-6 d-none d-md-block">
-        <div class="popup-content">
-            <div class="pc-wrapper">
-                <h2>Your EduCrafter Account</h2>
-                <ul class="tickmark-list">
-                    <li>Access to online tutors 24/7</li>
-                    <li>Organize and manage your tasks</li>
-                    <li>Homework help in any subject</li>
-                </ul>
-            </div>
-
-            <img src="{{ asset('images/graduate-girl-small.png') }}" class="img-fluid" alt="Essay Help" title="Essay Help"
-                width="211" >
-        </div>
+    <div class="offset-md-4 ">
     </div>
 </div>
 @endsection

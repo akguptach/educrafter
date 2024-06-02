@@ -109,14 +109,23 @@ class PaymentController extends Controller
     public function paymentValidation()
     {
 		
+
+        
+
         if(session()->has('payment_object') && session()->has('payment_order_id') && Orders::where('id',session('payment_order_id'))->exists()) {
             
-            
-            if(session('payment_object')->payment_status == 'paid') {
+
+            $stripe = new StripeClient(config('stripe.api_keys.secret_key'));
+            $result = $stripe->checkout->sessions->retrieve(
+                session('payment_object')->id,
+            []
+            );
+            if($result->payment_status == 'paid') {
                 
                 Orders::where('id',session('payment_order_id'))->update(
                     [
-                        'payment_status' => 'Success'
+                        'payment_status' => 'Success',
+                        'status' => 'INPROCESS'
                     ]
                 );
                 DB::table('payment')->updateOrInsert(
@@ -130,9 +139,38 @@ class PaymentController extends Controller
                         'transaction_id' => session('payment_object')->id
                     ]
                 );
+
+
+
+                $url = env('500_URL','https://500m.in').'/orders';
+                \App\Models\StudentOrderMessage::Create([
+                    'order_id'=>session('payment_order_id'),
+                    'sendertable_id' => \Auth::user()->id,
+                    'sendertable_type' => \App\Models\Student::class,
+                    'receivertable_id' => 1,
+                    'receivertable_type' => \App\Models\User::class,
+                    'message' => 'Payment of '.((session('payment_object')->amount_total)/100).' is received',
+                    'url'=>$url,
+                    'type'=>'notification'
+                ]);
+
+                $receiver = \App\Models\User::find(1);
+                $data = ['name' => $receiver->name,'url'=>$url,'messageContent'=>'Payment of '.((session('payment_object')->amount_total)/100).' is received'];
+                try {
+                    \Illuminate\Support\Facades\Mail::send('email.500.message', $data, function ($message) use ($data, $receiver) {
+                        $message->from(env('MAIL_FROM_ADDRESS'), env('MAIL_FROM_NAME'));
+                        $message->subject("Payment Received");
+                        $message->to(env('ADMIN_EMAIL', $receiver->email));
+                    });
+
+                } catch (\Exception $e) {
+                    echo $e; die;
+                }
+
+
                 Flash::flash('payment_status','Success');
             }else {
-                // dd(session('payment_object'));
+                // 
                 Orders::where('id',session('payment_order_id'))->update(
                     [
                         'payment_status' => 'Failed'
@@ -163,6 +201,7 @@ class PaymentController extends Controller
     }    
     public function payment(Request $request)
     {	
+        
         $validator = Validator::make($request->all(), [
             'fullName' => 'required',
             'cardNumber' => 'required',

@@ -19,6 +19,7 @@ use Response;
 use Validator;
 use App\Services\OrderService;
 use App\Http\Requests\OrderRequestMessageRequest;
+use Illuminate\Support\Facades\Mail;
 
 class OrderController extends Controller
 {
@@ -39,6 +40,7 @@ class OrderController extends Controller
         if (session()->has('attachment')) {
             session()->forget('attachment');
         }
+        
         return view('order', $data);
     }
 
@@ -343,6 +345,33 @@ class OrderController extends Controller
             ]
         );
 
+        $url = env('500_URL','https://500m.in').'/orders';
+        \App\Models\StudentOrderMessage::Create([
+            'order_id'=>$order->id,
+            'sendertable_id' => Auth::user()->id,
+            'sendertable_type' => \App\Models\Student::class,
+            'receivertable_id' => 1,
+            'receivertable_type' => \App\Models\User::class,
+            'message' => 'Your have received new order',
+            'url'=>$url,
+            'type'=>'notification'
+        ]);
+
+        $receiver = \App\Models\User::find(1);
+        $data = ['name' => $receiver->name,'url'=>$url,'messageContent'=>'Your have received new order'];
+        try {
+            Mail::send('email.500.message', $data, function ($message) use ($data, $receiver) {
+                $message->from(env('MAIL_FROM_ADDRESS'), env('MAIL_FROM_NAME'));
+                $message->subject("Order Received");
+                $message->to(env('ADMIN_EMAIL', $receiver->email));
+            });
+
+        } catch (\Exception $e) {
+            echo $e; die;
+        } 
+
+
+
         //$token = Auth::attempt(['email' => $request->input('email'), 'password' => $request->input('password')]);
         return response()->json(
             [
@@ -352,21 +381,48 @@ class OrderController extends Controller
         );
     }
 
-    public function transactions()
+    public function transactions(Request $request)
     {
         $user_id = Auth::id();
+        $keyword  = isset($request->keyword)?$request->keyword:'';
+
         $delivered = Orders::where('student_id', $user_id)
-            ->where('status', 'DELIVERED');
+        ->where(function($q) use ($keyword){
+            if($keyword){
+                $q->whereHas('subject',function($sq) use ($keyword){
+                    $sq->where('subject_name','like','%'.$keyword.'%');
+                });
+                $q->orWhere('no_of_words','like','%'.$keyword.'%');
+            }
+        })
+        ->where('status', 'DELIVERED')->paginate(10);
 
         $inprocess = Orders::where('student_id', $user_id)
-        ->where('payment_status', 'Success');
+        ->where(function($q) use ($keyword){
+            if($keyword){
+                $q->whereHas('subject',function($sq) use ($keyword){
+                    $sq->where('subject_name','like','%'.$keyword.'%');
+                });
+                $q->orWhere('no_of_words','like','%'.$keyword.'%');
+            }
+        })
+        ->where('payment_status', 'Success')->paginate(10);
 
         $enquiries = Orders::where('student_id', $user_id)
-            ->where('payment_status', 'Failed');
+        ->where(function($q) use ($keyword){
+            if($keyword){
+                $q->whereHas('subject',function($sq) use ($keyword){
+                    $sq->where('subject_name','like','%'.$keyword.'%');
+                });
+                $q->orWhere('no_of_words','like','%'.$keyword.'%');
+            }
+        })
+        ->where('payment_status', 'Failed')->paginate(10);
+        
 
             
 
-        return view('transactions', compact('delivered','inprocess','enquiries'));
+        return view('transactions', compact('delivered','inprocess','enquiries','keyword'));
     }
 
     public function vieworder(OrderRequestMessageRequest $request, $id)

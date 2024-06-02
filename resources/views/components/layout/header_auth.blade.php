@@ -2,6 +2,7 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta name="csrf-token" content="{{ csrf_token() }}" />
+    <meta name='dmca-site-verification' content='S21jWXRPeW9UVk92R05xMHl4d0dRdz090' />
     <link rel="canonical" href="https://essayhelp.com/">
     <link rel="icon" href="{{ asset('images/essayhelp-icon.png') }}" />
     <link rel="preconnect" href="https://fonts.googleapis.com">

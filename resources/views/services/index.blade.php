@@ -87,7 +87,6 @@
         font-weight: 500;
         font-style: italic;
     }
-
     .poppins-semibold-italic {
         font-family: "Poppins", sans-serif;
         font-weight: 600;
@@ -151,13 +150,10 @@
             <div class="row">
                 <div class="col-lg-8">
                     <div class="masthead-left poppins-medium">
-                        <!--<h5 style="color:#0d6efd;">{{$data->service->service_name}}</h5>-->
+                        
                         {!!$data->seo_title!!}
                         <p>{!!$data->service->short_description!!}</p>
-
-
                         <p><a href="{{$data->button_url}}" class="btn btn-primary">{{$data->button_title}}</a></p>
-
                     </div>
                     <p>Our writers are graduates of <span>top universities.</span></p>
                     <div class="overflow-hidden tu-marquee">
@@ -198,8 +194,8 @@
                             </div>
                             <div class="review-logo">
                                 <picture>
-                                    <source media="(min-width:768px)" srcset="{{ asset('images/sitejabber-logo.jpg') }}">
-                                    <img src="{{ asset('images/sitejabber-logo.jpg') }}" class="img-fluid" loading="lazy" alt="EduCrafter" title="EduCrafter" width="150" height="30">
+                                    <source media="(min-width:768px)" srcset="{{ asset('images/sitejabber-logo.png') }}">
+                                    <img src="{{ asset('images/sitejabber-logo.jpg') }}" class="img-fluid" loading="lazy" alt="EduCrafter" title="EduCrafter" >
                                 </picture>
                                 <p class="review-rating"><span>4.7</span> 653 Reviews</p>
                             </div>
@@ -211,14 +207,12 @@
                                 <p class="review-rating"><span>4.6</span> 489 Reviews</p>
                             </div>
                         </div>
-                        <h2><b>15,000+</b> students trust EduCrafter</h2>
+                        <h2><b>500K</b> students trust EduCrafter</h2>
                     </div>
                 </div>
             </div>
         </div>
     </div>
-
-
     <section class="we-make-sec">
         <div class="container">
             <div class="row">
@@ -462,11 +456,7 @@
 
                                     <div class="col-sm-6">
                                         <div class="card-body text-center" style="background: #fff;border-radius: 10px;height: 100px;padding:20px;margin-bottom: 10px;">
-
-
                                             <img src="{{ asset('images/top_universities/10.png') }}" class="card-img-top" alt="EduCrafter" title="Essay Hel" loading="lazy" style="height: 55px;">
-
-
                                         </div>
                                     </div>
 
@@ -493,9 +483,9 @@
                 @if($data->service && $data->service->specification)
                 @foreach($data->service->specification as $specification)
                 <div class="col-sm-6">
-                    <div class="card-body poppins-light" style="background:#F5FFF6;border-radius: 24px;padding:29px 15px 29px 15px;margin-bottom: 10px;text-align:left">
+                    <div class="card-body" style="background:#F5FFF6;border-radius: 24px;padding:29px 15px 29px 15px;margin-bottom: 10px;text-align:left">
                         <h2 style="font-size: 1.5rem;text-align: left;" class="poppins-bold">{{$specification->title}}</h2>
-                        <p style="">{!!$specification->description!!}</p>
+                        <p style="text-align:justify">{!!$specification->description!!}</p>
                     </div>
                 </div>
                 @endforeach

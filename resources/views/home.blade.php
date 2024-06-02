@@ -83,7 +83,7 @@
                             <img src="{{ asset('images/universities_logo/5.png') }}" alt="EduCrafter" title="EduCrafter" height="85">
                             <img src="{{ asset('images/universities_logo/20.png') }}" alt="EduCrafter" title="EduCrafter" height="85">
                             <img src="{{ asset('images/universities_logo/12.png') }}" alt="EduCrafter" title="EduCrafter" height="85">
-                            <img src="{{ asset('images/universities_logo/22.png') }}" alt="EduCrafter" title="EduCrafter" height="85">
+                            <img src="{{ asset('images/universities_logo/22.png') }}" alt="EduCrafter"title="EduCrafter" height="85">
                             <img src="{{ asset('images/universities_logo/10.png') }}" alt="EduCrafter" title="EduCrafter" height="85">
                             <img src="{{ asset('images/universities_logo/25.png') }}" alt="EduCrafter" title="EduCrafter" height="85">
                             <img src="{{ asset('images/universities_logo/23.png') }}" alt="EduCrafter" title="EduCrafter" height="85">
@@ -203,8 +203,8 @@
                         </div>
                         <div class="review-logo">
                             <picture>
-                                <source media="(min-width:768px)" srcset="{{ asset('images/sitejabber-logo.jpg') }}">
-                                <img src="{{ asset('images/sitejabber-logo.jpg') }}" class="img-fluid" loading="lazy" alt="EduCrafter" title="EduCrafter" width="150" height="30">
+                                <source media="(min-width:768px)" srcset="{{ asset('images/sitejabber-logo.png') }}">
+                                <img src="{{ asset('images/Sitejabber_logo.png') }}" class="img-fluid" loading="lazy" alt="EduCrafter" title="EduCrafter" >
                             </picture>
                             <p class="review-rating"><span>4.7</span> 653 Reviews</p>
                         </div>
@@ -216,7 +216,7 @@
                             <p class="review-rating"><span>4.6</span> 489 Reviews</p>
                         </div>
                     </div>
-                    <h2><b>15,000+</b> students trust EduCrafter</h2>
+                    <h2><b>500K </b> students trust EduCrafter</h2>
                 </div>
             </div>
         </div>
@@ -259,7 +259,7 @@
                 <div class="wm-right" style="padding-top: 17%;">
                     <h2>We Make <br><span>Students Happy </span></h2>
                     <h3 class="mb-4">Still in Two Minds?<br> The Proof is in Numbers!</h3>
-                    <p>500K+ students have entrusted their papers to us</p>
+                    <p>5000K students have entrusted their papers to us</p>
                     <p>With EduCrafter, achieving the grades you've always wanted has never been easier. Our top-notch essay writers are ready to assist you.</p>
                     <a class="btn btn-primary d-none d-md-inline-flex" href="{{route('order')}}" role="link">Get started</a>
                 </div>

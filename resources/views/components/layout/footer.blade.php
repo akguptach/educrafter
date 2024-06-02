@@ -3,48 +3,38 @@
     .footer-section ul {
         margin: 0px !important;
         padding: 0px !important;
-
     }
-
     .footer-section {
         background: #303b4f;
         position: relative;
     }
-
-
     .footer-cta {
         border-bottom: 1px solid #fff;
     }
-
     .single-cta i {
         color: #0e6ffb;
         font-size: 30px;
         float: left;
         margin-top: 8px;
     }
-
     .cta-text {
         padding-left: 15px;
         display: inline-block;
     }
-
     .cta-text h4 {
         color: #fff;
         font-size: 20px;
         font-weight: 600;
         margin-bottom: 2px;
     }
-
     .cta-text span {
         color: #757575;
         font-size: 15px;
     }
-
     .footer-content {
         position: relative;
         z-index: 2;
     }
-
     .footer-pattern img {
         position: absolute;
         top: 0;
@@ -53,22 +43,18 @@
         background-size: cover;
         background-position: 100% 100%;
     }
-
     .footer-logo {
         margin-bottom: 30px;
     }
-
     .footer-logo img {
         max-width: 200px;
     }
-
     .footer-text p {
         margin-bottom: 14px;
         font-size: 14px;
         color: #fff;
         line-height: 28px;
     }
-
     .footer-social-icon span {
         color: #fff;
         display: block;
@@ -77,13 +63,11 @@
         font-family: 'Poppins', sans-serif;
         margin-bottom: 20px;
     }
-
     .footer-social-icon a {
         color: #fff;
         font-size: 16px;
         margin-right: 15px;
     }
-
     .footer-social-icon i {
         height: 40px;
         width: 40px;
@@ -91,27 +75,21 @@
         line-height: 38px;
         border-radius: 50%;
     }
-
     .facebook-bg {
         background: #3B5998;
     }
-
     .twitter-bg {
         background: #55ACEE;
     }
-
     .google-bg {
         background: #DD4B39;
     }
-
     .instagram-bg {
         background: #6228d7;
     }
-
     .tiktok-bg {
         background: #6228d7;
     }
-
     .footer-widget-heading h3 {
         color: #fff;
         font-size: 20px;
@@ -119,7 +97,6 @@
         margin-bottom: 40px;
         position: relative;
     }
-
     .footer-widget-heading h3::before {
         content: "";
         position: absolute;
@@ -129,14 +106,12 @@
         width: 50px;
         background: #0e6ffb;
     }
-
     .footer-widget ul li {
         display: inline-block;
         float: left;
         width: 100%;
         margin-bottom: 12px;
     }
-
     .footer-widget ul li a:hover {
         color: #0e6ffb;
     }
@@ -247,7 +222,11 @@
                             <h3>Support</h3>
                         </div>
                         <div class="footer-text mb-25">
-                            <p><span style="color:#fff;"><i class="far fa-phone"></i>&nbsp;+44 (784) 541 1128</span>&nbsp;|&nbsp;<span style="color:#fff;"><i class="far fa-envelope-open"></i>&nbsp;info@educrafter.co</span></p>
+                            <p>
+                                <a href="tel:+447845411128" style="color:#fff; text-decoration: none;"><i class="far fa-phone"></i>&nbsp;+44 (784) 541 1128</a>
+                                &nbsp;|&nbsp;
+                                <a href="mailto:info@educrafter.co" style="color:#fff;text-decoration: none;"><i class="far fa-envelope-open"></i>&nbsp;info@educrafter.co</a>
+                            </p>
                         </div>
                         <div class="subscribe-form">
                             <div class="single-cta">
@@ -278,7 +257,7 @@
                         </div>
                         <div class="subscribe-form">
                             <form action="#" id="subscription_form" method="post">
-                                <input type="email" placeholder="Email Address" id="subscription_email"  name="subscription_email">
+                                <input type="email" placeholder="Email Address" id="subscription_email" name="subscription_email">
                                 <button type="button" id="subscribe_button"><i class="fab fa-telegram-plane"></i></button>
                             </form>
                         </div>
@@ -310,11 +289,12 @@
                             <h3>Our Services</h3>
                         </div>
                         <ul>
-                            <li><a href="https://educrafter.co/dissertation-writing-service">Dissertation writing</a></li>
-                            <li><a href="https://educrafter.co/research-paper-writing-service">Research paper writing</a></li>
-                            <li><a href="https://educrafter.co/term-paper-writing-service">Term paper writing</a></li>
-                            <li><a href="https://educrafter.co/coursework-writing-service">Coursework Writing Service</a></li>
-                            <li><a href="https://educrafter.co/buy-research-paper">Buy Research Paper</a></li>
+                            <li><a href="https://educrafter.co/research-paper-writing-service">Research Paper Writing Service</a></li>
+                            <li><a href="https://educrafter.co/term-paper-writing-service">Term Paper Writing Service</a></li>
+                            <li><a href="https://educrafter.co/assignment-writing-service">Assignment Writing Service</a></li>
+                            <li><a href="https://educrafter.co/dissertation-writing-service">Dissertation Writing Service</a></li>
+                            <li><a href="https://educrafter.co/report-writing-service">Report Writing Service</a></li>
+                            <li><a href="https://educrafter.co/essay-writing-service">Essay Writing Service</a></li>
 
                         </ul>
                     </div>
@@ -334,32 +314,28 @@
                         </ul>
                     </div>
                 </div>
-                {{--<div class="col-xl-3 col-lg-3 col-md-6 mb-30">
-                    <div class="footer-widget">
+                <div class="col-xl-3 col-lg-3 col-md-6 mb-30">
+                    {{--<div class="footer-widget">
                         <div class="footer-widget-heading">
                             <h3>Tools</h3>
                         </div>
                         <ul>
                             <li><a href="https://educrafter.co">Free Essay Writing Tools</a></li>
                             <li><a href="{{ route('about-us')}}">Plagiarism Checker</a></li>
-                            <li><a href="https://educrafter.co/contact-us">Citation Generators</a></li>
-                        </ul>
-                    </div>
-                    <div class="footer-widget">
-                        <div class="footer-widget-heading">
-                            <h3>We accept</h3>
-                        </div>
-                        <ul>
-                            <li><img src="{{ asset('images/footer.png')}}" width="150"></li>
-
-                        </ul>
-                    </div>
-
+                    <li><a href="https://educrafter.co/contact-us">Citation Generators</a></li>
+                    </ul>
                 </div>--}}
-
-
+                <div class="footer-widget">
+                    <div class="footer-widget-heading">
+                        <h3>We accept</h3>
+                    </div>
+                    <ul>
+                        <li><img src="{{ asset('images/footer.png')}}" width="150"></li>
+                    </ul>
+                </div>
             </div>
         </div>
+    </div>
     </div>
     <div class="copyright-area">
         <div class="container">
@@ -396,7 +372,7 @@
 
         $("#subscribe_button").click(function() {
             var email = $("#subscription_email").val();
-            
+
             $.ajax({
                 url: "{{route('subscriptionData')}}",
                 method: "POST",

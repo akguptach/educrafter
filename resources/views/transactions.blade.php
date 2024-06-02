@@ -1,5 +1,10 @@
 @extends('layout.app')
 @section('content')
+<style>
+.pagination .small {
+    margin-right: 10px;
+}
+</style>
 <section class="common-sec">
     <div class="container">
         <div class="row">
@@ -131,30 +136,33 @@
                             <button class="nav-link active" id="delivered-tab" data-bs-toggle="tab"
                                 data-bs-target="#delivered-tab-pane" type="button" role="tab"
                                 aria-controls="delivered-tab-pane" aria-selected="true">In Process
-                                ({{$inprocess->count()}})</button>
+                                ({{$inprocess->total()}})</button>
                         </li>
                         <li class="nav-item" role="presentation">
                             <button class="nav-link" id="refund-tab" data-bs-toggle="tab"
                                 data-bs-target="#refund-tab-pane" type="button" role="tab"
                                 aria-controls="refund-tab-pane" aria-selected="false">Enquiries
-                                ({{$enquiries->count()}})</button>
+                                ({{ $enquiries->total() }})</button>
                         </li>
                         <li class="nav-item" role="presentation">
                             <button class="nav-link" id="expired-tab" data-bs-toggle="tab"
                                 data-bs-target="#expired-tab-pane" type="button" role="tab"
                                 aria-controls="expired-tab-pane" aria-selected="false">Delivered
-                                ({{$delivered->count()}})</button>
+                                ({{$delivered->total()}})</button>
                         </li>
                     </ul>
                 </div>
                 <div class="col-md-4 col-lg-3 col-search">
-                    <div class="input-group input-group-sm input-group-custom">
-                        <input type="text" class="form-control" placeholder="Search" aria-label="Search"
-                            aria-describedby="button-search">
-                        <button class="btn btn-outline-secondary" type="button" id="button-search">
-                            <img src="{{ asset('images/search-icon-grey.svg')}}" alt="SOP Craft" title="SOP Craft">
-                        </button>
-                    </div>
+                    <form>
+                       
+                        <div class="input-group input-group-sm input-group-custom">
+                            <input type="text" class="form-control" placeholder="Search" aria-label="Search"
+                                aria-describedby="button-search" name="keyword" value="{{ request()->get('keyword') }}">
+                            <button class="btn btn-outline-secondary" type="submit" id="button-search">
+                                <img src="{{ asset('images/search-icon-grey.svg')}}" alt="SOP Craft" title="SOP Craft">
+                            </button>
+                        </div>
+                    </form>
                 </div>
             </div>
 
@@ -174,28 +182,30 @@
                                 </tr>
                             </thead>
                             <tbody>
-                                @foreach($inprocess->get() as $item)
+                                @foreach($inprocess as $item)
                                 <tr>
                                     <th scope="row">
                                         <a class="link" href="#" data-bs-toggle="modal"
-                                            data-bs-target="#orderMessageModal">
-                                            <a class="link" href="#" data-bs-toggle="modal"
-                                                data-bs-target="#orderMessageModal">MAS{{$item['id']}}}</a>
-                                        </a>
+                                            data-bs-target="#orderMessageModal11">MAS{{$item['id']}}</a>
                                     </th>
                                     <td>{{$item->subject['subject_name']}}</td>
                                     <td>{{$item['delivery_date']}}</td>
                                     <td>{{$item['no_of_words']}}</td>
                                     <td>
-                                    {{$item['currency_code']}}{{$item['price']}}
+                                        {{$item['currency_code']}}{{$item['price']}}
                                     </td>
                                     <td><a href="{{url('vieworder/'.$item['id'])}}" class="link">View</a></td>
                                 </tr>
                                 @endforeach
                             </tbody>
                         </table>
+                        <div class="clearfix mt-2 pagination">
+                            <div class="float-right" style="margin: 0;">
+                                {!! $inprocess->appends([])->links('pagination::bootstrap-5') !!}
+                            </div>
+                        </div>
                     </div>
-                    
+
                 </div>
                 <div class="tab-pane fade" id="refund-tab-pane" role="tabpanel" aria-labelledby="refund-tab"
                     tabindex="0">
@@ -214,14 +224,14 @@
                                 </tr>
                             </thead>
                             <tbody>
-                                @foreach($enquiries->get() as $item)
+                                @foreach($enquiries as $item)
                                 <tr>
                                     <th scope="row">MAS{{$item['id']}}</th>
                                     <td>{{$item->payment_status}}</td>
                                     <td>{{$item->subject['subject_name']}}</td>
                                     <td>{{$item['delivery_date']}}</td>
                                     <td>{{$item['no_of_words']}}</td>
-                                    
+
                                     <td>{{$item['currency_code']}} {{$item['price']}}</td>
                                     <!--<td class="text-center">
                                         <a class="link" href="#" data-bs-toggle="modal"
@@ -232,6 +242,11 @@
                                 @endforeach
                             </tbody>
                         </table>
+                        <div class="clearfix mt-2 pagination">
+                            <div class="float-right" style="margin: 0;">
+                                {!! $enquiries->appends(['keyword'=>$keyword])->links('pagination::bootstrap-5') !!}
+                            </div>
+                        </div>
                     </div>
                     <!--<p>Showing 1 to 5 of 5 entries</p>-->
                 </div>
@@ -251,26 +266,28 @@
                                 </tr>
                             </thead>
                             <tbody>
-                                @foreach($delivered->get() as $item)
+                                @foreach($delivered as $item)
                                 <tr>
                                     <th scope="row">
                                         <a class="link" href="#" data-bs-toggle="modal"
-                                            data-bs-target="#orderMessageModal">
-                                            <a class="link" href="#" data-bs-toggle="modal"
-                                                data-bs-target="#orderMessageModal">MAS{{$item['id']}}}</a>
-                                        </a>
+                                            data-bs-target="#orderMessageModal11">MAS{{$item['id']}}</a>
                                     </th>
                                     <td>{{$item->subject['subject_name']}}</td>
                                     <td>{{$item['delivery_date']}}</td>
                                     <td>{{$item['no_of_words']}}</td>
                                     <td>
-                                    {{$item['currency_code']}}{{$item['price']}}
+                                        {{$item['currency_code']}}{{$item['price']}}
                                     </td>
                                     <td><a href="{{url('vieworder/'.$item['id'])}}" class="link">View</a></td>
                                 </tr>
                                 @endforeach
                             </tbody>
                         </table>
+                        <div class="clearfix mt-2 pagination">
+                            <div class="float-right" style="margin: 0;">
+                                {!! $delivered->appends([])->links('pagination::bootstrap-5') !!}
+                            </div>
+                        </div>
                     </div>
                 </div>
 
@@ -396,4 +413,37 @@
         </div>
     </div>
 </div>
+<script>
+$(document).ready(function() {
+
+    console.log('{{url()->full()}}')
+    //$('.page-link').attr('href',$('.page-link').attr('href')+'#ggg')
+
+    $('#delivered-tab-pane .page-link').attr('href', function(i, str) {
+        return str + '#delivered-tab-pane';
+    });
+
+    $('#refund-tab-pane .page-link').attr('href', function(i, str) {
+        return str + '#refund-tab-pane';
+    });
+
+    $('#expired-tab-pane .page-link').attr('href', function(i, str) {
+        return str + '#expired-tab-pane';
+    });
+
+    if (location.hash) {
+        console.log('location.hash', location.hash)
+        var tabID = location.hash;
+        $('.nav-tabs button[data-bs-target="' + tabID + '"]').tab('show');
+    }
+    $(document.body).on("click", "button[data-bs-toggle='tab']", function(event) {
+        // location.hash = this.getAttribute("data-bs-target");
+        window.location.href = '{{url()->current()}}' + this.getAttribute("data-bs-target")
+    });
+});
+$(window).on("popstate", function() {
+    //var anchor = location.hash || $("button[data-bs-toggle='tab']").first().attr("data-bs-target");
+    //$("button[data-bs-target='" + anchor + "']").tab("show");
+});
+</script>
 @endsection

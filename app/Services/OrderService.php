@@ -28,8 +28,6 @@ class OrderService
 
     public function saveOrderMessage($request, $id)
     {
-
-
         try {
             $attachment = '';
             if ($request->has("attachment")) {

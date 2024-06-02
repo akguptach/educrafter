@@ -11,19 +11,24 @@
         font-weight: 500 !important;
     }
 </style>
+<?php
+
+$services = \App\Models\Service::where('website_type', 'Educrafter')->where('type', 'SERVICE')
+    ->get();
+?>
 <main class="flex-shrink-0">
     <div class="masthead wcu-masthead">
         <div class="container">
             <div class="row d-flex align-items-center">
-                <div class="col-lg-6">
+                <div class="col-lg-8">
                     <div class="masthead-left">
-                        <h1 style="text-transform: none;">A Variety of <span> Services</span> Just<br>a<span> Click Away</span></h1>
-                        <p>Tailored Solutions for Your Success, Elevate Your Experience with Our Exceptional and Comprehensive Services Today</p>
+                        {!!$data->seo_title!!}
+                        <p>{!!$page->short_description!!}</p>
                     </div>
                 </div>
-                <div class="col-lg-6">
+                <div class="col-lg-4">
                     <picture>
-                        <source media="(min-width:768px)" srcset="{{ asset('images/hero-girl.png') }}">
+                        <source media="(min-width:768px)" srcset="{{ asset('images/serviceImage.png') }}">
                         <img src="{{ asset('images/hero-girl-mobile.png') }}" class="img-fluid" alt="Essay Help" title="Essay Help" width="450" height="680">
                     </picture>
                 </div>
@@ -40,8 +45,8 @@
                                 </div>
                                 <div class="review-logo">
                                     <picture>
-                                        <source media="(min-width:768px)" srcset="{{ asset('images/sitejabber-logo.jpg') }}">
-                                        <img src="{{ asset('images/sitejabber-logo.jpg') }}" class="img-fluid" loading="lazy" alt="EduCrafter" title="EduCrafter" width="150" height="30">
+                                        <source media="(min-width:768px)" srcset="{{ asset('images/sitejabber-logo-vector-xs.png') }}">
+                                        <img src="{{ asset('images/sitejabber-logo.png') }}" class="img-fluid" loading="lazy" alt="EduCrafter" title="EduCrafter" width="150" height="30">
                                     </picture>
                                     <p class="review-rating"><span>4.7</span> 653 Reviews</p>
                                 </div>
@@ -53,7 +58,7 @@
                                     <p class="review-rating"><span>4.6</span> 489 Reviews</p>
                                 </div>
                             </div>
-                            <h2><b>15,000+</b> students trust EduCrafter</h2>
+                            <h2><b>500K </b> students trust EduCrafter</h2>
                         </div>
                     </div>
                 </div>
@@ -67,27 +72,23 @@
                     <h2 class="head-title">What are you looking for?</h2>
                 </div>
                 <div class="accordion row" id="accordionExample">
+                    @foreach($services as $index => $service)
                     <div class="accordion-item col-sm-6">
-                        <h2 class="accordion-header" id="headingOne">
-                            <a class="accordion-button collapsed" href="#" data-bs-toggle="collapse" data-bs-target="#collapseOne" aria-expanded="false" aria-controls="collapseOne">
-                                Essay 1
+                        <h2 class="accordion-header" id="heading{{$index}}">
+                            <a class="accordion-button collapsed" href="#" data-bs-toggle="collapse" data-bs-target="#collapse{{$index}}" aria-expanded="false" aria-controls="collapse{{$index}}">
+                                {{$service->service_name}}
+
                             </a>
                         </h2>
-                        <div id="collapseOne" class="accordion-collapse collapse" aria-labelledby="headingOne" data-bs-parent="#accordionExample">
-                            <div class="accordion-body">Sop Craft stands out through the expertise of its PhD writers, personalized approach to each client, and dedication to delivering standout SOPs and admission essays that mirror the unique qualities and aspirations of applicants.</div>
+                        <div id="collapse{{$index}}" class="accordion-collapse collapse" aria-labelledby="heading{{$index}}" data-bs-parent="#accordionExample">
+                            <div class="accordion-body">
+                                <p>{!!$service->short_description!!}</p>
+                            </div>
                         </div>
                     </div>
-                    <div class="accordion-item col-sm-6">
-                        <h2 class="accordion-header" id="headingTwo">
-                            <a class="accordion-button collapsed" href="#" data-bs-toggle="collapse" data-bs-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
-                                Essay 2
-                            </a>
-                        </h2>
-                        <div id="collapseTwo" class="accordion-collapse collapse" aria-labelledby="headingTwo" data-bs-parent="#accordionExample">
-                            <div class="accordion-body">Sop Craft stands out through the expertise of its PhD writers, personalized approach to each client, and dedication to delivering standout SOPs and admission essays that mirror the unique qualities and aspirations of applicants.</div>
-                        </div>
-                    </div>
+                    @endforeach
                 </div>
+
             </div>
         </div>
     </section>
@@ -101,80 +102,20 @@
                 </div>
             </div>
             <div class="row gy-4">
+                @foreach($servicePage as $rowD)
                 <div class="col-md-4">
                     <div class="work-card h-100">
                         <picture>
-                            <source media="(min-width:768px)" srcset="{{ asset('images/rocket-icon.svg') }}">
-                            <img src="{{ asset('images/rocket-icon.svg') }}" class="img-fluid" loading="lazy" alt="EduCrafter" title="EduCrafter" width="90" height="90">
+                            <source media="(min-width:768px)" srcset="{{ $rowD->icon}}">
+                            <img src="{{ $rowD->icon}}" class="img-fluid" loading="lazy" alt="EduCrafter" title="EduCrafter" width="90" height="90">
                         </picture>
                         <div class="card-body text-center">
-                            <h3 class="card-title">On time delivery</h3>
-                            <p>Our writers make sure that all orders are submitted prior to the deadline so that you can proofread your paper before handing it over to your tutor.</p>
+                            <h3 class="card-title">{{$rowD->title}}</h3>
+                            <p>{{$rowD->description}}</p>
                         </div>
                     </div>
                 </div>
-                <div class="col-md-4">
-                    <div class="work-card h-100">
-                        <picture>
-                            <source media="(min-width:768px)" srcset="{{ asset('images/setting-icon.svg') }}">
-                            <img src="{{ asset('images/setting-icon.svg') }}" class="img-fluid" loading="lazy" alt="EduCrafter" title="EduCrafter" width="90" height="90">
-                        </picture>
-                        <div class="card-body text-center">
-                            <h3 class="card-title">Verified Tutors</h3>
-                            <p>All tutor profiles are meticulously checked: diplomas, identity and background. ony profiles demostrating academic excellence are retained. Also, all reviews visible on tutor accounts are purely authentic.</p>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="col-md-4">
-                    <div class="work-card h-100">
-                        <picture>
-                            <source media="(min-width:768px)" srcset="{{ asset('images/rocket-icon.svg') }}">
-                            <img src="{{ asset('images/rocket-icon.svg') }}" class="img-fluid" loading="lazy" alt="EduCrafter" title="EduCrafter" width="90" height="90">
-                        </picture>
-                        <div class="card-body text-center">
-                            <h3 class="card-title">100% plagiarism free!</h3>
-                            <p>All EduCrafter papers are scanned for duplicate content and are guaranteed plagiarism free.</p>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-md-4">
-                    <div class="work-card h-100">
-                        <picture>
-                            <source media="(min-width:768px)" srcset="{{ asset('images/setting-icon.svg') }}">
-                            <img src="{{ asset('images/setting-icon.svg') }}" class="img-fluid" loading="lazy" alt="EduCrafter" title="EduCrafter" width="90" height="90">
-                        </picture>
-                        <div class="card-body text-center">
-                            <h3 class="card-title">World's top essay provider</h3>
-                            <p>We are widely recognised as being the best provider of student writing services in the World</p>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-md-4">
-                    <div class="work-card h-100">
-                        <picture>
-                            <source media="(min-width:768px)" srcset="{{ asset('images/rocket-icon.svg') }}">
-                            <img src="{{ asset('images/rocket-icon.svg') }}" class="img-fluid" loading="lazy" alt="EduCrafter" title="EduCrafter" width="90" height="90">
-                        </picture>
-                        <div class="card-body text-center">
-                            <h3 class="card-title">Free amendments</h3>
-                            <p>We provide unlimited free revisions until you are satisfied with the work.</p>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-md-4">
-                    <div class="work-card h-100">
-                        <picture>
-                            <source media="(min-width:768px)" srcset="{{ asset('images/setting-icon.svg') }}">
-                            <img src="{{ asset('images/setting-icon.svg') }}" class="img-fluid" loading="lazy" alt="EduCrafter" title="EduCrafter" width="90" height="90">
-                        </picture>
-                        <div class="card-body text-center">
-                            <h3 class="card-title">100% Confidentiality Guaranteed</h3>
-                            <p>Our aim is your complete confidentiality.</p>
-                        </div>
-                    </div>
-                </div>
-
+                @endforeach
             </div>
 
             <div class="text-center mt-4 mt-md-5 mb-4 ">
@@ -242,26 +183,26 @@
         </div>
     </section>
     <section class="mb-5">
-    <div class="container">
-        <div class="assign-box">
-            <div class="row">
-                <div class="col-md-6 d-flex flex-column justify-content-end">
-                    <div class="assign-content">
-                        <h2 style="color:#303B4F;">All assignments can be done on time</h2>
-                        <p style="color:#303B4F;">Fast and professional help from certified <br> experts on EduCrafter
-                        </p>
-                        <a class="btn btn-primary" href="{{route('order')}}" role="button" style="color: #fff;background: #3b71ed;border: 1px solid #3b71ed;">Get started</a>
+        <div class="container">
+            <div class="assign-box">
+                <div class="row">
+                    <div class="col-md-6 d-flex flex-column justify-content-end">
+                        <div class="assign-content">
+                            <h2 style="color:#303B4F;">All assignments can be done on time</h2>
+                            <p style="color:#303B4F;">Fast and professional help from certified <br> experts on EduCrafter
+                            </p>
+                            <a class="btn btn-primary" href="{{route('order')}}" role="button" style="color: #fff;background: #3b71ed;border: 1px solid #3b71ed;">Get started</a>
+                        </div>
                     </div>
-                </div>
-                <div class="col-md-6 text-center">
-                    <picture>
-                        <img src="{{ asset('images/img-01.png') }}" class="img-fluid card-img modal-img" alt="EduCrafter" title="EduCrafter" loading="lazy" width="542" height="415">
-                    </picture>
+                    <div class="col-md-6 text-center">
+                        <picture>
+                            <img src="{{ asset('images/img-01.png') }}" class="img-fluid card-img modal-img" alt="EduCrafter" title="EduCrafter" loading="lazy" width="542" height="415">
+                        </picture>
+                    </div>
                 </div>
             </div>
         </div>
-    </div>
-</section>
+    </section>
     <section class="mt-3">
         <div class="container">
             <div class="row">
@@ -273,208 +214,23 @@
                 </div>
             </div>
             <div class="row gy-4 mt-2">
+                @foreach($servicepageHowWork as $howItWork)
                 <div class="col-md-4">
                     <div class="work-card h-100">
                         <picture>
-                            <source media="(min-width:768px)" srcset="{{ asset('images/search-icon.svg') }}">
-                            <img src="{{ asset('images/search-icon.svg') }}" class="img-fluid" loading="lazy" alt="EduCrafter" title="EduCrafter" width="90" height="90">
+                            <source media="(min-width:768px)" srcset="{{ $howItWork->icon}}">
+                            <img src="{{ $howItWork->icon}}" class="img-fluid" loading="lazy" alt="EduCrafter" title="EduCrafter" width="90" height="90">
                         </picture>
                         <div class="card-body text-center">
-                            <h3 class="card-title">Fill-in the details</h3>
-                            <p>Provide all the necessary details. Once you complete the order form and pay to write your essay, we will immediately start working on it.</p>
+                            <h3 class="card-title">{{$howItWork->title}}</h3>
+                            <p>{{$howItWork->description}}</p>
                         </div>
                     </div>
                 </div>
-
-                <div class="col-md-4">
-                    <div class="work-card h-100">
-                        <picture>
-                            <source media="(min-width:768px)" srcset="{{ asset('images/setting-icon.svg') }}">
-                            <img src="{{ asset('images/setting-icon.svg') }}" class="img-fluid" loading="lazy" alt="EduCrafter" title="EduCrafter" width="90" height="90">
-                        </picture>
-                        <div class="card-body text-center">
-                            <h3 class="card-title">Your writer assigned</h3>
-                            <p>Our team will review your order and select an expert essay writer to work on your paper.</p>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="col-md-4">
-                    <div class="work-card h-100">
-                        <picture>
-                            <source media="(min-width:768px)" srcset="{{ asset('images/rocket-icon.svg') }}">
-                            <img src="{{ asset('images/rocket-icon.svg') }}" class="img-fluid" loading="lazy" alt="EduCrafter" title="EduCrafter" width="90" height="90">
-                        </picture>
-                        <div class="card-body text-center">
-                            <h3 class="card-title">Writing magic happens</h3>
-                            <p>Our experts are working tirelessly to write your paper. Then it will go through our quality assurance team.</p>
-                        </div>
-                    </div>
-                </div>
-
+                @endforeach
             </div>
-
             <div class="text-center mt-4 mt-md-5 mb-4 ">
                 <a class="btn btn-primary" href="{{route('order')}}" role="link">Get started</a>
-            </div>
-        </div>
-    </section>
-    <section class="mt-3">
-        <div class="container">
-            <div class="tu-second-block">
-                <div class="row">
-                    <div class="col-md-6">
-                        <div class="tu-content" style="padding-top: 15%;">
-                            <h3>The Choice of students from <span>Top Universities</span></h3>
-                            <p>TRUSTED BY 100,000 + STUDENTS FROM TOP-RATED UNIVERSITIES</p>
-                            <a class="btn btn-primary d-none d-md-block" href="{{route('order')}}" role="button">Get started</a>
-                        </div>
-                    </div>
-                    <div class="col-md-6">
-                        <div class="overflow-hidden">
-
-                            <div class="verticle-marquee">
-                                <div class="row">
-                                    <div class="col-sm-6">
-                                        <div class="card-body text-center" style="background: #fff;border-radius: 10px;height: 100px;padding:20px;margin-bottom: 10px;">
-                                            <img src="{{ asset('images/top_universities/1.png') }}" class="card-img-top" alt="EduCrafter" title="Essay Hel" loading="lazy" style="height: 55px;">
-                                        </div>
-                                    </div>
-                                    <div class="col-sm-6">
-                                        <div class="card-body text-center" style="background: #fff;border-radius: 10px;height: 100px;padding:20px;margin-bottom: 10px;">
-
-
-                                            <img src="{{ asset('images/top_universities/2.png') }}" class="card-img-top" alt="EduCrafter" title="Essay Hel" loading="lazy" style="height: 55px;">
-                                        </div>
-                                    </div>
-
-
-                                    <div class="col-sm-6">
-                                        <div class="card-body text-center" style="background: #fff;border-radius: 10px;height: 100px;padding:20px;margin-bottom: 10px;">
-
-
-                                            <img src="{{ asset('images/top_universities/3.png') }}" class="card-img-top" alt="EduCrafter" title="Essay Hel" loading="lazy" style="height: 55px;">
-                                        </div>
-                                    </div>
-
-                                    <div class="col-sm-6">
-                                        <div class="card-body text-center" style="background: #fff;border-radius: 10px;height: 100px;padding:20px;margin-bottom: 10px;">
-
-
-                                            <img src="{{ asset('images/top_universities/4.png') }}" class="card-img-top" alt="EduCrafter" title="Essay Hel" loading="lazy" style="height: 55px;">
-
-
-                                        </div>
-                                    </div>
-                                    <div class="col-sm-6">
-                                        <div class="card-body text-center" style="background: #fff;border-radius: 10px;height: 100px;padding:20px;margin-bottom: 10px;">
-
-
-                                            <img src="{{ asset('images/top_universities/5.png') }}" class="card-img-top" alt="EduCrafter" title="Essay Hel" loading="lazy" style="height: 55px;">
-
-
-                                        </div>
-                                    </div>
-
-                                    <div class="col-sm-6">
-                                        <div class="card-body text-center" style="background: #fff;border-radius: 10px;height: 100px;padding:20px;margin-bottom: 10px;">
-
-
-                                            <img src="{{ asset('images/top_universities/6.png') }}" class="card-img-top" alt="EduCrafter" title="Essay Hel" loading="lazy" style="height: 55px;">
-
-
-                                        </div>
-                                    </div>
-
-                                    <div class="col-sm-6">
-                                        <div class="card-body text-center" style="background: #fff;border-radius: 10px;height: 100px;padding:20px;margin-bottom: 10px;">
-
-
-                                            <img src="{{ asset('images/top_universities/7.png') }}" class="card-img-top" alt="EduCrafter" title="Essay Hel" loading="lazy" style="height: 55px;">
-
-
-                                        </div>
-                                    </div>
-                                    <div class="col-sm-6">
-                                        <div class="card-body text-center" style="background: #fff;border-radius: 10px;height: 100px;padding:20px;margin-bottom: 10px;">
-
-
-                                            <img src="{{ asset('images/top_universities/8.png') }}" class="card-img-top" alt="EduCrafter" title="Essay Hel" loading="lazy" style="height: 55px;">
-
-
-                                        </div>
-                                    </div>
-
-
-                                    <div class="col-sm-6">
-                                        <div class="card-body text-center" style="background: #fff;border-radius: 10px;height: 100px;padding:20px;margin-bottom: 10px;">
-
-
-                                            <img src="{{ asset('images/top_universities/9.png') }}" class="card-img-top" alt="EduCrafter" title="Essay Hel" loading="lazy" style="height: 55px;">
-
-
-                                        </div>
-                                    </div>
-
-                                    <div class="col-sm-6">
-                                        <div class="card-body text-center" style="background: #fff;border-radius: 10px;height: 100px;padding:20px;margin-bottom: 10px;">
-
-
-                                            <img src="{{ asset('images/top_universities/10.png') }}" class="card-img-top" alt="EduCrafter" title="Essay Hel" loading="lazy" style="height: 55px;">
-
-
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-
-                        </div>
-                        <a class="btn btn-primary d-md-none w-100 mt-4" href="{{route('order')}}" role="button">Get started</a>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-    <section class="faq-sec">
-        <div class="container">
-            <div class="faq-box">
-                <div class="hiw-head">
-                    <h2 class="head-title">Frequently Asked <span>Questions</span></h2>
-                </div>
-                <div class="accordion row" id="accordionExample">
-                    @foreach ($faq_page as $faq)
-                    <div class="accordion-item col-sm-6">
-                        <h2 class="accordion-header" id="heading<?= $faq['id']; ?>">
-                            <a class="accordion-button collapsed" href="#" data-bs-toggle="collapse" data-bs-target="#collapse<?= $faq['id']; ?>" aria-expanded="true" aria-controls="collapse<?= $faq['id']; ?>">
-                                <?= $faq['question']; ?>
-                            </a>
-                        </h2>
-                        <div id="collapse<?= $faq['id']; ?>" class="accordion-collapse collapse" aria-labelledby="heading<?= $faq['id']; ?>" data-bs-parent="#accordionExample">
-                            <div class="accordion-body"><?= $faq['answer']; ?></div>
-                        </div>
-                    </div>
-                    @endforeach
-                </div>
-            </div>
-        </div>
-    </section>
-    <section class="trophy-sec mb-5">
-        <div class="container">
-            <div class="tripy-box">
-                <div class="row">
-                    <div class="col-md-6 d-flex flex-column justify-content-end">
-                        <div class="assign-content">
-                            <h2>Grade-Boosting Essays: </h2>
-                            <p>Our Precision Writers Hit Your Academic Target Every Time</p>
-                            <a class="btn btn-primary" href="{{route('order')}}" role="button">Get started</a>
-                        </div>
-                    </div>
-                    <div class="col-md-6 text-center">
-                        <picture>
-                            <img src="{{ asset('images/trophy-mobile.png') }}" class="img-fluid card-img modal-img" alt="EduCrafter" title="EduCrafter" loading="lazy" width="542" height="415">
-                        </picture>
-                    </div>
-                </div>
             </div>
         </div>
     </section>
@@ -494,45 +250,45 @@
                     <div class="work-card" style="padding:0px;">
                         <picture>
                             <img src="{{ asset('images/articles/1.jpeg') }}" class="img-fluid" loading="lazy" alt="EduCrafter" title="EduCrafter">
-                        </picture>
-                        <div class="card-body" style="padding:10px;">
-                            <p>6 min read</p>
-                            <h3 class="card-title">How To Structure An Argumentative Essay: Hints To Create Perfect Essay</h3>
-                            <p>Read more -></p>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-sm-12 col-md-4">
-                    <div class="work-card" style="padding:0px;">
-                        <picture>
-                            <img src="{{ asset('images/articles/2.jpeg') }}" class="img-fluid" loading="lazy" alt="EduCrafter" title="EduCrafter">
-                        </picture>
-                        <div class="card-body" style="padding:10px;">
-                            <p>6 min read</p>
-                            <h3 class="card-title">How To Structure An Argumentative Essay: Hints To Create Perfect Essay</h3>
-                            <p>Read more -></p>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-sm-12 col-md-4">
-                    <div class="work-card" style="padding:0px;">
-                        <picture>
-                            <img src="{{ asset('images/articles/3.jpeg') }}" class="img-fluid" loading="lazy" alt="EduCrafter" title="EduCrafter">
-                        </picture>
-                        <div class="card-body" style="padding:10px;">
-                            <p>6 min read</p>
-                            <h3 class="card-title">How To Structure An Argumentative Essay: Hints To Create Perfect Essay</h3>
-                            <p>Read more -></p>
-                        </div>
-                    </div>
-                </div>
+    </picture>
+    <div class="card-body" style="padding:10px;">
+        <p>6 min read</p>
+        <h3 class="card-title">How To Structure An Argumentative Essay: Hints To Create Perfect Essay</h3>
+        <p>Read more -></p>
+    </div>
+    </div>
+    </div>
+    <div class="col-sm-12 col-md-4">
+        <div class="work-card" style="padding:0px;">
+            <picture>
+                <img src="{{ asset('images/articles/2.jpeg') }}" class="img-fluid" loading="lazy" alt="EduCrafter" title="EduCrafter">
+            </picture>
+            <div class="card-body" style="padding:10px;">
+                <p>6 min read</p>
+                <h3 class="card-title">How To Structure An Argumentative Essay: Hints To Create Perfect Essay</h3>
+                <p>Read more -></p>
             </div>
-
-            <div class="text-center mt-4 mt-md-5 mb-4 ">
-                <a class="btn btn-primary" href="#" role="link">Browse All</a>
-            </div>
-
         </div>
+    </div>
+    <div class="col-sm-12 col-md-4">
+        <div class="work-card" style="padding:0px;">
+            <picture>
+                <img src="{{ asset('images/articles/3.jpeg') }}" class="img-fluid" loading="lazy" alt="EduCrafter" title="EduCrafter">
+            </picture>
+            <div class="card-body" style="padding:10px;">
+                <p>6 min read</p>
+                <h3 class="card-title">How To Structure An Argumentative Essay: Hints To Create Perfect Essay</h3>
+                <p>Read more -></p>
+            </div>
+        </div>
+    </div>
+    </div>
+
+    <div class="text-center mt-4 mt-md-5 mb-4 ">
+        <a class="btn btn-primary" href="#" role="link">Browse All</a>
+    </div>
+
+    </div>
     </section>--}}
 
 </main>

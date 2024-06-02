@@ -33,10 +33,20 @@ class HomeController extends Controller
 {
     public function index()
     {
+
+
+        $page = ServiceSeo::where('seo_url_slug', 'homepage')->first();
+        \View::share('title', ($page && $page->seo_meta) ? $page->seo_meta : '');
+        \View::share('description', ($page && $page->seo_description) ? $page->seo_description : '');
+        \View::share('seo_keywords', ($page && $page->seo_keywords) ? $page->seo_keywords : '');
+        \View::share('og_image', ($page && $page->og_image) ? $page->og_image : '');
+        \View::share('og_url', ($page && $page->seo_url_slug) ? $page->seo_url_slug : '');
+
+
         $data['subjects']   =   Subjects::orderBy('subject_name', 'ASC')->get()->toArray();
         //$data['topics']     =  Study_labels::orderBy('id','desc')->get()->toArray();
         $page = ServiceSeo::where('seo_url_slug', 'homepage')->first();
-        $page1 = Service::where('service_name','Home Page')->first();
+        $page1 = Service::where('service_name', 'Home Page')->first();
         // dd($page1);
         $data['homepageData'] = ServiceWhyEducrafter::where('service_id', $page->service_id)->get();
         $data['ServiceSpecifications'] = ServiceSpecifications::where('service_id', $page->service_id)->get();
@@ -49,14 +59,14 @@ class HomeController extends Controller
         $data['referencings']     =   Referencing::orderBy('id', 'desc')->get()->toArray();
         return view('home', $data);
     }
-    
+
     public function dateformat()
     {
         echo date('jS F, Y', strtotime($_GET['date']));
         die;
     }
-    
-   
+
+
     public function contanctSave(Request $request)
     {
         $request->validate([
