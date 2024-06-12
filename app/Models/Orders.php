@@ -13,7 +13,7 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
 class Orders extends Model
 {
     protected $table = 'orders';
-    protected $fillable = ['fileupload', 'title', 'task', 'delivery_date', 'website_id', 'subject_id', 'task_type_id', 'studylabel_id', 'grade_id', 'referencing_style_id', 'no_of_words', 'price', 'student_id', 'payment_status', 'task_status', 'writer_id', 'qc_id', 'rating', 'review', 'currency_code'];
+    protected $fillable = ['coupon_code_id','gross_price','fileupload', 'title', 'task', 'delivery_date', 'website_id', 'subject_id', 'task_type_id', 'studylabel_id', 'grade_id', 'referencing_style_id', 'no_of_words', 'price', 'student_id', 'payment_status', 'task_status', 'writer_id', 'qc_id', 'rating', 'review', 'currency_code'];
 
     public function subject(): BelongsTo
     {

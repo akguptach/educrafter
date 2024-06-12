@@ -86,7 +86,7 @@
                             </div>
                             <div class="col-6">
                                 <p class="text-ta text-end total_price">
-                                    {{ $order->price }} {{ $order->currency_code }}
+                                    {{ $order->gross_price }} {{ $order->currency_code }}
                                 </p>
                             </div>
                         </div>

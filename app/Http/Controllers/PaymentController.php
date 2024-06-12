@@ -15,6 +15,8 @@ use App\Models\Orders;
 use Stripe\Checkout\Session;
 use Illuminate\Support\Facades\DB;
 use Mail;
+use App\Models\Coupon;
+use Illuminate\Support\Facades\Auth;
 
 class PaymentController extends Controller
 {
@@ -69,7 +71,7 @@ class PaymentController extends Controller
             $stripe = new StripeClient(env('STRIPE_SECRET'));
             
             // Get the payment amount and email address from the form.
-            $amount = $order->price * 100;
+            $amount = $order->gross_price * 100;
             $email = $order->student->email;
             $currency_code = strtolower($order->currency_code);
 
@@ -128,6 +130,19 @@ class PaymentController extends Controller
                         'status' => 'INPROCESS'
                     ]
                 );
+
+                $order = Orders::where('id',session('payment_order_id'))->first();
+                DB::table('coupon_code_uses')->insert(
+                    [
+                        'user_id' => Auth::user()->id, 
+                        'coupon_id' => $order->coupon_code_id
+                    ]
+                );
+                $coupon = Coupon::where('id',$order->coupon_code_id)->first();
+                $coupon->num_uses = $coupon->num_uses+1;
+                $coupon->save();
+
+
                 DB::table('payment')->updateOrInsert(
                     [
                         'order_id' => session('payment_order_id')

@@ -69,6 +69,7 @@ Route::post('/login', [Auth::class, 'login'])->name('login');
 Route::get('/order', [Order::class, 'index'])->name('order');
 Route::post('/price', [Order::class, 'checkprice'])->name('price');
 
+Route::post('/validate-coupon-code', [Order::class, 'validateCouponCode'])->name('validateCouponCode');
 
 Route::post('/neworder', [Order::class, 'create'])->name('neworder');
 Route::post('/process-attachment', [Order::class, 'processAttachment'])->name('process-attachment');

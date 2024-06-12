@@ -11,6 +11,8 @@ use App\Models\Subjects;
 use App\Models\Task_types;
 use App\Models\Website;
 use App\Models\Referral;
+use App\Models\Coupon;
+use App\Models\CouponCodeUses;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
@@ -20,6 +22,7 @@ use Validator;
 use App\Services\OrderService;
 use App\Http\Requests\OrderRequestMessageRequest;
 use Illuminate\Support\Facades\Mail;
+use Carbon\Carbon;
 
 
 class OrderController extends Controller
@@ -43,6 +46,30 @@ class OrderController extends Controller
         }
         
         return view('order', $data);
+    }
+
+    public function validateCouponCode(Request $request)
+    {
+        $couponCode  = isset($request->coupon_code)?$request->coupon_code:'';
+        if(!$couponCode)
+            return response()->json(['message'=>'Please enter coupon code'], 422);
+
+        $date = Carbon::now();
+        $coupon = Coupon::where('code',$couponCode)
+        ->whereDate('start_date', '<=', $date)
+        ->whereDate('end_date', '>=', $date)
+        ->first();
+        if(!$coupon)
+            return response()->json(['message'=>'Please use a valid coupon code'], 422);
+        else if($coupon->max_uses == $coupon->num_uses){
+            return response()->json(['message'=>'Please use a valid coupon code'], 422);
+        }
+        $uses = CouponCodeUses::where('coupon_id',$coupon->id)->where('user_id',Auth::user()->id)->count();
+        if($uses == $coupon->limit_per_users){
+            return response()->json(['message'=>'You already have used this coupon code'], 422);
+        }
+        return response()->json(['message'=>'Coupon code is valid'], 200);
+
     }
 
     public function checkprice(Request $request)
@@ -197,17 +224,52 @@ class OrderController extends Controller
 
             $j++;
         }
-
         if($request->delivery_price){
-            
             $arrP['delivery_date_price'] = $request->delivery_price;
             $price1 = $request->delivery_price;
         }else{
             $price1 = $websiteArr['currency_sign'] . $total1;
         }
 
+
+        // apply coupon
+        $discount = 0;
+        $discountprice = 0;
+        $currency = '';
+        
+        if($price1 > 0){
+            preg_match('/^(\D+)(\d|\d[.,\d]+)$/', $price1, $match);
+            $currency = $match[1];
+            $discountprice = $match[2];
+        }
+        if($request->valid_coupon_code){
+            $amount = $match[2];
+            $discount = $this->applyCoupon($request->valid_coupon_code, $amount);
+            $discountprice = $amount-$discount;
+        }
+
         $arrP['custom_date'] = $str;
-        return Response::json(array('success' => 'true', 'price' => $arrP, 'price1' => $price1));
+        return Response::json(array('success' => 'true', 'price' => $arrP, 'price1' => $price1,'discount'=>$discount,'discountprice'=>$currency.$discountprice));
+    }
+
+    public function applyCoupon($valid_coupon_code, $amount)
+    {
+        $discount = 0;
+        $date = Carbon::now();
+        $coupon = Coupon::where('code',$valid_coupon_code)
+        ->whereDate('start_date', '<=', $date)
+        ->whereDate('end_date', '>=', $date)
+        ->first();
+        if($coupon){
+            if($coupon->reduction_type == 'FIXED'){
+                $discount = $coupon->reduction_amount;
+            }else if($coupon->reduction_type == 'PERCENTAGE'){
+                $discount = ($amount*$coupon->reduction_amount)/100;
+                
+            }
+            return $discount;
+        }
+
     }
 
     public function processAttachment(Request $request)
@@ -319,10 +381,32 @@ class OrderController extends Controller
         $order->delivery_date = $delivery_date;
         //$arrPrice = explode(' ', $request->delivery_price);
 
+        
+        $string = preg_match('/^(\D+)(\d|\d[.,\d]+)$/', $request->delivery_price, $match);
+        //print_r($match); die;
+        $amount = $match[2];
+        if($request->valid_coupon_code){
+            
 
-        $string = preg_match('/^(\D+)(\d+)$/', $request->delivery_price, $match);
-        // print_r($match);
-        $order->price = $match[2];
+            $date = Carbon::now();
+            $coupon = Coupon::where('code',$request->valid_coupon_code)
+            ->whereDate('start_date', '<=', $date)
+            ->whereDate('end_date', '>=', $date)
+            ->first();
+
+            $uses = CouponCodeUses::where('coupon_id',$coupon->id)->where('user_id',Auth::user()->id)->count();
+            if($coupon && $coupon->max_uses > $coupon->num_uses && $uses < $coupon->limit_per_users){
+                $discount = $this->applyCoupon($request->valid_coupon_code, $amount);
+                $order->gross_price  = $amount - $discount;
+                $order->coupon_code_id = $coupon->id;
+            } else{
+                $order->gross_price = $amount; 
+            }  
+        }else{
+            
+            $order->gross_price = $amount;
+        }
+        $order->price = $amount;
         $order->currency_code = $match[1];
         if($attachment)
 		{

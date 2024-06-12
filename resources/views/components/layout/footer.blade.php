@@ -109,7 +109,7 @@
     .footer-widget ul li {
         display: inline-block;
         float: left;
-        width: 100%;
+        width:100%;
         margin-bottom: 12px;
     }
     .footer-widget ul li a:hover {
@@ -329,10 +329,37 @@
                     <div class="footer-widget-heading">
                         <h3>We accept</h3>
                     </div>
-                    <ul>
-                        <li><img src="{{ asset('images/footer.png')}}" width="150"></li>
-                    </ul>
-                </div>
+                    <ul class="flex flex-wrap -mb-2" style="width:100%;float:left;">
+					    <li class="pb-2 pr-2 last:pr-0" style="width: 20%;float: left;padding-top: 8px;">
+							<img src="{{ asset('images/visa.png') }}" style="width:45px;">
+						</li>
+						<li class="pb-2 pr-2 last:pr-0" style="width: 20%;float: left;">
+							<img src="{{ asset('images/mastercard.svg') }}" style="width:45px;">
+						</li>
+						<li class="pb-2 pr-2 last:pr-0" style="width: 20%;float: left;">
+							<img src="{{ asset('images/amex.svg') }}" style="width:45px;">
+						</li>
+
+					</ul>
+				    <ul class="flex flex-wrap -mb-2" style="width:100%;float:left;">
+						<li class="pb-2 pr-2 last:pr-0" style="width: 20%;float: left;">
+							<img src="{{ asset('images/klarna-svgrepo-com.svg') }}" style="width:45px;">
+
+						</li>
+					    <li class="pb-2 pr-2 last:pr-0" style="width: 20%;float: left;">
+						    <img src="{{ asset('images/google-pay.svg') }}" style="width:45px;">
+
+					    </li>
+					    <li class="pb-2 pr-2 last:pr-0" style="width: 20%;float: left;">
+						     <img src="{{ asset('images/apple-pay.svg') }}" style="width:45px;">
+					    </li>
+				    </ul>
+			  
+			 
+			  
+			 
+			   
+				</div>
             </div>
         </div>
     </div>

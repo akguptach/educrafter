@@ -192,7 +192,7 @@
                                     <td>{{$item['delivery_date']}}</td>
                                     <td>{{$item['no_of_words']}}</td>
                                     <td>
-                                        {{$item['currency_code']}}{{$item['price']}}
+                                        {{$item['currency_code']}}{{$item['gross_price']}}
                                     </td>
                                     <td><a href="{{url('vieworder/'.$item['id'])}}" class="link">View</a></td>
                                 </tr>

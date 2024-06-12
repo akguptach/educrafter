@@ -216,7 +216,7 @@
                             <p class="review-rating"><span>4.6</span> 489 Reviews</p>
                         </div>
                     </div>
-                    <h2><b>500K </b> students trust EduCrafter</h2>
+                    <h2><b>500K+ </b> students trust EduCrafter</h2>
                 </div>
             </div>
         </div>
@@ -248,7 +248,7 @@
             @endforeach
         </div>
         <div class="text-center mt-4 mt-md-5 mb-4 ">
-            <a class="btn btn-primary" href="{{route('order')}}" role="link">Get started</a>
+            <a class="btn btn-primary  button-order" href="{{route('order')}}" role="link">Get started</a>
         </div>
     </div>
 </section>
@@ -259,9 +259,9 @@
                 <div class="wm-right" style="padding-top: 17%;">
                     <h2>We Make <br><span>Students Happy </span></h2>
                     <h3 class="mb-4">Still in Two Minds?<br> The Proof is in Numbers!</h3>
-                    <p>5000K students have entrusted their papers to us</p>
+                    <p>500K+ students have entrusted their papers to us</p>
                     <p>With EduCrafter, achieving the grades you've always wanted has never been easier. Our top-notch essay writers are ready to assist you.</p>
-                    <a class="btn btn-primary d-none d-md-inline-flex" href="{{route('order')}}" role="link">Get started</a>
+                    <a class="btn btn-primary button-order" href="{{route('order')}}" role="link">Get started</a>
                 </div>
             </div>
             <div class="col-md-6">
@@ -269,19 +269,17 @@
                     <div class="row">
                         @foreach ($homepageRating->take(4) as $rating)
                         <div class="col-md-6 mb-2">
-                            <div class="card student-review-card p-2">
-                                <div class="card-body p-0">
-                                    <p class="card-text" id="ratingDescriptionShort{{ $rating->id }}">
+                            <div class="card student-review-card p-3">
+                                <div class="card-body p-0" style="font-size: 14px;">
+                                    <p class="card-text" id="ratingDescriptionShort{{ $rating->id }}" style="height: 100px;">
                                         {!! Str::words(strip_tags($rating->description), 20, ' <a href="javascript:void(0)" onclick="toggleDescription(event, '.$rating->id.')" style="text-decoration: none; "> Read more...</a>') !!}
                                     </p>
-                                    <p class="card-text" id="ratingDescriptionFull{{ $rating->id }}" style="display: none;">
-                                        {!! $rating->description !!}
-                                    </p>
+                                   
                                     <?php
                                     $date2 = $rating->created_at;
                                     $newDate2 = date("M d, Y", strtotime($date2));
                                     ?>
-                                    <div class="student-name"><b>{{ $rating->address}}.</b></div>
+                                    <div class="student-name" style="height: 50px;"><b>{{ $rating->address}}.</b></div>
 
                                 </div>
                                 <div class="d-flex sr-block ">
@@ -303,7 +301,7 @@
                         @endforeach
                     </div>
                 </div>
-                <a class="btn btn-primary w-100 mt-4 d-md-none" href="{{route('order')}}" role="link">Get started</a>
+                
             </div>
 
         </div>
@@ -466,7 +464,7 @@
             </div>
         </div>
         <div class="text-center mt-4 mb-4 ">
-            <a class="btn btn-primary" href="{{route('order')}}" role="link">Get started</a>
+            <a class="btn btn-primary button-order" href="{{route('order')}}" role="link">Get started</a>
         </div>
     </div>
 </section>
@@ -517,8 +515,8 @@
             </div>
             @endforeach
         </div>
-        <div class="text-center mt-4 mt-md-5 mb-4 ">
-            <a class="btn btn-primary" href="{{route('order')}}" role="link">Get started</a>
+        <div class="text-center mt-4 mb-4 ">
+            <a class="btn btn-primary button-order" href="{{route('order')}}" role="link">Get started</a>
         </div>
     </div>
 </section>
@@ -529,8 +527,8 @@
                 <div class="col-md-6">
                     <div class="tu-content" style="padding-top: 15%;">
                         <h3>The Choice of students from <span>Top Universities</span></h3>
-                        <p>TRUSTED BY 100,000 + STUDENTS FROM TOP-RATED UNIVERSITIES</p>
-                        <a class="btn btn-primary d-none d-md-block" href="{{route('order')}}" role="button">Get started</a>
+                        <p>TRUSTED BY 500K+ STUDENTS FROM TOP-RATED UNIVERSITIES</p>
+                        <a class="btn btn-primary button-order" href="{{route('order')}}" role="button">Get started</a>
                     </div>
                 </div>
                 <div class="col-md-6">
@@ -633,7 +631,7 @@
                             </div>
                         </div>
                     </div>
-                    <a class="btn btn-primary d-md-none w-100 mt-4" href="{{route('order')}}" role="button">Get started</a>
+                    
                 </div>
             </div>
         </div>
@@ -647,8 +645,7 @@
         <div class="row">
             <div class="col-12">
                 <div class="hiw-head">
-                    <h2 class="head-title" style="padding: 0px 15% 0px 15%;font-size: 24px;font-weight: 600;">Our expert
-                        Make your studies effortless with our essay service</h2>
+                    <h2 class="head-title" style="padding: 0px 15% 0px 15%;font-size: 24px;font-weight: 600;">Make your studies effortless with our essay writing service</h2>
                 </div>
             </div>
         </div>
@@ -664,29 +661,47 @@
         </div>
     </div>
 </section>
-<section class="faq-sec">
-    <div class="container">
-        <div class="faq-box">
-            <div class="hiw-head">
+<!-- FAQ 2 - Bootstrap Brain Component -->
+<section class="bsb-faq-2 bg-light py-3 py-md-5 py-xl-8" >
+  <div class="container">
+    <div class="row gy-5 gy-lg-0">
+       <div class="col-12 col-lg-12">
+	    <div class="">
+	    <div class="hiw-head">
                 <h2 class="head-title">Frequently Asked <span>Questions</span></h2>
-            </div>
-            <div class="accordion row" id="accordionExample">
-                @foreach ($faq_page as $faq)
-                <div class="accordion-item col-sm-6">
-                    <h2 class="accordion-header" id="heading<?= $faq['id']; ?>">
-                        <a class="accordion-button collapsed" href="#" data-bs-toggle="collapse" data-bs-target="#collapse<?= $faq['id']; ?>" aria-expanded="true" aria-controls="collapse<?= $faq['id']; ?>">
-                            <?= $faq['question']; ?>
-                        </a>
-                    </h2>
-                    <div id="collapse<?= $faq['id']; ?>" class="accordion-collapse collapse" aria-labelledby="heading<?= $faq['id']; ?>" data-bs-parent="#accordionExample">
-                        <div class="accordion-body"><?= $faq['answer']; ?></div>
-                    </div>
-                </div>
-                @endforeach
-            </div>
         </div>
-    </div>
+        <div class=" justify-content-xl-end">
+         
+            <div class="accordion accordion-flush row" id="accordionExample">
+			  @foreach ($faq_page as $faq)
+			  <div class="col-6 col-xl-6">
+              <div class="accordion-item mb-4 shadow-sm">
+                <h2 class="accordion-header" id="headingOne<?= $faq['id']; ?>">
+                  <button class="accordion-button bg-transparent fw-bold" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne<?= $faq['id']; ?>" aria-expanded="true" aria-controls="collapseOne<?= $faq['id']; ?>">
+                   <?= $faq['question']; ?>
+                  </button>
+                </h2>
+                <div id="collapseOne<?= $faq['id']; ?>" class="accordion-collapse collapse" aria-labelledby="headingOne<?= $faq['id']; ?>" data-bs-parent="#accordionExample">
+                  <div class="accordion-body">
+                    <?= $faq['answer']; ?>
+                  </div>
+                </div>
+              </div>
+			  </div>
+			   @endforeach
+              
+			</div>
+         
+        </div>
+		
+		</div>
+      </div>
+    
+	</div>
+  </div>
 </section>
+
+
 <section class="trophy-sec mb-5">
     <div class="container">
         <div class="tripy-box">
