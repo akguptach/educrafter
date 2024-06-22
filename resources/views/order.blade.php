@@ -418,6 +418,21 @@
         </div>
     </div>
 </div>
+
+
+<div class="modal fade" id="order_error" tabindex="-1" role="dialog" aria-labelledby="order_error" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-body">
+        <div id="msg" style="font-size: 16px;text-align: center;"></div>
+        <div style="text-align: center;"><button  style="margin-top: 20px;" type="button" class="btn btn-secondary" data-bs-dismiss="modal" data-dismiss="modal">Close</button></div>
+      </div>
+      
+    </div>
+  </div>
+</div>
+
+
 @if(session()->has('payment_status') && session('payment_status') == 'Success')
 <script>
 Swal.fire({
@@ -451,10 +466,24 @@ $(function() {
     $('#apply_coupon').click(function(){
         $('#coupon_code_error').html('');
         $('#valid_coupon_code').val('');
+       
+        //Serialize the Form
+        var values = {};
+        $.each($("#order_form").serializeArray(), function (i, field) {
+            values[field.name] = field.value;
+        });
+
+        //Value Retrieval Function
+        var getValue = function (valueName) {
+            return values[valueName];
+        };
+
+        //Retrieve the Values
+        var delivery_price = getValue("delivery_price");
         $.ajax({
             type: 'POST',
             url: "{{route('validateCouponCode')}}",
-            data:{coupon_code:$('#coupon_code').val(),"_token": "{{ csrf_token() }}",},
+            data:{coupon_code:$('#coupon_code').val(),"_token": "{{ csrf_token() }}",delivery_price:delivery_price},
             success: function(response) {
                 $('#valid_coupon_code').val($('#coupon_code').val());
                 pricecal();
@@ -510,6 +539,7 @@ $(function() {
                 contentType: false,
                 success: function(response1) {
                     $('.delivery_at_div').text(response1);
+                    pricecal();
                 },
                 error: function(xhr, status, error) {
                     // Handle errors
@@ -565,12 +595,17 @@ $(function() {
                         $("#loginModal").modal("show");
                     } else if (xhr.status == 422) {
 
-
+                        
+                        //$("#order_error #msg").html(xhr.responseJSON.status)
                         $.each(xhr.responseJSON.data, function(index, value) {
                             console.log('index', index)
                             $('#' + index + '_error').html(value[0]);
                         })
 
+                    }
+                    else if (xhr.status == 403) {
+                        $('#order_error').modal("show");
+                        $('#order_error #msg').html(xhr.responseJSON.status);
                     }
                 })
                 .always(function() {

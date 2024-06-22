@@ -15,7 +15,8 @@
                             <h5>Transaction Statement(s)</h5>
                         </div>
                         <div class="col-md-8 text-end">
-                            <h6>Wallet Amount: <b>AUD 00.00</b> | Free Credit: <b>AUD 0</b></h6>
+                        <?php $website = \App\Models\Website::select('currency')->where('website_type','Educrafter')->first(); ?>
+                            <h6>Wallet Amount: <b>{{$website->currency}} 00.00</b> | Free Credit: <b>{{$website->currency}} 0</b></h6>
                         </div>
                     </div>
                     <div class="table-responsive">
@@ -37,9 +38,9 @@
                                 <tr>
                                     <td scope="row">{{$index + $orders->firstItem()}} </td>
                                     <td>Debit</td>
-                                    <td>MAS{{$item->id}}</td>
+                                    <td>{{$item->website->order_prefix}}{{$item->id}}</td>
                                     <td>{{$item->payment->transaction_id}}</td>
-                                    <td>{{$item->payment->created_at}}</td>
+                                    <td>{{ \Carbon\Carbon::parse($item->payment->created_at)->format('M d, Y')}}</td>
                                     <td>{{$item->currency_code}} {{$item->payment->amount}}</td>
                                     <td>Paid</td>
                                     <td class="text-center">

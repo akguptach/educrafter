@@ -186,7 +186,7 @@
                                 <tr>
                                     <th scope="row">
                                         <a class="link" href="#" data-bs-toggle="modal"
-                                            data-bs-target="#orderMessageModal11">MAS{{$item['id']}}</a>
+                                            data-bs-target="#orderMessageModal11">{{$item->website->order_prefix}}{{$item['id']}}</a>
                                     </th>
                                     <td>{{$item->subject['subject_name']}}</td>
                                     <td>{{$item['delivery_date']}}</td>
@@ -226,7 +226,7 @@
                             <tbody>
                                 @foreach($enquiries as $item)
                                 <tr>
-                                    <th scope="row">MAS{{$item['id']}}</th>
+                                    <th scope="row">{{$item->website->order_prefix}}{{$item['id']}}</th>
                                     <td>{{$item->payment_status}}</td>
                                     <td>{{$item->subject['subject_name']}}</td>
                                     <td>{{$item['delivery_date']}}</td>
@@ -270,7 +270,7 @@
                                 <tr>
                                     <th scope="row">
                                         <a class="link" href="#" data-bs-toggle="modal"
-                                            data-bs-target="#orderMessageModal11">MAS{{$item['id']}}</a>
+                                            data-bs-target="#orderMessageModal11">{{$item->website->order_prefix}}{{$item['id']}}</a>
                                     </th>
                                     <td>{{$item->subject['subject_name']}}</td>
                                     <td>{{$item['delivery_date']}}</td>

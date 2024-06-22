@@ -52,7 +52,7 @@ class OrderController extends Controller
     {
         $couponCode  = isset($request->coupon_code)?$request->coupon_code:'';
         if(!$couponCode)
-            return response()->json(['message'=>'Please enter coupon code'], 422);
+            return response()->json(['message'=>'Please enter coupon code'], 422); 
 
         $date = Carbon::now();
         $coupon = Coupon::where('code',$couponCode)
@@ -67,6 +67,17 @@ class OrderController extends Controller
         $uses = CouponCodeUses::where('coupon_id',$coupon->id)->where('user_id',Auth::user()->id)->count();
         if($uses == $coupon->limit_per_users){
             return response()->json(['message'=>'You already have used this coupon code'], 422);
+        }
+        $string = preg_match('/^(\D+)(\d|\d[.,\d]+)$/', $request->delivery_price, $match);
+        $amount = $match[2];
+        $discount = $this->applyCoupon($couponCode, $amount);
+        
+        if(($amount - $discount) < 0){
+            return response()->json(
+                [
+                    'message' => 'This coupon code can not be applied on this order',
+                ],403
+            );
         }
         return response()->json(['message'=>'Coupon code is valid'], 200);
 
@@ -107,10 +118,11 @@ class OrderController extends Controller
         }
         //echo $no_of_words.'=='.$websiteArr['no_words'];
 
+
         $total1 = $subjectArr['price'] + (($no_of_words - $websiteArr['no_words']) * $subjectArr['additional_word_rate']);
 
         $total1 = $total1 + ($total1 * $websiteArr['subject_price'] / 100);
-
+        
         //echo $websiteArr['price'].'=='.$studylabelArr['price'].'=='.$task_typeArr['price'].'=='.$gradeArr['price'];
         //echo '<br>';
         $total_percent = $labelofstudyArr['price'] + $task_typeArr['price'] + $gradeArr['price'];
@@ -401,11 +413,20 @@ class OrderController extends Controller
                 $order->coupon_code_id = $coupon->id;
             } else{
                 $order->gross_price = $amount; 
-            }  
+            } 
+            if($order->gross_price < 0){
+                return response()->json(
+                    [
+                        'status' => 'This coupon code can not be applied on this order',
+                    ],403
+                );
+            } 
         }else{
             
             $order->gross_price = $amount;
         }
+
+        
         $order->price = $amount;
         $order->currency_code = $match[1];
         if($attachment)
