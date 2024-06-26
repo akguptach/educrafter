@@ -132,15 +132,20 @@ class PaymentController extends Controller
                 );
 
                 $order = Orders::where('id',session('payment_order_id'))->first();
-                DB::table('coupon_code_uses')->insert(
-                    [
-                        'user_id' => Auth::user()->id, 
-                        'coupon_id' => $order->coupon_code_id
-                    ]
-                );
-                $coupon = Coupon::where('id',$order->coupon_code_id)->first();
-                $coupon->num_uses = $coupon->num_uses+1;
-                $coupon->save();
+
+                if(isset($order->coupon_code_id)){
+                    DB::table('coupon_code_uses')->insert(
+                        [
+                            'user_id' => Auth::user()->id, 
+                            'coupon_id' => $order->coupon_code_id
+                        ]
+                    );
+                    $coupon = Coupon::where('id',$order->coupon_code_id)->first();
+                    if($coupon){
+                        $coupon->num_uses = $coupon->num_uses+1;
+                        $coupon->save();
+                    }
+                }
 
 
                 DB::table('payment')->updateOrInsert(
