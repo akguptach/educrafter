@@ -91,13 +91,13 @@
                     <div class="container">
                         <div class="row justify-content-center ">
                             <div class="col-md-2  social-auth">
-                                <a href="#" class="btn btn-google "></a>
+                                <a href="{{route('auth.google')}}" class="btn btn-google "></a>
                             </div>
                             <div class="col-md-2  social-auth">
-                                <a href="#" class="btn btn-facebook "></a>
+                                <a href="{{route('auth.facebook')}}" class="btn btn-facebook "></a>
                             </div>
                             <div class="col-md-2  social-auth">
-                                <a href="#" class="btn btn-apple "></a>
+                                <a href="{{route('auth.apple')}}" class="btn btn-apple "></a>
                             </div>
                         </div>
                     </div>
