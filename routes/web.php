@@ -15,7 +15,6 @@ use App\Livewire\Admin\Orders;
 use Livewire\Livewire;
 use App\Http\Controllers\ServicesController as Services;
 use App\Http\Controllers\ErrorController as Error;
-use App\Http\Controllers\FacebookLoginController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -105,14 +104,12 @@ Livewire::setUpdateRoute(function ($handle) {
     return Route::any('/student/livewire/update', $handle);
 });
 
+
+
+Route::get('/tutors', [App\Http\Controllers\ExpertDetailsController::class, 'tutorsList'])->name('Tutors.List');
+Route::get('/offers', [App\Http\Controllers\OffersController::class, 'index'])->name('Offers.Index');
 Route::get('/{slug}', [Services::class, 'servicesIndex'])->name('Services.Index');
+Route::get('/tutor/{id}', [App\Http\Controllers\ExpertDetailsController::class, 'index'])->name('Expert.Details');
 
-// FacebookLoginController redirect and callback urls
-Route::get('/auth/facebook', [FacebookLoginController::class, 'redirectToFacebook'])->name('auth.facebook');
-Route::get('/auth/facebook/callback', [FacebookLoginController::class, 'handleFacebookCallback']);
 
-Route::get('/auth/google', [\App\Http\Controllers\GoogleLoginController::class, 'redirectToGoogle'])->name('auth.google');
-Route::get('/auth/google/callback', [App\Http\Controllers\GoogleLoginController::class, 'handleGoogleCallback'])->name('google.callback');
 
-Route::get('/auth/apple', [\App\Http\Controllers\AppleLoginController::class, 'redirectToApple'])->name('auth.apple');
-Route::get('/auth/apple/callback', [App\Http\Controllers\AppleLoginController::class, 'handleAppleCallback'])->name('apple.callback');
