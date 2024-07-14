@@ -16,11 +16,13 @@ class ExpertDetailsController extends Controller
 
     public function index($id)
     {
-        return view('expert/index');
+        $expert = Expert::where('id', $id)->first();
+        return view('expert/index',compact('expert'));
     }
 
     public function tutorsList()
     {
-        return view('expert/list');
+        $experts = Expert::all();
+        return view('expert/list',compact('experts'));
     }
 }

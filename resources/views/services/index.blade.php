@@ -128,7 +128,7 @@
                                     <div class="col-3 col-md-3 col-sm-6">
                                         <div class="fact__item fact__item-two">
                                             <h2 class="count">
-                                                <span class="odometer" data-count="250"></span>M+
+                                                <span class="odometer" data-count="250"></span>K+
                                             </h2>
                                             <p style="font-size: 15px;">Satisfied students</p>
                                         </div>
@@ -208,7 +208,7 @@
                                             @else
                                               @php($ratingNumbers = 4)
                                             @endif
-                                            @for($i=0; $i <= $ratingNumbers; $i++)
+                                            @for($i=0; $i < $ratingNumbers; $i++)
                                             <i class="fas fa-star"></i>
                                             @endfor
                                             5K+
@@ -923,10 +923,7 @@
                     style="border: 1px solid #C6C6C6;border-radius: 8px;padding: 10px;box-shadow: 3px 4px 0px 0px #000000;background: #fff;">
                     <img src="{{ asset('img/downlogo/Stanford university.png')}}" style="width:150px;">
                 </div>
-                <div class="brand__item"
-                    style="border: 1px solid #C6C6C6;border-radius: 8px;padding: 10px;box-shadow: 3px 4px 0px 0px #000000;background: #fff;">
-                    <img src="{{ asset('img/downlogo/Pepperdine University.png')}}" style="width:150px;">
-                </div>
+                
                 <div class="brand__item"
                     style="border: 1px solid #C6C6C6;border-radius: 8px;padding: 10px;box-shadow: 3px 4px 0px 0px #000000;background: #fff;">
                     <img src="{{ asset('img/downlogo/Princeton University.png')}}" style="width:150px;">

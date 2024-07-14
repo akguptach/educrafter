@@ -104,7 +104,7 @@
 									<div class="col-3 col-md-3 col-sm-6">
 										<div class="fact__item fact__item-two">
 										  <h2 class="count">
-											<span class="odometer" data-count="250"></span>M+
+											<span class="odometer" data-count="250"></span>K+
 										  </h2>
 										  <p style="font-size: 15px;">Satisfied students</p>
 										</div>
@@ -761,8 +761,7 @@
 											<i class="fas fa-star"></i>
                                         </div>
 									</div>
-                                    <p class="paragraph" style="color:#000;font-size:10px;font-weight:500;">Educrafter is my go-to for essay help. Their services are affordable, user-friendly, and always deliver top-notch results. Highly recommend!
-</p>
+                                    <p class="paragraph" style="color:#000;font-size:10px;font-weight:500;">Educrafter is my go-to for essay help. Their services are affordable, user-friendly, and always deliver top-notch results. Highly recommend!</p>
                                     <div class="div-block-13-copy">
                                         <p style="font-size:16px;color:#000;font-family:'Inter'"><span style="font-weight:bold;">Jessica</span>&nbsp;&nbsp;<span style="font-size:14px;">May 16, 2024</span> <span style="font-size:14px;">Brown University</span></p>
 										
@@ -897,8 +896,8 @@
     transform: rotate(323deg);
 }
 						</style>
-						<div class="card-container scott11">
-                            <div class="gif-container scott11"><img src="{{ asset('img/banner2_l.png')}}" loading="lazy" alt="" class="gif" /></div>
+						<div class="card-container cocoon">
+                            <div class="gif-container cocoon"><img src="{{ asset('img/banner2_l.png')}}" loading="lazy" alt="" class="gif" /></div>
                         </div>
 						<style>
 						.card-container.hand {
@@ -1114,7 +1113,14 @@
 	  
 	  <section class="blog__post-area-three tg-motion-effects blog__bg" style="background: #C2E3FB;margin-top: 100px;height: 100%;border: 1px solid #000000;box-shadow: 0px 4px 0px 0px #000000;">
 	  
-	        <div style="margin:0 auto;position:Absolute;display: flex;top: 6%;z-index:10;"><img src="{{ asset('img/Group 1000007918.png')}}" style="width:30%;display: block;margin-left: auto;margin-right: auto;"></div>
+	       <div style="margin:0 auto;position:Absolute;display: flex;top: 21%;z-index:10;width:100%;">
+			    <div style="width:400px;height: 400px;background: #fff;border-radius: 20px;display: flex;margin: 0 auto;/* top: 29%; */position: relative;border: 10px solid #FB9271;box-shadow: 8px 8px 0px 0px #000000;"><img src="{{ asset('img/1rRk.gif')}}" style="width: 300px;height: 300px;/* display: block; */margin-left: auto;margin-right: auto;position: relative;top: -20%;transform: rotate(350deg);border-radius: 20px;">
+				
+				<div style="width:400px;position: absolute;bottom: 8px;font-size: 3em;font-family: 'Inter';text-align: center;color: #000;font-weight: bold;"><span style="color: #000;width: 100%;float: left;height: 54px;">As</span><span style="color:#3B71ED;">Featured</span> In</div>
+				</div>
+				
+				
+			</div>
             <div class="marquee_mode" id="marquee_mode1" style="height:128px;">
                 
                 <div class="row">

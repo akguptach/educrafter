@@ -10,12 +10,151 @@
 
 @font-face {
     font-family: 'Sofia Pro';
-    src: url('SofiaPro-Bold.woff2') format('woff2'),
-        url('SofiaPro-Bold.woff') format('woff');
+    src: url('../fonts/sofia/SofiaPro-BlackItalic.woff2') format('woff2'),
+        url('../fonts/sofia/SofiaPro-BlackItalic.woff') format('woff');
+    font-weight: 900;
+    font-style: italic;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'Sofia Pro';
+    src: url('../fonts/sofia/SofiaPro-Black.woff2') format('woff2'),
+        url('../fonts/sofia/SofiaPro-Black.woff') format('woff');
+    font-weight: 900;
+    font-style: normal;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'Sofia Pro';
+    src: url('../fonts/sofia/SofiaPro-BoldItalic.woff2') format('woff2'),
+        url('../fonts/sofia/SofiaPro-BoldItalic.woff') format('woff');
+    font-weight: bold;
+    font-style: italic;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'Sofia Pro';
+    src: url('../fonts/sofia/SofiaPro-ExtraLight.woff2') format('woff2'),
+        url('../fonts/sofia/SofiaPro-ExtraLight.woff') format('woff');
+    font-weight: 200;
+    font-style: normal;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'Sofia Pro';
+    src: url('../fonts/sofia/SofiaPro-Bold.woff2') format('woff2'),
+        url('../fonts/sofia/SofiaPro-Bold.woff') format('woff');
     font-weight: bold;
     font-style: normal;
     font-display: swap;
 }
+
+@font-face {
+    font-family: 'Sofia Pro';
+    src: url('../fonts/sofia/SofiaPro-ExtraLightItalic.woff2') format('woff2'),
+        url('../fonts/sofia/SofiaPro-ExtraLightItalic.woff') format('woff');
+    font-weight: 200;
+    font-style: italic;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'Sofia Pro';
+    src: url('../fonts/sofia/SofiaPro-Medium.woff2') format('woff2'),
+        url('../fonts/sofia/SofiaPro-Medium.woff') format('woff');
+    font-weight: 500;
+    font-style: normal;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'Sofia Pro';
+    src: url('../fonts/sofia/SofiaPro-SemiBold.woff2') format('woff2'),
+        url('../fonts/sofia/SofiaPro-SemiBold.woff') format('woff');
+    font-weight: 600;
+    font-style: normal;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'Sofia Pro';
+    src: url('../fonts/sofia/SofiaPro.woff2') format('woff2'),
+        url('../fonts/sofia/SofiaPro.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'Sofia Pro';
+    src: url('../fonts/sofia/SofiaPro-MediumItalic.woff2') format('woff2'),
+        url('../fonts/sofia/SofiaPro-MediumItalic.woff') format('woff');
+    font-weight: 500;
+    font-style: italic;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'Sofia Pro';
+    src: url('../fonts/sofia/SofiaPro-Italic.woff2') format('woff2'),
+        url('../fonts/sofia/SofiaPro-Italic.woff') format('woff');
+    font-weight: normal;
+    font-style: italic;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'Sofia Pro';
+    src: url('../fonts/sofia/SofiaPro-LightItalic.woff2') format('woff2'),
+        url('../fonts/sofia/SofiaPro-LightItalic.woff') format('woff');
+    font-weight: 300;
+    font-style: italic;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'Sofia Pro';
+    src: url('../fonts/sofia/SofiaPro-Light.woff2') format('woff2'),
+        url('../fonts/sofia/SofiaPro-Light.woff') format('woff');
+    font-weight: 300;
+    font-style: normal;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'Sofia Pro';
+    src: url('../fonts/sofia/SofiaPro-SemiBoldItalic.woff2') format('woff2'),
+        url('../fonts/sofia/SofiaPro-SemiBoldItalic.woff') format('woff');
+    font-weight: 600;
+    font-style: italic;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'Sofia Pro';
+    src: url('../fonts/sofia/SofiaPro-UltraLightItalic.woff2') format('woff2'),
+        url('../fonts/sofia/SofiaPro-UltraLightItalic.woff') format('woff');
+    font-weight: 200;
+    font-style: italic;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'Sofia Pro';
+    src: url('../fonts/sofia/SofiaPro-UltraLight.woff2') format('woff2'),
+        url('../fonts/sofia/SofiaPro-UltraLight.woff') format('woff');
+    font-weight: 200;
+    font-style: normal;
+    font-display: swap;
+}
+
+
+
+
 
 
 :root {
@@ -186,7 +325,7 @@ h6 {
 }
 
 p {
-  /*font-family: var(--tg-body-font-family);*/  
+  font-family: var(--tg-body-font-family);
   font-size: var(--tg-body-font-size);
   line-height: var(--tg-body-line-height);
   font-weight: var(--tg-fw-regular);
@@ -1012,10 +1151,10 @@ textarea {
   margin: 0 0 14px;
 }
 .section__title .title {
-    font-size: 64px;
+    font-size: 48px;
     line-height: 1;
     margin: 0 0;
-	font-family: 'Sofia Pro', sans-serif;
+    font-family: 'Sofia Pro', sans-serif;
     letter-spacing: -0.75px;
 }
 @media (max-width: 767.98px) {
@@ -3275,11 +3414,11 @@ textarea {
   position: relative;
   z-index: 1;
   overflow: hidden;
-  padding: 140px 0 0;
+  padding: 0px 0 0;
 }
 @media (max-width: 767.98px) {
   .banner-bg-four {
-    padding: 130px 0 0;
+    padding: 0px 0 0;
   }
 }
 .banner-bg-five {
@@ -3655,7 +3794,8 @@ textarea {
 }
 @media (max-width: 1500px) {
   .banner__content-four {
-    margin-top: 70px;
+    margin-top: 50px;
+	margin-bottom: 50px;
   }
 }
 @media (max-width: 991.98px) {
@@ -3674,7 +3814,7 @@ textarea {
 }
 .banner__content-four .title {
   margin-bottom: 8px;
-  font-size: 60px;
+  font-size: 6.5em;
   font-weight: 700;
   text-transform: capitalize;
   color: var(--tg-common-color-black-2);
@@ -3708,6 +3848,26 @@ textarea {
 .banner__content-four .title .title__shape svg {
   color: var(--tg-theme-secondary);
 }
+.tutor_head_4_four {
+	position: absolute;
+	right: 10%;
+	top: 2%;
+
+}
+
+.tutor_head_5_four {
+  position: absolute;
+  left: 0%;
+  bottom: 10%; 
+
+}
+
+.tutor_head_6_four {
+    position: absolute;
+    right: 11%;
+    bottom: 0%;
+}
+
 @media (max-width: 767.98px) {
   .banner__content-four .title .title__shape svg {
     width: 160px;
@@ -4457,8 +4617,10 @@ textarea {
   }
 }
 .banner__images-four {
-  position: relative;
-  text-align: right;
+  text-align: center;
+    position: absolute;
+    height: 500px;
+    width: 100%;
 }
 @media (max-width: 1500px) {
   .banner__images-four {
@@ -6548,7 +6710,14 @@ textarea {
     padding-top: 30px;
   }
 }
-
+.section-pb-30 {
+  padding-bottom: 30px;
+}
+@media (max-width: 767.98px) {
+  .section-pb-30 {
+    padding-bottom: 30px;
+  }
+}
 .section-pb-90 {
   padding-bottom: 90px;
 }
@@ -6676,8 +6845,8 @@ textarea {
   display: -webkit-box;
   display: -moz-box;
   display: -ms-flexbox;
-  display: -webkit-flex;
-  display: flex;
+  /* display: -webkit-flex; */
+  /* display: flex; */
   align-items: center;
   justify-content: center;
   flex-wrap: wrap;
@@ -6689,7 +6858,7 @@ textarea {
   z-index: 1;
 }
 .courses__nav .nav::after {
-  content: "";
+  /*content: "";
   position: absolute;
   left: 0;
   bottom: 0;
@@ -6701,7 +6870,7 @@ textarea {
   -o-border-radius: 30px;
   -ms-border-radius: 30px;
   border-radius: 30px;
-  z-index: -1;
+  z-index: -1;*/
 }
 @media (max-width: 767.98px) {
   .courses__nav .nav {
@@ -6716,50 +6885,24 @@ textarea {
 }
 .courses__nav .nav .nav-item .nav-link {
   font-weight: var(--tg-fw-medium);
-  color: #7F7E97;
-  padding: 0 0;
-  border: none;
+  color: #000;
+  padding: 8px;
+  /* border: 1px solid #000; */
   position: relative;
-  background: transparent;
+  /* background: #151111; */
+  /* border-radius: 10px; */
 }
-.courses__nav .nav .nav-item .nav-link::after {
-  content: "";
-  position: absolute;
-  left: 0;
-  bottom: -18px;
-  right: 0;
-  width: 0;
-  height: 6px;
-  background: var(--tg-theme-primary);
-  -webkit-border-radius: 30px;
-  -moz-border-radius: 30px;
-  -o-border-radius: 30px;
-  -ms-border-radius: 30px;
-  border-radius: 30px;
-  margin: 0 auto;
-  z-index: 1;
-  -webkit-transition: all 0.3s ease-out 0s;
-  -moz-transition: all 0.3s ease-out 0s;
-  -ms-transition: all 0.3s ease-out 0s;
-  -o-transition: all 0.3s ease-out 0s;
-  transition: all 0.3s ease-out 0s;
-}
-@media (max-width: 767.98px) {
-  .courses__nav .nav .nav-item .nav-link::after {
-    bottom: -7px;
-  }
-}
-@media only screen and (min-width: 576px) and (max-width: 767px) {
-  .courses__nav .nav .nav-item .nav-link::after {
-    bottom: -15px;
-  }
-}
+
+
+
 .courses__nav .nav .nav-item .nav-link.active {
-  color: var(--tg-heading-color);
+  color: #fff;
+  border: 1px solid #000;
+  position: relative;
+  background: #151111;
+  border-radius: 10px;
 }
-.courses__nav .nav .nav-item .nav-link.active::after {
-  width: 60px;
-}
+
 .courses__nav-two .nav {
   display: -webkit-box;
   display: -moz-box;
@@ -7520,8 +7663,8 @@ textarea {
   display: -webkit-box;
   display: -moz-box;
   display: -ms-flexbox;
-  display: -webkit-flex;
-  display: flex;
+  /* display: -webkit-flex; */
+  /* display: flex; */
   align-items: center;
   justify-content: space-between;
   gap: 10px 20px;
@@ -7529,13 +7672,15 @@ textarea {
   flex-wrap: wrap;
 }
 .courses__item-meta li {
-  display: -webkit-box;
+  /* display: -webkit-box; */
   display: -moz-box;
   display: -ms-flexbox;
-  display: -webkit-flex;
-  display: flex;
+  /* display: -webkit-flex; */
+  /* display: flex; */
   align-items: center;
   font-family: 'Sofia Pro', sans-serif;
+  font-size:16px;
+  font-weight:400;
 }
 .courses__item-meta li i {
   margin-right: 7px;
@@ -7578,19 +7723,19 @@ textarea {
   color: #B9B8C0;
 }
 .courses__item-tag a {
-  font-size: 18px;
-    font-weight: var(--tg-fw-medium);
-    color: var(--tg-heading-color);
-    background: #FFF4E4;
-    border: 1px solid #000;
-    display: block;
-    line-height: 1;
-    -webkit-border-radius: 50px;
-    -moz-border-radius: 50px;
-    -o-border-radius: 50px;
-    -ms-border-radius: 50px;
-    border-radius: 11px;
-    padding: 10px 10px;
+  font-size: 16px;
+  font-weight: 400;
+  color: var(--tg-heading-color);
+  background: #FFF4E4;
+  border: 1px solid #000;
+  display: block;
+  line-height: 1;
+  -webkit-border-radius: 50px;
+  -moz-border-radius: 50px;
+  -o-border-radius: 50px;
+  -ms-border-radius: 50px;
+  border-radius: 11px;
+  padding: 10px 10px;
 }
 .courses__item-tag a:hover {
   background: #3b71ed;
@@ -7781,15 +7926,11 @@ textarea {
   display: flex;*/
   align-items: center;
   gap: 0px 20px;
-  flex-wrap: wrap;
 }
 .courses__item-bottom-three .list-wrap li {
-  display: -webkit-box;
+  /* display: -webkit-box; */
   margin-bottom: 10px;
   display: -moz-box;
-  display: -ms-flexbox;
-  display: -webkit-flex;
-  display: flex;
   align-items: center;
   gap: 8px;
   font-size: 15px;
@@ -12463,13 +12604,12 @@ textarea {
   }
 }
 .instructor__details-info {
-  background: var(--tg-common-color-dark);
-  -webkit-border-radius: 10px;
-  -moz-border-radius: 10px;
-  -o-border-radius: 10px;
-  -ms-border-radius: 10px;
-  border-radius: 10px;
-  padding: 50px 50px;
+  background: #fff;
+  -webkit-border-radius: 16px;
+  -moz-border-radius: 16px;
+  -o-border-radius: 16px;
+  -ms-border-radius: 16px;
+  border-radius: 16px;
   display: -webkit-box;
   display: -moz-box;
   display: -ms-flexbox;
@@ -12481,19 +12621,19 @@ textarea {
 }
 @media (max-width: 991.98px) {
   .instructor__details-info {
-    padding: 35px 30px;
+    padding: 0px 0px;
     gap: 25px;
   }
 }
 @media (max-width: 767.98px) {
   .instructor__details-info {
-    padding: 25px 25px;
+    padding: 0px 0px;
     flex-direction: column;
   }
 }
 @media only screen and (min-width: 576px) and (max-width: 767px) {
   .instructor__details-info {
-    padding: 35px 30px;
+    padding: 0px 0px;
   }
 }
 .instructor__details-thumb {
@@ -12510,12 +12650,11 @@ textarea {
 .instructor__details-content .title {
   margin-bottom: 8px;
   font-size: 24px;
-  color: var(--tg-common-color-white);
+  
 }
 .instructor__details-content .designation {
   display: block;
   font-size: 16px;
-  color: var(--tg-common-color-white);
   font-family: var(--tg-heading-font-family);
   line-height: 1;
   margin-bottom: 22px;
@@ -12615,20 +12754,18 @@ textarea {
   color: var(--tg-heading-color);
 }
 .instructor__details-biography {
-  -webkit-border-radius: 10px;
-  -moz-border-radius: 10px;
-  -o-border-radius: 10px;
-  -ms-border-radius: 10px;
-  border-radius: 10px;
-  border: 1px solid #DFDFDF;
+  -webkit-border-radius: 12px;
+  -moz-border-radius: 12px;
+  -o-border-radius: 12px;
+  -ms-border-radius: 12px;
+  border-radius: 12px;
+  border: 1px solid #05070F;
   background: var(--tg-common-color-white);
-  -webkit-box-shadow: 0px 0px 14px 0px rgba(0, 0, 0, 0.08);
-  -moz-box-shadow: 0px 0px 14px 0px rgba(0, 0, 0, 0.08);
-  -ms-box-shadow: 0px 0px 14px 0px rgba(0, 0, 0, 0.08);
-  -o-box-shadow: 0px 0px 14px 0px rgba(0, 0, 0, 0.08);
-  box-shadow: 0px 0px 14px 0px rgba(0, 0, 0, 0.08);
-  padding: 35px 40px;
-  margin-bottom: 30px;
+  
+  padding: 20px 20px;
+  margin-bottom: 20px;
+  color:#475569;
+
 }
 @media (max-width: 767.98px) {
   .instructor__details-biography {
@@ -12768,35 +12905,37 @@ textarea {
 }
 .instructor__sidebar {
   background: var(--tg-common-color-white);
-  border: 1px solid #DFDFDF;
-  -webkit-box-shadow: 0px 0px 14px rgba(0, 0, 0, 0.08);
-  -moz-box-shadow: 0px 0px 14px rgba(0, 0, 0, 0.08);
-  -ms-box-shadow: 0px 0px 14px rgba(0, 0, 0, 0.08);
-  -o-box-shadow: 0px 0px 14px rgba(0, 0, 0, 0.08);
-  box-shadow: 0px 0px 14px rgba(0, 0, 0, 0.08);
-  -webkit-border-radius: 10px;
-  -moz-border-radius: 10px;
-  -o-border-radius: 10px;
-  -ms-border-radius: 10px;
-  border-radius: 10px;
+  border: 1px solid #05070F;
+  
+  -webkit-border-radius: 16px;
+  -moz-border-radius: 16px;
+  -o-border-radius: 16px;
+  -ms-border-radius: 16px;
+  border-radius: 16px;
   padding: 30px 25px 35px;
   margin-left: 20px;
 }
 @media (max-width: 1199.98px) {
   .instructor__sidebar {
     margin-left: 0;
-    margin-top: 80px;
+    margin-top: 20px;
   }
 }
 .instructor__sidebar .title {
-  font-size: 20px;
-  margin-bottom: 10px;
+  font-size: 24px;
+    margin-bottom: 10px;
+    font-family: 'Sofia Pro';
+    font-weight: 400;
 }
 .instructor__sidebar p {
   margin-bottom: 15px;
 }
 .instructor__sidebar .form-grp {
   margin-bottom: 8px;
+  font-family: 'Sofia Pro';
+  font-weight: 400;
+  font-size: 16px;
+  color: #000;
 }
 .instructor__sidebar .form-grp textarea, .instructor__sidebar .form-grp input {
   border: none;
@@ -20870,5 +21009,5 @@ blockquote > p {
     font-size: 14px;
     font-family: 'Inter';
 } 
-
+.flex-shrink-0{ margin-top:0px !important;}
 

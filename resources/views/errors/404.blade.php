@@ -14,7 +14,7 @@
 
 .four_zero_four_bg{
  
- background-image: url('assets/img/404.gif');
+ background-image: url('{{ asset('img/404.gif')}}');
     height: 400px;
     background-position: center;
  }
