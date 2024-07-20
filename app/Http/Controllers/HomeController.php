@@ -22,7 +22,7 @@ use App\Models\ServiceSeo;
 use App\Models\ServiceSpecifications;
 use App\Models\ServiceHowWork;
 use App\Models\PagesFaq;
-
+use App\Models\Expert;
 
 use App\Models\Referencing;
 use Illuminate\Http\Request;
@@ -57,6 +57,11 @@ class HomeController extends Controller
         $data['levels']     =   Level_study::where('website_type', 'Essay')->orderBy('id', 'desc')->get()->toArray();
         $data['grades']     =   Grades::orderBy('id', 'desc')->get()->toArray();
         $data['referencings']     =   Referencing::orderBy('id', 'desc')->get()->toArray();
+
+        $data['experts'] = Expert::with(['subjects'=>function($q){
+            $q->where('show_on_home', 1)->orderBy('subject_number');
+        }])->where('show_on_home', 1)->get();
+
         return view('home', $data);
     }
 

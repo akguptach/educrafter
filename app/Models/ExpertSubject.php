@@ -12,7 +12,7 @@ class ExpertSubject extends Model
     protected $fillable = ['expert_id', 'subject_id','subject_number'];
 
     public function subject()
-    {
-        return $this->belongsTo('App\Models\ExpertSubject', 'expert_id');
+    { 
+        return $this->belongsTo('App\Models\Subjects', 'subject_id');
     }
 }

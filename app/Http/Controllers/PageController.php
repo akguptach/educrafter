@@ -25,15 +25,18 @@ class PageController extends Controller
     }
     public function terms_condtion()
     {
-        $data['page'] = Service::where(array('service_name' => 'Terms and conditions', 'website_type' => 'Educrafter', 'type' => 'PAGE'))->first();
+        //$data['page'] = Service::where(array('service_name' => 'Terms and conditions', 'website_type' => 'Educrafter', 'type' => 'PAGE'))->first();
 
-        return view('pages', $data);
+        //return view('pages', $data);
+		 return view('terms');
+		 
     }
     public function privacy_policy()
     {
-        $data['page'] = Service::where(array('service_name' => 'Privacy policy', 'website_type' => 'Educrafter', 'type' => 'PAGE'))->first();
+        //$data['page'] = Service::where(array('service_name' => 'Privacy policy', 'website_type' => 'Educrafter', 'type' => 'PAGE'))->first();
 
-        return view('pages', $data);
+        //return view('pages', $data);
+		return view('privacy');
     }
     public function refund_policy()
     {
@@ -43,9 +46,10 @@ class PageController extends Controller
     }
     public function cookies_policy()
     {
-        $data['page'] = Service::where(array('service_name' => 'Cookies policy', 'website_type' => 'Educrafter', 'type' => 'PAGE'))->first();
+        //$data['page'] = Service::where(array('service_name' => 'Cookies policy', 'website_type' => 'Educrafter', 'type' => 'PAGE'))->first();
 
-        return view('pages', $data);
+        //return view('pages', $data);
+		return view('cookies');
     }
     public function why_us()
     {

@@ -1,4 +1,4 @@
-@extends('layout.app')
+@extends('layout.student')
 @section('content')
 <style>
 .pagination .small {

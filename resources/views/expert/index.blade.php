@@ -28,14 +28,12 @@
                                         </li>
 
                                         <li class="avg-rating">
-                                            @if(is_numeric($expert->rating_numbers))
-                                            @php($ratingNumbers = $expert->rating_numbers)
-                                            @else
-                                            @php($ratingNumbers = 4)
-                                            @endif
-                                            @for($i=0; $i < $ratingNumbers; $i++) <i class="fas fa-star"></i>
+                                            @php($ratingNumbersList = explode('-',$expert->rating_numbers))
+                                            @for($i=0; $i < $ratingNumbersList[0]; $i++) <i class="fas fa-star"></i>
                                                 @endfor
-                                                3k+
+                                                @if(isset($ratingNumbersList[1]))
+                                                {{$ratingNumbersList[1]}}+
+                                                @endif
                                         </li>
                                     </ul>
                                 </div>
@@ -84,7 +82,7 @@
     font-size: 20px;
     font-weight: bold;
     color: #05070F;
-">234</span>
+">{{$expert->satisfied_students}}</span>
                                             <span style="
     width: 100%;
     float: left;
@@ -102,7 +100,7 @@
     font-size: 20px;
     font-weight: bold;
     color: #05070F;
-">9</span>
+">{{$expert->month_on_domain}}</span>
                                             <span style="
     width: 100%;
     float: left;
@@ -118,37 +116,42 @@
                                 <div class="courses__item-bottom-three" style="margin-top:10px;">
                                     <h4 class="title">Skilled in:</h4>
                                     <ul class="courses__item-meta list-wrap">
-                                        @php($competencesList = explode(',',$expert->competences))
-                                        @foreach($competencesList as $competence)
+                                        @foreach($expert->subjects as $subject)
                                         <li class="courses__item-tag">
-                                            <a href="#">{{$competence}}</a>
+                                            <a href="#">{{$subject->subject->subject_name}}</a>
                                         </li>
                                         @endforeach
                                     </ul>
                                 </div>
+
                                 <hr style="border-bottom: 1px solid #171616;border-top: 0 none;margin: 12px 0;">
                                 <div class="courses__item-bottom-three">
                                     <h4 class="title">Helps with:</h4>
+                                    
                                     <ul class="courses__item-meta list-wrap">
+                                        @foreach($competences as $index=>$competence)
 
-                                    @foreach($expert->papers as $paper)
+                                        @if($index < 4)
                                         <li class="courses__item-tag">
-                                            <a href="#" style="background:#C2E3FB;">{{$paper->type_of_paper}}</a>
+                                            <a href="#">{{$competence->type_name}}</a>
                                         </li>
+                                        @else
+                                        @if($index == 4)
+                                        <li class="courses__item-tag"><a href="javascript:void(0);" class="more-btn">{{count($competences)-4}}+ more</a></li>
+                                        @endif
+                                        <li class="courses__item-tag more-items" style="display:none">
+                                            <a href="#">{{$competence->type_name}}</a>
+                                        </li>
+                                        @endif
+
                                         @endforeach
-                                        <li class="courses__item-tag">
-                                            <a href="#" style="background:#C2E3FB;">+25 more</a>
-                                        </li>
-
-
-
                                     </ul>
                                 </div>
                                 <hr style="border-bottom: 1px solid #171616;border-top: 0 none;margin: 12px 0;">
                                 <div class="courses__item-bottom">
 
                                     <h4 class="title">Bio</h4>
-                                    <p>{!!$expert->description!!}</p>
+                                    <div style="width: 100%;">{!!$expert->description!!}</div>
 
                                 </div>
                             </div>
@@ -162,24 +165,25 @@
                                 <div class="rating">
 
 
-                                @if(is_numeric($review->star_rating_number))
-                                            @php($ratingNumbers = $review->star_rating_number)
-                                            @else
-                                            @php($ratingNumbers = 4)
-                                            @endif
-                                            @for($i=0; $i < $ratingNumbers; $i++) <i class="fas fa-star"></i>
-                                                @endfor
+                                    @if(is_numeric($review->star_rating_number))
+                                    @php($ratingNumbers = $review->star_rating_number)
+                                    @else
+                                    @php($ratingNumbers = 4)
+                                    @endif
+                                    @for($i=0; $i < $ratingNumbers; $i++) <i class="fas fa-star"></i>
+                                        @endfor
 
-                                    
-                                        
+
+
                                 </div>
                             </div>
                             <div style="width:100%;">
                                 <p style="color:#060606;font-weight:600;font-size:16px;">{{$review->title}}</p>
                             </div>
                             <div style="width:100%;">
-                                <p><span style="color: #475569;font-size:14px;">{{date('d-M-Y ', strtotime($review->review_date))}}</span>&nbsp;&nbsp;<span
-                                        style="color: #0056D1;font-size:14px;">Oxford University</span></p>
+                                <p><span
+                                        style="color: #475569;font-size:14px;">{{date('d-M-Y ', strtotime($review->review_date))}}</span>&nbsp;&nbsp;<span
+                                        style="color: #0056D1;font-size:14px;">{{$review->review_code}}</span></p>
                             </div>
                             <p>{{$review->description}}</p>
                         </div>
@@ -225,5 +229,13 @@
 
 </main>
 <!-- main-area-end -->
-
+<script src="{{ asset('js/vendor/jquery-3.6.0.min.js') }}"></script>
+ <script>
+    $(document).ready(function(){
+        $('.more-btn').click(function(){
+            $(this).hide();
+            $('.more-items').show();
+        })
+    })
+</script>
 @endsection

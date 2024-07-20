@@ -184,7 +184,7 @@
                     </div>
                 </div>
                 <div class="swiper courses-swiper-active">
-                    <div class="swiper-wrapper">
+                    <div class="swiper-wrapper"> 
 
                     @foreach($experts as $expert)
                         <div class="swiper-slide">
@@ -203,15 +203,12 @@
                                         </li>
 
                                         <li class="avg-rating">
-                                            @if(is_numeric($expert->rating_numbers))
-                                              @php($ratingNumbers = $expert->rating_numbers)
-                                            @else
-                                              @php($ratingNumbers = 4)
-                                            @endif
-                                            @for($i=0; $i < $ratingNumbers; $i++)
-                                            <i class="fas fa-star"></i>
-                                            @endfor
-                                            5K+
+                                        @php($ratingNumbersList = explode('-',$expert->rating_numbers))
+                                            @for($i=0; $i < $ratingNumbersList[0]; $i++) <i class="fas fa-star"></i>
+                                                @endfor
+                                                @if(isset($ratingNumbersList[1]))
+                                                {{$ratingNumbersList[1]}}+
+                                                @endif
                                         </li>
                                         
                                     </ul>
@@ -227,16 +224,15 @@
 
                                         <li>
                                             <img src="{{ asset('img/expert_order.png')}}" alt="img" style="width:40px;">
-                                            5K+ Orders
+                                            {{ thousandsCurrencyFormat($expert->total_orders) }}+ Orders
                                         </li>
                                     </ul>
                                 </div>
                                 <div class="courses__item-bottom-three" id="courses__tag">
-                                    @php($competencesList = explode(',',$expert->competences))
-                                    <ul class="courses__item-meta list-wrap">
-                                        @foreach($competencesList as $competence)
+                                <ul class="courses__item-meta list-wrap">
+                                    @foreach($expert->subjects as $subject)
                                         <li class="courses__item-tag">
-                                            <a href="#">{{$competence}}</a>
+                                            <a href="#">{{$subject->subject->subject_name}}</a>
                                         </li>
                                         @endforeach
                                     </ul>

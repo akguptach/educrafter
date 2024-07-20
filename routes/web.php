@@ -25,6 +25,10 @@ use App\Http\Controllers\ErrorController as Error;
 | be assigned to the "web" middleware group. Make something great!
 |
 */
+Route::get("/demo", function(){
+    return view("demo");
+ });
+
 
 Route::get('/', [Home::class, 'index'])->name('home');
 
@@ -110,6 +114,9 @@ Route::get('/tutors', [App\Http\Controllers\ExpertDetailsController::class, 'tut
 Route::get('/offers', [App\Http\Controllers\OffersController::class, 'index'])->name('Offers.Index');
 Route::get('/{slug}', [Services::class, 'servicesIndex'])->name('Services.Index');
 Route::get('/tutor/{id}', [App\Http\Controllers\ExpertDetailsController::class, 'index'])->name('Expert.Details');
+
+Route::get('/offers/ajaxlist', [App\Http\Controllers\OffersController::class, 'ajaxList'])->name('Offers.ajaxList');
+Route::get('/offers/details/{id}', [App\Http\Controllers\OffersController::class, 'details'])->name('Offers.details');
 
 
 

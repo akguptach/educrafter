@@ -27,16 +27,16 @@
                 <div class="footer__link">
                   <ul class="list-wrap">
                     <li>
-                      <a href="events-details.html">Terms And Conditions</a>
+                      <a href="https://educrafter.co/terms-and-conditions">Terms And Conditions</a>
                     </li>
                     <li>
-                      <a href="events-details.html">Policy Privacy</a>
+                      <a href="https://educrafter.co/privacy-policy">Policy Privacy</a>
                     </li>
                     <li>
-                      <a href="events-details.html">Refund Policy</a>
+                      <a href="https://educrafter.co/refund-policy">Refund Policy</a>
                     </li>
                     <li>
-                      <a href="events-details.html">Cookies Policy</a>
+                      <a href="https://educrafter.co/cookies-policy">Cookies Policy</a>
                     </li>
                    
                   </ul>
@@ -49,22 +49,22 @@
                 <div class="footer__link">
                   <ul class="list-wrap">
 				    <li>
-					    <a href="events-details.html">Essay Writing Service</a>
+					    <a href="https://educrafter.co/essay-writing-service">Essay Writing Service</a>
 					</li>
 					<li>
-                      <a href="events-details.html">Report Writing Service</a>
+                      <a href="https://educrafter.co/report-writing-service">Report Writing Service</a>
                     </li>
 					<li>
-                      <a href="instructor-details.html">Dissertation Writing Service</a>
+                      <a href="https://educrafter.co/dissertation-writing-service">Dissertation Writing Service</a>
                     </li>
 					<li>
-                      <a href="blog.html">Assignment Writing Service</a>
+                      <a href="https://educrafter.co/assignment-writing-service">Assignment Writing Service</a>
                     </li>
 					<li>
-                      <a href="instructor-details.html">Term Paper Writing Service</a>
+                      <a href="https://educrafter.co/term-paper-writing-service">Term Paper Writing Service</a>
                     </li>
                     <li>
-                      <a href="contact.html">Research Paper Writing Service</a>
+                      <a href="https://educrafter.co/research-paper-writing-service">Research Paper Writing Service</a>
                     </li>
                     
                     
@@ -83,28 +83,28 @@
                 <div class="footer__link">
                   <ul class="list-wrap">
                     <li>
-                      <a href="contact.html">Home</a>
+                      <a href="https://educrafter.co">Home</a>
                     </li>
                     <li>
-                      <a href="instructor-details.html">About Us</a>
+                      <a href="{{ route('about-us')}}">About Us</a>
                     </li>
                     <li>
                       <a href="blog.html">Refer a Friend</a>
                     </li>
                     <li>
-                      <a href="instructor-details.html">Offers</a>
+                      <a href="https://educrafter.co/offers">Offers</a>
                     </li>
                     <li>
                       <a href="events-details.html">Blogs</a>
                     </li>
 					<li>
-                      <a href="events-details.html">Contact Us</a>
+                      <a href="https://educrafter.co/contact-us">Contact Us</a>
                     </li>
 					<li>
-                      <a href="events-details.html">Faq's</a>
+                      <a href="https://educrafter.co/faq">Faq's</a>
                     </li>
 					<li>
-                      <a href="events-details.html">Become a Writer</a>
+                      <a href="#">Become a Writer</a>
                     </li>
 					<li>
 					     <a href="//www.dmca.com/Protection/Status.aspx?ID=4f98b10a-59c8-4975-8c66-955c1eeb7b48" title="DMCA.com Protection Status" class="dmca-badge"> <img src="https://images.dmca.com/Badges/dmca_protected_sml_120l.png?ID=4f98b10a-59c8-4975-8c66-955c1eeb7b48" alt="DMCA.com Protection Status" /></a>

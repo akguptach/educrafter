@@ -17,7 +17,9 @@ class ServicesController extends Controller
     {
         $data = ServiceSeo::where('seo_url_slug', $slug)->first();
 
-        $experts = Expert::all();
+        $experts = Expert::with(['subjects'=>function($q){
+            $q->where('show_on_home', 1)->orderBy('subject_number');
+        }])->where('show_on_home', 1)->get();
         //echo "<pre>"; print_r($experts); die;
 
         if($data){
