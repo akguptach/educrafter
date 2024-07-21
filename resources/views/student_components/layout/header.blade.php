@@ -70,7 +70,7 @@
         <div class="nav-header" style="background-color:white">
             <a href="{{ url('/dashboard') }}" class="brand-logo">
                 <p style="font-size:32px;color: #6a73fa;" >
-					<img src="/img/Logo.png" style="width:200px;">
+					<img src="img/Logo.png" style="width:200px;">
 				</p>
                 
             </a>

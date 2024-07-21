@@ -2,6 +2,7 @@
 namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\Deal;
+use App\Models\DealCategory;
 
 
 class OffersController extends Controller
@@ -13,7 +14,10 @@ class OffersController extends Controller
     public function index()
     {
         $homeDeals = Deal::where('show_on_home',1)->get();
-        return view('offers/index',compact('homeDeals'));
+
+        $dealCategories = DealCategory::all();
+
+        return view('offers/index',compact('homeDeals','dealCategories'));
     }
 
 
@@ -28,16 +32,15 @@ class OffersController extends Controller
         $keyword = $request->get('keyword');
         $category = $request->get('category');
         
-        $dealsQuery = Deal::where('show_on_home',0);
+        $dealsQuery = Deal::where(function($q) use ($keyword, $category){
+            if($keyword){
+                $q->where('title','LIKE', "%$keyword%");
+            }
+            if($category && $category!='All'){
+                $q->where('deal_category', $category);
+            }
+        });
         
-        if($keyword){
-            $dealsQuery->where('title','LIKE', "%$keyword%");
-        }
-        if($category && $category!='All'){
-            $dealsQuery->whereHas('category',function($q) use ($category){
-                $q->where('category_name','LIKE', "%$category%");
-            });
-        }
         $deals = $dealsQuery->get();
         return view('offers/ajax_list',compact('deals'));
     }

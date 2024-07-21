@@ -25,10 +25,11 @@ use App\Http\Controllers\ErrorController as Error;
 | be assigned to the "web" middleware group. Make something great!
 |
 */
-Route::get("/demo", function(){
-    return view("demo");
- });
 
+Route::get("/dashboard", function(){
+    return view("dashboard");
+ });
+ 
 
 Route::get('/', [Home::class, 'index'])->name('home');
 

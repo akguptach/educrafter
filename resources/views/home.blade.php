@@ -19,9 +19,9 @@
                 </div>
                 <div class="col-xl-12 col-lg-12">
                     <div class="banner__content-three" align="center">
-                        <h2 class="title" data-aos="fade-right" data-aos-delay="400"
+                        <h1 class="title" data-aos="fade-right" data-aos-delay="400"
                             style="text-align: center;line-height: 134px;font-family: 'Sofia Pro'; font-weight: bold; font-style: normal;">
-                            Achieve Excellent Grades With World Class Tutors</h2>
+                            Achieve Excellent Grades With World Class Tutors</h1>
                         <p data-aos="fade-right" data-aos-delay="600" style="text-align: center;">Our tutors can assist
                             with anything from short essays, exam notes, and research papers to proofreading and
                             editing, or even your full dissertation.</p>
@@ -165,7 +165,7 @@
             <div class="row">
                 <div class="col-12">
                     <div class="section__title text-center mb-25">
-                        <h1 class="title">Top-notch essay<br>writers in one place</h1>
+                        <h2 class="title">Top-notch essay<br>writers in one place</h2>
 
                         <p>Get personalised essay help from top-notch essay writers and boost your grades.</p>
 
@@ -826,11 +826,10 @@
 
 
                                             <div class="rating" data-rate="{{$rating->star_rating}}">
-                                                <i class="fas fa-star"></i>
-                                                <i class="fas fa-star"></i>
-                                                <i class="fas fa-star"></i>
-                                                <i class="fas fa-star"></i>
-                                                <i class="fas fa-star"></i>
+											   @for($i=0; $i < $rating->star_rating; $i++) 
+												<i class="fas fa-star"></i>
+												@endfor
+                                                
                                             </div>
 
                                         </div>
@@ -843,15 +842,15 @@
                                             <div class="testimonial__author-content testimonial__author-content-two">
                                                 <h2 class="title">{{ $arrName[0]}}</h2>
                                                 <div style="width:100%;float: left;margin-bottom: 10px;"><span
-                                                        style="color:#475569;font-size:14px;float: left;width:100%;">{{ $newDate2 }}</span>
+                                                        style="color:#475569;font-size:14px;float: left;width:100%;">{{$arrName[1]}}</span>
                                                     <span
-                                                        style="color: #0056D1;font-size:14px;margin-top:5px;float: left;width:100%;">{{$arrName[1]}}</span>
+                                                        style="color: #0056D1;font-size:14px;margin-top:5px;float: left;width:100%;">{{$arrName[2]}}</span>
                                                 </div>
 
                                             </div>
                                         </div>
                                         <p
-                                            style="color: #475569;font-size:14px;margin-top:10px;line-height: 22px;font-family: inter;">
+                                            style="color: #475569;font-size:14px;margin-top:10px;line-height: 22px;height:100px;font-family: inter;">
                                             {!! Str::words(strip_tags($rating->description), 18, ' <a
                                                 href="javascript:void(0)"
                                                 onclick="toggleDescription(event, '.$rating->id.')"
@@ -998,7 +997,7 @@
             <div class="row">
                 <div class="col-12">
                     <div class="section__title text-center mt-50">
-                        <h1 class="title">Service we offer</h1>
+                        <h2 class="title">Service we offer</h2>
                         <p>From Essays to Dissertation, Our Essay Writers Can Handle It All with Skill and Precision.
                         </p>
                     </div>

@@ -53,8 +53,7 @@
                         style="border: 1px solid #E5E7EB;box-shadow: 5px 7px 0px 0px #000000;padding: 0px 0px 10px;">
                         <div class="courses__item-thumb">
                             <a href="{{route('Offers.details',$deal->id)}}" class="shine__animate-link">
-                                <img src="{{$deal->image}}" alt="img"
-                                    style="border-radius: 6px 6px 0px 0px;">
+                                <img src="{{$deal->image}}" alt="img" style="border-radius: 6px 6px 0px 0px;">
                             </a>
                         </div>
                         <div class="courses__item-content" style="padding: 0px 10px 10px 10px;">
@@ -96,51 +95,31 @@
                                 <li class="nav-item" role="presentation">
                                     <button class="nav-link active ajaxLoad" id="all-tab" data-bs-toggle="tab"
                                         data-bs-target="#all-tab-pane" type="button" role="tab"
-                                        aria-controls="all-tab-pane" aria-selected="true" fdprocessedid="pqz3ip" data-cat="All">
+                                        aria-controls="all-tab-pane" aria-selected="true" fdprocessedid="pqz3ip"
+                                        data-cat="All">
                                         All Coupons
                                     </button>
                                 </li>
+                                @foreach($dealCategories as $dealCategory)
                                 <li class="nav-item" role="presentation">
-                                    <button class="nav-link ajaxLoad" id="design-tab" data-bs-toggle="tab"
-                                        data-bs-target="#design-tab-pane" type="button" role="tab"
-                                        aria-controls="design-tab-pane" aria-selected="false" tabindex="-1" data-cat="Educations">
-                                        Educations
+                                    <button class="nav-link ajaxLoad"
+                                        id="{{str_replace(' ','-',strtolower($dealCategory->category_name))}}-tab"
+                                        data-bs-toggle="tab"
+                                        data-bs-target="#{{str_replace(' ','-',strtolower($dealCategory->category_name))}}-pane"
+                                        type="button" role="tab"
+                                        aria-controls="{{str_replace(' ','-',strtolower($dealCategory->category_name))}}-pane"
+                                        aria-selected="false" tabindex="-1" data-cat="{{$dealCategory->id}}">
+                                        {{$dealCategory->category_name}}
                                     </button>
                                 </li>
-                                <li class="nav-item" role="presentation">
-                                    <button class="nav-link ajaxLoad" id="business-tab" data-bs-toggle="tab"
-                                        data-bs-target="#business-tab-pane" type="button" role="tab"
-                                        aria-controls="business-tab-pane" aria-selected="false" fdprocessedid="85qjc"
-                                        tabindex="-1" data-cat="Lifestyle">
-                                        Lifestyle
-                                    </button>
-                                </li>
-                                <li class="nav-item" role="presentation">
-                                    <button class="nav-link ajaxLoad" id="development-tab" data-bs-toggle="tab"
-                                        data-bs-target="#development-tab-pane" type="button" role="tab"
-                                        aria-controls="development-tab-pane" aria-selected="false" tabindex="-1" data-cat="Entertainment">
-                                        Entertainment
-                                    </button>
-                                </li>
-                                <li class="nav-item" role="presentation">
-                                    <button class="nav-link ajaxLoad" id="travel-tab" data-bs-toggle="tab"
-                                        data-bs-target="#travel-tab-pane" type="button" role="tab"
-                                        aria-controls="travel-tab-pane" aria-selected="false" tabindex="-1" data-cat="Travel">
-                                        Travel 
-                                    </button>
-                                </li>
-                                <li class="nav-item" role="presentation">
-                                    <button class="nav-link ajaxLoad" id="food-tab" data-bs-toggle="tab"
-                                        data-bs-target="#food-tab-pane" type="button" role="tab"
-                                        aria-controls="food-tab-pane" aria-selected="false" tabindex="-1" data-cat="food">
-                                        Food
-                                    </button>
-                                </li>
+                                @endforeach
+
                             </ul>
                         </div>
                     </div>
                     <div class="col-lg-3">
-                        <input type="text" class="form-control" id="searchkeyword" placeholder="Search" style="border: 1px solid #000000">
+                        <input type="text" class="form-control" id="searchkeyword" placeholder="Search"
+                            style="border: 1px solid #000000">
                     </div>
                 </div>
             </div>
@@ -150,25 +129,15 @@
                 <div class="tab-pane fade active show" id="all-tab-pane" role="tabpanel" aria-labelledby="all-tab"
                     tabindex="0">
                 </div>
-
-                <div class="tab-pane fade" id="design-tab-pane" role="tabpanel" aria-labelledby="design-tab"
+                @foreach($dealCategories as $dealCategory)
+                <div class="tab-pane fade" id="{{str_replace(' ','-',strtolower($dealCategory->category_name))}}-pane" role="tabpanel" aria-labelledby="{{str_replace(' ','-',strtolower($dealCategory->category_name))}}"
                     tabindex="0">
                 </div>
+                @endforeach
 
-                <div class="tab-pane fade" id="business-tab-pane" role="tabpanel" aria-labelledby="business-tab"
-                    tabindex="0">
-                </div>
 
-                <div class="tab-pane fade" id="development-tab-pane" role="tabpanel" aria-labelledby="development-tab"
-                    tabindex="0">
-                </div>
 
-                <div class="tab-pane fade" id="travel-tab-pane" role="tabpanel" aria-labelledby="travel-tab"
-                    tabindex="0">
-                </div>
 
-                <div class="tab-pane fade" id="food-tab-pane" role="tabpanel" aria-labelledby="food-tab" tabindex="0">
-                </div>
             </div>
 
 
@@ -197,9 +166,9 @@
     </section>
     <script src="{{ asset('js/vendor/jquery-3.6.0.min.js') }}"></script>
     <script>
-    function loadOffers(tabId, category='', keyword='') {
+    function loadOffers(tabId, category = '', keyword = '') {
         $.ajax({
-            url: "{{route('Offers.ajaxList')}}?category="+category+"&keyword="+keyword,
+            url: "{{route('Offers.ajaxList')}}?category=" + category + "&keyword=" + keyword,
             success: function(html) {
                 $("#" + tabId).html(html);
             }
@@ -209,24 +178,24 @@
 
     $(document).ready(function() {
 
-		loadOffers('all-tab-pane');
+        loadOffers('all-tab-pane');
 
         $('.ajaxLoad').click(function() {
             var tabId = $(this).attr('aria-controls');
-			var cat = $(this).attr('data-cat');
-			$("#" + tabId).html('');
-			loadOffers(tabId, cat);
+            var cat = $(this).attr('data-cat');
+            $("#" + tabId).html('');
+            loadOffers(tabId, cat);
         });
 
 
-		$('#searchkeyword').change(function(){
-			
-			var keyword = $(this).val();
-			var tabId  = $('.nav-link.active').attr('aria-controls');
-			var cat  = $('.nav-link.active').attr('data-cat');
-			loadOffers(tabId, cat, keyword);
+        $('#searchkeyword').change(function() {
 
-		});
+            var keyword = $(this).val();
+            var tabId = $('.nav-link.active').attr('aria-controls');
+            var cat = $('.nav-link.active').attr('data-cat');
+            loadOffers(tabId, cat, keyword);
+
+        });
 
     })
     </script>

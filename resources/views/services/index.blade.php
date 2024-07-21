@@ -16,11 +16,7 @@
                     <div class="banner__content-two" align="center">
                         <h1 class="title" data-aos="fade-right" data-aos-delay="400"
                             style="text-align: center;font-family: 'Sofia Pro'; font-weight: bold; font-style: normal;">
-                            <?php 
-				    $aa=explode("-",$data->seo_title);
-            //echo $data->seo_title;
-            //print_r($aa); die;
-				?>
+                            <?php $aa=explode("-",$data->seo_title);?>
 
 
                             {{$aa[0]}}</h1>
@@ -166,7 +162,7 @@
             <div class="row">
                 <div class="col-12">
                     <div class="section__title text-center mb-25">
-                        <h1 class="title">Top-notch {{@$aa[1]}}<br>writers in one place</h1>
+                        <h2 class="title">Top-notch {{@$aa[1]}}<br>writers in one place</h2>
 
                         <p>Get personalised {{@$aa[1]}} help from top-notch {{@$aa[1]}} writers and boost your grades.
                         </p>
@@ -830,11 +826,9 @@
 
 
                                             <div class="rating" data-rate="{{$rating->star_rating}}">
-                                                <i class="fas fa-star"></i>
-                                                <i class="fas fa-star"></i>
-                                                <i class="fas fa-star"></i>
-                                                <i class="fas fa-star"></i>
-                                                <i class="fas fa-star"></i>
+                                               @for($i=0; $i < $rating->star_rating; $i++) 
+												<i class="fas fa-star"></i>
+												@endfor
                                             </div>
 
                                         </div>
@@ -845,18 +839,18 @@
 														$arrName=explode("-",$rating->address);
 												?>
                                             <div class="testimonial__author-content testimonial__author-content-two">
-                                                <h2 class="title">{{ $arrName[0]}}</h2>
+                                                <h2 class="title">{{ @$arrName[0]}}</h2>
                                                 <div style="width:100%;float: left;margin-bottom: 10px;"><span
-                                                        style="color:#475569;font-size:14px;float: left;width:100%;">{{ $newDate2 }}</span>
+                                                        style="color:#475569;font-size:14px;float: left;width:100%;">{{@$arrName[1]}}</span>
                                                     <span
-                                                        style="color: #0056D1;font-size:14px;margin-top:5px;float: left;width:100%;">{{$arrName[1]}}</span>
+                                                        style="color: #0056D1;font-size:14px;margin-top:5px;float: left;width:100%;">{{@$arrName[2]}}</span>
                                                 </div>
 
                                             </div>
                                         </div>
                                         <p
-                                            style="color: #475569;font-size:14px;margin-top:10px;line-height: 22px;font-family: inter;">
-                                            {!! Str::words(strip_tags($rating->description), 18, ' <a
+                                            style="color: #475569;font-size:14px;margin-top:10px;line-height: 22px;height:100px;font-family: inter;">
+                                            {!! Str::words(strip_tags($rating->description), 20, ' <a
                                                 href="javascript:void(0)"
                                                 onclick="toggleDescription(event, '.$rating->id.')"
                                                 style="text-decoration: none; "> Read more...</a>') !!}</p>
@@ -1000,7 +994,7 @@
             <div class="row">
                 <div class="col-12">
                     <div class="section__title text-center mt-50">
-                        <h1 class="title">Service we offer</h1>
+                        <h2 class="title">Service we offer</h2>
                         <p>From Essays to Dissertation, Our {{@$aa[1]}} Writers Can Handle It All with Skill and
                             Precision.</p>
                     </div>
