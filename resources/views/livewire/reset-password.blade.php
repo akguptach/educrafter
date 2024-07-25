@@ -1,20 +1,20 @@
 <div class="form-main mt-4">
     <div class="form-head">
         @if($formState == 'send-email')
-        <h2>Reset Password!</h2>
-        <p>Validate Your Identity to Get Reset Password Email</p>
+        <h2 class="title-heading">Reset Password!</h2>
+        <label class="label-text">Validate Your Identity to Get Reset Password Email</label>
         @endif
         @if($formState == 'verify-email')
-        <h2>Email Verification!</h2>
-        <p>Verify Your Email to Reset Your Password</p>
+        <h2 class="title-heading">Email Verification!</h2>
+        <label class="label-text">Verify Your Email to Reset Your Password</label>
         @endif
         @if($formState == 'reset-password')
-        <h2>Update Password!</h2>
-        <p>Set a New Strong Password</p>
+        <h2 class="title-heading">Update Password!</h2>
+        <label class="label-text">Set a New Strong Password</label>
         @endif
         @if($formState == 'login-now')
-        <h2>Password Updated!</h2>
-        <p>Your Reset Your Password Successfully</p>
+        <h2 class="title-heading">Password Updated!</h2>
+        <label class="label-text">Your Reset Your Password Successfully</label>
         @endif
     </div>
     <div class="form-wrapper">
@@ -23,10 +23,8 @@
             <div class="row gy-3 gx-2">
                 <div class="col-md-12">
                     <div class="input-group flex-nowrap">
-                        <span class="input-group-text" id="email-wrapping">
-                            <img src="{{ asset('images/user-icon.svg') }}" class="img-fluid" alt="Essay Help" title="Essay Help" width="24" height="24">
-                        </span>
-                        <input type="text" class="form-control shadow-none" placeholder="Enter your registered email" aria-label="Enter your registered email" aria-describedby="email-wrapping" wire:model="email">
+                        
+                        <input type="text" class="input-text form-control shadow-none" placeholder="Enter your registered email" aria-label="Enter your registered email" aria-describedby="email-wrapping" wire:model="email">
                     </div>
                     @error('email')
                     <small class="text-danger">
@@ -44,7 +42,7 @@
                     @endif
                 </div>
                 <div class="col-md-12">
-                    <button type="submit" class="btn btn-primary w-100">
+                    <button type="submit" class="btn btn-primary w-100 btn-two">
                         Send Verification Email
                     </button>
                 </div>
@@ -56,10 +54,8 @@
             <div class="row gy-3 gx-2">
                 <div class="col-md-12">
                     <div class="input-group flex-nowrap">
-                        <span class="input-group-text" id="email-wrapping">
-                            <img src="{{ asset('images/user-icon.svg') }}" class="img-fluid" alt="Essay Help" title="Essay Help" width="24" height="24">
-                        </span>
-                        <input type="text" class="form-control shadow-none" placeholder="Enter 6 digit verification code" aria-label="Enter 6 digit verification code" aria-describedby="email-wrapping" wire:model="code">
+                        
+                        <input type="text" class="input-text form-control shadow-none" placeholder="Enter 6 digit verification code" aria-label="Enter 6 digit verification code" aria-describedby="email-wrapping" wire:model="code">
                     </div>
                     @error('code')
                     <small class="text-danger">
@@ -84,7 +80,7 @@
                     @endif
                 </div>
                 <div class="col-md-12">
-                    <button type="submit" class="btn btn-primary w-100">
+                    <button type="submit" class="btn btn-primary w-100 btn-two">
                         Verify
                     </button>
                 </div>
@@ -137,7 +133,7 @@
                     @endif
                 </div>
                 <div class="col-md-12">
-                    <button type="submit" class="btn btn-primary w-100">
+                    <button type="submit" class="btn btn-primary w-100 btn-two">
                         Reset Password
                     </button>
                 </div>
