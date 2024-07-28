@@ -29,6 +29,7 @@
                         </div>
                     </div>
                 </div>
+                
                 <div class="col-lg-12">
                     <div class="banner__images-two">
 
@@ -155,6 +156,8 @@
             </div>
         </div>
     </section>
+
+    
     <!-- banner-area-end -->
     <!-- course-area -->
     <section class="courses-area section-pt-30 section-pb-30">
@@ -243,6 +246,7 @@
 
                     </div>
                 </div>
+                
                 <div style="width:100%;text-align:Right;padding-right:4%;color: #000;">
                     <span style="padding: 9px 0px 0px 6px;float: right;"><img src="{{ asset('img/arrow.png')}}"
                             style="width:20px;"></span>
@@ -307,6 +311,8 @@
 
         </div>
     </section>
+
+    
     <!-- course-area-end -->
     <style>
     .perks_n {
@@ -361,7 +367,7 @@
                             style="width:500px;"></div>
                     <div class="courses__item-four shine__animate-item"
                         style="/* box-shadow: 14px 14px 0px 0px #14141440; *//* border: 1.02px solid #000000; */position: relative;z-index: 2;top: -649px;width: 76%;left: 27px;border-radius: 0px;border: 0px;/* transition: rotate; */transform: rotate(354deg);">
-                        <p style="font-weight:bold;font-size: 2rem;color:#000;text-align:center;">Perks of EduCrafter
+                        <p style="font-weight:bold;font-size: 2.5rem;color:#000;text-align:center;">Perks of EduCrafter
                         </p>
 
 
@@ -419,6 +425,7 @@
 
         </div>
     </section>
+    
     <section class="brand-area">
         <div class="container-fluid">
 
@@ -546,6 +553,7 @@
                     </div>
 
                 </div>
+                
                 <div class="col-lg-6 col-md-12"
                     style="border-left: 3px solid #000000;padding: 0px;background-color: #c2e3fb;">
                     <div class="choose__img-three"
@@ -803,6 +811,7 @@
 
 
             </div>
+            
             <div class="row">
                 <div class="col-12">
                     <div class="testimonial__item-wrap">
@@ -824,14 +833,18 @@
                                     <div class="testimonial__item-two" style="padding:30px 15px 15px 15px;">
                                         <div class="testimonial__content-two">
 
-
+                                        
                                             <div class="rating" data-rate="{{$rating->star_rating}}">
+
+                                            @if(is_numeric($rating->star_rating))
                                                @for($i=0; $i < $rating->star_rating; $i++) 
 												<i class="fas fa-star"></i>
 												@endfor
+                                            @endif
                                             </div>
 
                                         </div>
+                                        
                                         <div class="testimonial__author testimonial__author-two">
                                             <?php
 														$date2 = $rating->created_at;
@@ -1028,7 +1041,7 @@
                             <p class="large off">Reports</p>
                         </div>
                         <div class="service-block black off">
-                            <p class="large off">{{@$aa[1]}}s-Writing</p>
+                            <p class="large off">Essays-Writing</p>
                         </div>
                         <div class="service-block white off">
                             <p class="large off">SOP-Writing</p>
@@ -1045,12 +1058,21 @@
     </section>
 
 
-    <section class="blog__post-area-three tg-motion-effects blog__bg"
-        style="background: #C2E3FB;margin-top: 100px;height: 100%;border: 1px solid #000000;box-shadow: 0px 4px 0px 0px #000000;">
+    <section class="blog__post-area-three tg-motion-effects blog__bg" style="background: #C2E3FB;margin-top: 100px;height: 100%;border: 1px solid #000000;box-shadow: 0px 4px 0px 0px #000000;">
 
-        <div style="margin:0 auto;position:Absolute;display: flex;top: 6%;z-index:10;"><img
-                src="{{ asset('img/Group 1000007918.png')}}"
-                style="width:30%;display: block;margin-left: auto;margin-right: auto;"></div>
+        <div style="margin:0 auto;position:Absolute;display: flex;top: 21%;z-index:10;width:100%;">
+            <div style="width:400px;height: 400px;background: #fff;border-radius: 20px;display: flex;margin: 0 auto;/* top: 29%; */position: relative;border: 10px solid #FB9271;box-shadow: 8px 8px 0px 0px #000000;">
+                <img src="{{ asset('img/1rRk.gif')}}"
+                    style="width: 300px;height: 300px;/* display: block; */margin-left: auto;margin-right: auto;position: relative;top: -20%;transform: rotate(350deg);border-radius: 20px;">
+
+                <div
+                    style="width:400px;position: absolute;bottom: 8px;font-size: 3em;font-family: 'Inter';text-align: center;color: #000;font-weight: bold;">
+                    <span style="color: #000;width: 100%;float: left;height: 54px;">As</span><span
+                        style="color:#3B71ED;">Featured</span> In</div>
+                </div>
+
+
+        </div>
         <div class="marquee_mode" id="marquee_mode1" style="height:128px;">
 
             <div class="row">
@@ -1127,7 +1149,7 @@
         </div>
 
     </section>
-    <!-- faq-area -->
+	<!-- faq-area -->
     <section class="faq__area">
         <div class="container">
             <div class="row justify-content-center">
@@ -1238,7 +1260,7 @@
                 <div style="width:80%">
                     <h2 class="title" style="font-family: 'Sofia Pro', sans-serif;font-weight:bold;font-size:8em;">Hire
                         Tutor</h2>
-                    <p style="color:#000;font-size:18px;font-weight: 500;">Grade-Boosting {{@$aa[1]}}s: Our Precision
+                    <p style="color:#000;font-size:18px;font-weight: 500;">Grade-Boosting Essays: Our Precision
                         Writers Hit Your Academic Target Every Time </p>
                 </div>
                 <div style="width:20%">

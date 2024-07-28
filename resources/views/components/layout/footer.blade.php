@@ -136,12 +136,12 @@
                   
                   <ul class="list-wrap footer__social footer__social-two">
                     <li>
-                      <a href="https://www.facebook.com/" target="_blank">
+                      <a href="https://www.instagram.com/educrafter.co" target="_blank">
                         <img src="{{ asset('img/instagram.png')}}" alt="img"  style="width:155px;">
                       </a>
                     </li>
                     <li>
-                      <a href="https://www.facebook.com/" target="_blank">
+                      <a href="http://www.tiktok.com/@educrafter.co" target="_blank">
                         <img src="{{ asset('img/tiktok.png')}}" alt="img"  style="width:120px;">
                       </a>
                     </li>
@@ -182,7 +182,7 @@
             </div>
             <div>
               <div style="text-align:center;color:#fff;font-size:13px;">
-                <p>Copyright © 2024, All Right Reserved EduCrafter</p>
+                <p style="color:#fff !importent;">Copyright © 2024, All Right Reserved EduCrafter</p>
               </div>
             </div>
             

@@ -46,7 +46,7 @@
                         style="border: 1px solid #000000;box-shadow: 4px 4px 0px 0px #000000;border-radius: 8px;overflow: hidden;">
                         <h3 style="padding-top: 20px;padding-bottom:20px;">We only hire tutors who have graduated from
                             top universities.</h3>
-                        <div class="marquee_mode" style="height:88px;margin-bottom: 20px;" id="marquee_mode_top">
+                        <div class="marquee_mode"  style="height:88px;margin-bottom: 20px;" id="marquee_mode_top">
                             <div class="brand__item"
                                 style="border: 1px solid #C6C6C6;border-radius: 8px;padding: 10px;">
                                 <img src="{{ asset('img/logo2/Columbia University.png')}}" style="width:150px;">
@@ -209,11 +209,11 @@
                                                 {{$ratingNumbersList[1]}}+
                                                 @endif
                                         </li>
-                                        
+                                         
                                     </ul>
                                 </div>
                                 <div class="courses__item-bottom-three">
-                                    <ul class="list-wrap">
+                                    <ul class="list-wrap1">
 
                                         <li>
                                             <img src="{{ asset('img/expert_degree.png')}}" alt="img"
@@ -249,7 +249,7 @@
                 <div style="width:100%;text-align:Right;padding-right:4%;color: #000;">
                     <span style="padding: 9px 0px 0px 6px;float: right;"><img src="{{ asset('img/arrow.png')}}"
                             style="width:20px;"></span>
-                    <span style="padding: 10px 0px 0px 0px;float: right;">View All</span>
+                    <span style="padding: 10px 0px 0px 0px;float: right;"><a href="{{route('Tutors.List')}}">View All</a></span>
 
                 </div>
 
@@ -364,14 +364,10 @@
                             style="width:500px;"></div>
                     <div class="courses__item-four shine__animate-item"
                         style="/* box-shadow: 14px 14px 0px 0px #14141440; *//* border: 1.02px solid #000000; */position: relative;z-index: 2;top: -649px;width: 76%;left: 27px;border-radius: 0px;border: 0px;/* transition: rotate; */transform: rotate(354deg);">
-                        <p style="font-weight:bold;font-size: 2rem;color:#000;text-align:center;">Perks of EduCrafter
-                        </p>
+                        <p style="font-weight:bold;font-size: 2.5rem;color:#000;text-align:left;">Perks of EduCrafter</p>
 
 
-                        <ul class="about__info-list list-wrap" style="
-    margin-top: 70px;
-    transform: rotate(0deg);
-">
+                        <ul class="about__info-list list-wrap" style="margin-top: 70px;transform: rotate(0deg);">
                             <li class="about__info-list-item">
                                 <span class="perks_n">1</span>
                                 <span style="width:88%;">
@@ -907,7 +903,7 @@
                 </div>
                 <div class="brand__item"
                     style="border: 1px solid #C6C6C6;border-radius: 8px;padding: 10px;box-shadow: 3px 4px 0px 0px #000000;background: #fff;">
-                    <img src="{{ asset('img/downlogo/Pepperdine University.png')}}" style="width:150px;">
+                    <img src="{{ asset('img/downlogo/University of Southern California.png')}}" style="width:150px;">
                 </div>
                 <div class="brand__item"
                     style="border: 1px solid #C6C6C6;border-radius: 8px;padding: 10px;box-shadow: 3px 4px 0px 0px #000000;background: #fff;">
@@ -925,10 +921,7 @@
                     style="border: 1px solid #C6C6C6;border-radius: 8px;padding: 10px;box-shadow: 3px 4px 0px 0px #000000;background: #fff;">
                     <img src="{{ asset('img/downlogo/Regents University.png')}}" style="width:150px;">
                 </div>
-                <div class="brand__item"
-                    style="border: 1px solid #C6C6C6;border-radius: 8px;padding: 10px;box-shadow: 3px 4px 0px 0px #000000;background: #fff;">
-                    <img src="{{ asset('img/downlogo/Stanford university.png')}}" style="width:150px;">
-                </div>
+                
             </div>
 
         </div>

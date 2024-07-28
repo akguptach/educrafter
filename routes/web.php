@@ -47,7 +47,7 @@ Route::get('/refer_friend', [Pages::class, 'refer_friend'])->name('refer_friend'
 Route::post('/refer_a_friend', [Pages::class, 'refer_a_friend'])->name('refer_a_friend');
 Route::get('/contact-us', [Pages::class, 'contact_us'])->name('contact-us');
 Route::get('/about-us', [Pages::class, 'about_us'])->name('about-us');
-Route::get('/Services', [Pages::class, 'services'])->name('Services');
+Route::get('/services', [Pages::class, 'services'])->name('Services');
 
 
 Route::get('/terms-and-conditions', [Pages::class, 'terms_condtion'])->name('terms-and-conditions');
@@ -113,11 +113,13 @@ Livewire::setUpdateRoute(function ($handle) {
 
 Route::get('/tutors', [App\Http\Controllers\ExpertDetailsController::class, 'tutorsList'])->name('Tutors.List');
 Route::get('/offers', [App\Http\Controllers\OffersController::class, 'index'])->name('Offers.Index');
-Route::get('/{slug}', [Services::class, 'servicesIndex'])->name('Services.Index');
+
 Route::get('/tutor/{id}', [App\Http\Controllers\ExpertDetailsController::class, 'index'])->name('Expert.Details');
 
 Route::get('/offers/ajaxlist', [App\Http\Controllers\OffersController::class, 'ajaxList'])->name('Offers.ajaxList');
 Route::get('/offers/details/{id}', [App\Http\Controllers\OffersController::class, 'details'])->name('Offers.details');
+
+Route::get('/{slug}/22', [Services::class, 'servicesIndex'])->name('Services.Index');
 
 
 

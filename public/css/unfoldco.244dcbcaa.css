@@ -3072,8 +3072,12 @@ color: #000;
 .service-block.black {
   background-color: #000;
   box-shadow: inset 0 0 0 2px var(--gray-1);
-  color: #fff;
+  color: #fff !important;
 }
+.service-block.black p {
+  color: #fff !important;
+}
+
 
 .service-block.red {
   z-index: 100;

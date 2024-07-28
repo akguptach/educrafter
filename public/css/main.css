@@ -6960,7 +6960,7 @@ textarea {
   -o-border-radius: 10px;
   -ms-border-radius: 10px;
   border-radius: 10px;
-  padding: 25px 25px 32px;
+  padding: 15px 15px 15px;
   border: 1px solid #000;
   -webkit-transition: all 0.2s ease-out 0s;
   -moz-transition: all 0.2s ease-out 0s;
@@ -7025,8 +7025,10 @@ textarea {
   margin-top: 8px;
 }
 .courses__item-three .courses__item-tag {
-  gap: 15px;
+  gap: 5px;
+  margin:0px;
 }
+
 .courses__item-three .courses__item-meta {
   margin: 0 0 8px;
 }
@@ -7758,7 +7760,7 @@ textarea {
   -o-border-radius: 50px;
   -ms-border-radius: 50px;
   border-radius: 11px;
-  padding: 10px 10px;
+  padding: 8px 8px;
 }
 .courses__item-tag a:hover {
   background: #3b71ed;
@@ -7948,11 +7950,12 @@ textarea {
   display: -webkit-flex;
   display: flex;*/
   align-items: center;
-  gap: 0px 20px;
+  gap: 0px 10px;
+  height: 110px;
 }
 .courses__item-bottom-three .list-wrap li {
-  /* display: -webkit-box; */
-  margin-bottom: 10px;
+  /* display: -webkit-box; 
+  margin-bottom: 10px;*/
   display: -moz-box;
   align-items: center;
   gap: 8px;
@@ -7960,6 +7963,19 @@ textarea {
   line-height: 1;
   color: #000;
   font-weight: 500;
+  margin-bottom: 5px;
+}
+.courses__item-bottom-three .list-wrap1{
+  list-style: none;
+  padding: 0px;
+  margin: 0px;
+  /* gap: 10px; */
+}
+.courses__item-bottom-three .list-wrap1 li{
+  font-size: 16px;
+  line-height: 0;
+  margin-bottom: 10px;
+  color: #000;
 }
 .courses__item-bottom-three .list-wrap li i {
   font-size: 20px;

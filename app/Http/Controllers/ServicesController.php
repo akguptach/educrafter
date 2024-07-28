@@ -15,6 +15,8 @@ class ServicesController extends Controller
     }
     public function servicesIndex($slug)
     {
+		
+		
         $data = ServiceSeo::where('seo_url_slug', $slug)->first();
 
         $experts = Expert::with(['subjects'=>function($q){

@@ -141,7 +141,7 @@
                                     <div class="col-3 col-md-3 col-sm-6">
                                         <div class="fact__item fact__item-two">
                                             <h2 class="count">
-                                                <span class="odometer" data-count="250"></span>M+
+                                                <span class="odometer" data-count="250"></span>K+
                                             </h2>
                                             <p style="font-size: 15px;">Satisfied students</p>
                                         </div>
@@ -157,7 +157,7 @@
                                     <div class="col-3 col-md-3 col-sm-6">
                                         <div class="fact__item fact__item-two">
                                             <h2 class="count">
-                                                <span class="odometer" data-count="90"></span>%
+                                                <span class="odometer" data-count="98"></span>%
                                             </h2>
                                             <p style="font-size: 15px;">Satisfaction Rate</p>
                                         </div>
