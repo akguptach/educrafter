@@ -9,7 +9,7 @@ use App\Models\ServiceRating;
 use App\Models\ServiceFaq;
 use App\Models\ServiceWhyEducrafter;
 use App\Models\ServiceSeo;
-use App\Models\ServiceSpecifications;
+
 use App\Models\ServiceHowWork;
 use App\Models\Pages;
 use App\Models\Expert;
@@ -21,7 +21,6 @@ class PageController extends Controller
 {
     public function index($page_sku = '')
     {
-        
         $data['pages']   =   Pages::where('page_sku', $page_sku)->first()->toArray();
         return view('pages', $data);  
     }
@@ -113,6 +112,7 @@ class PageController extends Controller
     public function services()
     {
 		
+        
         $page = Service::where(array('service_name' => 'Services', 'website_type' => 'Educrafter', 'type' => 'PAGE'))->first();
 		
 		$experts = Expert::with(['subjects'=>function($q){
@@ -128,7 +128,7 @@ class PageController extends Controller
         $faq_page = ServiceFaq::where('service_id', $page->id)->get();
         View::share('title', $page->page_title);
         View::share('description', $page->seo_description);
-        return view('services', compact('page','faq_page', 'experts', 'data'));
+        return view('services.index', compact('page','faq_page', 'experts', 'data'));
     }
     public function contact_us()
     {

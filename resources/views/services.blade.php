@@ -5,7 +5,30 @@
     left: -4% !important;
 
 }
+
+.accordion-button:not(.collapsed) {
+    color: var(--bs-accordion-active-color);
+    background-color: #fff;
+    box-shadow: none;
+}
+
+.panel-body table tr td {
+    padding-left: 15px
+}
+
+.panel-body table tr td a:hover {
+    color: #000;
+}
+
+.panel-body .table {
+    margin-bottom: 0px;
+}
+
+.panel-group {
+    margin-bottom: 10px;
+}
 </style>
+
 <main class="main-area fix">
     <!-- banner-area -->
     <section class="banner-area banner-bg-three tg-motion-effects">
@@ -29,6 +52,7 @@
                         </div>
                     </div>
                 </div>
+
                 <div class="col-lg-12">
                     <div class="banner__images-two">
 
@@ -155,7 +179,85 @@
             </div>
         </div>
     </section>
+
+
     <!-- banner-area-end -->
+
+    <!-- faq-area -->
+    <section class="faq__area section-pb-30">
+        <div class="container">
+            <div class="row justify-content-center">
+                <div class="col-lg-12">
+                    <div class="section__title text-center mt-40 mb-40">
+                        <h2 class="title" style="font-size:5rem;">What are you looking for?</h2>
+                    </div>
+                </div>
+            </div>
+
+
+
+
+            <div class="faq__wrap">
+                <div class="accordion" id="accordionExample">
+                    <div class="row">
+
+                    @foreach($serviceKeywords as $serviceKeyword)
+                        <div class="col-lg-6">
+                            <div class="panel-group" id="accordion">
+                                <div class="panel panel-default">
+                                    <div class="panel-heading" style="border: 1px solid #D9D9D9;border-radius: 8px;">
+                                        <h4 class="panel-title" style="padding: 5px;margin: 0px;">
+                                            <a class="accordion-button" data-bs-toggle="collapse"
+                                                data-bs-target="#keyword_{{$serviceKeyword->id}}" aria-expanded="true"
+                                                style="padding: 10px;"><span class="glyphicon glyphicon-folder-close">
+                                                </span>{{$serviceKeyword->name}}</a>
+                                        </h4>
+                                    </div>
+                                    <div id="keyword_{{$serviceKeyword->id}}" class="panel-collapse in collapse" style="">
+                                        <div class="panel-body"
+                                            style="background: #F8FAFF;margin-top: 10px;border: 1px solid #D9D9D9;border-radius: 8px;padding: 0px;">
+                                            <table class="table"
+                                                style="background: #000;--bs-table-bg: #F8FAFF;padding: 10px;border-radius: 8px;">
+                                                <tbody>
+                                                    @foreach($serviceKeyword->services as $service)
+                                                    <tr>
+                                                        <td>
+                                                            <a href="{{$service->seo->seo_url_slug}}" style="color: #000;">{{$service->service_name}}</a>
+                                                        </td>
+                                                    </tr>
+                                                    @endforeach
+                                                    
+                                                </tbody>
+                                            </table>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        @endforeach
+
+
+
+
+
+                    </div>
+
+
+
+                </div>
+
+            </div>
+        </div>
+
+
+
+
+
+        </div>
+
+    </section>
+    <!-- faq-area-end -->
+
     <!-- course-area -->
     <section class="courses-area section-pt-30 section-pb-30">
         <div class="container11">
@@ -180,9 +282,9 @@
                     </div>
                 </div>
                 <div class="swiper courses-swiper-active">
-                    <div class="swiper-wrapper"> 
+                    <div class="swiper-wrapper">
 
-                    @foreach($experts as $expert)
+                        @foreach($experts as $expert)
                         <div class="swiper-slide">
                             <div class="courses__item shine__animate-item">
                                 <div class="rc-post-item">
@@ -194,19 +296,20 @@
                                     <ul class="courses__item-meta list-wrap">
                                         <li>
                                             <h5>
-                                                <a href="{{route('Expert.Details',$expert->id)}}">{{$expert->first_name}} {{$expert->last_name}}</a>
+                                                <a href="{{route('Expert.Details',$expert->id)}}">{{$expert->first_name}}
+                                                    {{$expert->last_name}}</a>
                                             </h5>
                                         </li>
 
                                         <li class="avg-rating">
-                                        @php($ratingNumbersList = explode('-',$expert->rating_numbers))
+                                            @php($ratingNumbersList = explode('-',$expert->rating_numbers))
                                             @for($i=0; $i < $ratingNumbersList[0]; $i++) <i class="fas fa-star"></i>
                                                 @endfor
                                                 @if(isset($ratingNumbersList[1]))
                                                 {{$ratingNumbersList[1]}}+
                                                 @endif
                                         </li>
-                                        
+
                                     </ul>
                                 </div>
                                 <div class="courses__item-bottom-three">
@@ -225,8 +328,8 @@
                                     </ul>
                                 </div>
                                 <div class="courses__item-bottom-three" id="courses__tag">
-                                <ul class="courses__item-meta list-wrap">
-                                    @foreach($expert->subjects as $subject)
+                                    <ul class="courses__item-meta list-wrap">
+                                        @foreach($expert->subjects as $subject)
                                         <li class="courses__item-tag">
                                             <a href="#">{{$subject->subject->subject_name}}</a>
                                         </li>
@@ -237,14 +340,14 @@
                         </div>
                         @endforeach
 
-                        
-                        
-                        
+
+
+
 
                     </div>
                 </div>
-                
-				<div style="width:100%;text-align:Right;padding-right:4%;color: #000;">
+
+                <div style="width:100%;text-align:Right;padding-right:4%;color: #000;">
                     <span style="padding: 9px 0px 0px 6px;float: right;"><img src="{{ asset('img/arrow.png')}}"
                             style="width:20px;"></span>
                     <span style="padding: 10px 0px 0px 0px;float: right;">View All</span>
@@ -308,6 +411,8 @@
 
         </div>
     </section>
+
+
     <!-- course-area-end -->
     <style>
     .perks_n {
@@ -420,6 +525,7 @@
 
         </div>
     </section>
+
     <section class="brand-area">
         <div class="container-fluid">
 
@@ -547,6 +653,7 @@
                     </div>
 
                 </div>
+
                 <div class="col-lg-6 col-md-12"
                     style="border-left: 3px solid #000000;padding: 0px;background-color: #c2e3fb;">
                     <div class="choose__img-three"
@@ -804,6 +911,7 @@
 
 
             </div>
+
             <div class="row">
                 <div class="col-12">
                     <div class="testimonial__item-wrap">
@@ -827,12 +935,16 @@
 
 
                                             <div class="rating" data-rate="{{$rating->star_rating}}">
-                                               @for($i=0; $i < $rating->star_rating; $i++) 
-												<i class="fas fa-star"></i>
-												@endfor
+
+                                                @if(is_numeric($rating->star_rating))
+                                                @for($i=0; $i < $rating->star_rating; $i++)
+                                                    <i class="fas fa-star"></i>
+                                                    @endfor
+                                                    @endif
                                             </div>
 
                                         </div>
+
                                         <div class="testimonial__author testimonial__author-two">
                                             <?php
 														$date2 = $rating->created_at;
@@ -914,7 +1026,7 @@
                     style="border: 1px solid #C6C6C6;border-radius: 8px;padding: 10px;box-shadow: 3px 4px 0px 0px #000000;background: #fff;">
                     <img src="{{ asset('img/downlogo/Stanford university.png')}}" style="width:150px;">
                 </div>
-                
+
                 <div class="brand__item"
                     style="border: 1px solid #C6C6C6;border-radius: 8px;padding: 10px;box-shadow: 3px 4px 0px 0px #000000;background: #fff;">
                     <img src="{{ asset('img/downlogo/Princeton University.png')}}" style="width:150px;">
@@ -1046,18 +1158,21 @@
     </section>
 
 
-    <section class="blog__post-area-three tg-motion-effects blog__bg" style="background: #C2E3FB;margin-top: 100px;height: 100%;border: 1px solid #000000;box-shadow: 0px 4px 0px 0px #000000;">
+    <section class="blog__post-area-three tg-motion-effects blog__bg"
+        style="background: #C2E3FB;margin-top: 100px;height: 100%;border: 1px solid #000000;box-shadow: 0px 4px 0px 0px #000000;">
 
         <div style="margin:0 auto;position:Absolute;display: flex;top: 21%;z-index:10;width:100%;">
-            <div style="width:400px;height: 400px;background: #fff;border-radius: 20px;display: flex;margin: 0 auto;/* top: 29%; */position: relative;border: 10px solid #FB9271;box-shadow: 8px 8px 0px 0px #000000;">
+            <div
+                style="width:400px;height: 400px;background: #fff;border-radius: 20px;display: flex;margin: 0 auto;/* top: 29%; */position: relative;border: 10px solid #FB9271;box-shadow: 8px 8px 0px 0px #000000;">
                 <img src="{{ asset('img/1rRk.gif')}}"
                     style="width: 300px;height: 300px;/* display: block; */margin-left: auto;margin-right: auto;position: relative;top: -20%;transform: rotate(350deg);border-radius: 20px;">
 
                 <div
                     style="width:400px;position: absolute;bottom: 8px;font-size: 3em;font-family: 'Inter';text-align: center;color: #000;font-weight: bold;">
                     <span style="color: #000;width: 100%;float: left;height: 54px;">As</span><span
-                        style="color:#3B71ED;">Featured</span> In</div>
+                        style="color:#3B71ED;">Featured</span> In
                 </div>
+            </div>
 
 
         </div>
@@ -1137,7 +1252,7 @@
         </div>
 
     </section>
-	<!-- faq-area -->
+    <!-- faq-area -->
     <section class="faq__area">
         <div class="container">
             <div class="row justify-content-center">

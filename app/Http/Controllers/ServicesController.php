@@ -7,6 +7,7 @@ use App\Models\ServiceSeo;
 use App\Models\ServiceRating;
 use App\Models\ServiceSpecifications;
 use App\Models\Expert;
+use App\Models\ServiceKeyword;
 
 class ServicesController extends Controller
 {
@@ -17,6 +18,7 @@ class ServicesController extends Controller
     {
 		
 		
+		$serviceKeywords = ServiceKeyword::with(['services.seo'])->where('status', 1)->get();
         $data = ServiceSeo::where('seo_url_slug', $slug)->first();
 
         $experts = Expert::with(['subjects'=>function($q){
@@ -30,7 +32,7 @@ class ServicesController extends Controller
             \View::share('seo_keywords', ($data && $data->seo_keywords) ? $data->seo_keywords : '');
             \View::share('og_image', ($data && $data->og_image) ? $data->og_image : '');
             \View::share('og_url', ($data && $data->seo_url_slug) ? $data->seo_url_slug : '');
-            return view('services/index', compact('data','experts'));
+            return view('services', compact('data','experts','serviceKeywords'));
         }else{
             return view('errors/404'); 
         }

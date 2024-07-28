@@ -6,6 +6,8 @@
 
 }
 </style>
+
+
 <main class="main-area fix">
     <!-- banner-area -->
     <section class="banner-area banner-bg-three tg-motion-effects">

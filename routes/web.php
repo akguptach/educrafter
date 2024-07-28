@@ -119,7 +119,7 @@ Route::get('/tutor/{id}', [App\Http\Controllers\ExpertDetailsController::class, 
 Route::get('/offers/ajaxlist', [App\Http\Controllers\OffersController::class, 'ajaxList'])->name('Offers.ajaxList');
 Route::get('/offers/details/{id}', [App\Http\Controllers\OffersController::class, 'details'])->name('Offers.details');
 
-Route::get('/{slug}/22', [Services::class, 'servicesIndex'])->name('Services.Index');
+Route::get('/{slug}', [Services::class, 'servicesIndex'])->name('Services.Index');
 
 
 
