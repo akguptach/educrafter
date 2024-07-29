@@ -5,7 +5,28 @@
     left: -4% !important;
 
 }
-</style>
+.accordion-button:not(.collapsed) {
+    color: var(--bs-accordion-active-color);
+    background-color: #fff;
+    box-shadow: none;
+}
+
+.panel-body table tr td {
+    padding-left: 15px
+}
+
+.panel-body table tr td a:hover {
+    color: #000;
+}
+
+.panel-body .table {
+    margin-bottom: 0px;
+}
+
+.panel-group {
+    margin-bottom: 10px;
+}
+</style> 
 
 
 <main class="main-area fix">
@@ -161,6 +182,80 @@
 
     
     <!-- banner-area-end -->
+    <section class="faq__area section-pb-30">
+        <div class="container">
+            <div class="row justify-content-center">
+                <div class="col-lg-12">
+                    <div class="section__title text-center mt-40 mb-40">
+                        <h2 class="title" style="font-size:5rem;">What are you looking for?</h2>
+                    </div>
+                </div>
+            </div>
+
+
+
+
+            <div class="faq__wrap">
+                <div class="accordion" id="accordionExample">
+                    <div class="row">
+
+                    @foreach($serviceKeywords as $serviceKeyword)
+                        <div class="col-lg-6">
+                            <div class="panel-group" id="accordion">
+                                <div class="panel panel-default">
+                                    <div class="panel-heading" style="border: 1px solid #D9D9D9;border-radius: 8px;">
+                                        <h4 class="panel-title" style="padding: 5px;margin: 0px;">
+                                            <a class="accordion-button" data-bs-toggle="collapse"
+                                                data-bs-target="#keyword_{{$serviceKeyword->id}}" aria-expanded="true"
+                                                style="padding: 10px;"><span class="glyphicon glyphicon-folder-close">
+                                                </span>{{$serviceKeyword->name}}</a>
+                                        </h4>
+                                    </div>
+                                    <div id="keyword_{{$serviceKeyword->id}}" class="panel-collapse in collapse" style="">
+                                        <div class="panel-body"
+                                            style="background: #F8FAFF;margin-top: 10px;border: 1px solid #D9D9D9;border-radius: 8px;padding: 0px;">
+                                            <table class="table"
+                                                style="background: #000;--bs-table-bg: #F8FAFF;padding: 10px;border-radius: 8px;">
+                                                <tbody>
+                                                    @foreach($serviceKeyword->services as $service)
+                                                    <tr>
+                                                        <td>
+                                                            <a href="{{$service->seo->seo_url_slug}}" style="color: #000;">{{$service->service_name}}</a>
+                                                        </td>
+                                                    </tr>
+                                                    @endforeach
+                                                    
+                                                </tbody>
+                                            </table>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        @endforeach
+
+
+
+
+
+                    </div>
+
+
+
+                </div>
+
+            </div>
+        </div>
+
+
+
+
+
+        </div>
+
+    </section>
+
+
     <!-- course-area -->
     <section class="courses-area section-pt-30 section-pb-30">
         <div class="container11">

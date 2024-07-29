@@ -15,7 +15,8 @@ use App\Models\Pages;
 use App\Models\Expert;
 use View;
 use Mail;
-use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Auth; 
+use App\Models\ServiceKeyword;
 
 class PageController extends Controller
 {
@@ -112,7 +113,7 @@ class PageController extends Controller
     public function services()
     {
 		
-        
+        $serviceKeywords = ServiceKeyword::with(['services.seo'])->where('status', 1)->get();
         $page = Service::where(array('service_name' => 'Services', 'website_type' => 'Educrafter', 'type' => 'PAGE'))->first();
 		
 		$experts = Expert::with(['subjects'=>function($q){
@@ -128,7 +129,7 @@ class PageController extends Controller
         $faq_page = ServiceFaq::where('service_id', $page->id)->get();
         View::share('title', $page->page_title);
         View::share('description', $page->seo_description);
-        return view('services.index', compact('page','faq_page', 'experts', 'data'));
+        return view('services.index', compact('page','faq_page', 'experts', 'data','serviceKeywords'));
     }
     public function contact_us()
     {

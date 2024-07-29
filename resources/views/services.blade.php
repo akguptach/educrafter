@@ -184,7 +184,7 @@
     <!-- banner-area-end -->
 
     <!-- faq-area -->
-    <section class="faq__area section-pb-30">
+    <?php /*<section class="faq__area section-pb-30">
         <div class="container">
             <div class="row justify-content-center">
                 <div class="col-lg-12">
@@ -256,6 +256,7 @@
         </div>
 
     </section>
+    */ ?>
     <!-- faq-area-end -->
 
     <!-- course-area -->
