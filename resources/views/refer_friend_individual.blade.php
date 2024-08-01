@@ -1,140 +1,133 @@
-@extends('layout.app')
+@extends('layout.student')
 @section('content')
-<section class="common-sec">
-    <div class="container">
-        <ul class="nav nav-pills nav-fill pill-cust mt-3 py-1 rounded-lg" id="pills-tab" role="tablist">
-            <li class="nav-item" role="presentation">
-                <a class="nav-link active d-flex align-items-center" id="pills-st1-tab" data-toggle="pill"
-                    href="#pills-st1" role="tab" aria-controls="pills-st1" aria-selected="true">
-                    <span
-                        class="border fa-cust shadow-sm rounded-circle p-2 d-flex align-items-center justify-content-center">
-                        1
-                    </span>
-                    <p class="mb-0 pl-3">
-                        <span class="d-flex text-dark small">Share Referral URL with</span>
-                        <span class="d-flex mt-n1 text-primary text-capitalize">Friend</span>
-                    </p>
-                </a>
-            </li>
-            <li class="nav-item" role="presentation">
-                <a class="nav-link d-flex align-items-center" id="pills-st2-tab" data-toggle="pill" href="#pills-st2"
-                    role="tab" aria-controls="pills-st2" aria-selected="false">
-                    <span
-                        class="border fa-cust shadow-sm rounded-circle p-2 d-flex align-items-center justify-content-center">
-                        2
-                    </span>
-                    <p class="mb-0 pl-3">
-                        <span class="d-flex text-dark small">Your Friends</span>
-                        <span class="d-flex mt-n1 text-primary text-capitalize">Place an Order</span>
-                    </p>
-                </a>
-            </li>
-            <li class="nav-item" role="presentation">
-                <a class="nav-link d-flex align-items-center" id="pills-st3-tab" data-toggle="pill" href="#pills-st3"
-                    role="tab" aria-controls="pills-st3" aria-selected="false">
-                    <span
-                        class="border fa-cust shadow-sm rounded-circle p-2 d-flex align-items-center justify-content-center">
-                        3
-                    </span>
-                    <p class="mb-0 pl-3">
-                        <span class="d-flex text-dark small">You Earn</span>
-                        <span class="d-flex mt-n1 text-primary text-capitalize">$50</span>
-                    </p>
-                </a>
-            </li>
-        </ul>
+
+
+<div class="content-body">
+    <!-- row -->
+    <div class="container-fluid">
         <div class="row">
-            <div class="col-md-12">
-                <div class="common-theme raf-individual">
-                    <div class="row align-items-end">
-                        <div class="col-md-12">
-                            <h5 class="text-center"><b><u>Invite Friends, Earn Unlimited!</u></b></h5>
-                        </div>
-                    </div>
+            <div class="col-lg-12">
+                <div class="card">
 
-                    <div class="raf-form-share mb-5">
-                        <form action="" class="text-center my-4">
-                            <div class="mb-3">
-                                <label for="referralUrl" class="form-label"><b>Referral URL</b></label>
-                                <div style="color:green;display:none;height:25px;font-size:14px;" id="url_copied">
-                                Url copied
+                    <div class="card-body" style="background: #f2f1f2;">
+                        <p>Refer, Earn, Repeat! It's that easy to get $50 for every friend who signs up and places their
+                            first order. No limit on referrals.</p>
+                        <div class="row" style="margin-bottom: 20px;">
+                            <div class="col-sm-6">
+
+                                <!--<div style="min-height: 10px;">
+                                    <span style="color:green;display:none;font-size:12px;" id="url_copied_text">Url copied</span>
+                                </div>-->
+
+                                <input id="referralUrlInput" type="text" class="form-control form-control-lg"
+                                    placeholder="Your referral link" style="border-radius: 60px;" value="{{env('APP_URL')}}refer/{{$referral_code}}">
                                 </div>
-                                <input id="referralUrl" type="text" class="form-control"
-                                    value="https://educrafter.co/refer/{{$referral_code}}" placeholder="Referral URL"
-                                    aria-label="Referral URL" aria-describedby="refer-mail" readonly>
-                                    
+                            <div class="col-sm-2">
+                            
+                            <a href="javascript:void(0);" onclick="copyRefCode()" class="btn btn-primary"
+                                    style="height: 48px;width: 142px;padding: 8px;border-radius: 60px;background: #9071fb;font-size: 18px;"><img
+                                        src="<?php echo asset('/student/');?>/img/copy-icon-blue.png"> Copy link</a>
                             </div>
+                            <div class="col-sm-4">
+                                <span
+                                    style="background: #9071FB;border-radius: 57px;width:100%;padding-top: 7px;float: left;height: 48px;box-shadow: 3px 4px 0px 0px #000000;">
 
-                            <button type="button" onclick="copyUrl();" class="btn btn-copy-link">Copy URL</button>
-                        </form>
-
-                        <h4 class="text-center">OR</h4>
-                        <p class="text-center mt-4">Directly share the referral link via</p>
-                        <div class="share-block text-center">
-                            <button type="button" href="#" class="btn btn-share d-md-none">Share</button>
-                            <div class="social-share d-none d-md-flex">
-                                <a href="#" class="btn">
-                                    <img src="{{ asset('images/whatsaap-icon-black.svg')}}" class="img-fluid"
-                                        alt="SOP Craft" title="SOP Craft" width="30" height="30">
-                                </a>
-                                <a href="#" class="btn">
-                                    <img src="{{ asset('images/fb-icon-black.svg')}}" class="img-fluid" alt="SOP Craft"
-                                        title="SOP Craft" width="30" height="30">
-                                </a>
-                                <a href="#" class="btn">
-                                    <img src="{{ asset('images/twitter-icon-black.svg')}}" class="img-fluid"
-                                        alt="SOP Craft" title="SOP Craft" width="30" height="30">
-                                </a>
-                                <a href="#" class="btn">
-                                    <img src="{{ asset('images/linkedin-icon-black.svg')}}" class="img-fluid"
-                                        alt="SOP Craft" title="SOP Craft" width="30" height="30">
-                                </a>
+                                    <span style="width:25%;float: left;text-align: center;"><a
+                                            href="add-student.html"><img
+                                                src="<?php echo asset('/student/');?>/img/whatsapp-fill.png"></a></span>
+                                    <span style="width:25%;float: left;text-align: center;"><a
+                                            href="add-student.html"><img
+                                                src="<?php echo asset('/student/');?>/img/t.png"></a></span>
+                                    <span style="width:25%;float: left;text-align: center;"><a
+                                            href="add-student.html"><img
+                                                src="<?php echo asset('/student/');?>/img/f.png"></a></span>
+                                    <span style="width:25%;float: left;text-align: center;"><a
+                                            href="add-student.html"><img
+                                                src="<?php echo asset('/student/');?>/img/in.png"></a></span>
+                                </span>
                             </div>
                         </div>
-                    </div>
-                    <div class="table-responsive">
-                        <table class="table table-striped">
-                            <thead>
-                                <tr>
-                                    <th scope="col">&nbsp;</th>
-                                    <th scope="col">Total Lead</th>
-                                    <th scope="col">Total Order</th>
-                                    <th scope="col">Total Earned</th>
-                                    <!--<th scope="col">Action</th>-->
-                                </tr>
-                            </thead>
-                            <tbody>
-                            
-                                <tr>
-                                    <td scope="row">Referrals</td>
-                                    <td>{{$referrals}}</td>
-                                    <td>{{$total_orders}}</td>
-                                    <td>AUD {{$earned}}</td>
-                                    <!--<td>
-                                        <a href="#" class="link">Transaction Details</a>
-                                    </td>-->
-                                </tr>
+                        <div class="row">
+                            <div class="col-sm-8">
+                                <div class="card">
 
-                            </tbody>
-                        </table>
+                                    <div class="card-body"
+                                        style="padding:0px;border: 1px solid #000000;box-shadow: 3px 3px 0px 0px #000000;border-radius: 8px;">
+                                        <h4 class="card-title"
+                                            style="font-size:32px !important;padding-left:10px;padding-top:10px;">Your
+                                            Referral Earning Statistics</h4>
+                                        <hr>
+                                        <div class="table-responsive" style="height:350px;over-flow:auto;">
+                                            <table class="table table-striped table-responsive-sm">
+                                                <thead>
+                                                    <tr>
+                                                        <th>Referred to</th>
+                                                        <th>Date</th>
+                                                        <th>Amount</th>
+
+                                                    </tr>
+                                                </thead>
+                                                <tbody>
+                                                    @foreach($referralsList as $referral)
+                                                    <tr>
+                                                        <td>{{$referral->student->first_name}}</td>
+                                                        <td>{{ \Carbon\Carbon::parse($referral->created_at)->format('d/m/Y')}}</td>
+                                                        <td>${{$referral->earned}}</td>
+
+                                                    </tr>
+                                                    @endforeach
+                                                </tbody>
+                                            </table>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="col-sm-4">
+                                <div class="card">
+                                    <div class="card-body"
+                                        style="padding: 0px;border: 1px solid #000000;box-shadow: 3px 3px 0px 0px #000000;border-radius: 8px;">
+                                        <div style="border-bottom: 1px solid #000;">
+                                            <div style="padding: 24px;">
+                                                <span style="display: block;font-size:48px;">13(Demo)</span>
+                                                <span style="display: block;font-size:16px;">Referral sent</span>
+                                            </div>
+                                        </div>
+                                        <div style="border-bottom: 1px solid #000;">
+                                            <div style="padding: 24px;">
+                                                <span style="display: block;font-size:48px;">{{count($referralsList)}}</span>
+                                                <span style="display: block;font-size:16px;">Friends joined</span>
+                                            </div>
+                                        </div>
+                                        <div style="border-bottom: 1px solid #000;">
+                                            <div style="padding: 24px;">
+                                                <span style="display: block;font-size:48px;">${{$earned}}</span>
+                                                <span style="display: block;font-size:16px;">You Earned</span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
         </div>
-        <p class="text-end fs-7 mt-2 mb-0 px-4"><a href="#" class="link">Terms & Conditions</a> | <a href="#"
-                class="link">How It Works</a></p>
+
     </div>
-</section>
+</div>
 <script>
-function copyUrl() {
-    var copyText = document.getElementById("referralUrl");
+function copyRefCode() {
+    var copyText = document.getElementById("referralUrlInput");
     copyText.select();
     copyText.setSelectionRange(0, 99999); // For mobile devices
     navigator.clipboard.writeText(copyText.value);
-    $('#url_copied').show();
+    /*$('#url_copied_text').show();
     setTimeout(function(){
-        $('#url_copied').hide();
-    },5000)
+        $('#url_copied_text').hide();
+    },5000)*/
 }
 </script>
+
 @endsection

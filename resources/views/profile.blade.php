@@ -1,4 +1,4 @@
-@extends('layout.app')
+@extends('layout.student')
 @section('content')
 <style>
 	.form-control {
@@ -6,8 +6,12 @@
 		line-height: 2.5;
 	}
 </style>
-<main>
-	<section class="common-sec">
+<div class="content-body">
+    <!-- row -->
+    <div class="container-fluid">
+
+        
+
 		<div class="container">
 			<div class="row text-center">
 				<div class="col-sm-6 mx-auto">
@@ -64,6 +68,7 @@
 				</div>
 			</div>
 		</div>
-	</section>
-</main>
+	
+	</div>
+</div>
 @endsection

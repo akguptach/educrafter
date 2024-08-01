@@ -13,6 +13,7 @@ use App\Models\Website;
 use App\Models\Referral;
 use App\Models\Coupon;
 use App\Models\CouponCodeUses;
+use App\Models\Payment;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
@@ -23,6 +24,7 @@ use App\Services\OrderService;
 use App\Http\Requests\OrderRequestMessageRequest;
 use Illuminate\Support\Facades\Mail;
 use Carbon\Carbon;
+use DataTables;
 
 
 class OrderController extends Controller
@@ -491,44 +493,73 @@ class OrderController extends Controller
     {
         $user_id = Auth::id();
         $keyword  = isset($request->keyword)?$request->keyword:'';
-
-        $delivered = Orders::where('student_id', $user_id)
-        ->where(function($q) use ($keyword){
-            if($keyword){
-                $q->whereHas('subject',function($sq) use ($keyword){
-                    $sq->where('subject_name','like','%'.$keyword.'%');
-                });
-                $q->orWhere('no_of_words','like','%'.$keyword.'%');
+        $sortby  = isset($request->sortby)?$request->sortby:'';
+        $orderBy = '';
+        $order = '';
+        if($sortby){
+            $orderByArray = explode(',', $sortby);
+            $orderBy = $orderByArray[0];
+            $order = trim($orderByArray[1]);
+            if($orderBy == 'Deadline'){
+                $orderBy = 'delivery_date';
+            }else if($orderBy == 'Date'){
+                $orderBy = 'created_at';
             }
-        })
-        ->where('status', 'DELIVERED')->paginate(10);
+            
+        }
 
-        $inprocess = Orders::where('student_id', $user_id)
-        ->where(function($q) use ($keyword){
-            if($keyword){
-                $q->whereHas('subject',function($sq) use ($keyword){
-                    $sq->where('subject_name','like','%'.$keyword.'%');
-                });
-                $q->orWhere('no_of_words','like','%'.$keyword.'%');
-            }
-        })
-        ->where('payment_status', 'Success')->paginate(10);
-
-        $enquiries = Orders::where('student_id', $user_id)
-        ->where(function($q) use ($keyword){
-            if($keyword){
-                $q->whereHas('subject',function($sq) use ($keyword){
-                    $sq->where('subject_name','like','%'.$keyword.'%');
-                });
-                $q->orWhere('no_of_words','like','%'.$keyword.'%');
-            }
-        })
-        ->where('payment_status', 'Failed')->paginate(10);
         
 
-            
+        $deliveredQ = Orders::where('student_id', $user_id)
+        ->where(function($q) use ($keyword){
+            if($keyword){
+                $q->whereHas('subject',function($sq) use ($keyword){
+                    $sq->where('subject_name','like','%'.$keyword.'%');
+                });
+                $q->orWhere('no_of_words','like','%'.$keyword.'%');
+            }
+        })
+        ->where('status', 'DELIVERED');
+        if($orderBy){
+            $deliveredQ->orderBy("$orderBy", "$order");
+        }
+        
+        $delivered = $deliveredQ->paginate(10);
 
-        return view('transactions', compact('delivered','inprocess','enquiries','keyword'));
+        $inprocessQ = Orders::where('student_id', $user_id)
+        ->where(function($q) use ($keyword){
+            if($keyword){
+                $q->whereHas('subject',function($sq) use ($keyword){
+                    $sq->where('subject_name','like','%'.$keyword.'%');
+                });
+                $q->orWhere('no_of_words','like','%'.$keyword.'%');
+            }
+        });
+        if($orderBy){
+            $inprocessQ->orderBy("$orderBy", "$order");
+        }
+        $inprocess = $inprocessQ
+        ->where('status', 'INPROCESS')
+        ->where('payment_status', 'Success')->paginate(10);
+
+
+
+
+        $enquiriesQ = Orders::where('student_id', $user_id)
+        ->where(function($q) use ($keyword){
+            if($keyword){
+                $q->whereHas('subject',function($sq) use ($keyword){
+                    $sq->where('subject_name','like','%'.$keyword.'%');
+                });
+                $q->orWhere('no_of_words','like','%'.$keyword.'%');
+            }
+        });
+        if($orderBy){
+            $enquiriesQ->orderBy("$orderBy", "$order");
+        }
+        $enquiries = $enquiriesQ->where('payment_status', 'Failed')->paginate(10);
+        
+        return view('transactions', compact('delivered','inprocess','enquiries','keyword','orderBy','order'));
     }
 
     public function vieworder(OrderRequestMessageRequest $request, $id)
@@ -553,18 +584,22 @@ class OrderController extends Controller
 
         $referrals = Referral::where('referred_by',Auth::user()->id)->count();
         $earned = Referral::where('referred_by',Auth::user()->id)->sum('earned');
-        $referralsList = Referral::with(['student' => fn($student) => $student->withCount('orders')])
-        ->where('referred_by',Auth::user()->id)->get();
-        $totalOrders = 0;
+
+        $referralsList = Referral::with(['student'])->where('referred_by',Auth::user()->id)->get();
+
+        /*$referralsList = Referral::with(['student' => fn($student) => $student->withCount('orders')])
+        ->where('referred_by',Auth::user()->id)->get();*/
+        /*$totalOrders = 0;
         foreach($referralsList as $referralsData){
             $totalOrders = $totalOrders+$referralsData->student->orders_count;
-        }
+        }*/
         $referralCode = Auth::user()->referral_code;
         $data = [
             'referral_code'=>$referralCode,
-            'total_orders'=>$totalOrders,
+            //'total_orders'=>$totalOrders,
             'referrals'=>$referrals,
-            'earned'=>$earned
+            'earned'=>$earned,
+            'referralsList'=>$referralsList
         ];
         return view('refer_friend_individual', $data);
 
@@ -572,8 +607,26 @@ class OrderController extends Controller
 
     public function statements()
     {
-        $data = array();
-        $orders = Orders::with(['payment'])->whereHas('payment')->where('student_id',Auth::user()->id)->paginate(10);
-        return view('statements', compact('orders'));
+        if(\request()->ajax()){
+            $orders = Orders::with(['payment'])->whereHas('payment')->where('student_id',Auth::user()->id)->get();
+            return DataTables::of($orders)
+            ->addIndexColumn()
+            ->addColumn('date', function($row) {
+                return \Carbon\Carbon::parse($row->payment->created_at)->format('d/m/Y');
+            })
+            ->addColumn('description', function($row) {
+                return 'Demo';
+            })
+            ->addColumn('type', function($row) {
+                return '<span class="badge badge-rounded badge-warning">Purchased</span>';
+            })
+            ->addColumn('amount', function($row) {
+                return '$'.$row->payment->amount;
+            })
+            ->rawColumns(['type'])
+            ->toJson();
+        }else{
+            return view('statements');
+        }
     }
 }

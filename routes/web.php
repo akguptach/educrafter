@@ -15,6 +15,7 @@ use App\Livewire\Admin\Orders;
 use Livewire\Livewire;
 use App\Http\Controllers\ServicesController as Services;
 use App\Http\Controllers\ErrorController as Error;
+use App\Http\Controllers\OrderRatingController as OrderRating;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -89,7 +90,7 @@ Route::middleware('auth')->group(function () {
     Route::get('/statements', [Order::class, 'statements'])->name('order.statements');
     //Route::post('/neworder', [Order::class, 'create'])->name('neworder');
     //Route::post('/process-attachment', [Order::class, 'processAttachment'])->name('process-attachment');
-    Route::get('/profile', [Student::class, 'profile'])->name('student.profile');
+    Route::get('/profile', [Student::class, 'profile'])->name('student.profile'); 
     Route::post('/update-profile', [Student::class, 'updateProfile'])->name('student.update.profile');
     Route::get('/changepass', [Student::class, 'changepass'])->name('student.changepass');
     Route::post('/update-password', [Student::class, 'updatePassword'])->name('student.update.password');
@@ -118,8 +119,19 @@ Route::get('/tutor/{id}', [App\Http\Controllers\ExpertDetailsController::class, 
 
 Route::get('/offers/ajaxlist', [App\Http\Controllers\OffersController::class, 'ajaxList'])->name('Offers.ajaxList');
 Route::get('/offers/details/{id}', [App\Http\Controllers\OffersController::class, 'details'])->name('Offers.details');
+Route::post('/save-ratings', [OrderRating::class, 'saveRatings'])->name('save.ratings');
+
+
+
+
+
+
+
+
 
 Route::get('/{slug}', [Services::class, 'servicesIndex'])->name('Services.Index');
+
+
 
 
 

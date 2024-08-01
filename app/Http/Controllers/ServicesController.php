@@ -19,7 +19,7 @@ class ServicesController extends Controller
 		
 		
 		$serviceKeywords = ServiceKeyword::with(['services.seo'])->where('status', 1)->get();
-        $data = ServiceSeo::where('seo_url_slug', $slug)->first();
+        $data = ServiceSeo::where('seo_url_slug', strtolower($slug))->first();
 
         $experts = Expert::with(['subjects'=>function($q){
             $q->where('show_on_home', 1)->orderBy('subject_number');

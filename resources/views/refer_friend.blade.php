@@ -1,290 +1,413 @@
-@extends('layout.app')
+@extends('layout.app',['title'=>$title])
 @section('content')
 <style>
-    #email-error{
-    position: absolute;
-    margin-left: 10px;
-    font-size: 14px;
-    top: 100%;
-    }
+.banner__images-three .about__enrolled {
+    left: -4% !important;
+
+}
+
+.accordion-button:not(.collapsed) {
+    color: var(--bs-accordion-active-color);
+    background-color: #fff;
+    box-shadow: none;
+}
+
+.panel-body table tr td {
+    padding-left: 15px
+}
+
+.panel-body table tr td a:hover {
+    color: #000;
+}
+
+.panel-body .table {
+    margin-bottom: 0px;
+}
+
+.panel-group {
+    margin-bottom: 10px;
+}
+.brand-area-two {
+    transform: rotate(-3.5deg);
+    position: relative;
+    z-index: 2;
+    margin-top: 50px;
+}
+.marquee_mode {
+    height: 40px;
+}
+.brand__item a {
+    display: -webkit-box;
+    display: -moz-box;
+    display: -ms-flexbox;
+    display: -webkit-flex;
+    display: flex;
+    height: auto;
+    font-size: 1.5rem;
+    color: #000;
+    font-weight: bold;
+    align-items: center;
+    justify-content: center;
+}
 </style>
-<main class="flex-shrink-0">
-    <div class="masthead raf-masthead">
+
+<main class="main-area fix">
+    <!-- banner-area -->
+    <section class="banner-area banner-bg-three tg-motion-effects">
         <div class="container">
-            <div class="row d-flex align-items-center">
-                <div class="col-lg-6">
-                    <div class="masthead-left">
-                        <h1>Refer friends and earn upto <span>$50,000</span></h1>
-                        <p>They get 10% OFF their first assignment, and you earn 10% commission from their task when
-                            their
-                            task is
-                            complete...amazing, right?!</p>
+            <div class="row justify-content-between align-items-start">
 
-                        <form id="refer_form">
-                            @csrf
-                            <div class="input-group refer-email mb-3">
-                                <input name="email" type="text" class="form-control" placeholder="Your friend’s email ID"
-                                    aria-label="Your friend’s email ID" aria-describedby="refer-mail">
-
-                                <button class="btn" type="submit" id="refer-mail">
-                                    <img src="{{ asset('images/iconoir_send-solid.svg') }}" class="img-fluid"
-                                        alt="Essay Help" title="Essay Help" width="32" height="32">
-                                </button>
-                            </div>
-                        </form>
+                <div class="col-xl-12 col-lg-12">
+                    <div class="banner__content-two" align="center">
+                        <h1 class="title" data-aos="fade-right" data-aos-delay="400"
+                            style="text-align: center;font-family: 'Sofia Pro'; font-weight: bold; font-style: normal;">
+                            Refer friends and earn upto $10,000</h1>
+                        <p data-aos="fade-right" data-aos-delay="600" style="text-align: center;">
+                           Refer, Earn, Repeat! It's that easy to get $50 for every friend who signs up and places their first order. No limit on referrals.</p>
 
 
-                        <div class="share-block" style="margin-top: 28px;">
-                            <!--<button type="button" href="#" class="btn btn-copy-link">Copy link</button>-->
-                            <button type="button" href="#" class="btn btn-share d-md-none">Share</button>
-                            <div class="social-share d-none d-md-flex">
-                                <a href="#" class="btn">
-                                    <img src="{{ asset('images/whatsaap-icon-black.svg') }}" class="img-fluid"
-                                        alt="Essay Help" title="Essay Help" width="30" height="30">
-                                </a>
-                                <a href="#" class="btn">
-                                    <img src="{{ asset('images/fb-icon-black.svg') }}" class="img-fluid"
-                                        alt="Essay Help" title="Essay Help" width="30" height="30">
-                                </a>
-                                <a href="#" class="btn">
-                                    <img src="{{ asset('images/twitter-icon-black.svg') }}" class="img-fluid"
-                                        alt="Essay Help" title="Essay Help" width="30" height="30">
-                                </a>
-                                <a href="#" class="btn">
-                                    <img src="{{ asset('images/linkedin-icon-black.svg') }}" class="img-fluid"
-                                        alt="Essay Help" title="Essay Help" width="30" height="30">
-                                </a>
-                            </div>
+                        <div class="banner__all-recipe aos-init aos-animate" data-aos="fade-left" data-aos-delay="200">
+                            <img src="{{ asset('img/100.svg')}}" alt="img">
                         </div>
                     </div>
                 </div>
-                <div class="col-lg-6">
-                    <picture>
-                        <source media="(min-width:768px)" srcset="{{ asset('images/group-boy-girl.png') }}">
-                        <img src="{{ asset('images/group-boy-girl-mobile.png') }}" class="img-fluid" alt="Essay Help"
-                            title="Essay Help" width="543" height="680">
-                    </picture>
+
+                <div class="col-lg-12">
+                    <div class="banner__images-two">
+
+                        <div class="about__enrolled" data-aos="fade-right" data-aos-delay="900">
+
+                            <img src="{{ asset('img/banner2_l.png')}}" alt="img">
+                        </div>
+                    </div>
                 </div>
+                <div class="col-xl-12 col-lg-12" align="center" style="margin-top: 100px;margin-bottom: 30px;">
+                    <div class="row">
+						 <div class="col-sm-12"><input type="text" class="form-control form-control-lg" placeholder="Your referral link" style="border-radius: 60px;" fdprocessedid="ytckx8"></div>
+						 <div class="col-sm-2"><a href="#" class="btn btn-primary" style="height: 48px;width: 142px;padding: 8px;border-radius: 60px;background: #9071fb;font-size: 18px;"><img src="img/copy-icon-blue.png"> Copy link</a></div>
+						 <div class="col-sm-10">
+							 <span style="background: #9071FB;border-radius: 57px;width:100%;padding-top: 7px;float: left;height: 48px;box-shadow: 3px 4px 0px 0px #000000;">
+								 
+								 <span style="width:25%;float: left;text-align: center;"><a href="add-student.html"><img src="img/whatsapp-fill.png"></a></span>
+								 <span style="width:25%;float: left;text-align: center;"><a href="add-student.html"><img src="img/t.png"></a></span>
+								 <span style="width:25%;float: left;text-align: center;"><a href="add-student.html"><img src="img/f.png"></a></span>
+								 <span style="width:25%;float: left;text-align: center;"><a href="add-student.html"><img src="img/in.png"></a></span>
+							 </span>
+						 </div>
+					</div>
+                </div>
+
+
+            </div>
+        </div>
+    </section>
+
+
+    <section class="brand-area brand-area-two" style="background:#F6FA5E;">
+        <div class="container-fluid">
+
+            <div class="marquee_mode" id="marquee_mode4">
+                <div class="brand__item">
+                    <a href="#">
+                        <img src="{{ asset('img/blue.png') }}" style="width:10px;">&nbsp;&nbsp;&nbsp;&nbsp;PhD Experts
+                    </a>
+                </div>
+                <div class="brand__item">
+                    <a href="#">
+                        <img src="{{ asset('img/blue.png') }}" style="width:10px;">&nbsp;&nbsp;&nbsp;&nbsp;Any Topic
+                    </a>
+                </div>
+                <div class="brand__item">
+                    <a href="#">
+                        <img src="{{ asset('img/blue.png') }}" style="width:10px;">&nbsp;&nbsp;&nbsp;&nbsp;Top Quality
+                    </a>
+                </div>
+                <div class="brand__item">
+                    <a href="#">
+                        <img src="{{ asset('img/blue.png') }}" style="width:10px;">&nbsp;&nbsp;&nbsp;&nbsp;A+ Results
+                    </a>
+                </div>
+
+                <div class="brand__item">
+                    <a href="#">
+                        <img src="{{ asset('img/blue.png')}}" style="width:10px;">&nbsp;&nbsp;&nbsp;&nbsp;Absolute
+                        Discretion
+                    </a>
+                </div>
+
+
+            </div>
+
+        </div>
+    </section>
+
+    <section class="choose__area-three"  style="margin-bottom: 32px;margin-top: 70px;">
+        <div class="container" >
+            <div class="row">
+
+                
+                <div class="col-lg-12 col-md-12" >
+                    <div class="choose__img-three" style="border-radius:20px;box-shadow: 8px 8px 0px 0px #000000;padding: 7%;min-height:600px;margin: auto;background-image:url('{{ asset('img/rf_6.png')}}');object-fit: cover;width: 100%;background-size: cover;background-repeat: no-repeat;background-repeat: no-repeat;background-repeat: no-repeat;">
+                         <div style="width:250px;margin-bottom:100px;font-family: 'Sofia Pro', sans-serif;">
+							 <span style="font-size:48px;font-weight:bold;float: left;width: 100%;color:#000;height: 60px;">1</span>
+							 <span style="font-size:20px;;float: left;width: 100%;color:#000;">Login to Educrafter and go to My Account</span>
+						 </div>
+						 <div style="width:250px;;margin-bottom:100px;font-family: 'Sofia Pro', sans-serif;">
+						     <span style="font-size:48px;font-weight:bold;float: left;width: 100%;color:#000;height: 60px;">2</span>
+							 <span style="font-size:20px;;float: left;width: 100%;color:#000;">Share your unique referral link with friends.</span>
+						 </div>
+						 <div style="width:300px;font-family: 'Sofia Pro', sans-serif;">
+						     <span style="font-size:48px;font-weight:bold;float: left;width: 100%;color:#000;height: 60px;">3</span>
+							 <span style="font-size:20px;;float: left;width: 100%;color:#000;">Earn $50 when your friends sign up and place their first order.</span>
+						 </div>
+					</div>
+						
+                </div>
+            </div>
+        </div>
+    </section>
+
+     <div class="brand-area brand-area-two" style="background:#FEEAA8;">
+        <div class="container-fluid">
+            <div class="marquee_mode" id="marquee_mode">
+                <div class="brand__item">
+                    <a href="#">
+                        <img src="{{ asset('img/star.png')}}" style="width:20px;">&nbsp;&nbsp;&nbsp;&nbsp;A+ Results
+                    </a>
+                </div>
+                <div class="brand__item">
+                    <a href="#">
+                        <img src="{{ asset('img/star.png')}}" style="width:20px;">&nbsp;&nbsp;&nbsp;&nbsp;Absolute
+                        Discretion
+                    </a>
+                </div>
+                <div class="brand__item">
+                    <a href="#">
+                        <img src="{{ asset('img/star.png')}}" style="width:20px;">&nbsp;&nbsp;&nbsp;&nbsp;PhD Experts
+                    </a>
+                </div>
+                <div class="brand__item">
+                    <a href="#">
+                        <img src="{{ asset('img/star.png')}}" style="width:20px;">&nbsp;&nbsp;&nbsp;&nbsp;Top Quality
+                    </a>
+                </div>
+
+                <div class="brand__item">
+                    <a href="#">
+                        <img src="{{ asset('img/star.png')}}" style="width:20px;">&nbsp;&nbsp;&nbsp;&nbsp;Absolute
+                        Discretion
+                    </a>
+                </div>
+
+
             </div>
         </div>
     </div>
-    <section class="works-sec raf-hiw-sec mt-5">
+    
+	
+    <section class="testimonial__area-two pb-60 testimonial__bg" style="padding-top:50px;">
+        <style>
+        /* Prevent click/hover for element */
+        .off {
+            pointer-events: none;
+        }
+
+        .image {
+            border-radius: 100px;
+            width: 3.5em;
+        }
+        </style>
+
         <div class="container">
-            <div class="raf-hiw-wrapper">
-                <div class="row">
-                    <div class="col-12">
-                        <div class="hiw-head">
-                            <h2 class="head-title">How it <span>works</span>?</h2>
-                        </div>
-                    </div>
-                </div>
-                <div class="row mt-md-5">
-                    <div class="col-md-6 gp-div">
-                        <img src="{{ asset('images/group-girl.png') }}" class="img-fluid" alt="Essay Help"
-                            title="Essay Help" width="465" height="543">
-                    </div>
-                    <div class="col-md-6">
-                        <ul class="step-list mt-4">
-                            <li>
-                                <div class="icon">
-                                    <img src="{{ asset('images/eh-icon.svg') }}" class="img-fluid" alt="Essay Help"
-                                        title="Essay Help" width="90" height="90">
-                                </div>
-                                <div class="step-content">
-                                    <h6 class="">Step 1</h6>
-                                    <p class="mb-0">Login to Essay Help and go to <b>My Account</b></p>
-                                </div>
-                            </li>
-                            <li>
-                                <div class="icon">
-                                    <img src="{{ asset('images/link-icon.svg') }}" class="img-fluid" alt="Essay Help"
-                                        title="Essay Help" width="90" height="90">
-                                </div>
-                                <div class="step-content">
-                                    <h6 class="">Step 2</h6>
-                                    <p class="mb-0">Share the <b>unique referral</b> link with friends</p>
-                                </div>
-                            </li>
-                            <li>
-                                <div class="icon">
-                                    <img src="{{ asset('images/dollar-icon.svg') }}" class="img-fluid" alt="Essay Help"
-                                        title="Essay Help" width="90" height="90">
-                                </div>
-                                <div class="step-content">
-                                    <h6 class="">Step 3</h6>
-                                    <p class="mb-0"><b>Earn 10% commission once your friends complete a task</b></p>
-                                </div>
-                            </li>
-                        </ul>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-    <section class="helping-hand-sec my-md-5">
-        <div class="container">
-            <h2>Lend a <span>helping</span> hand!</h2>
+           
 
             <div class="row">
-                <div class="col-md-4">
-                    <div class="hh-content mb-5 mb-md-0">
-                        <h3 class="mb-5">Help your friends, and earn <b>Earn 10% commission</b> It’s a no-brainer!</h3>
-                        <a class="btn btn-primary" href="#" role="link">Refer a Friend</a>
+                <div class="col-12">
+                    <div class="testimonial__item-wrap">
+					    <h3 style="padding-top: 20px;padding-bottom:20px;text-align:center;">Students like you are referring their friends</h3>
+                        <div class="testimonial__nav-two">
+                            <button type="button" class="testimonial-button-prev">
+                                <i class="flaticon-arrow-right"></i>
+                            </button>
+                            <button type="button" class="testimonial-button-next">
+                                <i class="flaticon-arrow-right"></i>
+                            </button>
+                        </div>
+                        <div class="swiper-container testimonial-swiper-active-two">
+                            <div class="swiper-wrapper">
+                                @if($data->service && $data->service->ratings)
+                                @php($pageRating = $data->service->ratings)
+                                @foreach ($pageRating as $rating)
+                                <div class="swiper-slide">
 
-                        <p class="mt-5 d-none d-md-block">Questions? Contact our <a href="#" class="link">support
-                                team</a></p>
-                    </div>
-                </div>
-                <div class="col-md-8">
-                    <div class="row gy-3 gy-md-0 gx-1">
-                        <div class="col-md-4">
-                            <div class="card helping-card first">
-                                <h3>$250</h3>
-                                <p>For</p>
-                                <h4>3 friends</h4>
-                                <img src="{{ asset('images/crowd-1.png') }}" class="img-fluid" alt="Essay Help"
-                                    title="Essay Help" width="170" height="160">
-                            </div>
-                        </div>
-                        <div class="col-md-4">
-                            <div class="card helping-card">
-                                <h3>$500</h3>
-                                <p>For</p>
-                                <h4>6 friends</h4>
-                                <img src="{{ asset('images/crowd-2.png') }}" class="img-fluid" alt="Essay Help"
-                                    title="Essay Help" width="170" height="160">
-                            </div>
-                        </div>
-                        <div class="col-md-4">
-                            <div class="card helping-card last">
-                                <h3>$1000</h3>
-                                <p>For</p>
-                                <h4>12 friends</h4>
-                                <img src="{{ asset('images/crowd-3.png') }}" class="img-fluid" alt="Essay Help"
-                                    title="Essay Help" width="170" height="160">
+                                    <div class="testimonial__item-two" style="padding:30px 15px 15px 15px;">
+                                        <div class="testimonial__content-two">
+
+
+                                            <div class="rating" data-rate="{{$rating->star_rating}}">
+
+                                                @if(is_numeric($rating->star_rating))
+                                                @for($i=0; $i < $rating->star_rating; $i++)
+                                                    <i class="fas fa-star"></i>
+                                                    @endfor
+                                                    @endif
+                                            </div>
+
+                                        </div>
+
+                                        <div class="testimonial__author testimonial__author-two">
+                                            <?php
+														$date2 = $rating->created_at;
+														$newDate2 = date("M d, Y", strtotime($date2));
+														$arrName=explode("-",$rating->address);
+												?>
+                                            <div class="testimonial__author-content testimonial__author-content-two">
+                                                <h2 class="title">{{ @$arrName[0]}}</h2>
+                                                <div style="width:100%;float: left;margin-bottom: 10px;"><span
+                                                        style="color:#475569;font-size:14px;float: left;width:100%;">{{@$arrName[1]}}</span>
+                                                    <span
+                                                        style="color: #0056D1;font-size:14px;margin-top:5px;float: left;width:100%;">{{@$arrName[2]}}</span>
+                                                </div>
+
+                                            </div>
+                                        </div>
+                                        <p
+                                            style="color: #475569;font-size:14px;margin-top:10px;line-height: 22px;height:100px;font-family: inter;">
+                                            {!! Str::words(strip_tags($rating->description), 20, ' <a
+                                                href="javascript:void(0)"
+                                                onclick="toggleDescription(event, '.$rating->id.')"
+                                                style="text-decoration: none; "> Read more...</a>') !!}</p>
+                                    </div>
+                                </div>
+                                @endforeach
+                                @endif
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
 
-            <p class="mt-4 text-center d-md-none">Questions? Contact our <a href="#" class="link">support team</a></p>
         </div>
     </section>
 
-    <section class="students-referring-sec">
+    <section class="testimonial__area-two section-pt-30 pb-60 testimonial__bg"
+        style="background: #FFF4E4;border: 1px solid #000000;box-shadow: 0px 7px 0px 0px #000000;">
         <div class="container">
-            <h2>Students like you are referring their friends</h2>
-            <div class="sr-slider">
-                @foreach ($serviceRating as $rating)
-                <div class="col-md-4">
-                    <div class="card student-reveiw-card h-100">
-                        <div class="d-flex sr-group ">
-                            <div class="student-name">
-                                <?php
-                                $date2 = $rating->created_at;
-                                $newDate2 = date("M d, Y", strtotime($date2));
-                                ?>
-                                <h5 class="card-title ">{{ $rating->address}}</h5>
-                                <p class="text-muted mb-0 ">{{$newDate2}}</p>
+            <div class="row justify-content-center">
+                <div class="col-xl-5">
+                    <div class="section__title text-center mb-50">
+                        <h2 class="title" style="font-size:">Lend a Helping hand!</h2>
+                        
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-4">
+                    <div class="testimonial__item-wrap" style="background:#fff;">
+                        <img src="{{ asset('img/rf_1.png')}}">
+                    </div>
+                </div>
+				<div class="col-4">
+                    <div class="testimonial__item-wrap" style="background:#fff;">
+                        <img src="{{ asset('img/rf_3.png')}}">
+                    </div>
+                </div>
+				<div class="col-4">
+                    <div class="testimonial__item-wrap" style="background:#fff;">
+                        <img src="{{ asset('img/rf_2.png')}}">
+                    </div>
+                </div>
+            </div>
+			<div class="row">
+			    <div class="col-12">Help your friends with their writing needs and earn $50 for every successful order they place. It's that simple!</div>
+				<div class="col-12"><button class="btn btn-primary">Refer a Friend</button></div>
+				
+			</div>
+
+        </div>
+    </section>
+   
+   <section class="newsletter__area-three mb-5 mt-40">
+        <div class="container">
+            <div class="newsletter__inner-wrap newsletter__inner-wrap-two" style="background: #F0FFE4;">
+
+                <img src="{{ asset('img/black star.svg')}}" style="position:Absolute;top:10px;left: 50px;">
+                <div style="width:80%">
+                    <h2 class="title" style="font-family: 'Sofia Pro', sans-serif;font-weight:bold;font-size:4em;">Share your referral link with friends and start earning!</h2>
+                    <p style="color:#000;font-size:18px;font-weight: 500;">Refer, Earn, Repeat! It's that easy to get $50 for every friend who signs up and places their first order. No limit on referrals.</p>
+                </div>
+                <div style="width:20%">
+                    <form action="#" class="newsletter__form-two">
+                        <button type="button" class="btn"><img src="{{ asset('img/arrow.png')}}"></button>
+                    </form>
+                </div>
+
+
+
+            </div>
+
+        </div>
+    </section>
+   <!-- faq-area -->
+    <section class="faq__area mb-5">
+        <div class="container">
+            <div class="row justify-content-center">
+                <div class="col-lg-12">
+                    <div class="section__title text-center mt-40 mb-40">
+                        <h2 class="title" style="font-size:5rem;">Frequently Asked Questions</h2>
+                    </div>
+                </div>
+            </div>
+
+
+
+
+            <div class="faq__wrap">
+                <div class="accordion" id="accordionExample">
+                    <div class="row">
+                        @if($data->service && $data->service->faq)
+                        @foreach ($data->service->faq as $faq)
+                        <div class="col-lg-6">
+                            <div class="accordion-item">
+                                <h2 class="accordion-header">
+                                    <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+                                        data-bs-target="#collapseOne<?= $faq['id']; ?>" aria-expanded="true"
+                                        aria-controls="collapseOne<?= $faq['id']; ?>">
+                                        <?= $faq['question']; ?>
+                                    </button>
+                                </h2>
+                                <div id="collapseOne<?= $faq['id']; ?>" class="accordion-collapse collapse"
+                                    data-bs-parent="#accordionExample">
+                                    <div class="accordion-body">
+                                        <p style="border-top: 1px solid #B1B1B1;">&nbsp;</p>
+                                        <?= $faq['answer']; ?>
+
+                                    </div>
+                                </div>
                             </div>
                         </div>
-                        <div class="card-body p-0">
-                            <div class="sr-list">
-                                <ul class="student-rating" data-rate="{{$rating->star_rating}}">
-                                    <li>Start 1</li>
-                                    <li>Start 2</li>
-                                    <li>Start 3</li>
-                                    <li>Start 4</li>
-                                    <li>Start 5</li>
-                                </ul>
-                            </div>
-                            <p class="card-text text-center">“{{ $rating->description }}”.</p>
-                        </div>
-                    </div>
-                </div>
-                @endforeach
-            </div>
-        </div>
-    </section>
 
-    <section class="assignments-sec unique-refer-sec mt-md-5 mb-3">
-        <div class="container">
-            <div class="assign-box">
-                <div class="row">
-                    <div class="col-md-6 d-flex flex-column justify-content-end">
-                        <div class="assign-content">
-                            <h2 class="mb-3">Start sharing your unique referral link with friends!</h2>
 
-                            <a class="btn btn-primary" href="#" role="button">Refer Friends</a>
-                        </div>
-                    </div>
-                    <div class="col-md-6">
-                        <picture>
-                            <img src="{{ asset('images/group-boy.png') }}" class="img-fluid card-img" alt="Essay Help"
-                                title="Essay Help" loading="lazy" width="542" height="415">
-                        </picture>
+                        @endforeach
+                        @endif
                     </div>
                 </div>
             </div>
+
+
+
+
+
         </div>
+
     </section>
-    <section class="faq-sec">
-        <div class="container">
-            <div class="faq-box">
-                <div class="hiw-head">
-                    <h2 class="head-title">Frequently Asked <span>Questions</span></h2>
-                </div>
-                <div class="accordion row" id="accordionExample">
-                    @foreach ($faq_page as $faq)
-                    <div class="accordion-item col-sm-6">
-                        <h2 class="accordion-header" id="heading<?= $faq['id']; ?>">
-                            <a class="accordion-button collapsed" href="#" data-bs-toggle="collapse"
-                                data-bs-target="#collapse<?= $faq['id']; ?>" aria-expanded="true"
-                                aria-controls="collapse<?= $faq['id']; ?>">
-                                <?= $faq['question']; ?>
-                            </a>
-                        </h2>
-                        <div id="collapse<?= $faq['id']; ?>" class="accordion-collapse collapse"
-                            aria-labelledby="heading<?= $faq['id']; ?>" data-bs-parent="#accordionExample">
-                            <div class="accordion-body"><?= $faq['answer']; ?></div>
-                        </div>
-                    </div>
-                    @endforeach
-                </div>
-            </div>
-        </div>
-    </section>
+    <!-- faq-area-end -->
+
+   
+
+    
+
+
 </main>
-<script>
-$(document).ready(function() {
-
-    $("#refer_form").validate({
-        // In 'rules' user have to specify all the             
-        // constraints for respective fields            
-        rules: {
-            email: {
-                required: true,
-            },
-        },
-        submitHandler: function(form) {
-            var formData = $(form).serialize();
-            $.post("{{route('refer_a_friend')}}", formData)
-                .done(function(response) {
-                    alert('Refer request sent successfully');
-                    location.reload();
-                })
-                .fail(function(xhr, status, error) {
-                    if (xhr.status == 401) {
-                        $("#loginModal").modal("show");
-                    }
-                })
-                .always(function() {
-                    //console.log('Request completed.');                                            
-                });
-            return false;
-        }
-    });
-})
-</script>
+<!-- main-area-end -->
 @endsection

@@ -22,6 +22,8 @@ class PageController extends Controller
 {
     public function index($page_sku = '')
     {
+		
+		
         $data['pages']   =   Pages::where('page_sku', $page_sku)->first()->toArray();
         return view('pages', $data);  
     }
@@ -99,11 +101,28 @@ class PageController extends Controller
     public function refer_friend(Request $request)
     {
 
-        
-        $page = ServiceSeo::where('seo_url_slug', 'refer-friend')->first();
-        $serviceRating = ServiceRating::where('service_id', $page->service_id)->get();
-        $faq_page =   ServiceFaq::where('service_id', $page->service_id)->get();
-        return view('refer_friend', compact('serviceRating', 'faq_page'));
+        $experts = Expert::with(['subjects'=>function($q){
+            $q->where('show_on_home', 1)->orderBy('subject_number');
+        }])->where('show_on_home', 1)->get();
+		$data = ServiceSeo::where('seo_url_slug', 'refer-friend')->first();
+		
+        //$page = ServiceSeo::where('seo_url_slug', 'refer-friend')->first();
+        //$serviceRating = ServiceRating::where('service_id', $page->service_id)->get();
+        //$faq_page =   ServiceFaq::where('service_id', $page->service_id)->get();
+        //return view('refer_friend', compact('data','experts'));
+		
+		
+		if($data){
+            \View::share('title', ($data && $data->seo_meta) ? $data->seo_meta : '');
+            \View::share('description', ($data && $data->seo_description) ? $data->seo_description : '');
+            \View::share('seo_keywords', ($data && $data->seo_keywords) ? $data->seo_keywords : '');
+            \View::share('og_image', ($data && $data->og_image) ? $data->og_image : '');
+            \View::share('og_url', ($data && $data->seo_url_slug) ? $data->seo_url_slug : '');
+            return view('refer_friend', compact('data','experts'));
+        }else{
+            return view('errors/404'); 
+        }
+		
     }
     public function faq()
     {

@@ -226,6 +226,7 @@
 	margin-top:16px;
 }
 	</style>
+	
     <!-- footer-area-end -->
 	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css">
 	<a href="https://wa.me/message/6BCQKSJORYUOL1" class="float" target="_blank">
