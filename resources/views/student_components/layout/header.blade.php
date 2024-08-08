@@ -19,14 +19,14 @@
     <meta property="og:title" content="">
     <meta property="og:description" content="">
 
-    <meta property="og:image" content="https://edumin.dexignlab.com/xhtml/social-image.png">
+    <meta property="og:image" content="">
 
     <meta name="format-detection" content="telephone=no">
 
     <meta name="twitter:title" content="">
     <meta name="twitter:description" content="">
 
-    <meta name="twitter:image" content="https://edumin.dexignlab.com/xhtml/social-image.png">
+    <meta name="twitter:image" content="">
     <meta name="twitter:card" content="summary_large_image">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="icon" type="<?php echo asset('/student/');?>/image/png" sizes="16x16" href="./images/favicon.png">
@@ -170,7 +170,7 @@
                                 <a class="nav-link" href="javascript:void(0);" role="button" data-bs-toggle="dropdown">
 
                                     <span
-                                        style="background:#FEEAA8;color: #000;border-radius: 20px;height: 40px;width: 40px;padding: 8px 8px 8px 8px;font-size: 16px;float: left;text-align: center;">
+                                        style="background:#FEEAA8;color: #000;border-radius: 24px;height: 44px;width: 44px;padding: 8px 8px 8px 8px;font-size: 16px;float: left;text-align: center;">
                                         <?php echo strtoupper(substr(Auth::user()->first_name,0,1)).' '.strtoupper(substr(Auth::user()->last_name,0,1));?>
                                     </span>
                                 </a>

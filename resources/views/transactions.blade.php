@@ -247,7 +247,7 @@ p.v-data {
                                                     </div>
                                                     <div style="float:left;font-size:14px;color:#000;">Delivery in
                                                         {{$item['delivery_date']}} | {{$item['no_of_words']}} words |
-                                                        {{$item->taskType->type_name}} | English</div>
+                                                        {{@$item->taskType->type_name}} | English</div>
                                                 </div>
                                             </div>
                                             <div style="width:20%;float:right;">

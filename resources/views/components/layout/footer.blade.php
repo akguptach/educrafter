@@ -95,7 +95,7 @@
                       <a href="https://educrafter.co/offers">Offers</a>
                     </li>
                     <li>
-                      <a href="events-details.html">Blogs</a>
+                      <a href="https://educrafter.co/blog">Blogs</a>
                     </li>
 					<li>
                       <a href="https://educrafter.co/contact-us">Contact Us</a>

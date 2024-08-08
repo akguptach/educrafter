@@ -50,13 +50,15 @@ class PaymentController extends Controller
     
     public function pay(Request $request)
     {
+
+        
         if(session()->has('payment_object')) {
             session()->forget('payment_object');
         }
         if(session()->has('order_id')) {
             session()->forget('order_id');
         }
-        $order_id = \Crypt::decrypt($request->order_id);
+        $order_id = \Crypt::decrypt($request->query('order_id'));
         if(Orders::where('id',$order_id)->exists()) {
             
             // Get Order Details.

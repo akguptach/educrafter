@@ -58,7 +58,7 @@ $services = \App\Models\Service::where('website_type', 'Educrafter')->where('typ
     <div class="navmenu">
         <div class="menu_wrap">
             <div class="menu">
-                <a href="#" class="btn arrow-btn">Hire Tutor <svg width="16" height="14" viewBox="0 0 16 14" fill="none"
+                <a href="https://educrafter.co/order" class="btn arrow-btn">Hire Tutor <svg width="16" height="14" viewBox="0 0 16 14" fill="none"
                         xmlns="http://www.w3.org/2000/svg"
                         data-inject-url="https://html.themegenix.com/skillgro/assets/img/icons/right_arrow.svg"
                         class="injectable">

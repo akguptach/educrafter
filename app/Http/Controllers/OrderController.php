@@ -696,4 +696,29 @@ class OrderController extends Controller
             return view('statements');
         }
     }
+
+    public function orderValidate(Request $request){
+
+        $validator = Validator::make($request->all(), [
+            'subject_id' => 'required',
+            'referencing_style_id' => 'required',
+            'task_type_id' => 'required',
+            'no_of_words' => 'required',
+            'studylabel_id' => 'required',
+            'grade_id' => 'required',
+            'delivery_date' => 'required',
+            'delivery_price' => 'required',
+        ]);
+        if ($validator->fails()) {
+            return $this->sendError('Validation Error.', $validator->errors(), 422);
+        }
+        else if (!Auth::check()) {
+            $orderRequestData = $request->all();
+            $request->session()->put('orderRequestData', $orderRequestData);
+            $request->session()->save();
+            return response()->json(['status' => 'Login require'], 401);
+        }else{
+            return response()->json(['status' => ''], 200);
+        }
+    }
 }

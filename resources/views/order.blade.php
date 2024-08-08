@@ -70,6 +70,11 @@
 .donate-now input[type="radio"]:hover {
     background: #0d6efd;
 }
+
+.summary-table td {
+    padding: 10px;
+    color: #000;
+}
 </style>
 <main class="main-area fix">
 
@@ -248,7 +253,7 @@
                                 <div style="border: 1px solid #000;border-radius: 8px;margin-top: 10px;padding:10px;">
                                     <div class="form-grp">
                                         <p style="font-size:18px;">You will get your order on</p>
-                                        <p style="font-size:32px;">11 Jan, Wednesday</p>
+                                        <p style="font-size:32px;" class="delivery_at_title">{{\Carbon\Carbon::parse(new \DateTime())->format('d M, l')}}</p>
                                     </div>
                                 </div>
                             </div>
@@ -299,21 +304,21 @@
 
                             <div class="row " id="couponBox" style="display: none;">
                                 <div class="coupon__code-form" style="display: block;">
-                                <div class="col-sm-12">
-                                    <p>Coupon Code</p>
-                                    <div style="width:78%;float:left;">
-                                        <input type="text" placeholder="Coupon code" id="coupon_code" name="coupon_code"
-                                            style="width:100%">
-                                        <p id="coupon_code_error"></p>
+                                    <div class="col-sm-12">
+                                        <p>Coupon Code</p>
+                                        <div style="width:78%;float:left;">
+                                            <input type="text" placeholder="Coupon code" id="coupon_code"
+                                                name="coupon_code" style="width:100%">
+                                            <p id="coupon_code_error"></p>
+                                        </div>
+                                        <div style="width:20%;float:left;">
+                                            <button type="button" id="apply_coupon" name="apply_coupon" class="btn"
+                                                style="width: 100%;padding: 8px;border-radius: 8px;">Apply</button>
+                                            <button style="display:none;width: 100%;padding: 8px;border-radius: 8px;"
+                                                type="button" class="btn btn-primary" id="remove_coupon"
+                                                name="remove_coupon">Remove</button>
+                                        </div>
                                     </div>
-                                    <div style="width:20%;float:left;">
-                                        <button type="button" id="apply_coupon" name="apply_coupon" class="btn"
-                                            style="width: 100%;padding: 8px;border-radius: 8px;">Apply</button>
-                                        <button style="display:none;width: 100%;padding: 8px;border-radius: 8px;"
-                                            type="button" class="btn btn-primary" id="remove_coupon"
-                                            name="remove_coupon">Remove</button>
-                                    </div>
-                                </div>
                                 </div>
                             </div>
 
@@ -328,7 +333,7 @@
                                     ?>
                                     @if($balance > 0)
                                     <input type="checkbox" class="form-check-input" value="1" id="wallet-check"
-                                        name="wallet_check" >
+                                        name="wallet_check">
                                     <label for="wallet-check" class="form-check-label" style="font-size:16px">Use your
                                         wallet balance: <b>${{$balance}}</b></label>
                                     @endif
@@ -342,7 +347,8 @@
                                     0
                                 </span>
                             </p>
-                            <button type="submit" class="btn" id="btn_checkout" name="btn_checkout">Place order</button>
+                            <button type="button" class="btn" id="btn_checkout" name="btn_checkout">Place order</button>
+
                             <p style="text-align:center;">By proceeding to checkout you accept our <a
                                     href="{{route('terms-and-conditions')}}" target="_blank">Terms and Conditions</a>
                                 and <a href="{{route('privacy-policy')}}" target="_blank">Privacy Policy.</a></p>
@@ -418,6 +424,73 @@
         </div>
     </div>
 </div>
+
+
+<div class="modal fade" id="order_summary">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content" style="">
+            <div class="modal-header" style="display: block;">
+                <h5 class="modal-title text-center" style="width: 100%;float: left;font-size: 30px;">Order summary</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal"
+                    style="right: 7px;top: 10px;position: absolute;">
+                </button>
+            </div>
+            <div class="modal-body" style="padding:40px;">
+                <table style="width:400px;" class="summary-table">
+                    <tr>
+                        <td width="50%">Subject:</td>
+                        <td id="summary_suject">dd</td>
+                    </tr>
+
+                    <tr>
+                        <td>Referencing Style:</td>
+                        <td id="summary_referencing_style">dd</td>
+                    </tr>
+
+
+                    <tr>
+                        <td>Task type:</td>
+                        <td id="summary_task_type"></td>
+                    </tr>
+
+
+                    <tr>
+                        <td>Word count:</td>
+                        <td id="summary_word_count"></td>
+                    </tr>
+
+                    <tr>
+                        <td>Level of study</td>
+                        <td id="summary_level_of_study"></td>
+                    </tr>
+
+
+                    <tr>
+                        <td>Grade required</td>
+                        <td id="summary_grade_required"></td>
+                    </tr>
+
+
+                    <tr>
+                        <td>Delivery At</td>
+                        <td id="summary_delivery_at"></td>
+                    </tr>
+
+                    <tr>
+                        <td>Total Price:</td>
+                        <td id="summary_total_price"></td>
+                    </tr>
+                    <tr>
+                        <td colspan="2"><button type="button" data-bs-toggle="modal" class="btn btn-primary w-100"
+                                id="btn_pay" name="btn_checkout">Pay Now
+                            </button></td>
+                    </tr>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+
 @if(session()->has('payment_status') && session('payment_status') == 'Success')
 <script>
 Swal.fire({
@@ -438,6 +511,44 @@ Swal.fire({
 @endif
 <script>
 $(function() {
+
+    $(document).on('click', '.delivery_at',function(){
+        var date = $(this).val();
+        var dateFormat = moment(new Date(date)).format('DD MMMM dddd');
+        $('.delivery_at_title').html(dateFormat);
+    })
+    $('#btn_pay').click(function() {
+        $('#order_form').submit();
+    });
+
+    $('#btn_checkout').click(function() {
+        
+        var formData = $('#order_form').serialize();
+        $.ajax({
+            type: 'POST',
+            url: "{{route('orderValidate')}}",
+            data: formData,
+            success: function(response) {
+                showSummary();
+            },
+            error: function(xhr, status, error) {
+                if (xhr.status == 401) {
+                    $("#loginModal").modal("show");
+                } else if (xhr.status == 422) {
+                    $.each(xhr.responseJSON.data, function(index, value) {
+                        console.log('index', index)
+                        $('#' + index + '_error').html(value[0]);
+                    })
+                } else if (xhr.status == 403) {
+                    $('#order_error').modal("show");
+                    $('#order_error #msg').html(xhr.responseJSON.status);
+                }
+            }
+        });
+    })
+
+
+
     $('#wallet-check').click(function() {
         pricecal();
 
@@ -585,7 +696,7 @@ $(function() {
                 .done(function(response) {
                     if (response.status && response.status == 'order added successfully.' &&
                         response.order_id) {
-                        window.location.href = 'payment?id=' + response.order_id;
+                        window.location.href = "{{ route('pay') }}?order_id="+ response.order_id;
                     } else {
                         //window.location.reload();
                     }
@@ -702,6 +813,19 @@ function pricecal() {
     });
 }
 
+
+function showSummary() {
+    $('#order_summary').modal('show');
+    $('#summary_suject').html($('.subject_div').html());
+    $('#summary_referencing_style').html($('.referencing_style_div').html());
+    $('#summary_task_type').html($('.task_type_div').html());
+    $('#summary_word_count').html($('.no_of_words_div').html());
+    $('#summary_level_of_study').html($('.studylabel_div').html());
+    $('#summary_grade_required').html($('.grade_div').html());
+    $('#summary_delivery_at').html($('.delivery_at_div').html());
+    $('#summary_total_price').html($('#final_price').html());
+}
+
 function saveAttachment(e) {
     e.preventDefault();
     let attachmentList = [];
@@ -787,4 +911,5 @@ function blankAttachment() {
     $('#attachmentErrors').html('');
 }
 </script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.18.1/moment.min.js"></script>
 @endsection

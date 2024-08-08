@@ -76,12 +76,12 @@ Route::get('/order', [Order::class, 'index'])->name('order');
 Route::post('/price', [Order::class, 'checkprice'])->name('price');
 
 Route::post('/validate-coupon-code', [Order::class, 'validateCouponCode'])->name('validateCouponCode');
-
+Route::post('/neworder/auth/check', [Order::class, 'orderValidate'])->name('orderValidate');
 Route::post('/neworder', [Order::class, 'create'])->name('neworder');
 Route::post('/process-attachment', [Order::class, 'processAttachment'])->name('process-attachment');
 Route::middleware('auth')->group(function () {
     Route::get('/payment', [Payment::class, 'index']);
-    Route::post('/pay', [Payment::class, 'pay'])->name('pay');
+    Route::any('/pay', [Payment::class, 'pay'])->name('pay');
     Route::get('/payment-validation', [Payment::class, 'paymentValidation'])->name('payment-validation');
     Route::post('/paymentsave', [Payment::class, 'payment']);
     Route::get('/transactions', [Order::class, 'transactions'])->name('order.transactions');
