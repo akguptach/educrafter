@@ -1,7 +1,19 @@
 @extends('layout.app')
 @section('content')
-
+<!-- main-area -->
 <style>
+.btn-plus,
+.btn-minus {
+    background: #fff;
+    color: #0056D1;
+    border: 1px solid #000;
+}
+
+.account__check-remember input:checked {
+    background-color: #10C379;
+    border-color: #10C379;
+}
+
 .donate-now {
     list-style-type: none;
     margin: 25px 0 0 0;
@@ -41,7 +53,7 @@
     background: #3B71ED;
     color: #ffffff;
     border: 1px solid #3B71ED;
-    height: 80px;
+    height: 81px;
 }
 
 .donate-now label {
@@ -58,331 +70,305 @@
 .donate-now input[type="radio"]:hover {
     background: #0d6efd;
 }
-
-.select2-container .select2-selection--single {
-    height: 52px !important;
-}
-
-.select2-container--default .select2-selection--single {
-    background-color: #fff;
-    border: 1px solid #868685;
-    border-radius: 30px;
-}
-
-.select2-container--default .select2-selection--single .select2-selection__rendered {
-    color: #444;
-    line-height: 52px;
-}
-
-.select2-container--default .select2-selection--single .select2-selection__arrow {
-    height: 48px;
-    position: absolute;
-    top: 1px;
-    right: 1px;
-    width: 20px;
-}
-
-.select2-container .select2-selection--single .select2-selection__rendered {
-    display: block;
-    padding-left: 20px;
-    padding-right: 20px;
-    overflow: hidden;
-    text-overflow: ellipsis;
-    white-space: nowrap;
-}
-
-.input-error {
-    color: red;
-    font-size: 14px;
-    margin-left: 10px;
-}
 </style>
-<main class="flex-shrink-0">
-    <section class="order-sec">
+<main class="main-area fix">
+
+
+
+    <!-- checkout-area -->
+    <div class="checkout__area section-py-120" style="background:#FFF4E4;">
         <div class="container">
-
-            @php($orderSessionData = (session('orderRequestData'))?session('orderRequestData'):[])
-
-            @php($orderRequestData = array_merge($orderSessionData,app('request')->input()))
-            <form class="order-form" id="order_form" name="order_form" enctype="multipart/form-data">
-                @csrf
+            <form class="customer__form-wrap" id="order_form" name="order_form" enctype="multipart/form-data">
                 <div class="row">
-                    <div class="col-md-8">
-                        <div class="order-summary">
-                            <h2 class="border-0">Task Details</h2>
-                            <div class="row">
-                                <div class="col-md-6">
-                                    <div class="mb-3">
-                                        <label for="subject" class="form-label">Subject</label>
-                                        <select class="form-select select2" id="subject_id" name="subject_id"
-                                            aria-label="Subject">
-                                            <option selected value="">Select subject</option>
-                                            @if(!empty($subjects)):
-                                            @foreach ($subjects as $subject1)
-                                            <option value="<?= $subject1['id']; ?>"
-                                                @if(isset($orderRequestData['subject_id']) &&
-                                                $orderRequestData['subject_id']==$subject1['id']) selected="selected"
-                                                @endif><?= $subject1['subject_name']; ?></option>
-                                            @endforeach
-                                            @endif
-                                        </select>
-                                        <span id="subject_id_error" class="input-error"></span>
-                                    </div>
+
+                    <div class="col-lg-7">
+
+
+                        @php($orderSessionData = (session('orderRequestData'))?session('orderRequestData'):[])
+
+                        @php($orderRequestData = array_merge($orderSessionData,app('request')->input()))
+
+                        @csrf
+                        <input type="hidden" id="valid_coupon_code" name="valid_coupon_code" />
+                        <input type="hidden" id="uploadedFile" name="uploadedFile"
+                            value="{{$orderRequestData['uploadedFile'] ?? ''}}" />
+                        <input type="hidden" id="delivery_date" name="delivery_date"
+                            value="{{(isset($orderRequestData['delivery_date']) && $orderRequestData['delivery_date']!='NA')?$orderRequestData['delivery_date']:'12 hours'}}">
+                        <input type="hidden" id="delivery_price" name="delivery_price"
+                            value="{{$orderRequestData['delivery_price'] ?? 0}}">
+                        <span class="title">Task Details</span>
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="form-grp select-grp">
+                                    <label for="country-name">Subject *</label>
+                                    <select class="country-name" id="subject_id" name="subject_id" aria-label="Subject">
+                                        <option selected value="">Select subject</option>
+                                        @if(!empty($subjects)):
+                                        @foreach ($subjects as $subject1)
+                                        <option value="<?= $subject1['id']; ?>"
+                                            @if(isset($orderRequestData['subject_id']) &&
+                                            $orderRequestData['subject_id']==$subject1['id']) selected="selected"
+                                            @endif><?= $subject1['subject_name']; ?></option>
+                                        @endforeach
+                                        @endif
+                                    </select>
+                                    <span id="subject_id_error" class="input-error"></span>
                                 </div>
-                                <div class="col-md-6">
-                                    <div class="mb-3">
-                                        <label for="referencing_style_id" class="form-label">Referencing Style</label>
-                                        <select class="form-select select2" id="referencing_style_id"
-                                            name="referencing_style_id">
-                                            <option selected value="">Select Referencing Style</option>
-                                            @if(!empty($referencings)): @foreach ($referencings as $referencing) <option
-                                                value="<?= $referencing['id']; ?>"
-                                                @if(isset($orderRequestData['referencing_style_id']) &&
-                                                $orderRequestData['referencing_style_id']==$referencing['id'])
-                                                selected="selected" @endif><?= $referencing['style']; ?></option>
-                                            @endforeach
-                                            @endif
-                                        </select>
-                                        <span id="referencing_style_id_error" class="input-error"></span>
-                                    </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-grp select-grp">
+                                    <label for="country-name">Referencing style *</label>
+                                    <select class="country-name" id="referencing_style_id" name="referencing_style_id">
+                                        <option selected value="">Select Referencing Style</option>
+                                        @if(!empty($referencings)): @foreach ($referencings as $referencing) <option
+                                            value="<?= $referencing['id']; ?>"
+                                            @if(isset($orderRequestData['referencing_style_id']) &&
+                                            $orderRequestData['referencing_style_id']==$referencing['id'])
+                                            selected="selected" @endif><?= $referencing['style']; ?></option>
+                                        @endforeach
+                                        @endif
+                                    </select>
+                                    <span id="referencing_style_id_error" class="input-error"></span>
                                 </div>
-                                <div class="col-md-6">
-                                    <div class="mb-3">
-                                        <label for="taskType" class="form-label">Task type</label>
-                                        <select class="form-select select2" id="task_type_id" name="task_type_id"
-                                            aria-label="taskType">
-                                            <option selected value="">Select task type</option>
-                                            @if(!empty($task_types)):
-                                            @foreach ($task_types as $task_type)
-                                            <option value="<?= $task_type['id']; ?>"
-                                                @if(isset($orderRequestData['task_type_id']) &&
-                                                $orderRequestData['task_type_id']==$task_type['id']) selected="selected"
-                                                @endif><?= $task_type['type_name']; ?></option>
-                                            @endforeach
-                                            @endif
-                                        </select>
-                                        <span id="task_type_id_error" class="input-error"></span>
-                                    </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="form-grp select-grp">
+                                    <label for="country-name">Task type *</label>
+                                    <select class="country-name" id="task_type_id" name="task_type_id"
+                                        aria-label="taskType">
+                                        <option selected value="">Select task type</option>
+                                        @if(!empty($task_types)):
+                                        @foreach ($task_types as $task_type)
+                                        <option value="<?= $task_type['id']; ?>"
+                                            @if(isset($orderRequestData['task_type_id']) &&
+                                            $orderRequestData['task_type_id']==$task_type['id']) selected="selected"
+                                            @endif><?= $task_type['type_name']; ?></option>
+                                        @endforeach
+                                        @endif
+                                    </select>
+                                    <span id="task_type_id_error" class="input-error"></span>
                                 </div>
-                                <div class="col-md-6">
-                                    <div class="mb-3">
-                                        <label for="wordCount" class="form-label">Word count</label>
-                                        <div class="input-group mb-3">
-                                            <button class="btn btn-outline-secondary btn-minus" onclick="minus(this)"
-                                                type="button">-</button>
-                                            <input type="text" class="form-control" placeholder=""
-                                                aria-label="taskDate text with button addon"
-                                                aria-describedby="button-addon1"
-                                                value="{{@$orderRequestData['no_of_words'] ??  200}}" id="no_of_words"
-                                                name="no_of_words">
-                                            <button class="btn btn-outline-secondary btn-plus" onclick="add(this)"
-                                                type="button">+</button>
-                                        </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-grp">
+                                    <label for="country-name">Word count *</label>
+                                    <div class="input-group mb-3">
+                                        <button class="btn btn-outline-secondary btn-minus" onclick="minus(this)"
+                                            type="button">-</button>
+                                        <input type="text" class="form-control" placeholder=""
+                                            aria-label="taskDate text with button addon"
+                                            aria-describedby="button-addon1"
+                                            value="{{@$orderRequestData['no_of_words'] ??  200}}" id="no_of_words"
+                                            name="no_of_words"
+                                            style="width: 100px;text-align: center;border-top: 1px solid;border-bottom: 1px solid;">
+                                        <button class="btn btn-outline-secondary btn-plus" onclick="add(this)"
+                                            type="button">+</button>
                                     </div>
+
                                 </div>
-                                <input type="hidden" id="valid_coupon_code" name="valid_coupon_code" />
-                                <div class="col-md-6">
-                                    <div class="mb-3">
-                                        <label for="studylabel_id" class="form-label">Level of study</label>
-                                        <select class="form-select select2" id="studylabel_id" name="studylabel_id"
-                                            aria-label="studylabel_id">
-                                            <option selected value="">Select level of study</option>
-                                            @if(!empty($levels)):
-                                            @foreach ($levels as $level)
-                                            <option value="<?= $level['id']; ?>"
-                                                @if(isset($orderRequestData['studylabel_id']) &&
-                                                $orderRequestData['studylabel_id']==$level['id']) selected="selected"
-                                                @endif><?= $level['level_name']; ?></option>
-                                            @endforeach
-                                            @endif
-                                        </select>
-                                        <span id="studylabel_id_error" class="input-error"></span>
-                                        <input type="hidden" id="uploadedFile" name="uploadedFile"
-                                            value="{{$orderRequestData['uploadedFile'] ?? ''}}" />
-                                    </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="form-grp select-grp">
+                                    <label for="country-name">Level of study *</label>
+                                    <select class="country-name" id="studylabel_id" name="studylabel_id"
+                                        aria-label="studylabel_id">
+                                        <option selected value="">Select level of study</option>
+                                        @if(!empty($levels)):
+                                        @foreach ($levels as $level)
+                                        <option value="<?= $level['id']; ?>"
+                                            @if(isset($orderRequestData['studylabel_id']) &&
+                                            $orderRequestData['studylabel_id']==$level['id']) selected="selected"
+                                            @endif><?= $level['level_name']; ?></option>
+                                        @endforeach
+                                        @endif
+                                    </select>
+                                    <span id="studylabel_id_error" class="input-error"></span>
                                 </div>
-                                <div class="col-md-6">
-                                    <div class="mb-3">
-                                        <label for="grade_id" class="form-label">Desired grades</label>
-                                        <select class="form-select select2" id="grade_id" name="grade_id"
-                                            aria-label="Desired grades">
-                                            <option selected value="">Select grade</option>
-                                            @if(!empty($grades)):
-                                            @foreach ($grades as $grade)
-                                            <option value="<?= $grade['id']; ?>"
-                                                @if(isset($orderRequestData['grade_id']) &&
-                                                $orderRequestData['grade_id']==$grade['id']) selected="selected" @endif>
-                                                <?= $grade['grade_name']; ?></option>
-                                            @endforeach
-                                            @endif
-                                        </select>
-                                        <span id="grade_id_error" class="input-error"></span>
-                                    </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-grp select-grp">
+                                    <label for="country-name">Desired grades *</label>
+                                    <select class="country-name" id="grade_id" name="grade_id"
+                                        aria-label="Desired grades">
+                                        <option selected value="">Select grade</option>
+                                        @if(!empty($grades)):
+                                        @foreach ($grades as $grade)
+                                        <option value="<?= $grade['id']; ?>" @if(isset($orderRequestData['grade_id']) &&
+                                            $orderRequestData['grade_id']==$grade['id']) selected="selected" @endif>
+                                            <?= $grade['grade_name']; ?></option>
+                                        @endforeach
+                                        @endif
+                                    </select>
+                                    <span id="grade_id_error" class="input-error"></span>
+
                                 </div>
-                                <div class="col-md-12">
-                                    <div class="title-task-box">
-                                        <input id="title" name="title" type="text" class="form-control"
-                                            placeholder="Add a title for your Task/Project"
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-12">
+                                <div style="border: 1px solid #000;border-radius: 8px;">
+                                    <div class="form-grp">
+
+                                        <input type="text" id="title" name="title"
+                                            placeholder="Add a title to your Task/Project."
                                             value="{{$orderRequestData['title'] ?? ''}}">
-                                        <hr class="my-0">
-                                        <textarea class="form-control" id="task" name="task" rows="3"
+                                        <hr>
+                                    </div>
+
+                                    <div class="form-grp">
+
+                                        <textarea id="task" name="task"
                                             placeholder="Tell us more about your task..">{{$orderRequestData['task'] ?? ''}}</textarea>
-                                        <div id="attachment_list" style="text-align:center;">
-                                            @if(isset($orderRequestData['uploadedFile']))
-                                            <ul>
-                                                <li>
-                                                    <a href="{{$orderRequestData['uploadedFile']}}"
-                                                        target="_blank">{{$orderRequestData['uploadedFile']}}</a>
-                                                </li>
-                                            </ul>
-                                            @endif
-                                        </div>
-                                        <div class="file-upload-box">
-                                            <a for="taskFile" class="form-label" data-bs-toggle="modal"
-                                                href="#fileuploadModal">Attach files</a>
-                                        </div>
                                     </div>
-                                </div>
-                                <div class="col-md-12">
-                                    <p class="text-note">Upload your files here, if any. The file size limit is 100 Mb
-                                        per file</p>
-                                </div>
-                                <div class="col-md-12 mb-3">
-
-                                    <div class="row gy-3 hours-list mb-3">
-                                        <div id="error_msg"></div>
-                                    </div>
-                                    <div id="datepicker1">
-                                        <h4 Style="text-align:center;">
-                                            <?php echo date('F'); ?>/<?php echo $effectiveDate = date('F', strtotime("+2 months", strtotime('Y-m-d'))); ?>
-                                        </h4>
-                                        <ul class="donate-now custom_date_div">
+                                    <div id="attachment_list" style="text-align:center;">
+                                        @if(isset($orderRequestData['uploadedFile']))
+                                        <ul>
+                                            <li>
+                                                <a href="{{$orderRequestData['uploadedFile']}}"
+                                                    target="_blank">{{$orderRequestData['uploadedFile']}}</a>
+                                            </li>
                                         </ul>
+                                        @endif
                                     </div>
-                                    <input type="hidden" id="delivery_date" name="delivery_date"
-                                        value="{{(isset($orderRequestData['delivery_date']) && $orderRequestData['delivery_date']!='NA')?$orderRequestData['delivery_date']:'12 hours'}}">
-                                    <input type="hidden" id="delivery_price" name="delivery_price"
-                                        value="{{$orderRequestData['delivery_price'] ?? 0}}">
+                                    <div class="file-upload-box">
+                                        <a for="taskFile" class="form-label" data-bs-toggle="modal"
+                                            href="#fileuploadModal">Attach files</a>
+                                    </div>
                                 </div>
                             </div>
                         </div>
+                        <span class="title title-two">Upload your files here, if any. The file size limit is 100 Mb per
+                            file</span>
+                        <div class="row">
+                            <div class="col-md-12">
+                                <div style="border: 1px solid #000;border-radius: 8px;margin-top: 10px;padding:10px;">
+                                    <div class="form-grp">
+                                        <p style="font-size:18px;">You will get your order on</p>
+                                        <p style="font-size:32px;">11 Jan, Wednesday</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+
+                        <div class="row">
+                            <div class="col-md-12">
+                                <p style="text-align:center;">Choose your delivery time</p>
+
+                                <div class="row gy-3 hours-list mb-3">
+                                    <div id="error_msg"></div>
+                                </div>
+                                <div id="datepicker1">
+                                    <h4 Style="text-align:center;">
+                                        <?php echo date('F'); ?>/<?php echo $effectiveDate = date('F', strtotime("+2 months", strtotime('Y-m-d'))); ?>
+                                    </h4>
+                                    <ul class="donate-now custom_date_div">
+                                    </ul>
+                                </div>
+
+
+                            </div>
+
+                        </div>
+
+
+
                     </div>
-                    <div class="col-md-4">
-                        <div class="order-summary os-theme">
-                            <h2>Order summary</h2>
-                            <div class="row">
-                                <div class="col-6">
-                                    <p>Subject</p>
+                    <div class="col-lg-5">
+                        <div class="order__info-wrap">
+                            <h2 class="title">Order summary</h2>
+                            <ul class="list-wrap">
+                                <li>Subject <span class="subject_div">NA</span></li>
+                                <li>Referencing Style <span class="referencing_style_div">NA</span></li>
+                                <li>Task type <span class="task_type_div">NA</span></li>
+                                <li>Word count <span class="no_of_words_div">200</span></li>
+
+                                <li>Level of study <span class="studylabel_div">NA</span></li>
+                                <li>Grade required <span class="grade_div">NA</span></li>
+                                <li>Delivery At <span class="delivery_at_div">NA</span></li>
+                                <li>Total Price <span class="total_price">0</span></li>
+                                <li id="discount_div" style="display:none;">Discount Price <span
+                                        id="discountprice">0</span>
+                                </li>
+
+                            </ul>
+
+                            <div class="row " id="couponBox" style="display: none;">
+                                <div class="coupon__code-form" style="display: block;">
+                                <div class="col-sm-12">
+                                    <p>Coupon Code</p>
+                                    <div style="width:78%;float:left;">
+                                        <input type="text" placeholder="Coupon code" id="coupon_code" name="coupon_code"
+                                            style="width:100%">
+                                        <p id="coupon_code_error"></p>
+                                    </div>
+                                    <div style="width:20%;float:left;">
+                                        <button type="button" id="apply_coupon" name="apply_coupon" class="btn"
+                                            style="width: 100%;padding: 8px;border-radius: 8px;">Apply</button>
+                                        <button style="display:none;width: 100%;padding: 8px;border-radius: 8px;"
+                                            type="button" class="btn btn-primary" id="remove_coupon"
+                                            name="remove_coupon">Remove</button>
+                                    </div>
                                 </div>
-                                <div class="col-6">
-                                    <p class="text-end subject_div">NA</p>
-                                </div>
-                            </div>
-                            <div class="row align-items-end">
-                                <div class="col-6">
-                                    <p>Referencing Style</p>
-                                </div>
-                                <div class="col-6">
-                                    <p class="text-end referencing_style_div">NA</p>
-                                </div>
-                            </div>
-                            <div class="row align-items-end">
-                                <div class="col-6">
-                                    <p>Task type</p>
-                                </div>
-                                <div class="col-6">
-                                    <p class="text-end task_type_div">NA</p>
-                                </div>
-                            </div>
-                            <div class="row align-items-end">
-                                <div class="col-6">
-                                    <p>Word count</p>
-                                </div>
-                                <div class="col-6">
-                                    <p class="text-end no_of_words_div">200</p>
-                                </div>
-                            </div>
-                            <div class="row align-items-end">
-                                <div class="col-6">
-                                    <p>Level of study</p>
-                                </div>
-                                <div class="col-6">
-                                    <p class="text-end studylabel_div">NA</p>
-                                </div>
-                            </div>
-                            <div class="row align-items-end">
-                                <div class="col-6">
-                                    <p>Grade required</p>
-                                </div>
-                                <div class="col-6">
-                                    <p class="text-end grade_div">NA</p>
-                                </div>
-                            </div>
-                            <div class="row align-items-end">
-                                <div class="col-6">
-                                    <p>Delivery At</p>
-                                </div>
-                                <div class="col-6">
-                                    <p class="text-end delivery_at_div">NA</p>
-                                </div>
-                            </div>
-                            <hr class="opacity-25">
-                            <div class="row align-items-center">
-                                <div class="col-6">
-                                    <p class="text-tp">Total Price:</p>
-                                </div>
-                                <div class="col-6">
-                                    <p class="text-ta text-end total_price">0</p>
                                 </div>
                             </div>
 
-                            <div class="row align-items-center" id="discount_div" style="display:none;">
-                                <div class="col-6">
-                                    <p class="text-tp">Discount Price:</p>
-                                </div>
-                                <div class="col-6">
-                                    <p class="text-ta text-end" id="discountprice">0</p>
+                            <div class="account__check" style="display: none;" id="wallet-check-section">
+                                <div class="account__check-remember">
+
+                                    <?php
+                                    $userId = Auth::user()->id;
+                                    $credits = App\Models\WalletTransaction::where('user_id', $userId)->where('type','credit')->sum('amount');
+                                    $debits = App\Models\WalletTransaction::where('user_id', $userId)->where('type','debit')->sum('amount');
+                                    $balance = $credits-$debits;
+                                    ?>
+                                    @if($balance > 0)
+                                    <input type="checkbox" class="form-check-input" value="1" id="wallet-check"
+                                        name="wallet_check" >
+                                    <label for="wallet-check" class="form-check-label" style="font-size:16px">Use your
+                                        wallet balance: <b>${{$balance}}</b></label>
+                                    @endif
                                 </div>
                             </div>
 
-
-                            
-                            
-                            <p class="text-center text-tcnp">
-                                By proceeding to checkout you accept our <a href="{{route('terms-and-conditions')}}"
-                                    class="link">Terms and
-                                    Conditions</a> and <a href="{{route('privacy-policy')}}" class="link">Privacy
-                                    Policy</a>.
+                            <p Style="font-size:16px"><span
+                                    style="color:#000;float:left;font-size:18px;font-weight:700;">Total Price:</span>
+                                <span style="color:#10C379;float:right;font-size:18px;font-weight:700;"
+                                    id="final_price">
+                                    0
+                                </span>
                             </p>
-                            <div id="couponBox" style="display: none;">
-                            <div style="display:flex; margin-bottom:20px;"> 
-                                <div>
-                                    <input id="coupon_code" class="form-control" placeholder="Coupon Code" style="width:80%;height: auto;padding: .375rem .75rem;margin-right:48px">
-                                    <div id="coupon_code_error"></div>
-                                </div>
-                                <div>
-                                <button type="button" class="btn btn-primary w-100" id="apply_coupon" name="apply_coupon"
-                                >Apply</button>
-                                <button style="display:none;" type="button" class="btn btn-primary w-100" id="remove_coupon" name="remove_coupon"
-                                >Remove</button>
-                                </div>
-                            </div>
+                            <button type="submit" class="btn" id="btn_checkout" name="btn_checkout">Place order</button>
+                            <p style="text-align:center;">By proceeding to checkout you accept our <a
+                                    href="{{route('terms-and-conditions')}}" target="_blank">Terms and Conditions</a>
+                                and <a href="{{route('privacy-policy')}}" target="_blank">Privacy Policy.</a></p>
+
+                            <div style="background: #F1F9FF;text-align:center;padding:10px;">
+                                <h3 style="font-size:14px;">What happens next?</h3>
+                                <p style="font-size:12px;">We will assign a tutor who's an <b>expert</b> in your
+                                    subject.
+                                    We'll keep you updated on the
+                                    progress.</p>
                             </div>
 
-                            <button type="submit" class="btn btn-primary w-100" id="btn_checkout" name="btn_checkout"
-                                style="padding: 13px;">Checkout</button>
                         </div>
-                        <div class="whn-block">
-                            <h3>What happens next?</h3>
-                            <p>We will assign a tutor who's an expert in your subject. We'll keep you updated on the
-                                progress.</p>
-                        </div>
+
                     </div>
+
+
                 </div>
             </form>
         </div>
-    </section>
+    </div>
+    <!-- checkout-area-end -->
+
 </main>
+<!-- main-area-end -->
+
 <div class="modal fade" id="fileuploadModal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
     aria-labelledby="fileuploadModalLabel" aria-hidden="true">
     <div class="modal-dialog modal-md">
@@ -421,18 +407,17 @@
 
 
 <div class="modal fade" id="order_error" tabindex="-1" role="dialog" aria-labelledby="order_error" aria-hidden="true">
-  <div class="modal-dialog" role="document">
-    <div class="modal-content">
-      <div class="modal-body">
-        <div id="msg" style="font-size: 16px;text-align: center;"></div>
-        <div style="text-align: center;"><button  style="margin-top: 20px;" type="button" class="btn btn-secondary" data-bs-dismiss="modal" data-dismiss="modal">Close</button></div>
-      </div>
-      
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-body">
+                <div id="msg" style="font-size: 16px;text-align: center;"></div>
+                <div style="text-align: center;"><button style="margin-top: 20px;" type="button"
+                        class="btn btn-secondary" data-bs-dismiss="modal" data-dismiss="modal">Close</button></div>
+            </div>
+
+        </div>
     </div>
-  </div>
 </div>
-
-
 @if(session()->has('payment_status') && session('payment_status') == 'Success')
 <script>
 Swal.fire({
@@ -453,28 +438,35 @@ Swal.fire({
 @endif
 <script>
 $(function() {
+    $('#wallet-check').click(function() {
+        pricecal();
 
-    $('#remove_coupon').click(function(){
+    });
+
+
+
+    $('#remove_coupon').click(function() {
         $('#remove_coupon').hide();
         $('#apply_coupon').show();
+
         $('#coupon_code_error').html('');
         $('#valid_coupon_code').val('');
         $('#coupon_code').val('');
         pricecal();
     })
 
-    $('#apply_coupon').click(function(){
+    $('#apply_coupon').click(function() {
         $('#coupon_code_error').html('');
         $('#valid_coupon_code').val('');
-       
+
         //Serialize the Form
         var values = {};
-        $.each($("#order_form").serializeArray(), function (i, field) {
+        $.each($("#order_form").serializeArray(), function(i, field) {
             values[field.name] = field.value;
         });
 
         //Value Retrieval Function
-        var getValue = function (valueName) {
+        var getValue = function(valueName) {
             return values[valueName];
         };
 
@@ -483,17 +475,25 @@ $(function() {
         $.ajax({
             type: 'POST',
             url: "{{route('validateCouponCode')}}",
-            data:{coupon_code:$('#coupon_code').val(),"_token": "{{ csrf_token() }}",delivery_price:delivery_price},
+            data: {
+                coupon_code: $('#coupon_code').val(),
+                "_token": "{{ csrf_token() }}",
+                delivery_price: delivery_price
+            },
             success: function(response) {
                 $('#valid_coupon_code').val($('#coupon_code').val());
                 pricecal();
                 $('#remove_coupon').show();
                 $('#apply_coupon').hide();
-                //$('#coupon_code_error').html('<span style="color:green;">'+response.message+'</span>'); 
+
+                $('#coupon_code_error').html(
+                    '<span style="font-size:12px;color:#10C379;">' + response.message +
+                    '</span>');
             },
             error: function(xhr, status, error) {
                 console.log('Error', xhr.responseJSON.message)
-                $('#coupon_code_error').html('<span style="color:red;">'+xhr.responseJSON.message+'</span>');
+                $('#coupon_code_error').html('<span style="color:red;font-size:12px;">' +
+                    xhr.responseJSON.message + '</span>');
             }
         });
 
@@ -595,15 +595,14 @@ $(function() {
                         $("#loginModal").modal("show");
                     } else if (xhr.status == 422) {
 
-                        
+
                         //$("#order_error #msg").html(xhr.responseJSON.status)
                         $.each(xhr.responseJSON.data, function(index, value) {
                             console.log('index', index)
                             $('#' + index + '_error').html(value[0]);
                         })
 
-                    }
-                    else if (xhr.status == 403) {
+                    } else if (xhr.status == 403) {
                         $('#order_error').modal("show");
                         $('#order_error #msg').html(xhr.responseJSON.status);
                     }
@@ -623,7 +622,13 @@ function pricecal() {
     $('.studylabel_div').text($("#studylabel_id option:selected").text());
     $('.grade_div').text($("#grade_id option:selected").text());
     $('.no_of_words_div').text($("#no_of_words").val());
+
+    var walletCheck = 0;
+    if ($('#wallet-check').is(':checked'))
+        walletCheck = 1;
+
     var data = $('#order_form').serialize();
+    data += "&wallet_check=" + walletCheck;
     $.ajax({
         type: 'post',
         url: "{{ route('price') }}",
@@ -654,18 +659,21 @@ function pricecal() {
                 $('#delivery_price').val(response.price.delivery_date_price);
                 $('.delivery_at_div').text(response.price.delivery_date);
 
-                
-                if(response.price.delivery_date_price != 0){
+                $('#final_price').html(response.finalPrice);
+
+                if (response.price.delivery_date_price != 0) {
                     $('#couponBox').show();
-                }else{
+                    $('#wallet-check-section').show();
+                } else {
                     $('#couponBox').hide();
+                    $('#wallet-check-section').hide();
                 }
 
-                if(response.discount > 0){
+                if (response.discount > 0) {
                     $('#discount_div').show();
                     $('#discountprice').html(response.discountprice);
-                    $('.total_price').attr('style','text-decoration: line-through;')
-                }else{
+                    $('.total_price').attr('style', 'text-decoration: line-through;')
+                } else {
                     $('#discount_div').hide();
                     $('#discountprice').html('');
                     $('.total_price').removeAttr('style')

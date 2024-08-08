@@ -1,5 +1,12 @@
 @extends('layout.student')
 @section('content')
+<?php
+$userId = Auth::user()->id;
+$credits = App\Models\WalletTransaction::where('user_id', $userId)->where('type','credit')->sum('amount');
+$debits = App\Models\WalletTransaction::where('user_id', $userId)->where('type','debit')->sum('amount');
+$balance = $credits-$debits;
+
+?>
 <div class="content-body">
     <!-- row -->
     <div class="container-fluid">
@@ -14,7 +21,7 @@
                             <span class="nav-text pull-right"><span style="float:left;"><img class="nav-icon"
                                         src="<?php echo asset('/student/');?>/img/empty-wallet.png"
                                         style="margin-right: 11px;"> Balance</span> <span
-                                    style="float:right;margin-left: 30px;">$00.00 (demo)</span></span>
+                                    style="float:right;margin-left: 30px;">${{$balance}}</span></span>
                         </div>
                         <div
                             style="border: 1px solid #000;border-radius: 8px;padding: 10px;background: #10C379;color: #fff;">

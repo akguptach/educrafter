@@ -2535,6 +2535,8 @@ textarea.w-input, textarea.w-select {
   padding-bottom: 1em;
   display: flex;
   position: fixed;
+  margin: auto;
+  width: 160px;
   top: auto;
   bottom: 0%;
   left: 0%;

@@ -68,7 +68,7 @@
 									</div>
 									<div class="col-4 col-sm-4">
 										<a href="#" class="account__social-btn" style="background:  #3B71ED;border: 1px solid #3B71ED">
-											<img src="{{ asset('img/f.png')}}" alt="img">
+											<img src="{{ asset('img/facebook.png')}}" alt="img">
 										   
 										</a>
 									</div>

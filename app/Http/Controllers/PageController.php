@@ -78,24 +78,31 @@ class PageController extends Controller
     public function refer_a_friend(Request $request)
     {
 
+        
         if (!Auth::check()) {
             $refer_friend_data = $request->all();
             $refer_friend_data['refer'] = route('refer_friend');
             $request->session()->put('orderRequestData', $refer_friend_data);
             $request->session()->save();
-            return response()->json(['status' => 'Login require'], 401);
+            //return response()->json(['status' => 'Login require'], 401);
+            return redirect(route('login'))->with('success', 'Login require'); 
         }
-        $referralCode = Auth::user()->referral_code;
-        $to = $request->email;
-
-        Mail::send('email.refer-friend', ['referral_url'=>env('APP_URL').'refer/'.$referralCode, 'name'=>Auth::user()->first_name], function($message) use ($to){
+        $data = $request->all();
+        $emails = $data['email'];
+        $emails = json_decode($emails,true);
+        
+        //print_r($emails); die;
+        foreach($emails as $email){
+            $referralCode = Auth::user()->referral_code;
+            $to = $email['value'];
+            Mail::send('email.refer-friend', ['referral_url'=>env('APP_URL').'refer/'.$referralCode, 'name'=>Auth::user()->first_name], function($message) use ($to){
             $message->to($to)
             ->subject('Refer Link');
+            }
+            );
         }
-    );
-
-
-        
+        $request->session()->forget('orderRequestData');
+        return redirect()->back()->with('success', 'your message,here'); 
     }
 
     public function refer_friend(Request $request)
@@ -110,15 +117,18 @@ class PageController extends Controller
         //$serviceRating = ServiceRating::where('service_id', $page->service_id)->get();
         //$faq_page =   ServiceFaq::where('service_id', $page->service_id)->get();
         //return view('refer_friend', compact('data','experts'));
-		
-		
+		$referralCode = '';
+		if (Auth::check()) {
+            $referralCode = Auth::user()->referral_code;
+        }
+
 		if($data){
             \View::share('title', ($data && $data->seo_meta) ? $data->seo_meta : '');
             \View::share('description', ($data && $data->seo_description) ? $data->seo_description : '');
             \View::share('seo_keywords', ($data && $data->seo_keywords) ? $data->seo_keywords : '');
             \View::share('og_image', ($data && $data->og_image) ? $data->og_image : '');
             \View::share('og_url', ($data && $data->seo_url_slug) ? $data->seo_url_slug : '');
-            return view('refer_friend', compact('data','experts'));
+            return view('refer_friend', compact('data','experts','referralCode'));
         }else{
             return view('errors/404'); 
         }

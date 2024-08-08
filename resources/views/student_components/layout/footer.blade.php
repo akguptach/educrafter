@@ -22,6 +22,10 @@
 <script src="<?php echo asset('/student/');?>/js/custom.min.js"></script>
 <script src="<?php echo asset('/student/');?>/js/dlabnav-init.js"></script>
 <link class="main-css" rel="stylesheet" href="<?php echo asset('/student/');?>/css/style.css">
+
+
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/croppie/2.6.4/croppie.js"></script>
 <script>
 $("div.star-wrapper i").on("mouseover", function() {
     if ($(this).siblings("i.vote-recorded").length == 0) {

@@ -44,11 +44,13 @@ $services = \App\Models\Service::where('website_type', 'Educrafter')->where('typ
     <link rel="stylesheet" href="{{ asset('css/plyr.css') }}">
     <link rel="stylesheet" href="{{ asset('css/spacing.css') }}">
     <link rel="stylesheet" href="{{ asset('css/tg-cursor.css') }}">
-    <link rel="stylesheet" href="{{ asset('css/main.css') }}">
+    <link rel="stylesheet" href="{{ asset('css/main.css?w=1') }}">
 
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Antonio:wght@100..700&display=swap" rel="stylesheet">
+	 <script src="{{ asset('js/vendor/jquery-3.6.0.min.js') }}"></script>
+     <script src="{{ asset('js/bootstrap.min.js') }}"></script>
 </head>
 
 <body>
@@ -124,8 +126,8 @@ $services = \App\Models\Service::where('website_type', 'Educrafter')->where('typ
                                         <li class="menu-item-has-children"><a href="{{ route('about-us') }}">About
                                                 Us</a>
                                             <ul class="sub-menu">
-                                                <li><a href="courses.html">Why Educrafter</a></li>
-                                                <li><a href="course-details.html">FAQ</a></li>
+                                                <li><a href="{{route('about-us')}}">Why Educrafter</a></li>
+                                                <li><a href="{{route('faq')}}">FAQ</a></li>
                                                 <li><a href="lesson.html">Blog</a></li>
                                                 <li><a href="{{route('contact-us')}}">Contact us</a></li>
 

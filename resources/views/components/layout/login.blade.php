@@ -43,6 +43,7 @@
                                 you can login here</div>
                             <form action="{{route('login')}}" class="form-common" id="login_form" method="POST">
                                 @csrf
+                                <input type="hidden" value="{{URL::current()}}" name="redirect">
                                 <div class="row gy-3 gx-2">
                                     <div class="col-md-12">
                                         <div class="input-group flex-nowrap">

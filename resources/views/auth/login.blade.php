@@ -28,7 +28,7 @@
                                 </div>
                                 <div class="account__check">
                                     <div class="account__check-remember">
-                                        <input type="checkbox" class="form-check-input" value="" id="terms-check">
+                                        <input type="checkbox" class="form-check-input" value="1" id="terms-check" name="remember_me">
                                         <label for="terms-check" class="form-check-label">Remember me</label>
                                     </div>
                                     <div class="account__check-forgot">

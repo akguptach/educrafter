@@ -36,17 +36,23 @@ class AuthController extends BaseController
         $input = $request->all();
         $field = filter_var($request->input('email'), FILTER_VALIDATE_EMAIL) ? 'email' : 'phone_number';
         $request->merge([$field => $request->input('email')]);
-        if (!$token = Auth::attempt([$field => $request->input('email'), 'password' => $request->input('password'), 'website_id' => env('WEBSITE_ID')])) {
+
+        $remember_me = $request->has('remember_me') ? true : false; 
+
+        if (!$token = Auth::attempt([$field => $request->input('email'), 'password' => $request->input('password'), 'website_id' => env('WEBSITE_ID')],$remember_me)) {
             return   $this->sendjwtError('Unauthorized', '', 401);
         }
-        $data = auth()->user();
+        $data = auth()->user(); 
         $response = [
             'status' => 1,
             'access_token' => $token,
             'admin' => $data,
             'message' => 'Logged successfully.',
         ];
-        if ((session()->has('orderRequestData'))) {
+        if($request->input('redirect')){
+            $response['refer'] = $request->input('redirect');
+        }
+        else if ((session()->has('orderRequestData'))) {
             $orderRequestData = session('orderRequestData');
             $response['refer'] = $orderRequestData['refer'];
         }

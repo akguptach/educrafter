@@ -1,6 +1,14 @@
 <?php
-$referralCode = Auth::user()->referral_code;
+$userId = Auth::user()->id;
+
+$referralCode = Auth::user()->referral_code; 
 $ordersCount = App\Models\Orders::where('student_id', Auth::user()->id)->count();
+
+$credits = App\Models\WalletTransaction::where('user_id', $userId)->where('type','credit')->sum('amount');
+
+$debits = App\Models\WalletTransaction::where('user_id', $userId)->where('type','debit')->sum('amount');
+$balance = $credits-$debits;
+
 ?>
 <div class="dlabnav">
     <div class="dlabnav-scroll">
@@ -11,7 +19,7 @@ $ordersCount = App\Models\Orders::where('student_id', Auth::user()->id)->count()
 
                     <span class="nav-text"><span style="float:left;"><img class="nav-icon"
                                 src="<?php echo asset('/student/');?>/img/empty-wallet.png">
-                            Balance</span> <span style="float:right;">$134.00(Demo)</span></span>
+                            Balance</span> <span style="float:right;">${{$balance}}</span></span>
 
                 </a>
             </li>
@@ -56,14 +64,14 @@ $ordersCount = App\Models\Orders::where('student_id', Auth::user()->id)->count()
 
             </li>
             <li>
-                <a class="ai-icon" href="" aria-expanded="false">
+                <a class="ai-icon" href="{{route('Offers.Index')}}" aria-expanded="false">
                     <i class="la la-gift"></i>
                     <span class="nav-text"> Offers</span>
                 </a>
 
             </li>
             <li>
-                <a class="ai-icon" href="" aria-expanded="false">
+                <a class="ai-icon" href="{{route('contact-us')}}" aria-expanded="false">
                     <img class="nav-icon" src="<?php echo asset('/student/');?>/img/message.png">
                     <span class="nav-text"> Contact us</span>
                 </a>

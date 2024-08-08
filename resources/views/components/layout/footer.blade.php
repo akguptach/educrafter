@@ -89,7 +89,7 @@
                       <a href="{{ route('about-us')}}">About Us</a>
                     </li>
                     <li>
-                      <a href="blog.html">Refer a Friend</a>
+                      <a href="{{route('refer_friend')}}">Refer a Friend</a>
                     </li>
                     <li>
                       <a href="https://educrafter.co/offers">Offers</a>
@@ -104,7 +104,7 @@
                       <a href="https://educrafter.co/faq">Faq's</a>
                     </li>
 					<li>
-                      <a href="#">Become a Writer</a>
+                      <a href="https://mywriters.in">Become a Writer</a>
                     </li>
 					<li>
 					     <a href="//www.dmca.com/Protection/Status.aspx?ID=4f98b10a-59c8-4975-8c66-955c1eeb7b48" title="DMCA.com Protection Status" class="dmca-badge"> <img src="https://images.dmca.com/Badges/dmca_protected_sml_120l.png?ID=4f98b10a-59c8-4975-8c66-955c1eeb7b48" alt="DMCA.com Protection Status" /></a>
@@ -182,7 +182,7 @@
             </div>
             <div>
               <div style="text-align:center;color:#fff;font-size:13px;">
-                <p style="color:#fff !importent;">Copyright © 2024, All Right Reserved EduCrafter</p>
+                <p style="color:#fff !important;">Copyright © 2024, All Right Reserved EduCrafter</p>
               </div>
             </div>
             
@@ -251,8 +251,7 @@
 	
 	
     <!-- JS here -->
-    <script src="{{ asset('js/vendor/jquery-3.6.0.min.js') }}"></script>
-    <script src="{{ asset('js/bootstrap.min.js') }}"></script>
+   
 	<script src="https://cdn.jsdelivr.net/jquery.validation/1.16.0/jquery.validate.min.js"></script>
     <script src="https://cdn.jsdelivr.net/jquery.validation/1.16.0/additional-methods.min.js"></script>
     <script src="{{ asset('js/imagesloaded.pkgd.min.js') }}"></script>
@@ -280,5 +279,63 @@
     <script>
       SVGInject(document.querySelectorAll("img.injectable"));
     </script>
+    <script>
+$(document).ready(function() {
+
+    $("#login_form").validate({
+        // In 'rules' user have to specify all the             
+        // constraints for respective fields            
+        rules: {
+            email: {
+                required: true,
+            },
+            password: {
+                required: true,
+            },
+        },
+        submitHandler: function(form) {
+            $('#invalid_login_data').hide(); 
+            var formData = $(form).serialize();
+            $.post("{{route('login')}}", formData)
+                .done(function(response) {
+                    //window.location.href="{{route('order.transactions')}}";
+
+                    //alert('asas');						
+                    //$("#loginModal").modal("hide");						
+                    //$('#withoutlogin').hide();	
+                    //$('#withoutlogin').css({'display': 'none'});
+                    //$('#withoutlogin').attr('style', 'display: none !important');				
+                    //$('#withlogin').show();
+
+                    //$('#is_login').hide();
+                    //$("#withlogin ul").append("<li class='nav-item'><a class='nav-link' href='{{route('order.transactions')}}'>Hi,"+response.admin.first_name+" "+response.admin.last_name+"</a></li><li class='nav-item'><a class='nav-link' href='{{route('logout')}}'>Logout</a></li>");			
+                    //$('#ordersubmit_div').html('<button type="submit" class="btn btn-primary w-100" id="btn_checkout" name="btn_checkout">Checkout</button>');		
+                    //console.log('Success:', response);
+                    if(response.refer)
+                      window.location.href = response.refer;
+                    else
+                      window.location.href = "{{route('home')}}"
+                })
+                .fail(function(xhr, status, error) {
+                    $('#invalid_login_data').show();
+                    console.error('Error:', error);
+                })
+                .always(function() {
+                    console.log('Request completed.');
+
+                });
+            return false;
+        }
+    });
+
+});
+
+function error_form(error_id, success_id = '') {
+    $('#' + error_id).hide();
+    if (success_id != '') {
+        $('#' + success_id).hide();
+    }
+}
+</script>
   </body>
 </html>

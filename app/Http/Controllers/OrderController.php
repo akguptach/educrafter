@@ -13,6 +13,9 @@ use App\Models\Website;
 use App\Models\Referral;
 use App\Models\Coupon;
 use App\Models\CouponCodeUses;
+
+use App\Models\WalletTransaction;
+
 use App\Models\Payment;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -81,12 +84,13 @@ class OrderController extends Controller
                 ],403
             );
         }
-        return response()->json(['message'=>'Coupon code is valid'], 200);
+        return response()->json(['message'=>'Congratulations!! you saved '.$match[1].$discount], 200);
 
     }
 
     public function checkprice(Request $request)
     {
+
 
         $validator = Validator::make($request->all(), [
             'subject_id' => 'required|numeric',
@@ -107,6 +111,8 @@ class OrderController extends Controller
         $labelofstudy_id = $request->studylabel_id;
         $grade_id = $request->grade_id;
         $delivery_date = $request->delivery_date;
+		
+	
 
         $websiteArr = Website::where('id', $website_id)->first()->toArray(); //%
         $subjectArr = Subjects::where('id', $subject_id)->first()->toArray();
@@ -130,9 +136,9 @@ class OrderController extends Controller
         $total_percent = $labelofstudyArr['price'] + $task_typeArr['price'] + $gradeArr['price'];
 
         $total = $total1 + round(($total1 * $total_percent) / 100);
-
+	
         $arrWP = explode(',', $websiteArr['website_price']);
-
+		
         $total2 = ($total * $arrWP[0]) / 100;
 
         $arrP = array();
@@ -153,8 +159,12 @@ class OrderController extends Controller
         }
 
         $j = 1;
+		
         for ($i = 1; $i < 25; $i++) {
             $total1 = 0;
+			
+			
+			
             /* if($j==1)
               {
               $total1=round(($total*$arrWP[1])/100);
@@ -238,6 +248,8 @@ class OrderController extends Controller
 
             $j++;
         }
+		
+		
         if($request->delivery_price){
             $arrP['delivery_date_price'] = $request->delivery_price;
             $price1 = $request->delivery_price;
@@ -256,14 +268,48 @@ class OrderController extends Controller
             $currency = $match[1];
             $discountprice = $match[2];
         }
-        if($request->valid_coupon_code){
+        if(@$request->valid_coupon_code){
             $amount = $match[2];
             $discount = $this->applyCoupon($request->valid_coupon_code, $amount);
             $discountprice = $amount-$discount;
         }
 
+
         $arrP['custom_date'] = $str;
-        return Response::json(array('success' => 'true', 'price' => $arrP, 'price1' => $price1,'discount'=>$discount,'discountprice'=>$currency.$discountprice));
+		
+        $finalPrice = $arrP['delivery_date_price'];
+        if($discountprice > 0){
+            $finalPrice = $currency.$discountprice;
+        }
+
+        
+        if($request->wallet_check == 1){
+            
+            preg_match('/^(\D+)(\d|\d[.,\d]+)$/', $finalPrice, $match);
+            $currency = $match[1];
+            $amount = $match[2];
+
+            $userId = Auth::user()->id;
+            $credits = WalletTransaction::where('user_id', $userId)->where('type','credit')->sum('amount');
+            $debits = WalletTransaction::where('user_id', $userId)->where('type','debit')->sum('amount');
+            $balance = $credits-$debits;
+            if($balance > 0){
+                if($balance >= $amount)
+                    $amount = 0;
+                else if($balance < $amount)
+                    $amount = $amount-$balance;
+            }
+            $finalPrice = $currency.$amount;
+        }
+		
+        return Response::json(array(
+            'success' => 'true', 
+            'price' => $arrP, 
+            'price1' => $price1,
+            'discount'=>$discount,
+            'discountprice'=>$currency.$discountprice,
+            'finalPrice' => $finalPrice
+        ));
     }
 
     public function applyCoupon($valid_coupon_code, $amount)
@@ -411,24 +457,45 @@ class OrderController extends Controller
             $uses = CouponCodeUses::where('coupon_id',$coupon->id)->where('user_id',Auth::user()->id)->count();
             if($coupon && $coupon->max_uses > $coupon->num_uses && $uses < $coupon->limit_per_users){
                 $discount = $this->applyCoupon($request->valid_coupon_code, $amount);
-                $order->gross_price  = $amount - $discount;
+                $gross_price  = $amount - $discount;
                 $order->coupon_code_id = $coupon->id;
             } else{
-                $order->gross_price = $amount; 
+                $gross_price  = $amount; 
             } 
-            if($order->gross_price < 0){
+            if($gross_price  < 0){
                 return response()->json(
                     [
                         'status' => 'This coupon code can not be applied on this order',
                     ],403
                 );
             } 
-        }else{
-            
-            $order->gross_price = $amount;
+        }
+        else{
+            $gross_price = $amount;
         }
 
+        if(isset($request->wallet_check)){
+            $userId = Auth::user()->id;
+            $credits = WalletTransaction::where('user_id', $userId)->where('type','credit')->sum('amount');
+            $debits = WalletTransaction::where('user_id', $userId)->where('type','debit')->sum('amount');
+            $wallet = $credits-$debits;
+            if($wallet > 0){
+                if($wallet > $gross_price){
+                    $walletPaid = $gross_price; 
+                    $gross_price = 0;
+                }else if($wallet <= $gross_price){
+                    $gross_price = $gross_price-$wallet;  // 50-10=40
+                    $walletPaid = $wallet;
+                }
+                $order->wallet_paid = $walletPaid;
+                
+            }
+        }
+
+
         
+
+        $order->gross_price = $gross_price;
         $order->price = $amount;
         $order->currency_code = $match[1];
         if($attachment)

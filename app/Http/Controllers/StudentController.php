@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\Student;
 use App\Models\Referral;
+use App\Models\WalletTransaction;
 
 use Illuminate\Validation\Rules;
 use Illuminate\Support\Facades\Auth;
@@ -57,11 +58,20 @@ class StudentController extends Controller
             $referredBy = Student::where('referral_code',$request->referral_code)->first();
             if($referredBy){
                 
-                Referral::Create([
+                $referral = Referral::Create([
                     'student_id'=>$student->id,
                     'referred_by'=>$referredBy->id,
                     'earned'=>50
                 ]);
+
+                WalletTransaction::Create([
+                    'user_id'=>$referredBy->id,
+                    'referral_id'=>$referral->id,
+                    'amount'=>50,
+                    'type'=>'credit'
+                ]);
+
+
                 
             }
         }
@@ -103,6 +113,7 @@ class StudentController extends Controller
     }
     public function updatePassword(Request $request)
     {
+
         // Validate the request data
         $validator = Validator::make($request->all(), [
             'old_password' => 'required|min:5',
@@ -157,11 +168,24 @@ class StudentController extends Controller
         if ($validator->fails()) {
             return redirect()->back()->withErrors($validator)->withInput();
         }
+
+
+
+        //$file = base64_decode($request['profile_pic']);
+        $img = $request['profile_pic'];
+        $img = substr($img, strpos($img, ",")+1);
+        $data = base64_decode($img);
+        $safeName = time().'.'.'png';
+
+        $success = file_put_contents(public_path().'/images/uploads/'.$safeName, $data);
+
         $student = Student::find(auth()->user()->id);
         $student->first_name = $request->first_name;
         $student->last_name = $request->last_name;
         $student->email = $request->email;
         $student->phone_number = $request->phone_number;
+        if($success)
+            $student->profile_pic = env('APP_URL').'/images/uploads/'.$safeName;
         $student->save();
         return back()->with('profileupdatedsmessage', 'Profile Updated successfully.');
     }

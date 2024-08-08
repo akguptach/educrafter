@@ -12,6 +12,7 @@ use Exception;
 use Stripe\StripeClient;
 use Stripe\Exception\CardException;
 use App\Models\Orders;
+use App\Models\WalletTransaction;
 use Stripe\Checkout\Session;
 use Illuminate\Support\Facades\DB;
 use Mail;
@@ -146,6 +147,18 @@ class PaymentController extends Controller
                         $coupon->save();
                     }
                 }
+
+                if($order->wallet_paid > 0){
+                    WalletTransaction::Create([
+                        'user_id'=>Auth::user()->id,
+                        'order_id'=>$order->id,
+                        'amount'=>$order->wallet_paid,
+                        'type'=>'debit'
+                    ]);
+                }
+                
+
+
 
 
                 DB::table('payment')->updateOrInsert(

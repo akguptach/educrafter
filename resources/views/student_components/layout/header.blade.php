@@ -35,7 +35,7 @@
     <link rel="stylesheet"
         href="<?php echo asset('/student/');?>/vendor/bootstrap-select/dist/css/bootstrap-select.min.css">
     <link href="<?php echo asset('/student/');?>/vendor/datatables/css/jquery.dataTables.min.css" rel="stylesheet">
-
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/croppie/2.6.4/croppie.css" rel="stylesheet" />
     <link class="main-css" rel="stylesheet" href="<?php echo asset('/student/');?>/css/style.css">
     <script src="<?php echo asset('/student/');?>/js/jquery.min3.js"></script>
 
@@ -68,7 +68,7 @@
             Nav header start
         ***********************************-->
         <div class="nav-header">
-            <a href="" class="brand-logo">
+            <a href="/" class="brand-logo">
                 <p style="font-size:32px;color: #6a73fa;">
                     <img src="<?php echo asset('/student/');?>/img/Logo.png" style="width:200px;">
                 </p>
@@ -170,7 +170,9 @@
                                 <a class="nav-link" href="javascript:void(0);" role="button" data-bs-toggle="dropdown">
 
                                     <span
-                                        style="background:#FEEAA8;color: #000;border-radius: 20px;height: 40px;width: 40px;padding: 8px 8px 8px 8px;font-size: 16px;float: left;text-align: center;">JD</span>
+                                        style="background:#FEEAA8;color: #000;border-radius: 20px;height: 40px;width: 40px;padding: 8px 8px 8px 8px;font-size: 16px;float: left;text-align: center;">
+                                        <?php echo strtoupper(substr(Auth::user()->first_name,0,1)).' '.strtoupper(substr(Auth::user()->last_name,0,1));?>
+                                    </span>
                                 </a>
                                 <div class="dropdown-menu dropdown-menu-right">
                                     <a href="{{route('student.profile')}}" class="dropdown-item ai-icon">
