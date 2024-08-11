@@ -128,7 +128,7 @@ $services = \App\Models\Service::where('website_type', 'Educrafter')->where('typ
                                             <ul class="sub-menu">
                                                 <li><a href="{{route('about-us')}}">Why Educrafter</a></li>
                                                 <li><a href="{{route('faq')}}">FAQ</a></li>
-                                                <li><a href="lesson.html">Blog</a></li>
+                                                <li><a href="{{route('blog')}}">Blog</a></li>
                                                 <li><a href="{{route('contact-us')}}">Contact us</a></li>
 
                                             </ul>
@@ -223,4 +223,5 @@ $services = \App\Models\Service::where('website_type', 'Educrafter')->where('typ
 
 
     </header>
+    
     <!-- header-area-end -->

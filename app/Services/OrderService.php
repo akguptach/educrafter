@@ -44,7 +44,8 @@ class OrderService
                 'receivertable_id' => 1,
                 'receivertable_type' => User::class,
                 'message' => $request->message,
-                'attachment' => $attachment
+                'attachment' => $attachment,
+                'url'=>env('500_URL').'/orders/'.$id.'/view'
             ]);
             return ['message' => 'Message sent', 'status' => 'success'];
         } catch (\Exception $e) {

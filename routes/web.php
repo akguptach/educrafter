@@ -60,7 +60,8 @@ Route::get('/cookies-policy', [Pages::class, 'cookies_policy'])->name('cookies-p
 
 Route::get('/blog', [Blog::class, 'index'])->name('blog');
 Route::get('/blog1', [Blog::class, 'index'])->name('blog1');
-Route::get('/blog/{blog}', [Blog::class, 'view'])->name('blog.view');
+
+Route::get('/blog/{category}/{title}', [Blog::class, 'view'])->name('blog.view');
 
 
 Route::get('/login', [Auth::class, 'loginPage'])->name('login.page');
@@ -77,9 +78,15 @@ Route::post('/price', [Order::class, 'checkprice'])->name('price');
 
 Route::post('/validate-coupon-code', [Order::class, 'validateCouponCode'])->name('validateCouponCode');
 Route::post('/neworder/auth/check', [Order::class, 'orderValidate'])->name('orderValidate');
-Route::post('/neworder', [Order::class, 'create'])->name('neworder');
+Route::post('/neworder', [Order::class, 'create'])->name('neworder'); 
+
+
+
 Route::post('/process-attachment', [Order::class, 'processAttachment'])->name('process-attachment');
 Route::middleware('auth')->group(function () {
+    Route::get('/payment-success/{order_id}', [Order::class, 'paymentSuccess'])->name('payment.success');
+Route::get('/payment-failed/{order_id}', [Order::class, 'paymentFailed'])->name('payment.failed');
+Route::get('/transactions/order-receipt/{order_id}', [Order::class, 'orderReceipt'])->name('order.receipt');
     Route::get('/payment', [Payment::class, 'index']);
     Route::any('/pay', [Payment::class, 'pay'])->name('pay');
     Route::get('/payment-validation', [Payment::class, 'paymentValidation'])->name('payment-validation');
@@ -122,7 +129,7 @@ Route::get('/offers/details/{id}', [App\Http\Controllers\OffersController::class
 Route::post('/save-ratings', [OrderRating::class, 'saveRatings'])->name('save.ratings');
 
 
-
+Route::get('/blogs/ajaxlist', [App\Http\Controllers\BlogController::class, 'ajaxList'])->name('Blogs.ajaxList');
 
 
 
@@ -130,8 +137,3 @@ Route::post('/save-ratings', [OrderRating::class, 'saveRatings'])->name('save.ra
 
 
 Route::get('/{slug}', [Services::class, 'servicesIndex'])->name('Services.Index');
-
-
-
-
-

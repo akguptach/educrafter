@@ -13,7 +13,7 @@ use App\Models\Website;
 use App\Models\Referral;
 use App\Models\Coupon;
 use App\Models\CouponCodeUses;
-
+use Symfony\Component\HttpKernel\Exception\UnauthorizedHttpException;
 use App\Models\WalletTransaction;
 
 use App\Models\Payment;
@@ -55,6 +55,15 @@ class OrderController extends Controller
 
     public function validateCouponCode(Request $request)
     {
+
+        $orderRequestData = $request->all();
+        if (!Auth::check()) {
+            $orderRequestData['refer'] = route('order');
+            $request->session()->put('orderRequestData', $orderRequestData);
+            $request->session()->save();
+            return response()->json(['status' => 'Login require'], 401);
+        }
+        
         $couponCode  = isset($request->coupon_code)?$request->coupon_code:'';
         if(!$couponCode)
             return response()->json(['message'=>'Please enter coupon code'], 422); 
@@ -389,13 +398,13 @@ class OrderController extends Controller
             return $this->sendError('Validation Error.', $validator->errors(), 422);
         }
 
+        $orderRequestData = $request->all();
         if (!Auth::check()) {
-            $orderRequestData = $request->all();
             $orderRequestData['refer'] = route('order');
-            $request->session()->put('orderRequestData', $orderRequestData);
-            $request->session()->save();
             return response()->json(['status' => 'Login require'], 401);
         }
+        $request->session()->put('orderRequestData', $orderRequestData);
+        $request->session()->save();
 
         $order = new Orders();
 
@@ -520,7 +529,7 @@ class OrderController extends Controller
             ]
         );
 
-        $url = env('500_URL','https://500m.in').'/orders';
+        /*$url = env('500_URL','https://500m.in').'/orders';
         \App\Models\StudentOrderMessage::Create([
             'order_id'=>$order->id,
             'sendertable_id' => Auth::user()->id,
@@ -530,9 +539,9 @@ class OrderController extends Controller
             'message' => 'Your have received new order',
             'url'=>$url,
             'type'=>'notification'
-        ]);
+        ]);*/
 
-        $receiver = \App\Models\User::find(1);
+        /*$receiver = \App\Models\User::find(1);
         $data = ['name' => $receiver->name,'url'=>$url,'messageContent'=>'Your have received new order'];
         try {
             Mail::send('email.500.message', $data, function ($message) use ($data, $receiver) {
@@ -543,7 +552,7 @@ class OrderController extends Controller
 
         } catch (\Exception $e) {
             echo $e; die;
-        } 
+        }*/ 
 
 
 
@@ -721,4 +730,37 @@ class OrderController extends Controller
             return response()->json(['status' => ''], 200);
         }
     }
+
+
+
+
+    public function paymentSuccess($orderId){
+        $order = Orders::where('id',$orderId)->first();
+        return view('payment.success',compact('order'));
+    }
+    
+
+    public function paymentFailed($orderId){
+        $order = Orders::where('id',$orderId)->first();
+        return view('payment.fail',compact('order'));
+    }
+
+
+    public function orderReceipt($orderId) {
+        
+        $order = Orders::where('id',$orderId)->first();
+        //$order = $this->authorizedOrder($orderId);
+        return view('payment.receipt',compact('order'));
+    }
+
+    public function authorizedOrder($orderId) {
+        $order = Orders::where('id',$orderId)->where('student_id', Auth::user()->id)->first();
+        if($order){
+            return $order;
+        }
+        throw new UnauthorizedHttpException( 'message here' );
+        
+    }
+
+
 }

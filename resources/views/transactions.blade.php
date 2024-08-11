@@ -167,7 +167,7 @@ p.v-data {
                     <div class="card-body">
                         <div class="tab-content">
                             <div id="active-orders" class="tab-pane fade" role="tabpanel">
-                                @if($enquiries && count($enquiries) > 0)
+                                @if($inprocess && count($inprocess) > 0)
                                 @foreach($inprocess as $item)
                                 <div class="row" style="margin-bottom:10px;">
                                     <div class="col-lg-12">
@@ -177,8 +177,8 @@ p.v-data {
                                                 <div style="width:100%;float:left;margin-bottom: 10px;">
                                                     <div style="width:60%;font-size:18px;font-weight:600;float:left;">
                                                         {{$item->subject['subject_name']}}</div>
-                                                    <div style="float:left;width:20%;color:#3B71ED;font-size:16px;">Task
-                                                        ID: {{$item->website->order_prefix}}{{$item['id']}}</div>
+                                                    <div style="float:left;width:20%;color:#3B71ED;font-size:16px;"><a href="{{url('vieworder/'.$item['id'])}}">Task
+                                                    ID: {{$item->website->order_prefix}}{{$item['id']}}</a></div>
                                                 </div>
                                                 <div style="width:100%;float:left;">
                                                     <div style="width:110px;float:left;">
@@ -237,8 +237,8 @@ p.v-data {
                                                 <div style="width:100%;float:left;margin-bottom: 10px;">
                                                     <div style="width:60%;font-size:18px;font-weight:600;float:left;">
                                                         {{$item->subject['subject_name']}}</div>
-                                                    <div style="float:left;width:20%;color:#3B71ED;font-size:16px;">Task
-                                                        ID: {{$item->website->order_prefix}}{{$item['id']}}</div>
+                                                    <div style="float:left;width:20%;color:#3B71ED;font-size:16px;"><a href="{{url('vieworder/'.$item['id'])}}">Task
+                                                    ID: {{$item->website->order_prefix}}{{$item['id']}}</a></div>
                                                 </div>
                                                 <div style="width:100%;float:left;">
                                                     <div style="width:70px;float:left;">
@@ -292,8 +292,9 @@ p.v-data {
                                                 <div style="width:100%;float:left;margin-bottom: 10px;">
                                                     <div style="width:60%;font-size:18px;font-weight:600;float:left;">
                                                         {{$item->subject['subject_name']}}</div>
-                                                    <div style="float:left;width:20%;color:#3B71ED;font-size:16px;">Task
-                                                        ID: {{$item->website->order_prefix}}{{$item['id']}}</div>
+                                                    <div style="float:left;width:20%;color:#3B71ED;font-size:16px;">
+                                                    <a href="{{url('vieworder/'.$item['id'])}}">Task
+                                                        ID: {{$item->website->order_prefix}}{{$item['id']}}</a></div>
                                                 </div>
                                                 <div style="width:100%;float:left;">
                                                     <div style="width:110px;float:left;">

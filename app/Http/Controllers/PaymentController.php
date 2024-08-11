@@ -111,15 +111,10 @@ class PaymentController extends Controller
         }
     }
     
-    public function paymentValidation()
+    public function paymentValidation(Request $request)
     {
-		
-
-        
-
+        $request->session()->forget('orderRequestData');
         if(session()->has('payment_object') && session()->has('payment_order_id') && Orders::where('id',session('payment_order_id'))->exists()) {
-            
-
             $stripe = new StripeClient(config('stripe.api_keys.secret_key'));
             $result = $stripe->checkout->sessions->retrieve(
                 session('payment_object')->id,
@@ -177,8 +172,22 @@ class PaymentController extends Controller
 
 
 
-                $url = env('500_URL','https://500m.in').'/orders';
+                $url = env('APP_URL','https://educrafter.co').'vieworder/'.session('payment_order_id'); 
                 \App\Models\StudentOrderMessage::Create([
+                    'order_id'=>session('payment_order_id'),
+                    'sendertable_id' => 1,
+                    'sendertable_type' => \App\Models\User::class,
+                    'receivertable_id' =>  Auth::user()->id,
+                    'receivertable_type' => \App\Models\Student::class,
+                    'message' => 'Hi '.Auth::user()->first_name.', Hope you’re doing well. I have gone through the subject and essay topic. really cool topic, now sit back and relax while I start work on it. will meet soon. bye',
+                    'url'=>$url,
+                    'type'=>'message'
+                ]);
+
+
+               
+                $url = env('500_URL','https://500m.in').'/orders'; 
+                /*\App\Models\StudentOrderMessage::Create([
                     'order_id'=>session('payment_order_id'),
                     'sendertable_id' => \Auth::user()->id,
                     'sendertable_type' => \App\Models\Student::class,
@@ -187,7 +196,7 @@ class PaymentController extends Controller
                     'message' => 'Payment of '.((session('payment_object')->amount_total)/100).' is received',
                     'url'=>$url,
                     'type'=>'notification'
-                ]);
+                ]);*/
 
                 $receiver = \App\Models\User::find(1);
                 $data = ['name' => $receiver->name,'url'=>$url,'messageContent'=>'Payment of '.((session('payment_object')->amount_total)/100).' is received'];
@@ -204,6 +213,8 @@ class PaymentController extends Controller
 
 
                 Flash::flash('payment_status','Success');
+                return redirect()->route('payment.success',session('payment_order_id'));
+                
             }else {
                 // 
                 Orders::where('id',session('payment_order_id'))->update(
@@ -222,14 +233,14 @@ class PaymentController extends Controller
                         'transaction_id' => session('payment_object')->id
                     ]
                 );
-                Flash::flash('payment_status','Success');
-                //Flash::flash('payment_status','Failed');
+                Flash::flash('payment_status','Failed');
+                return redirect()->route('payment.failed',session('payment_order_id'));
             }
-            $order = Orders::where('id',session('payment_order_id'))->first();
+            /*$order = Orders::where('id',session('payment_order_id'))->first();
             Mail::send('email.order-data', ['order' => $order], function($message) {
                 $message->to(env("ADMIN_EMAIL"))->subject('New Order');
             });
-            return redirect()->route('order.transactions');
+            return redirect()->route('payment.success');*/
         }else {
             return redirect()->back();
         }

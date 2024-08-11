@@ -234,7 +234,7 @@
                                         <ul>
                                             <li>
                                                 <a href="{{$orderRequestData['uploadedFile']}}"
-                                                    target="_blank">{{$orderRequestData['uploadedFile']}}</a>
+                                                    target="_blank">Your attachment</a>
                                             </li>
                                         </ul>
                                         @endif
@@ -253,7 +253,7 @@
                                 <div style="border: 1px solid #000;border-radius: 8px;margin-top: 10px;padding:10px;">
                                     <div class="form-grp">
                                         <p style="font-size:18px;">You will get your order on</p>
-                                        <p style="font-size:32px;" class="delivery_at_title">{{\Carbon\Carbon::parse(new \DateTime())->format('d M, l')}}</p>
+                                        <p style="font-size:32px;" class="delivery_at_title"></p>
                                     </div>
                                 </div>
                             </div>
@@ -308,7 +308,8 @@
                                         <p>Coupon Code</p>
                                         <div style="width:78%;float:left;">
                                             <input type="text" placeholder="Coupon code" id="coupon_code"
-                                                name="coupon_code" style="width:100%">
+                                                name="coupon_code" style="width:100%"
+                                                value="{{@$orderRequestData['coupon_code']}}">
                                             <p id="coupon_code_error"></p>
                                         </div>
                                         <div style="width:20%;float:left;">
@@ -326,14 +327,15 @@
                                 <div class="account__check-remember">
 
                                     <?php
-                                    $userId = Auth::user()->id;
+                                    $userId = @Auth::user()->id;
                                     $credits = App\Models\WalletTransaction::where('user_id', $userId)->where('type','credit')->sum('amount');
                                     $debits = App\Models\WalletTransaction::where('user_id', $userId)->where('type','debit')->sum('amount');
-                                    $balance = $credits-$debits;
+                                    $balance = number_format($credits-$debits,2);
                                     ?>
                                     @if($balance > 0)
                                     <input type="checkbox" class="form-check-input" value="1" id="wallet-check"
-                                        name="wallet_check">
+                                        name="wallet_check" @if(isset($orderRequestData['wallet_check']))
+                                        checked="checked" @endif>
                                     <label for="wallet-check" class="form-check-label" style="font-size:16px">Use your
                                         wallet balance: <b>${{$balance}}</b></label>
                                     @endif
@@ -426,14 +428,13 @@
 </div>
 
 
-<div class="modal fade" id="order_summary">
+<div class="modal fade" id="order_summary" tabindex="-1" role="dialog" aria- labelledby="exampleModalLabel"
+    aria-hidden="true" data-bs-keyboard="false" data-bs-backdrop="static">
     <div class="modal-dialog modal-dialog-centered" role="document">
         <div class="modal-content" style="">
             <div class="modal-header" style="display: block;">
                 <h5 class="modal-title text-center" style="width: 100%;float: left;font-size: 30px;">Order summary</h5>
-                <button type="button" class="btn-close" data-bs-dismiss="modal"
-                    style="right: 7px;top: 10px;position: absolute;">
-                </button>
+
             </div>
             <div class="modal-body" style="padding:40px;">
                 <table style="width:400px;" class="summary-table">
@@ -481,8 +482,11 @@
                         <td id="summary_total_price"></td>
                     </tr>
                     <tr>
-                        <td colspan="2"><button type="button" data-bs-toggle="modal" class="btn btn-primary w-100"
-                                id="btn_pay" name="btn_checkout">Pay Now
+                        <td><button type="button" data-bs-toggle="modal" class="btn btn-primary w-100" id="btn_pay"
+                                name="btn_checkout">Pay Now
+                            </button></td>
+                        <td><button type="button" data-bs-toggle="modal" class="btn w-100" id="btn_pay_cancel"
+                                name="btn_checkout" style="background-color: #6D747D;">Cancel
                             </button></td>
                     </tr>
                 </table>
@@ -490,6 +494,13 @@
         </div>
     </div>
 </div>
+@php($deliveryAt = \Carbon\Carbon::parse(new \DateTime())->format('Y-m-d'))
+@if($orderRequestData && isset($orderRequestData['delivery_date']))
+    @php($tempDate = explode('-', $orderRequestData['delivery_date']))
+    @if(count($tempDate) == 3)
+    @php($deliveryAt=@$orderRequestData['delivery_date'])
+    @endif
+@endif
 
 @if(session()->has('payment_status') && session('payment_status') == 'Success')
 <script>
@@ -510,19 +521,38 @@ Swal.fire({
 </script>
 @endif
 <script>
+var coupon = "{{@$orderRequestData['coupon_code']}}"
+var delivery_date_val = "{{$deliveryAt}}"
+window.onhashchange = function() {
+    pricecal();
+
+    if (delivery_date_val) {
+        var dateFormat = moment(new Date(delivery_date_val)).format('DD MMMM dddd');
+        $('.delivery_at_title').html(dateFormat);
+    }
+
+    if (coupon)
+        applyCoupon();
+}
 $(function() {
 
-    $(document).on('click', '.delivery_at',function(){
+    $(document).on('click', '.delivery_at', function() {
         var date = $(this).val();
         var dateFormat = moment(new Date(date)).format('DD MMMM dddd');
         $('.delivery_at_title').html(dateFormat);
     })
+
+    $('#btn_pay_cancel').click(function() {
+        $('#order_summary').modal('hide');
+    });
+
+
     $('#btn_pay').click(function() {
         $('#order_form').submit();
     });
 
     $('#btn_checkout').click(function() {
-        
+
         var formData = $('#order_form').serialize();
         $.ajax({
             type: 'POST',
@@ -567,46 +597,7 @@ $(function() {
     })
 
     $('#apply_coupon').click(function() {
-        $('#coupon_code_error').html('');
-        $('#valid_coupon_code').val('');
-
-        //Serialize the Form
-        var values = {};
-        $.each($("#order_form").serializeArray(), function(i, field) {
-            values[field.name] = field.value;
-        });
-
-        //Value Retrieval Function
-        var getValue = function(valueName) {
-            return values[valueName];
-        };
-
-        //Retrieve the Values
-        var delivery_price = getValue("delivery_price");
-        $.ajax({
-            type: 'POST',
-            url: "{{route('validateCouponCode')}}",
-            data: {
-                coupon_code: $('#coupon_code').val(),
-                "_token": "{{ csrf_token() }}",
-                delivery_price: delivery_price
-            },
-            success: function(response) {
-                $('#valid_coupon_code').val($('#coupon_code').val());
-                pricecal();
-                $('#remove_coupon').show();
-                $('#apply_coupon').hide();
-
-                $('#coupon_code_error').html(
-                    '<span style="font-size:12px;color:#10C379;">' + response.message +
-                    '</span>');
-            },
-            error: function(xhr, status, error) {
-                console.log('Error', xhr.responseJSON.message)
-                $('#coupon_code_error').html('<span style="color:red;font-size:12px;">' +
-                    xhr.responseJSON.message + '</span>');
-            }
-        });
+        applyCoupon();
 
     });
 
@@ -696,7 +687,8 @@ $(function() {
                 .done(function(response) {
                     if (response.status && response.status == 'order added successfully.' &&
                         response.order_id) {
-                        window.location.href = "{{ route('pay') }}?order_id="+ response.order_id;
+                        window.location.href = "{{ route('pay') }}?order_id=" + response
+                            .order_id;
                     } else {
                         //window.location.reload();
                     }
@@ -725,6 +717,48 @@ $(function() {
         }
     });
 });
+
+function applyCoupon() {
+    $('#coupon_code_error').html('');
+    $('#valid_coupon_code').val('');
+
+    // var values = {};
+    // $.each($("#order_form").serializeArray(), function(i, field) {
+    //     values[field.name] = field.value;
+    // });
+    // var getValue = function(valueName) {
+    //     return values[valueName];
+    // };
+    // var delivery_price = getValue("delivery_price");
+
+
+    var data = $('#order_form').serialize();
+    data += "&coupon_code=" + $('#coupon_code').val();
+
+    $.ajax({
+        type: 'POST',
+        url: "{{route('validateCouponCode')}}",
+        data: data,
+        success: function(response) {
+            $('#valid_coupon_code').val($('#coupon_code').val());
+            pricecal();
+            $('#remove_coupon').show();
+            $('#apply_coupon').hide();
+
+            $('#coupon_code_error').html(
+                '<span style="font-size:12px;color:#10C379;">' + response.message +
+                '</span>');
+        },
+        error: function(xhr, status, error) {
+            if (xhr.status == 401) {
+                $("#loginModal").modal("show");
+            } else {
+                $('#coupon_code_error').html('<span style="color:red;font-size:12px;">' +
+                    xhr.responseJSON.message + '</span>');
+            }
+        }
+    });
+}
 
 function pricecal() {
     $('.subject_div').text($("#subject_id option:selected").text());

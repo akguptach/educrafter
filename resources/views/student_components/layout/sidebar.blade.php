@@ -7,7 +7,7 @@ $ordersCount = App\Models\Orders::where('student_id', Auth::user()->id)->count()
 $credits = App\Models\WalletTransaction::where('user_id', $userId)->where('type','credit')->sum('amount');
 
 $debits = App\Models\WalletTransaction::where('user_id', $userId)->where('type','debit')->sum('amount');
-$balance = $credits-$debits;
+$balance = number_format($credits-$debits,2);
 
 ?>
 <div class="dlabnav">
