@@ -348,16 +348,12 @@ class OrderController extends Controller
         if (session()->has('attachment')) {
             session()->forget('attachment');
         }
-        $type = $request->type;
         $attachment = $request->attachment;
+        $attachmentUrl = $request->attachmentUrl;
         $data = [];
-        if ($type == 'url') {
-            $data['type'] = $type;
-            $data['attachment'] = $attachment;
-            session()->put('attachment', $data);
-        }
-        if ($type == 'file') {
-            $attachmentList = [];
+        $attachmentList = [];
+        if ($request->total_file > 0) {
+            
             for ($i = 0; $i < $request->total_file; $i++) {
                 $key = 'attachment_' . $i;
                 $attachment = $request->$key;
@@ -365,10 +361,15 @@ class OrderController extends Controller
                 $attachment->move(public_path('images/uploads/attachment/'), $attachmentName);
                 $attachmentList[] = env('APP_URL', '/') . 'images/uploads/attachment/' . $attachmentName;
             }
-            $data['type'] = $type;
-            $data['attachment'] = $attachmentList;
-            session()->put('attachment', $data);
+            
+           
         }
+
+        if($attachmentUrl){
+            $attachmentList[] = $attachmentUrl;
+        }
+        $data['attachment'] = $attachmentList;
+        session()->put('attachment', $data);
         if (session()->has('attachment')) {
             return session('attachment');
         }
@@ -377,6 +378,7 @@ class OrderController extends Controller
     public function create(Request $request)
     {
 
+        
         $website_id = env('WEBSITE_ID');
 
         $validator = Validator::make($request->all(), [
@@ -399,6 +401,8 @@ class OrderController extends Controller
         }
 
         $orderRequestData = $request->all();
+
+        
         if (!Auth::check()) {
             $orderRequestData['refer'] = route('order');
             return response()->json(['status' => 'Login require'], 401);

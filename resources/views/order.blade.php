@@ -389,7 +389,7 @@
                     <div id="attachmentErrors"></div>
                     <div class="form-group">
                         <label for="attachment">Upload Zip attecment</label>
-                        <input type="file" onchange="blankFileUploadUrl()" accept="application/zip, .doc, .docx,.pdf"
+                        <input type="file"  accept="application/zip, .doc, .docx,.pdf"
                             class="form-control shadow-none" name="attachment" id="attachment">
                         <small id="emailHelp" class="form-text text-muted" style="font-size: 12px;">You can upload your
                             attecment less then 100MB. Only Zip,Doc,Pdf</small>
@@ -397,7 +397,7 @@
                     <div class="text-center my-4 text-muted">OR</div>
                     <div class="form-group">
                         <label for="fileUploadUrl">Copy/Paste WeTransfer Url</label>
-                        <input type="text" onchange="blankAttachment()" oninput="blankAttachment()"
+                        <input type="text" 
                             class="form-control shadow-none" placeholder="" name="file_upload_url" id="fileUploadUrl">
                         <small id="emailHelp" class="form-text text-muted" style="font-size: 12px;">More then 100MB file
                             go with wetransfer <a href="https://wetransfer.com/" target="_blank">click here</a></small>
@@ -864,8 +864,11 @@ function saveAttachment(e) {
     e.preventDefault();
     let attachmentList = [];
     let attachment = $('#attachment')[0].files;
+
+    
     let fileUploadUrl = $('#fileUploadUrl').val();
     if (attachment.length && attachment.length > 0) {
+        
         if (attachment.length > 5) {
             $('#attachmentErrors').html(
                 '<div class="alert alert-danger">More than 5 attchment are not allowed.<div></div></div>');
@@ -880,36 +883,36 @@ function saveAttachment(e) {
                     '<div class="alert alert-danger">Attachment size more than 100 MB are not allowed.<div></div></div>'
                 );
             } else {
-                sendAttachment('file', attachment);
+                
+                sendAttachment(attachment,fileUploadUrl);
             }
         }
-    } else {
-        if (fileUploadUrl && fileUploadUrl != null && fileUploadUrl != '') {
-            sendAttachment('url', fileUploadUrl);
-        } else {
-            $('#attachmentErrors').html(
-                '<div class="alert alert-danger">Please provide a valid file or link.<div></div></div>');
-        }
+    } 
+    else if(fileUploadUrl){
+        sendAttachment(null, fileUploadUrl);
     }
 }
 
-function sendAttachment(attachmentType, attachmentData) {
+function sendAttachment(attachmentFile, attachmentUrl)  {
+
     let attachmentFormData = new FormData();
-    attachmentFormData.append('type', attachmentType);
-    if (attachmentType == 'file') {
+    if (attachmentFile) {
         for (let i = 0; i < $('#attachment')[0].files.length; i++) {
             attachmentFormData.append('attachment_' + i, $('#attachment')[0].files[i]);
         }
         attachmentFormData.append('total_file', $('#attachment')[0].files.length);
-    } else {
-        attachmentFormData.append('attachment', attachmentData);
+    } 
+    if(attachmentUrl){
+        attachmentFormData.append('attachmentUrl', attachmentUrl);
     }
+
+
     $.ajaxSetup({
         headers: {
             'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
         }
     });
-    console.log(attachmentFormData)
+    var attachmentJson = [];
     $.ajax({
         url: "process-attachment",
         type: "POST",
@@ -922,9 +925,10 @@ function sendAttachment(attachmentType, attachmentData) {
             (sendAttachmentResponse.attachment).forEach((item) => {
                 attachmentData += '<li><a href="' + item + '" target="_blank">' + item +
                     '</a></li>';
-                $('#uploadedFile').val(item);
+                    attachmentJson.push({url:item})
 
             });
+            $('#uploadedFile').val(JSON.stringify(attachmentJson));
             attachmentData += '</ul>'
             $('#attachment_list').html(attachmentData);
             $('#fileuploadModal').modal('hide');

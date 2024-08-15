@@ -186,20 +186,21 @@ class PaymentController extends Controller
 
 
                
-                $url = env('500_URL','https://500m.in').'/orders'; 
-                /*\App\Models\StudentOrderMessage::Create([
+                $url = env('500_URL','https://500m.in').'/orders/'.$order->id.'/view'; 
+                $message = \Auth::user()->first_name.' has made a payment of '.$order->currency_code.((session('payment_object')->amount_total)/100);
+                \App\Models\StudentOrderMessage::Create([
                     'order_id'=>session('payment_order_id'),
                     'sendertable_id' => \Auth::user()->id,
                     'sendertable_type' => \App\Models\Student::class,
                     'receivertable_id' => 1,
                     'receivertable_type' => \App\Models\User::class,
-                    'message' => 'Payment of '.((session('payment_object')->amount_total)/100).' is received',
+                    'message' => $message,
                     'url'=>$url,
                     'type'=>'notification'
-                ]);*/
+                ]);
 
                 $receiver = \App\Models\User::find(1);
-                $data = ['name' => $receiver->name,'url'=>$url,'messageContent'=>'Payment of '.((session('payment_object')->amount_total)/100).' is received'];
+                $data = ['name' => $receiver->name,'url'=>$url,'messageContent'=>$message];
                 try {
                     \Illuminate\Support\Facades\Mail::send('email.500.message', $data, function ($message) use ($data, $receiver) {
                         $message->from(env('MAIL_FROM_ADDRESS'), env('MAIL_FROM_NAME'));
