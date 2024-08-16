@@ -25,6 +25,7 @@ use Response;
 use Validator;
 use App\Services\OrderService;
 use App\Http\Requests\OrderRequestMessageRequest;
+use App\Models\OrderRating;
 use Illuminate\Support\Facades\Mail;
 use Carbon\Carbon;
 use DataTables;
@@ -590,7 +591,7 @@ class OrderController extends Controller
 
         
 
-        $deliveredQ = Orders::where('student_id', $user_id)
+        $deliveredQ = Orders::with(['ratings'])->where('student_id', $user_id)
         ->where(function($q) use ($keyword){
             if($keyword){
                 $q->whereHas('subject',function($sq) use ($keyword){
@@ -603,8 +604,11 @@ class OrderController extends Controller
         if($orderBy){
             $deliveredQ->orderBy("$orderBy", "$order");
         }
-        
         $delivered = $deliveredQ->paginate(10);
+        //echo "<pre>"; print_r($delivered[0]->ratings); die;
+
+
+
 
         $inprocessQ = Orders::where('student_id', $user_id)
         ->where(function($q) use ($keyword){
@@ -638,6 +642,7 @@ class OrderController extends Controller
             $enquiriesQ->orderBy("$orderBy", "$order");
         }
         $enquiries = $enquiriesQ->where('payment_status', 'Failed')->paginate(10);
+        
         
         return view('transactions', compact('delivered','inprocess','enquiries','keyword','orderBy','order'));
     }

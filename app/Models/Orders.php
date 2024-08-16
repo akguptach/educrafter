@@ -59,6 +59,11 @@ class Orders extends Model
         return $this->hasOne('App\Models\Payment', 'order_id');
     }
 
+    public function ratings()
+    {
+        return $this->hasOne('App\Models\OrderRating', 'order_id');
+    }
+
 
 
 

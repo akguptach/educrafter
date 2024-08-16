@@ -36,7 +36,7 @@
         href="<?php echo asset('/student/');?>/vendor/bootstrap-select/dist/css/bootstrap-select.min.css">
     <link href="<?php echo asset('/student/');?>/vendor/datatables/css/jquery.dataTables.min.css" rel="stylesheet">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/croppie/2.6.4/croppie.css" rel="stylesheet" />
-    <link class="main-css" rel="stylesheet" href="<?php echo asset('/student/');?>/css/style.css">
+    <link class="main-css" rel="stylesheet" href="<?php echo asset('/student/');?>/css/style.css?v=1">
     <script src="<?php echo asset('/student/');?>/js/jquery.min3.js"></script>
 
 

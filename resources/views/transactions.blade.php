@@ -1,6 +1,11 @@
 @extends('layout.student')
 @section('content')
 <style>
+
+.checked {
+  color: orange;
+}
+
 .btn-primary1 {
     border-color: #fff !important;
     background-color: #fff !important;
@@ -177,7 +182,7 @@ p.v-data {
                                                 <div style="width:100%;float:left;margin-bottom: 10px;">
                                                     <div style="width:60%;font-size:18px;font-weight:600;float:left;">
                                                         {{$item->subject['subject_name']}}</div>
-                                                    <div style="float:left;width:20%;color:#3B71ED;font-size:16px;"><a href="{{url('vieworder/'.$item['id'])}}">Task
+                                                    <div style="float:left;width:20%;color:#3B71ED;font-size:16px;"><a href="{{route('order.receipt',$item['id'])}}">Task
                                                     ID: {{$item->website->order_prefix}}{{$item['id']}}</a></div>
                                                 </div>
                                                 <div style="width:100%;float:left;">
@@ -187,8 +192,11 @@ p.v-data {
                                                     </div>
                                                     <div style="float:left;font-size:14px;color:#000;">Delivery in
                                                         {{$item['delivery_date']}} | {{$item['no_of_words']}} words |
-                                                        {{$item->taskType->type_name}} | English</div>
+                                                        {{$item->taskType->type_name}}</div>
                                                 </div>
+												<div style="width:100%;float:left;padding-top: 10px;">
+												   <a href="{{url('transactions/order-receipt/'.$item['id'])}}" target="_blank" style="color:#000;">Order Reciept</a>
+												</div>
                                             </div>
                                             <div style="width:20%;float:right;">
                                                 <div
@@ -237,7 +245,7 @@ p.v-data {
                                                 <div style="width:100%;float:left;margin-bottom: 10px;">
                                                     <div style="width:60%;font-size:18px;font-weight:600;float:left;">
                                                         {{$item->subject['subject_name']}}</div>
-                                                    <div style="float:left;width:20%;color:#3B71ED;font-size:16px;"><a href="{{url('vieworder/'.$item['id'])}}">Task
+                                                    <div style="float:left;width:20%;color:#3B71ED;font-size:16px;"><a href="{{route('order.receipt',$item['id'])}}">Task
                                                     ID: {{$item->website->order_prefix}}{{$item['id']}}</a></div>
                                                 </div>
                                                 <div style="width:100%;float:left;">
@@ -293,7 +301,7 @@ p.v-data {
                                                     <div style="width:60%;font-size:18px;font-weight:600;float:left;">
                                                         {{$item->subject['subject_name']}}</div>
                                                     <div style="float:left;width:20%;color:#3B71ED;font-size:16px;">
-                                                    <a href="{{url('vieworder/'.$item['id'])}}">Task
+                                                    <a href="{{route('order.receipt',$item['id'])}}">Task
                                                         ID: {{$item->website->order_prefix}}{{$item['id']}}</a></div>
                                                 </div>
                                                 <div style="width:100%;float:left;">
@@ -311,15 +319,33 @@ p.v-data {
                                                     style="text-align:right;font-size:16px;color:#000;font-weight:bold;">
                                                     {{$item['currency_code']}}{{$item['price']}}</div>
                                                 <div style="text-align:right;">
+
+                                                    @if($item->ratings)
+                                                    <a href="#"
+                                                        class="btn btn-rounded btn-outline-light pull-left rate-button"
+                                                        style="padding: 9px;margin-right: 10px;">
+                                                        <div>
+                                                            @for($i=1; $i<=5; $i++)
+                                                                @if($i<=$item->ratings->ratings)
+                                                                    <span class="fa fa-star checked"></span>
+                                                                @else
+                                                                    <span class="fa fa-star"></span>
+                                                                @endif
+                                                            @endfor
+                                                            
+                                                        </div>
+                                                    </a>
+                                                    @else
                                                     <a href="#"
                                                         class="btn btn-rounded btn-outline-light pull-left rate-button"
                                                         style="padding: 9px;margin-right: 10px;" data-bs-toggle="modal"
                                                         data-bs-target="#exampleModalCenter"
                                                         data-order-id="{{$item['id']}}">
-                                                        <img class="nav-icon"
-                                                            src="<?php echo asset('/student/');?>/img/Star 27.png"> Rate
-                                                        your order
+                                                        <img class="nav-icon" src="<?php echo asset('/student/');?>/img/Star 27.png"> Rate your order
                                                     </a>
+                                                    @endif
+
+
                                                     <a href="{{url('vieworder/'.$item['id'])}}" class="btn btn-primary">
                                                         <img class="nav-icon"
                                                             src="<?php echo asset('/student/');?>/img/message_white.png">
@@ -387,7 +413,7 @@ p.v-data {
                         </div>
                         <div class="mb-3">
                             <button type="submit" class="btn btn-primary btn-block">Send</button>
-                        </div>
+                        </div> 
                     </form>
                 </div>
             </div>

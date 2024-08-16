@@ -1,72 +1,134 @@
-@extends('layout.app')
+@extends('layout.student')
 @section('content')
-<main class="main-area fix">
-
-    <!-- banner-area -->
-    <section class="banner-area banner-bg-three tg-motion-effects">
-        <div class="container">
-            <div class="row justify-content-between align-items-start">
-                <div class="col-lg-12">
-                    <h3>Order Receipt</h3>
-                    <table style="width:80%; margin:0 auto;" class="summary-table">
-
-                        <tr>
-                            <td width="50%">Transaction Id:</td>
-                            <td id="summary_suject">{{$order?->payment?->transaction_id}}</td>
-                        </tr>
-
-                        <tr>
-                            <td width="50%">Subject:</td>
-                            <td id="summary_suject">{{$order?->subject?->subject_name}}</td>
-                        </tr>
-
-                        <tr>
-                            <td>Referencing Style:</td>
-                            <td id="summary_referencing_style">{{$order?->referencingStyle?->style}}</td>
-                        </tr>
-
-
-                        <tr>
-                            <td>Task type:</td>
-                            <td id="summary_task_type">{{$order?->taskType?->type_name}}</td>
-                        </tr>
-
-
-                        <tr>
-                            <td>Word count:</td>
-                            <td id="summary_word_count">{{$order?->no_of_words}}</td>
-                        </tr>
-
-                        <tr>
-                            <td>Level of study</td>
-                            <td id="summary_level_of_study">{{$order?->studyLevel?->level_name}}</td>
-                        </tr>
-
-
-                        <tr>
-                            <td>Grade required</td>
-                            <td id="summary_grade_required">{{$order?->grade?->grade_name}}</td>
-                        </tr>
-
-
-                        <tr>
-                            <td>Delivery At</td>
-                            <td id="summary_delivery_at">{{$order?->delivery_date}}</td>
-                        </tr>
-
-                        <tr>
-                            <td>Total Price:</td>
-                            <td id="summary_total_price">{{$order?->currency_code}}{{$order?->gross_price}}</td>
-                        </tr>
-                        <tr>
-                            <td colspan="2">
-                                <a href="{{route('order.transactions')}}" class="btn btn-primary w-100">Continue to
-                                    Order</a>
-                            </td>
-                        </tr>
-                    </table>
+    <div class="content-body">
+            <!-- row -->
+        <div class="container-fluid">
+				    
+                <div class="row page-titles mx-0">
+                    <div class="col-sm-6 p-md-0">
+                        <div class="welcome-text">
+                            <h4>Order Receipt</h4>
+                        </div>
+                    </div>
+                    <div class="col-sm-6 p-md-0 justify-content-sm-end mt-2 mt-sm-0 d-flex">
+                        <ol class="breadcrumb">
+                            
+                            <li class="breadcrumb-item"><a href="javascript:void(0);">Orders</a></li>
+                            <li class="breadcrumb-item active"><a href="javascript:void(0);">Order Receipt</a></li>
+                        </ol>
+                    </div>
                 </div>
+				
+				<div class="row">
+                    <div class="col-lg-12 mb-3">
+
+                        <div class="card mt-3">
+                            <div class="card-header"> Invoice <strong>{{$order?->payment?->created_at}}</strong> 
+									<span class="float-right">
+										<strong>Payment Status:</strong> {{$order?->payment?->payment_status}} 
+									</span> 
+									<span class="float-right">
+										<strong>Transection:</strong>{{$order?->payment?->transaction_id}}
+									</span> 
+							</div>
+									
+									
+                            <div class="card-body">
+                                
+                                <div class="table-responsive">
+                                    <table class="table table-striped text-nowrap">
+                                        <thead>
+                                            <tr>
+                                                <th class="center">#</th>
+                                                <th>Fees Type</th>
+                                                <th>Frequency</th>
+                                                
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr>
+                                                <td class="center">1</td>
+												<td class="left">Subject:</td>
+                                                <td class="left strong">{{$order?->subject?->subject_name}}</td>
+                                                
+                                                
+                                            </tr>
+                                            <tr>
+                                                <td class="center">2</td>
+												<td class="left">Referencing Style:</td>
+                                                <td class="left">{{$order?->referencingStyle?->style}}</td>
+                                                
+                                                
+                                            </tr>
+                                            <tr>
+                                                <td class="center">3</td>
+												<td class="left">Task type:</td>
+                                                <td class="left">{{$order?->taskType?->type_name}}</td>
+                                                
+                                               
+                                            </tr>
+                                            <tr>
+                                                <td class="center">4</td>
+												<td class="left">Word count:</td>
+                                                <td class="left">{{$order?->no_of_words}}</td>
+                                                
+                                                
+                                            </tr>
+											<tr>
+											    <td class="center">4</td>
+												<td>Level of study</td>
+												<td>{{$order?->studyLevel?->level_name}}</td>
+												
+											</tr>
+
+
+											<tr>
+											    <td class="center">4</td>
+												<td>Grade required</td>
+												<td>{{$order?->grade?->grade_name}}</td>
+												
+											</tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                                <div class="row">
+                                    <div class="col-lg-4 col-sm-5"> </div>
+                                    <div class="col-lg-4 col-sm-5 ms-auto">
+                                        <table class="table table-clear">
+                                            <tbody>
+                                                <tr>
+                                                    <td class="left"><strong>Subtotal</strong></td>
+                                                    <td class="right">{{$order?->currency_code}}{{$order?->gross_price}}</td>
+                                                </tr>
+                                                <tr>
+                                                    <td class="left"><strong>Coupon Discount (20%)</strong></td>
+                                                    <td class="right"></td>
+                                                </tr>
+                                                <tr>
+                                                    <td class="left"><strong>Wallet use</strong></td>
+                                                    <td class="right"></td>
+                                                </tr>
+                                                <tr>
+                                                    <td class="left"><strong>Total</strong></td>
+                                                    <td class="right"><strong>{{$order?->currency_code}}{{$order?->gross_price}}</strong></td>
+                                                </tr> 
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </div>
+								<div class="row">  
+									<div class="col-lg-12 text-right">
+										
+										<button onclick="javascript:window.print();" class="btn btn-light" type="button"> <i class="fa fa-print"></i> Print </button>
+									</div>
+								</div>
+                            </div>
+                        </div>
+                    </div>
+				</div>
+					
             </div>
-        </div>
-    </section>
-    @endsection
+    </div>
+
+	
+	@endsection
