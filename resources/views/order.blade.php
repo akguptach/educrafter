@@ -2,6 +2,7 @@
 @section('content')
 <!-- main-area -->
 <style>
+.navmenu{ display:none;}
 .btn-plus,
 .btn-minus {
     background: #fff;
@@ -239,7 +240,7 @@
                                         </ul>
                                         @endif
                                     </div>
-                                    <div class="file-upload-box">
+                                    <div class="file-upload-box" style="text-align: center;">
                                         <a for="taskFile" class="form-label" data-bs-toggle="modal"
                                             href="#fileuploadModal">Attach files</a>
                                     </div>
@@ -921,10 +922,11 @@ function sendAttachment(attachmentFile, attachmentUrl)  {
         contentType: false,
         data: attachmentFormData,
         success: function(sendAttachmentResponse) {
-            attachmentData = '<ul>';
+            attachmentData = '<ul style="list-style: none;text-align: left;">';
+			var i=0;
             (sendAttachmentResponse.attachment).forEach((item) => {
-                attachmentData += '<li><a href="' + item + '" target="_blank">' + item +
-                    '</a></li>';
+				i++;
+                attachmentData += '<li><a href="' + item + '" target="_blank">Attechemnt File'+i+'</a></li>';
                     attachmentJson.push({url:item})
 
             });

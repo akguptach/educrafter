@@ -150,6 +150,7 @@ class OrderController extends Controller
         $arrWP = explode(',', $websiteArr['website_price']);
 		
         $total2 = ($total * $arrWP[0]) / 100;
+		$total2=round($total2);
 
         $arrP = array();
         $arrP['hour1'] = 100;
@@ -194,7 +195,8 @@ class OrderController extends Controller
                 if ($delivery_date == '30 days') {
                     $checked = 'checked';
                 }
-                $str .= '<li class="col-2" style="height: 82px;margin-top:2px;"><input class="delivery_at" type="radio" value="30 days" name="custom_date_at" rel="' . $websiteArr['currency_sign'] . $total1 . '" style="height:80px;" '.$checked.' /><label for="custom_date_at" >
+                $str .= '<li class="col-2" style="height: 82px;margin-top:2px;"><input class="delivery_at" type="radio" value="30 days" name="custom_date_at" 
+				rel="' . $websiteArr['currency_sign'] . $total1 . '" style="height:80px;" '.$checked.' /><label for="custom_date_at" >
 					<span style="float: left;width: 100%;font-size: 12px;">Delivered in</span>
 					<span style="float: left;width: 100%;font-weight: bold;font-size: 20px;">30 Days</span>
 					<span style="float: left;width: 100%;font-size:14px;color:#0a58ca;">' . $total1 . $websiteArr['currency_sign'] . '</span>
@@ -238,7 +240,7 @@ class OrderController extends Controller
 					<span style="float: left;width: 100%;font-weight: bold;font-size: 20px;">' . $dd . '</span>
 					<span style="float: left;width: 100%;font-size:14px;color:#0a58ca;">' . $total1 . $websiteArr['currency_sign'] . '</span>
 					</label></li>';
-                    $arrP['delivery_date_price'] = $websiteArr['currency_sign'] . $total1;
+                   
                 } else {
 
                     $str .= '<li class="col-2" style="height: 82px;margin-top:2px;"><input class="delivery_at" type="radio" value="' . $date . '" name="custom_date_at" rel="' . $websiteArr['currency_sign'] . $total1 . '" style="height:80px;" />
@@ -247,10 +249,16 @@ class OrderController extends Controller
 					<span style="float: left;width: 100%;font-weight: bold;font-size: 20px;">' . $dd . '</span>
 					<span style="float: left;width: 100%;font-size:14px;color:#0a58ca;">' . $websiteArr['currency_sign'] . $total1 . '</span>
 					</label></li>';
-                    if ($delivery_date != 'NA' && $delivery_date != '12 hours') {
-                        $arrP['delivery_date_price'] = $websiteArr['currency_sign'] . $total1;
-                    }
+                    
                 }
+				
+				if($delivery_date == $date) {
+				 $arrP['delivery_date_price'] = $websiteArr['currency_sign'] . $total1;
+				}
+				/*if ($delivery_date != 'NA' && $delivery_date != '12 hours') {
+							$arrP['delivery_date_price'] = $websiteArr['currency_sign'] . $total1;
+						
+                }*/
                 
             }
 
