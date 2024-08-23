@@ -80,7 +80,8 @@ Route::post('/validate-coupon-code', [Order::class, 'validateCouponCode'])->name
 Route::post('/neworder/auth/check', [Order::class, 'orderValidate'])->name('orderValidate');
 Route::post('/neworder', [Order::class, 'create'])->name('neworder'); 
 
-
+Route::get('/auth/google', [\App\Http\Controllers\GoogleLoginController::class, 'redirectToGoogle'])->name('auth.google');
+Route::any('/google/logincallback', [App\Http\Controllers\GoogleLoginController::class, 'handleGoogleCallback'])->name('google.callback');
 
 Route::post('/process-attachment', [Order::class, 'processAttachment'])->name('process-attachment');
 Route::middleware('auth')->group(function () {

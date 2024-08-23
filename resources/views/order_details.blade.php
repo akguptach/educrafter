@@ -78,7 +78,7 @@
                                     </div>
                                     <div style="float:left;font-size:14px;color:#000;">Delivery in
                                         {{$data['delivery_date']}} | {{$data['no_of_words']}} words |
-                                        {{$data->taskType->type_name}} | English(Demo)</div>
+                                        {{$data->taskType->type_name}}</div>
                                 </div>
                             </div>
                             <div style="width: 10%;float:right;">

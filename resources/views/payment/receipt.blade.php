@@ -96,22 +96,40 @@
                                     <div class="col-lg-4 col-sm-5 ms-auto">
                                         <table class="table table-clear">
                                             <tbody>
+
+                                            <tr>
+                                                    <td class="left"><strong>Total</strong></td>
+                                                    <td class="right"><strong>{{$order?->currency_code}}{{$order?->price}}</strong></td>
+                                                </tr>
+
+                                               
+                                                @if($order->coupon)
+                                                <tr>
+                                                    <td class="left"><strong>Coupon Discount (
+                                                        @if($order->coupon->reduction_type == 'PERCENTAGE')
+                                                        @php($discount = ($order?->price * $order->coupon->reduction_amount)/100)
+                                                        {{$order->coupon->reduction_amount}}%
+                                                        @else
+                                                        @php($discount = $order->coupon->reduction_amount)
+                                                        {{$order->currency_code}}{{$order->coupon->reduction_amount}}
+                                                        @endif
+                                                    )</strong></td>
+                                                    <td class="right">{{$order?->currency_code}}{{$discount}}</td>
+                                                </tr>
+                                                @endif
+                                                @if($order->wallet_paid)
+                                                <tr>
+                                                    <td class="left"><strong>Wallet use</strong></td>
+                                                    <td class="right"><strong>{{$order?->currency_code}}{{$order?->wallet_paid}}</strong></td>
+                                                </tr> 
+                                                @endif
+
                                                 <tr>
                                                     <td class="left"><strong>Subtotal</strong></td>
                                                     <td class="right">{{$order?->currency_code}}{{$order?->gross_price}}</td>
                                                 </tr>
-                                                <tr>
-                                                    <td class="left"><strong>Coupon Discount (20%)</strong></td>
-                                                    <td class="right"></td>
-                                                </tr>
-                                                <tr>
-                                                    <td class="left"><strong>Wallet use</strong></td>
-                                                    <td class="right"></td>
-                                                </tr>
-                                                <tr>
-                                                    <td class="left"><strong>Total</strong></td>
-                                                    <td class="right"><strong>{{$order?->currency_code}}{{$order?->gross_price}}</strong></td>
-                                                </tr> 
+
+                                                 
                                             </tbody>
                                         </table>
                                     </div>

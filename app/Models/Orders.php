@@ -77,4 +77,9 @@ class Orders extends Model
     {
         return $this->hasOne('App\Models\QcAssign', 'order_id');
     }
+
+    public function coupon()
+    {
+        return $this->belongsTo('App\Models\Coupon', 'coupon_code_id');
+    }
 }

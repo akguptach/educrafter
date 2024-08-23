@@ -51,30 +51,28 @@ class StudentController extends Controller
         $student->password = Hash::make($request->password);
         $student->save();
         $student->referral_code = $student->id.time();
-        $student->update();
+        
         if(isset($request->referral_code)){
 
             
-            $referredBy = Student::where('referral_code',$request->referral_code)->first();
+            /*$referredBy = Student::where('referral_code',$request->referral_code)->first();
             if($referredBy){
-                
                 $referral = Referral::Create([
                     'student_id'=>$student->id,
                     'referred_by'=>$referredBy->id,
                     'earned'=>50
                 ]);
-
                 WalletTransaction::Create([
                     'user_id'=>$referredBy->id,
                     'referral_id'=>$referral->id,
                     'amount'=>50,
                     'type'=>'credit'
                 ]);
+            }*/
+            $student->reffered_by_code = $request->referral_code;
 
-
-                
-            }
         }
+        $student->update();
 
         $token = Auth::attempt(['email' => $request->input('email'), 'password' => $request->input('password')]);
         $response = [];

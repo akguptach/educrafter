@@ -102,7 +102,7 @@ class PageController extends Controller
             );
         }
         $request->session()->forget('orderRequestData');
-        return redirect()->back()->with('success', 'your message,here'); 
+        return redirect()->back()->with('success', 'Reffer link has been sent'); 
     }
 
     public function refer_friend(Request $request)

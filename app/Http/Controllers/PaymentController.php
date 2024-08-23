@@ -17,6 +17,8 @@ use Stripe\Checkout\Session;
 use Illuminate\Support\Facades\DB;
 use Mail;
 use App\Models\Coupon;
+use App\Models\Student;
+use App\Models\Referral;
 use Illuminate\Support\Facades\Auth;
 
 class PaymentController extends Controller
@@ -154,8 +156,8 @@ class PaymentController extends Controller
                     ]);
                 }
                 
-
-
+                
+               
 
 
                 DB::table('payment')->updateOrInsert(
@@ -169,6 +171,33 @@ class PaymentController extends Controller
                         'transaction_id' => session('payment_object')->id
                     ]
                 );
+
+                // add reffer earning
+                if(Auth::user()->reffered_by_code_status == 0 && Auth::user()->reffered_by_code){
+                    $referredBy = Student::where('referral_code',Auth::user()->reffered_by_code)->first();
+
+                    $amount = $order->gross_price+$order->wallet_paid;
+                    $earning = $amount*10/100;
+                    if($referredBy){
+                        $referral = Referral::Create([
+                            'student_id'=>Auth::user()->id,
+                            'referred_by'=>$referredBy->id,
+                            'earned'=>$earning
+                        ]);
+                        WalletTransaction::Create([
+                            'user_id'=>$referredBy->id,
+                            'referral_id'=>$referral->id,
+                            'amount'=>$earning,
+                            'type'=>'credit'
+                        ]);
+                        $currentUser = Student::where('id',Auth::user()->id)->first();
+                        $currentUser->reffered_by_code_status = 1;
+                        $currentUser->save();
+
+                    }
+
+                }
+
 
 
 
@@ -245,7 +274,10 @@ class PaymentController extends Controller
         }else {
             return redirect()->back();
         }
-    }    
+    }  
+    
+    
+
     public function payment(Request $request)
     {	
         

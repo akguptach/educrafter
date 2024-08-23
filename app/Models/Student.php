@@ -9,7 +9,7 @@ class Student extends Authenticatable
 {
     use HasApiTokens, HasFactory, Notifiable;
     protected $table = 'student';
-    protected $fillable = ['first_name','last_name','email','phone_number','password','country_code','referral_code'];
+    protected $fillable = ['first_name','last_name','email','phone_number','password','country_code','referral_code','reffered_by_code','reffered_by_code_status'];
 
     public function orders()
     {
