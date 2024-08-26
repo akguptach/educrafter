@@ -136,6 +136,7 @@ class OrderController extends Controller
         }
         //echo $no_of_words.'=='.$websiteArr['no_words'];
 
+//24+5.28=27.28+2.7=30*60 200,170,150,100,100,100,100,95,95,95,92,92,90,90,90,88,88,88,85,85,85,85,80,75,70
 
         $total1 = $subjectArr['price'] + (($no_of_words - $websiteArr['no_words']) * $subjectArr['additional_word_rate']);
 
@@ -144,6 +145,7 @@ class OrderController extends Controller
         //echo $websiteArr['price'].'=='.$studylabelArr['price'].'=='.$task_typeArr['price'].'=='.$gradeArr['price'];
         //echo '<br>';
         $total_percent = $labelofstudyArr['price'] + $task_typeArr['price'] + $gradeArr['price'];
+		
 
         $total = $total1 + round(($total1 * $total_percent) / 100);
 	
@@ -157,17 +159,18 @@ class OrderController extends Controller
         $arrP['delivery_date'] = $delivery_date;
         $checked='';
         $arrP['hour2'] = $total2 . $websiteArr['currency'];
-        if ($delivery_date == '12 hours') {
+		$arrP['delivery_date_price'] = 0;
+        //if ($delivery_date == '12 hours') {
             
-            $str = '<li class="col-12" style="height: 60px;"><input class="delivery_at" type="radio" value="12 hours" name="custom_date_at" rel="' . $websiteArr['currency_sign'] . $total2 . '" checked /><label for="custom_date_at" >12 Hours<br>' . $websiteArr['currency_sign'] . $total2 . '</label></li>';
+            $str = '<li class="col-12" style="height: 60px;"><input class="delivery_at" type="radio" value="12 hours" name="custom_date_at" rel="' . $websiteArr['currency_sign'] . $total2 . '" /><label for="custom_date_at" >12 Hours<br>' . $websiteArr['currency_sign'] . $total2 . '</label></li>';
 
             $arrP['delivery_date_price'] = $websiteArr['currency_sign'] . $total2;
-        } else {
-            $str = '<li class="col-12" style="height: 60px;"><input class="delivery_at" type="radio" value="12 hours" name="custom_date_at" rel="' . $websiteArr['currency_sign'] . $total2 . '" /><label for="custom_date_at" >12 Hours<br>' . $websiteArr['currency_sign'] . $total2 . '</label></li>';
-        }
-        if ($delivery_date == 'NA') {
-            $arrP['delivery_date_price'] = 0;
-        }
+        //} else {
+            //$str = '<li class="col-12" style="height: 60px;"><input class="delivery_at" type="radio" value="12 hours" name="custom_date_at" rel="' . $websiteArr['currency_sign'] . $total2 . '" /><label for="custom_date_at" >12 Hours<br>' . $websiteArr['currency_sign'] . $total2 . '</label></li>';
+        //}
+        //if ($delivery_date == 'NA') {
+            //$arrP['delivery_date_price'] = 0;
+        //}
 
         $j = 1;
 		
@@ -194,6 +197,7 @@ class OrderController extends Controller
                 $checked = '';
                 if ($delivery_date == '30 days') {
                     $checked = 'checked';
+					$arrP['delivery_date_price'] = $websiteArr['currency_sign'] . $total1;
                 }
                 $str .= '<li class="col-2" style="height: 82px;margin-top:2px;"><input class="delivery_at" type="radio" value="30 days" name="custom_date_at" 
 				rel="' . $websiteArr['currency_sign'] . $total1 . '" style="height:80px;" '.$checked.' /><label for="custom_date_at" >
@@ -201,24 +205,26 @@ class OrderController extends Controller
 					<span style="float: left;width: 100%;font-weight: bold;font-size: 20px;">30 Days</span>
 					<span style="float: left;width: 100%;font-size:14px;color:#0a58ca;">' . $total1 . $websiteArr['currency_sign'] . '</span>
 					</label></li>';
-                $arrP['delivery_date_price'] = $websiteArr['currency_sign'] . $total1;
+                
             } elseif ($j == 23) {
 
                 $checked = '';
                 if ($delivery_date == '45 days') {
                     $checked = 'checked';
+					$arrP['delivery_date_price'] = $websiteArr['currency_sign'] . $total1;
                 }
                 $str .= '<li class="col-2" style="height: 82px;margin-top:2px;"><input class="delivery_at" type="radio" value="45 days" name="custom_date_at" rel="' . $websiteArr['currency_sign'] . $total1 . '" style="height:80px;" '.$checked.' /><label for="custom_date_at" >
 					<span style="float: left;width: 100%;font-size: 12px;">Delivered in</span>
 					<span style="float: left;width: 100%;font-weight: bold;font-size: 20px;">45 Days</span>
 					<span style="float: left;width: 100%;font-size:14px;color:#0a58ca;">' . $total1 . $websiteArr['currency_sign'] . '</span>
 					</label></li>';
-                $arrP['delivery_date_price'] = $websiteArr['currency_sign'] . $total1;
+                
             } elseif ($j == 24) {
 
                 $checked = '';
                 if ($delivery_date == '60 days') {
                     $checked = 'checked';
+					$arrP['delivery_date_price'] = $websiteArr['currency_sign'] . $total1;
                 }
                 $str .= '<li class="col-2" style="height: 82px;margin-top:2px;"><input class="delivery_at" type="radio" value="60 days" name="custom_date_at" rel="' . $websiteArr['currency_sign'] . $total1 . '" style="height:80px;" '.$checked.' /><label for="custom_date_at" >
 					<span style="float: left;width: 100%;font-size: 12px;">Delivered in</span>
@@ -226,7 +232,7 @@ class OrderController extends Controller
 					<span style="float: left;width: 100%;font-size:14px;color:#0a58ca;">' . $total1 . $websiteArr['currency_sign'] . '</span>
 					</label></li>';
 
-                $arrP['delivery_date_price'] = $websiteArr['currency_sign'] . $total1;
+               
             } else {
                 $date = date("Y-m-d", strtotime(date('Y-m-d') . " +$i days"));
 
@@ -235,30 +241,35 @@ class OrderController extends Controller
                 $D1 = date("D", strtotime(date('Y-m-d') . " +$i days"));
                 if ($delivery_date == $date) {
  
-                    $str .= '<li class="col-2" style="height: 82px;margin-top:2px;"><input class="delivery_at" type="radio" value="' . $date . '" name="custom_date_at" rel="' . $total1 . ' ' . $websiteArr['currency_sign'] . '" style="height:80px;" checked /><label for="custom_date_at" >
-					<span style="float: left;width: 100%;font-size: 12px;">' . $D1 . '</span>
-					<span style="float: left;width: 100%;font-weight: bold;font-size: 20px;">' . $dd . '</span>
-					<span style="float: left;width: 100%;font-size:14px;color:#0a58ca;">' . $total1 . $websiteArr['currency_sign'] . '</span>
-					</label></li>';
+                    $str .= '<li class="col-2" style="height: 82px;margin-top:2px;">
+					<input class="delivery_at" type="radio" value="' . $date . '" name="custom_date_at" rel="' . $total1 . ' ' . $websiteArr['currency_sign'] . '" style="height:80px;" checked />
+					<label for="custom_date_at" >
+						<span style="float: left;width: 100%;font-size: 12px;">' . $D1 . '</span>
+						<span style="float: left;width: 100%;font-weight: bold;font-size: 20px;">' . $dd . '</span>
+						<span style="float: left;width: 100%;font-size:14px;color:#0a58ca;">' . $total1 . $websiteArr['currency_sign'].'</span>
+					</label>
+					</li>';
+					$arrP['delivery_date_price'] = $websiteArr['currency_sign'] . $total1;
                    
                 } else {
 
-                    $str .= '<li class="col-2" style="height: 82px;margin-top:2px;"><input class="delivery_at" type="radio" value="' . $date . '" name="custom_date_at" rel="' . $websiteArr['currency_sign'] . $total1 . '" style="height:80px;" />
+                    $str .= '<li class="col-2" style="height: 82px;margin-top:2px;">
+					<input class="delivery_at" type="radio" value="' . $date . '" name="custom_date_at" rel="' . $websiteArr['currency_sign'] . $total1 . '" style="height:80px;" />
 					<label for="custom_date_at" >
 					<span style="float: left;width: 100%;font-size: 12px;">' . $D1 . '</span>
 					<span style="float: left;width: 100%;font-weight: bold;font-size: 20px;">' . $dd . '</span>
-					<span style="float: left;width: 100%;font-size:14px;color:#0a58ca;">' . $websiteArr['currency_sign'] . $total1 . '</span>
+					<span style="float: left;width: 100%;font-size:14px;color:#0a58ca;">' . $websiteArr['currency_sign'] . $total1. '</span>
 					</label></li>';
                     
                 }
 				
-				if($delivery_date == $date) {
-				 $arrP['delivery_date_price'] = $websiteArr['currency_sign'] . $total1;
-				}
-				/*if ($delivery_date != 'NA' && $delivery_date != '12 hours') {
-							$arrP['delivery_date_price'] = $websiteArr['currency_sign'] . $total1;
+				//if($delivery_date == $date) {
+				 
+				//}
+				//if ($delivery_date != 'NA' && $delivery_date != '12 hours') {
+							//$arrP['delivery_date_price'] = $websiteArr['currency_sign'] . $total1;
 						
-                }*/
+                //}
                 
             }
 
@@ -268,12 +279,14 @@ class OrderController extends Controller
         }
 		
 		
-        if($request->delivery_price){
+        /*if($request->delivery_price){
             $arrP['delivery_date_price'] = $request->delivery_price;
             $price1 = $request->delivery_price;
         }else{
             $price1 = $websiteArr['currency_sign'] . $total1;
-        }
+        }*/
+		
+		$price1 = $arrP['delivery_date_price'];
 
 
         // apply coupon

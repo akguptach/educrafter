@@ -266,8 +266,8 @@ class PaymentController extends Controller
                 Flash::flash('payment_status','Failed');
                 return redirect()->route('payment.failed',session('payment_order_id'));
             }
-            /*$order = Orders::where('id',session('payment_order_id'))->first();
-            Mail::send('email.order-data', ['order' => $order], function($message) {
+            $order = Orders::where('id',session('payment_order_id'))->first();
+            /*Mail::send('email.order-data', ['order' => $order], function($message) {
                 $message->to(env("ADMIN_EMAIL"))->subject('New Order');
             });
             return redirect()->route('payment.success');*/

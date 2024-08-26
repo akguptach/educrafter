@@ -85,6 +85,15 @@ Route::any('/google/logincallback', [App\Http\Controllers\GoogleLoginController:
 
 Route::post('/process-attachment', [Order::class, 'processAttachment'])->name('process-attachment');
 Route::middleware('auth')->group(function () {
+
+
+Route::get('/withdraw-history', [App\Http\Controllers\PaymentMethodController::class, 'withdrawHistory'])->name('payment.withdraw.history');
+
+Route::get('/payment-method', [App\Http\Controllers\PaymentMethodController::class, 'index'])->name('payment.method.index');
+Route::post('/payment-method/bank', [App\Http\Controllers\PaymentMethodController::class, 'bank'])->name('payment.method.bank');
+Route::post('/payment-method/upi', [App\Http\Controllers\PaymentMethodController::class, 'upi'])->name('payment.method.upi');
+Route::post('/withdraw-amount', [App\Http\Controllers\PaymentMethodController::class, 'withdrawaAmount'])->name('payment.method.withdraw');
+
     Route::get('/payment-success/{order_id}', [Order::class, 'paymentSuccess'])->name('payment.success');
 Route::get('/payment-failed/{order_id}', [Order::class, 'paymentFailed'])->name('payment.failed');
 Route::get('/transactions/order-receipt/{order_id}', [Order::class, 'orderReceipt'])->name('order.receipt');

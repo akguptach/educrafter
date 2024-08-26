@@ -42,7 +42,7 @@
     left: 0;
     right: 0;
     border-radius: 0.3125rem;
-    border: 1px solid #0d6efd;
+    border: 1px solid #FFF4E4;
 }
 
 .donate-now input[type="radio"] {
@@ -59,17 +59,17 @@
 
 .donate-now label {
     padding: 5px;
-    border: 1px solid #0d6efd;
+    border: 1px solid #FFF4E4;
     cursor: pointer;
 
 }
 
 .donate-now label:hover {
-    background: #0d6efd;
+    background: #FFF4E4;
 }
 
 .donate-now input[type="radio"]:hover {
-    background: #0d6efd;
+    background: #FFF4E4;
 }
 
 .summary-table td {
@@ -99,7 +99,7 @@
                         <input type="hidden" id="uploadedFile" name="uploadedFile"
                             value="{{$orderRequestData['uploadedFile'] ?? ''}}" />
                         <input type="hidden" id="delivery_date" name="delivery_date"
-                            value="{{(isset($orderRequestData['delivery_date']) && $orderRequestData['delivery_date']!='NA')?$orderRequestData['delivery_date']:'12 hours'}}">
+                            value="{{(isset($orderRequestData['delivery_date']) && $orderRequestData['delivery_date']!='NA')?$orderRequestData['delivery_date']:'60 days'}}">
                         <input type="hidden" id="delivery_price" name="delivery_price"
                             value="{{$orderRequestData['delivery_price'] ?? 0}}">
                         <span class="title">Task Details</span>

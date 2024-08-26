@@ -36,6 +36,16 @@ $balance = number_format($credits-$debits,2);
                 </a>
             </li>
 
+
+            <li>
+                <a class="ai-icon" href="{{route('payment.method.index')}}" aria-expanded="false">
+                    <span class="nav-text">
+                        <span style="float:left;"><img class="nav-icon"
+                                src="<?php echo asset('/student/');?>/img/empty-wallet.png"> Payment Method
+                        </span> 
+                </a>
+            </li>
+
             <li>
                 <a class="ai-icon" href="{{route('order.statements')}}" aria-expanded="false">
                     <span class="nav-text">

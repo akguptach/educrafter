@@ -26,7 +26,7 @@ class StudentController extends Controller
         $website_id = env('WEBSITE_ID');
         $validator = Validator::make($request->all(), [
             'first_name' => 'required|min:3',
-            'last_name' => 'required',
+            'last_name' => 'required|min:3',
             //'email' => 'required|unique:student,email',
             'email' => ['required', 'email', Rule::unique('student', 'email')->where(function ($query) use ($website_id) {
                 $query->where('website_id', '=', $website_id);
