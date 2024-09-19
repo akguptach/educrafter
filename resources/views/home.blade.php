@@ -20,6 +20,7 @@
 .top-notch-hr{
 	display:none;
 }
+.top_university{ padding-top: 20px;padding-bottom: 40px;font-size: 2rem; }
 .support_m{
 		display:none;
 	}
@@ -37,16 +38,50 @@
 		margin-bottom: 24px;
 	}
 	.featured-in{ margin:0 auto;position:Absolute;display: flex;top: 21%;z-index:10;width:100%;}
+	.featured-in-div{ width: 400px;height: 400px;background: #fff;border-radius: 20px;display: flex;margin: 0 auto;/* top: 29%; */position: relative;border: 10px solid #FB9271;box-shadow: 8px 8px 0px 0px #000000;}
+	.featured-in-text{width:400px;position: absolute;bottom: 8px;font-size: 3em;font-family: 'Inter';text-align: center;color: #000;font-weight: bold;}
+	.featured-in img{width: 300px;height: 300px;/* display: block; */margin-left: auto;margin-right: auto;position: relative;top: -20%;transform: rotate(350deg);border-radius: 20px;}
+	
+	
 	.featured-in-img{ width:250px;}
-@media (max-width: 1199.98px) {
+	
+	.newsletter__inner-wrap-two .title {
+		font-family: 'Sofia Pro', sans-serif;font-weight:bold;font-size: 8em;
+     }
+	 .newsletter__inner-wrap-two .div1 { width:80%;}
+	 .newsletter__inner-wrap-two .div2 { width:20%;}
+	 .choose__area .subtitle{ font-size:1.6rem;}
+	 .choose__area .title{ font-size:3rem;}
+	@media (max-width: 1199.98px) {
+		 .choose__area .title{ font-size:1.5rem;}
+		.choose__area .subtitle{ font-size:1rem;}
+	.newsletter__form-two .btn {
+		background: #FEEAA8;
+		color: var(--tg-heading-color);
+		width: 50px !important;
+		height: 50px !important;
+		border-radius: 100px;
+		padding:5px;
+		box-shadow: 5px 4px 0px 0px #000000;
+     }
+	 .newsletter__inner-wrap-two .title {
+		font-family: 'Sofia Pro', sans-serif;font-weight:bold;font-size: 3em;text-align:left;
+     }
+	 .newsletter__inner-wrap-two .div1 { width:100%;margin-top:0px;}
+	 .newsletter__inner-wrap-two .div2 {position: absolute;right: 15px;}
+	 
+	.top_university{ padding-top: 20px;padding-bottom: 20px;font-size: 22px; }
 	.blog__bg{ padding:0px;}
 	.featured-in-img{ width:150px;}
-	.featured-in{ margin:0 auto;position:relative;display: flex;width:100%;margin-top: 30%;}
+	.featured-in{ margin:0 auto;position:relative;display: flex;width:100%;margin-top: 15%;}
+	.featured-in-text{width:300px;position: absolute;bottom: 8px;font-size: 3em;font-family: 'Inter';text-align: center;color: #000;font-weight: bold;}
+	.featured-in-div{ width: 300px;height: 300px;background: #fff;border-radius: 20px;display: flex;margin: 0 auto;/* top: 29%; */position: relative;border: 10px solid #FB9271;box-shadow: 8px 8px 0px 0px #000000;}
+	.featured-in img{width: 200px;height: 200px;/* display: block; */margin-left: auto;margin-right: auto;position: relative;top: -20%;transform: rotate(350deg);border-radius: 20px;}
     .fact__inner-wrap {
         padding: 0px 0px 20px;
     }
 	.fact__inner-wrap h2 {
-		font-size: 2rem;
+		font-size: 1.8rem;
 		font-weight:bold;
     }
 	.top-notch{
@@ -189,7 +224,7 @@
                 </div>
                 <div class="col-xl-12 col-lg-12" align="center"  id="home_logo_slider">
                     <div style="border: 1px solid #000000;box-shadow: 4px 4px 0px 0px #000000;border-radius: 8px;overflow: hidden;">
-                        <h3 style="padding-top: 20px;padding-bottom:20px;">We only hire tutors who have graduated from
+                        <h3 class="top_university">We only hire tutors who have graduated from
                             top universities.</h3>
                         <div class="marquee_mode"  style="height:88px;margin-bottom: 20px;" id="marquee_mode_top">
                             <div class="brand__item"
@@ -308,7 +343,7 @@
                     <div class="section__title text-center mb-25">
                         <h2 class="title">Top-Notch Essay <br>Writers In One Place</h2>
 
-                        <p style="line-height: 22px;font-size: 18px;">Get personalised essay help from top-notch essay writers and boost your grades.</p>
+                        <p style="line-height: 22px;font-size: 16px;">Get personalised essay help from top-notch essay writers and boost your grades.</p>
 
                     </div>
                 </div>
@@ -769,7 +804,7 @@
     </section>
 
 
-    <section class="testimonial__area-two pb-60 testimonial__bg" style="padding-top:50px;">
+    <section class="testimonial__area-two pb-60 testimonial__bg">
         <style>
         /* Prevent click/hover for element */
         .off {
@@ -1072,7 +1107,7 @@
         <div class="container-fluid">
             <h3 style="padding-top: 20px;padding-bottom:20px;text-align:center;">250k+ students trust us, and you can
                 too!</h3>
-            <div class="marquee_mode" id="marquee_mode_top11">
+            <div class="marquee_mode_img" id="marquee_mode_top11">
                 <div class="brand__item"
                     style="border: 1px solid #C6C6C6;border-radius: 8px;padding: 10px;box-shadow: 3px 4px 0px 0px #000000;background: #fff;">
                     <img src="{{ asset('img/downlogo/Babson college.png')}}" style="width:150px;">
@@ -1266,7 +1301,7 @@
         
 		
          <div class="brand-area" style="background: #c2e3fb;">
-        <div class="marquee_mode" id="marquee_mode1">
+        <div class="marquee_mode_img" id="marquee_mode1">
 
            
                 <div class="brand__item">
@@ -1306,58 +1341,37 @@
 		
 		
 		<div  class="featured-in">
-            <div
-                style="width:400px;height: 400px;background: #fff;border-radius: 20px;display: flex;margin: 0 auto;/* top: 29%; */position: relative;border: 10px solid #FB9271;box-shadow: 8px 8px 0px 0px #000000;">
-                <img src="{{ asset('img/1rRk.gif')}}"
-                    style="width: 300px;height: 300px;/* display: block; */margin-left: auto;margin-right: auto;position: relative;top: -20%;transform: rotate(350deg);border-radius: 20px;">
-
-                <div
-                    style="width:400px;position: absolute;bottom: 8px;font-size: 3em;font-family: 'Inter';text-align: center;color: #000;font-weight: bold;">
-                    <span style="color: #000;width: 100%;float: left;height: 54px;">As</span><span
-                        style="color:#3B71ED;">Featured</span> In</div>
-            </div>
-
-
-        </div>
-		<div class="marquee_mode" id="marquee_mode2" style="margin-top: 20px;">
-            <div class="row">
-                <div class="col-xl-2 col-md-2">
-                    <div class="shine__animate-item">
-                        <img src="{{ asset('img/logos/newsweek.svg')}}" style="width:250px;">
-                    </div>
-                </div>
-                <div class="col-xl-2 col-md-2">
-                    <div class="shine__animate-item">
-                        <img src="{{ asset('img/logos/nyp.svg')}}" style="width:250px;">
-                    </div>
-                </div>
-                <div class="col-xl-2 col-md-2">
-                    <div class="shine__animate-item">
-                        <img src="{{ asset('img/logos/edutopia.svg')}}" style="width:250px;">
-                    </div>
-                </div>
-                <div class="col-xl-2 col-md-2">
-                    <div class="shine__animate-item">
-                        <img src="{{ asset('img/logos/forbes.svg')}}" style="width:250px;">
-                    </div>
-                </div>
-                <div class="col-xl-2 col-md-2">
-                    <div class="shine__animate-item">
-                        <img src="{{ asset('img/logos/lifehacker.svg')}}" style="width:250px;">
-                    </div>
-                </div>
-
-                <div class="col-xl-2 col-md-2">
-                    <div class="shine__animate-item">
-                        <img src="{{ asset('img/logos/cnbc.svg')}}" style="width:250px;">
-                    </div>
-                </div>
-
-
-
+            <div class="featured-in-div">
+                <img src="{{ asset('img/1rRk.gif')}}">
+                <div class="featured-in-text"><span style="color: #000;width: 100%;float: left;height: 54px;">As</span><span style="color:#3B71ED;">Featured</span> In</div>
             </div>
         </div>
+		
+		<div class="brand-area" style="background: #c2e3fb;">
+			<div class="marquee_mode_img" id="marquee_mode2" style="margin-top: 20px;">
+                <div class="brand__item">
+                    <img src="{{ asset('img/logos/newsweek.svg')}}" class="featured-in-img">
+                </div>
+				<div class="brand__item">
+                        <img src="{{ asset('img/logos/nyp.svg')}}" class="featured-in-img">
+                </div>
+               <div class="brand__item">
+                    <img src="{{ asset('img/logos/edutopia.svg')}}" class="featured-in-img">
+                </div>
+                <div class="brand__item">
+                    <img src="{{ asset('img/logos/forbes.svg')}}" class="featured-in-img">
+                </div>
+                <div class="brand__item">
+                    <img src="{{ asset('img/logos/lifehacker.svg')}}" class="featured-in-img">
+                </div>
 
+                <div class="brand__item">
+                    <img src="{{ asset('img/logos/cnbc.svg')}}" class="featured-in-img">
+                </div>
+		    </div>
+		</div>
+		
+		
     </section>
     <!-- faq-area -->
     <section class="faq__area">
@@ -1365,7 +1379,7 @@
             <div class="row justify-content-center">
                 <div class="col-lg-12">
                     <div class="section__title text-center mt-40 mb-40">
-                        <h2 class="title" style="font-size:5rem;">Frequently Asked Questions</h2>
+                        <h2 class="title">Frequently Asked Questions</h2>
                     </div>
                 </div>
             </div>
@@ -1413,39 +1427,70 @@
     <!-- faq-area-end -->
 
     <!-- choose-area -->
-    <section class="choose__area tg-motion-effects section-pt-30 pb-60 mb-5"
-        style="background: #FFF4E4;border: 1px solid #000000;box-shadow: 0px 7px 0px 0px #000000;margin-top:50px;">
+    <section class="choose__area tg-motion-effects section-pt-30 pb-60 mb-5" style="background: #FFF4E4;border: 1px solid #000000;box-shadow: 0px 7px 0px 0px #000000;margin-top:50px;">
         <div class="container" style="max-height: 600px;overflow: auto;">
             <div class="row justify-content-center">
                 <div class="col-xl-12">
                     <div class="section__title text-center mb-40">
-
-                        <h2 class="title" style="font-size:3em;">Make your studies effortless with our essay writing
-                            service</h2>
+                        <h2 class="title">Make your studies effortless with our essay writing service</h2>
 
                     </div>
                 </div>
             </div>
             <div class="choose__inner-wrap">
                 <div class="row">
-                    @foreach ($ServiceSpecifications as $arrR)
-                    <div class="col-lg-6">
+				    <div class="col-lg-6">
+                    <?php $i=0;
+					foreach ($ServiceSpecifications as $arrR){ $i++;
+						if($i==1 || $i==3 || $i==5 || $i==7 || $i==9)
+						{
+						
+						?>
+						
 
-                        <div class="choose__content" style="border: 1px solid #000000;border-radius:24px;">
-                            <div class="section__title mb-15" style="height: 38px;">
-                                <span style="width: 13%;float: left;padding: 9px 0px 0px 0px;"><img
-                                        src="{{ asset('img/writing_service/1.svg')}}" style="width: 55px;"></span>
-                                <span style="float: left;width: 87%;">
-                                    <h4 class="subtitle" style="font-size:28px;">{{$arrR->title}}</h4>
-                                </span>
-                            </div>
-                            <p style="font-size: 16px;   font-weight: 400; text-align:justify;font-family: 'Inter';">
-                                {!!$arrR->description!!}</p>
+							<div class="choose__content" style="border: 1px solid #000000;border-radius:24px;">
+								<div class="section__title mb-15" style="height: 38px;">
+									<span style="width: 17%;float: left;padding: 9px 10px 10px 0px;"><img
+											src="{{ asset('img/writing_service/1.svg')}}" style="width: 55px;"></span>
+									<span style="float: left;width: 83%;">
+										<h4 class="subtitle">{{$arrR->title}}</h4>
+									</span>
+								</div>
+								<p style="font-size: 16px;   font-weight: 400; text-align:justify;font-family: 'Inter';">
+									{!!$arrR->description!!}</p>
 
 
-                        </div>
-                    </div>
-                    @endforeach
+							</div>
+					   
+						<?php }
+					}?>
+					 </div>
+					 <div class="col-lg-6">
+					     <?php $i=0;
+					    foreach ($ServiceSpecifications as $arrR){ $i++;
+						if($i==2 || $i==4 || $i==6 || $i==8 || $i==10)
+						{
+						
+						?>
+						
+
+							<div class="choose__content" style="border: 1px solid #000000;border-radius:24px;">
+								<div class="section__title mb-15" style="height: 38px;">
+									<span style="width: 17%;float: left;padding: 9px 10px 10px 0px;"><img
+											src="{{ asset('img/writing_service/1.svg')}}" style="width: 55px;"></span>
+									<span style="float: left;width: 83%;">
+										<h4 class="subtitle">{{$arrR->title}}</h4>
+									</span>
+								</div>
+								<p style="font-size: 16px;   font-weight: 400; text-align:justify;font-family: 'Inter';">
+									{!!$arrR->description!!}</p>
+
+
+							</div>
+					   
+						<?php }
+					}?>
+					 </div>
 
 
                 </div>
@@ -1462,21 +1507,16 @@
         <div class="container">
             <div class="newsletter__inner-wrap newsletter__inner-wrap-two" style="background: #C2E3FB;">
 
-                <img src="{{ asset('img/black star.svg')}}" style="position:Absolute;top:10px;left: 50px;">
-                <div style="width:80%">
-                    <h2 class="title" style="font-family: 'Sofia Pro', sans-serif;font-weight:bold;font-size:8em;">Hire
-                        Tutor</h2>
-                    <p style="color:#000;font-size:18px;font-weight: 500;">Grade-Boosting Essays: Our Precision Writers
-                        Hit Your Academic Target Every Time </p>
+                <img src="{{ asset('img/black star.svg')}}" class="img1" style="position:Absolute;top:10px;left: 50px;">
+                <div class="div1">
+                    <h2 class="title">Hire Tutor</h2>
+                    <p>Grade-Boosting Essays: Our Precision Writers Hit Your Academic Target Every Time </p>
                 </div>
-                <div style="width:20%">
-                    <form action="#" class="newsletter__form-two">
+                <div class="div2">
+                    <form action="https://educrafter.co/order" class="newsletter__form-two">
                         <button type="submit" class="btn"><img src="{{ asset('img/arrow.png')}}"></button>
                     </form>
                 </div>
-
-
-
             </div>
 
         </div>

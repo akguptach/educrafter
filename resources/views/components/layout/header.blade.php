@@ -44,7 +44,7 @@ $services = \App\Models\Service::where('website_type', 'Educrafter')->where('typ
     <link rel="stylesheet" href="{{ asset('css/plyr.css') }}">
     <link rel="stylesheet" href="{{ asset('css/spacing.css') }}">
     <link rel="stylesheet" href="{{ asset('css/tg-cursor.css') }}">
-    <link rel="stylesheet" href="{{ asset('css/main.css?w=4') }}">
+    <link rel="stylesheet" href="{{ asset('css/main.css?w=8') }}">
 
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>

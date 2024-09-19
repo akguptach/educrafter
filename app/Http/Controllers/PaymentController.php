@@ -209,16 +209,20 @@ class PaymentController extends Controller
                     'sendertable_type' => \App\Models\User::class,
                     'receivertable_id' =>  Auth::user()->id,
                     'receivertable_type' => \App\Models\Student::class,
-                    'message' => 'Hi '.Auth::user()->first_name.', Hope you’re doing well. I have gone through the subject and essay topic. really cool topic, now sit back and relax while I start work on it. will meet soon. bye',
+                    'message' => '<p>Thank You for Your Order!</p><p>Hi '.Auth::user()->first_name.',</p><p>Your order has been successfully placed! 🎓 Our premium writers are now working on your essay.</p><p>We\'ll make sure to deliver high-quality work that meets your expectations.</p><p>If you need to add any details or instructions, feel free to reach out to us via our support chat or whatsapp.</p><p>We’re here to help! Thank you for choosing EduCrafter!</p>',
+					
                     'url'=>$url,
                     'type'=>'message'
                 ]);
+				
+				
 
 
                
                 $url = env('500_URL','https://500m.in').'/orders/'.$order->id.'/view'; 
                 $message = \Auth::user()->first_name.' has made a payment of '.$order->currency_code.((session('payment_object')->amount_total)/100);
-                \App\Models\StudentOrderMessage::Create([
+				
+               \App\Models\StudentOrderMessage::Create([
                     'order_id'=>session('payment_order_id'),
                     'sendertable_id' => \Auth::user()->id,
                     'sendertable_type' => \App\Models\Student::class,
@@ -234,9 +238,9 @@ class PaymentController extends Controller
                 $data = ['name' => $receiver->name,'url'=>$url,'messageContent'=>$message];
                 try {
                     \Illuminate\Support\Facades\Mail::send('email.500.message', $data, function ($message) use ($data, $receiver) {
-                        $message->from(env('MAIL_FROM_ADDRESS'), env('MAIL_FROM_NAME'));
-                        $message->subject("Payment Received");
-                        $message->to(env('ADMIN_EMAIL', $receiver->email));
+                        $message->from(env('MAIL_FROM_ADDRESS'),'EduCrafter: Trusted Essay Help');
+                        $message->subject("Payment Received(admin)");
+                        $message->to(env('ADMIN_EMAIL'));
                     });
 
                 } catch (\Exception $e) {
@@ -247,16 +251,16 @@ class PaymentController extends Controller
                 $data = ['name' => Auth::user()->first_name,'url'=>$url,'order'=>$order];
                 try {
                     \Illuminate\Support\Facades\Mail::send('email.educrafter.new-order', $data, function ($message) use ($data, $receiver) {
-                        $message->from(env('MAIL_FROM_ADDRESS'), env('MAIL_FROM_NAME'));
+                        $message->from(env('MAIL_FROM_ADDRESS'), 'EduCrafter: Trusted Essay Help');
                         $message->subject("Order Placed Successfully");
-                        $message->to(env('TEST_EMAIL', Auth::user()->email));
+                        $message->to(Auth::user()->email);
                     });
 
                 } catch (\Exception $e) {
                     echo $e; die;
                 }
 
-
+                
 
                 Flash::flash('payment_status','Success');
                 return redirect()->route('payment.success',session('payment_order_id'));

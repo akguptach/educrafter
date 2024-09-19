@@ -35,8 +35,8 @@ class ResetPassword extends Component
                 'email' => 'required|email|exists:\App\Models\Student,email,website_id,'.env("WEBSITE_ID")
             ]
         );
+        $this->otp = mt_rand(100000,999999);
         
-        $this->otp = Str::random(6);
         
         $student = Student::where(
             [
@@ -51,8 +51,9 @@ class ResetPassword extends Component
         ];
         
         Mail::send('email.sop-student-verification-code', $data, function($message) {
+			    $message->from(env('MAIL_FROM_ADDRESS'),'EduCrafter: Trusted Essay Help');
                 $message->to($this->email)
-                ->subject('Email Verification Code');
+                ->subject('Reset Your Educrafter Password');
             }
         );
         

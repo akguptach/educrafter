@@ -7,8 +7,8 @@
         <div class="container">
             <div class="row justify-content-between align-items-start">
                 <div class="col-lg-12">
-                    <h3>Payment {{$order?->payment?->payment_status}}</h3>
-                    <h5>Thanks for your order</h5>
+                    <h3>Payment  {{$order?->payment?->payment_status}}</h3>
+                    <h5>Thank You for Your Order!</h5>
                     <table style="width:80%; margin:0 auto;" class="summary-table">
 
                         <tr>
@@ -62,8 +62,7 @@
 
                         <tr>
                             <td colspan="2">
-                                <a href="{{route('order.receipt', $order->id)}}" class="btn btn-primary w-100">Continue to
-                                    Order</a>
+                                <a href="{{route('order.receipt', $order->id)}}" class="btn btn-primary w-100">Continue to Dashboard</a>
                             </td>
                         </tr>
                     </table>
