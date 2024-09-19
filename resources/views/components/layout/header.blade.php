@@ -29,7 +29,7 @@ $services = \App\Models\Service::where('website_type', 'Educrafter')->where('typ
     <link rel="shortcut icon" type="image/x-icon" href="{{ asset('img/favicon.png') }}">
     <!-- Place favicon.ico in the root directory -->
     <!-- CSS here -->
-    <link href="{{ asset('css/unfoldco.244dcbcaa.css') }}" rel="stylesheet" type="text/css" />
+    <link href="{{ asset('css/unfoldco.244dcbcaa.css?v=1') }}" rel="stylesheet" type="text/css" />
     <link rel="stylesheet" href="{{ asset('css/bootstrap.min.css') }}">
     <link rel="stylesheet" href="{{ asset('css/animate.min.css') }}">
     <link rel="stylesheet" href="{{ asset('css/magnific-popup.css') }}">
@@ -44,7 +44,7 @@ $services = \App\Models\Service::where('website_type', 'Educrafter')->where('typ
     <link rel="stylesheet" href="{{ asset('css/plyr.css') }}">
     <link rel="stylesheet" href="{{ asset('css/spacing.css') }}">
     <link rel="stylesheet" href="{{ asset('css/tg-cursor.css') }}">
-    <link rel="stylesheet" href="{{ asset('css/main.css?w=1') }}">
+    <link rel="stylesheet" href="{{ asset('css/main.css?w=4') }}">
 
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -158,13 +158,13 @@ $services = \App\Models\Service::where('website_type', 'Educrafter')->where('typ
                                         @endauth
                                     </ul>
                                 </div>
-                                <div class="mobile-login-btn">
+                                <!--<div class="mobile-login-btn">
                                     <a href="login.html">
                                         <img src="{{ asset('img/icons/user.svg') }}" alt="" class="injectable">
                                     </a>
-                                </div>
+                                </div>-->
                                 <div class="mobile-nav-toggler">
-                                    <i class="tg-flaticon-menu-1"></i>
+                                    <i class="tg-flaticon-menu-2"></i>
                                 </div>
                             </nav>
                         </div>

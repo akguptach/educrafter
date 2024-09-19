@@ -1,5 +1,7 @@
 @extends('layout.app')
 @section('content')
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/intl-tel-input/17.0.12/css/intlTelInput.css">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/intl-tel-input/17.0.12/js/intlTelInput.min.js"></script>
     <main class="main-area fix" style="background:#FFF4E4;">
         <section class="contact-area section-py-120">
 			<div class="container" >
@@ -14,7 +16,7 @@
 									<div class="col-md-6">
 										<div class="form-grp">
 										    <label>Your Name</label>
-											<input name="name" type="text" placeholder="" required="" name="c_name" id="c_name">
+											<input type="text" placeholder="" required="" name="c_name" id="c_name">
 										</div>
 									</div>
 									<div class="col-md-6">
@@ -26,9 +28,12 @@
 									<div class="col-md-6">
 										<div class="form-grp">
 										    <label>Your Mobile No.</label>
-											<input name="website" type="text" placeholder="" required="" name="c_mobile_no" id="c_mobile_no" pattern="[0-9]{10,14}" min="10" mix="13">
+											<input type="text" placeholder="" required="" name="c_mobile_no" id="c_mobile_no" pattern="[0-9]{10,14}" min="10" mix="13">
+                                            <input type="hidden" class="form-control" name="country_code" id="country_code">
+                                            <span id="phone-error" style="color: red;"></span>
 										</div>
 									</div>
+
 									<div class="col-md-6">
 										<div class="form-grp">
 										    <label>Service</label>
@@ -45,7 +50,7 @@
 									</div>
 								
 								<div class="form-grp">
-									<textarea name="message" placeholder="Tell us more..." required=""></textarea>
+									<textarea name="c_message" placeholder="Tell us more..." required=""></textarea>
 								</div>
 								<div>
 									<button type="submit" id="btn_checkout" class="btn btn-two btn-block btn-sm" style="background:#3B71ED;color:#fff;width:100%;text-align:center;">Submit</button>
@@ -99,6 +104,31 @@
 	</main>
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@10"></script>
 <script>
+
+$(document).ready(function() {
+    // Initialize intl-tel-input plugin
+    var input = document.querySelector("#c_mobile_no");
+    var iti = window.intlTelInput(input, {
+        separateDialCode: true,
+        utilsScript: "https://cdnjs.cloudflare.com/ajax/libs/intl-tel-input/17.0.12/js/utils.js"
+    });
+    // Validate phone number and update country code
+    $('#c_mobile_no').on('keyup change', function() {
+        var isValidNumber = iti.isValidNumber();
+        var selectedCountryData = iti.getSelectedCountryData();
+        if (!isValidNumber) {
+            $('#phone-error').text('Invalid phone number');
+        } else if (selectedCountryData == null) {
+            $('#phone-error').text('Please select a country');
+        } else {
+            $('#phone-error').text('');
+            var countryCode = selectedCountryData.dialCode;
+            $('#country_code').val(countryCode);
+        }
+    });
+});
+
+
     document.addEventListener("DOMContentLoaded", function() {
         document.getElementById("btn_checkout").addEventListener("click", function() {
             var name = document.getElementById("c_name").value;

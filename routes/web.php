@@ -44,17 +44,22 @@ Route::get('/pages/{sku}', [Pages::class, 'index'])->name('pages.index');
 
 Route::get('/faq', [Pages::class, 'faq'])->name('faq');
 Route::get('/why_us', [Pages::class, 'why_us'])->name('why_us');
-Route::get('/refer_friend', [Pages::class, 'refer_friend'])->name('refer_friend');
+Route::get('/refer_a_friend', [Pages::class, 'refer_friend'])->name('refer_friend');
 Route::post('/refer_a_friend', [Pages::class, 'refer_a_friend'])->name('refer_a_friend');
 Route::get('/contact-us', [Pages::class, 'contact_us'])->name('contact-us');
 Route::get('/about-us', [Pages::class, 'about_us'])->name('about-us');
 Route::get('/services', [Pages::class, 'services'])->name('Services');
+//Route::get('/Services', [Pages::class, 'services'])->name('Services');
+Route::get("/Services", function(){
+    return view("errors.404");
+ });
 
 
 Route::get('/terms-and-conditions', [Pages::class, 'terms_condtion'])->name('terms-and-conditions');
 Route::get('/privacy-policy', [Pages::class, 'privacy_policy'])->name('privacy-policy');
 Route::get('/refund-policy', [Pages::class, 'refund_policy'])->name('refund-policy');
 Route::get('/cookies-policy', [Pages::class, 'cookies_policy'])->name('cookies-policy');
+Route::get('/refer-friend', [Pages::class, 'refer_friend'])->name('refer_friend');
 
 
 
@@ -67,13 +72,13 @@ Route::get('/blog/{category}/{title}', [Blog::class, 'view'])->name('blog.view')
 Route::get('/login', [Auth::class, 'loginPage'])->name('login.page');
 Route::get('/signup', [Auth::class, 'signupPage'])->name('signup.page');
 
-Route::get('/refer/{referral_code}', [Auth::class, 'signupPage'])->name('signup.referral_code');
+Route::get('/r/{referral_code}', [Auth::class, 'signupPage'])->name('signup.referral_code');
 
 Route::get('/reset-password', [Auth::class, 'resetPasswordPage'])->name('reset.password.page');
 Route::get('/404', [Error::class, 'notFound'])->name('not.found.page');
 Route::post('/signup', [Student::class, 'create'])->name('signup');
 Route::post('/login', [Auth::class, 'login'])->name('login');
-Route::get('/order', [Order::class, 'index'])->name('order');
+Route::get('/order', [Order::class, 'index'])->name('order')->middleware('isStudent');
 Route::post('/price', [Order::class, 'checkprice'])->name('price');
 
 Route::post('/validate-coupon-code', [Order::class, 'validateCouponCode'])->name('validateCouponCode');
@@ -101,10 +106,10 @@ Route::get('/transactions/order-receipt/{order_id}', [Order::class, 'orderReceip
     Route::any('/pay', [Payment::class, 'pay'])->name('pay');
     Route::get('/payment-validation', [Payment::class, 'paymentValidation'])->name('payment-validation');
     Route::post('/paymentsave', [Payment::class, 'payment']);
-    Route::get('/transactions', [Order::class, 'transactions'])->name('order.transactions');
-    Route::any('/vieworder/{oid}', [Order::class, 'vieworder'])->name('order.vieworder');
+    Route::get('/myorders', [Order::class, 'transactions'])->name('order.transactions')->middleware('isStudent');;
+    Route::any('/vieworder/{oid}', [Order::class, 'vieworder'])->name('order.vieworder')->middleware('isStudent');;
     Route::get('/refer_friend_individual', [Order::class, 'refer_friend'])->name('order.refer_friend');
-    Route::get('/statements', [Order::class, 'statements'])->name('order.statements');
+    Route::get('/transactions', [Order::class, 'statements'])->name('order.statements')->middleware('isStudent');;
     //Route::post('/neworder', [Order::class, 'create'])->name('neworder');
     //Route::post('/process-attachment', [Order::class, 'processAttachment'])->name('process-attachment');
     Route::get('/profile', [Student::class, 'profile'])->name('student.profile'); 
@@ -130,7 +135,7 @@ Livewire::setUpdateRoute(function ($handle) {
 
 
 Route::get('/tutors', [App\Http\Controllers\ExpertDetailsController::class, 'tutorsList'])->name('Tutors.List');
-Route::get('/offers', [App\Http\Controllers\OffersController::class, 'index'])->name('Offers.Index');
+Route::get('/offers', [App\Http\Controllers\OffersController::class, 'index'])->name('Offers.Index')->middleware('isStudent');;
 
 Route::get('/tutor/{id}', [App\Http\Controllers\ExpertDetailsController::class, 'index'])->name('Expert.Details');
 
@@ -140,6 +145,9 @@ Route::post('/save-ratings', [OrderRating::class, 'saveRatings'])->name('save.ra
 
 
 Route::get('/blogs/ajaxlist', [App\Http\Controllers\BlogController::class, 'ajaxList'])->name('Blogs.ajaxList');
+
+
+Route::get('/student-discount', [Student::class, 'discount'])->name('student.discount');
 
 
 

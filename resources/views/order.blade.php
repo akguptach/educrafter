@@ -2,7 +2,13 @@
 @section('content')
 <!-- main-area -->
 <style>
-.navmenu{ display:none;}
+    .input-error{
+        color: red;
+    }
+.navmenu {
+    display: none;
+}
+
 .btn-plus,
 .btn-minus {
     background: #fff;
@@ -230,24 +236,28 @@
                                         <textarea id="task" name="task"
                                             placeholder="Tell us more about your task..">{{$orderRequestData['task'] ?? ''}}</textarea>
                                     </div>
-                                    <div id="attachment_list" style="text-align:center;">
+
+                                    <div id="attachment_list">
                                         @if(isset($orderRequestData['uploadedFile']))
-                                        <ul>
-                                            <li>
-                                                <a href="{{$orderRequestData['uploadedFile']}}"
-                                                    target="_blank">Your attachment</a>
-                                            </li>
-                                        </ul>
+
+                                        @include('student_components.download_link',
+                                        [
+                                        'attachment'=>$orderRequestData['uploadedFile'],
+                                        'attachmentTitle'=>"Your attachments"
+                                        ])
+
+
                                         @endif
                                     </div>
-                                    <div class="file-upload-box" style="text-align: center;">
-                                        <a for="taskFile" class="form-label" data-bs-toggle="modal"
-                                            href="#fileuploadModal">Attach files</a>
+                                    <div class="file-upload-box" style="text-align: center; margin-bottom: 10px;">
+                                        <a style="padding: 6px 10px;" for="taskFile" class="form-label btn"
+                                            data-bs-toggle="modal" href="#fileuploadModal"><i class="fa fa-paperclip"
+                                                aria-hidden="true"></i> Attach files</a>
                                     </div>
                                 </div>
                             </div>
                         </div>
-                        <span class="title title-two">Upload your files here, if any. The file size limit is 100 Mb per
+                        <span class="title title-two">Upload your files here, if any. The file size limit is 25 Mb per
                             file</span>
                         <div class="row">
                             <div class="col-md-12">
@@ -388,19 +398,26 @@
             <form autocomplete="off" enctype="multipart/form-data" onsubmit="saveAttachment(event)">
                 <div class="modal-body">
                     <div id="attachmentErrors"></div>
+                    
                     <div class="form-group">
-                        <label for="attachment">Upload Zip attecment</label>
-                        <input type="file"  accept="application/zip, .doc, .docx,.pdf"
+                        <label for="attachment">Upload Zip attachment</label>
+                        <input type="file" accept="application/zip, .doc, .docx,.pdf, .jpeg, .jpg"
                             class="form-control shadow-none" name="attachment" id="attachment">
                         <small id="emailHelp" class="form-text text-muted" style="font-size: 12px;">You can upload your
-                            attecment less then 100MB. Only Zip,Doc,Pdf</small>
+                            attecment less then 25MB. Only Zip,Doc,Pdf, JPG, JPEG</small>
                     </div>
-                    <div class="text-center my-4 text-muted">OR</div>
+                    <div style="border: 1px #6a73fa solid;display:none;" id="uploadProgress">
+                        <div id="uploadProgressBar"
+                            style="height: 20px;background:#6a73fa; text-align:center;color:#fff;">
+                        </div>
+                    </div>
+
+                    <div class="text-center my-4 text-muted">AND</div>
                     <div class="form-group">
                         <label for="fileUploadUrl">Copy/Paste WeTransfer Url</label>
-                        <input type="text" 
-                            class="form-control shadow-none" placeholder="" name="file_upload_url" id="fileUploadUrl">
-                        <small id="emailHelp" class="form-text text-muted" style="font-size: 12px;">More then 100MB file
+                        <input type="text" class="form-control shadow-none" placeholder="" name="file_upload_url"
+                            id="fileUploadUrl">
+                        <small id="emailHelp" class="form-text text-muted" style="font-size: 12px;">More then 25MB file
                             go with wetransfer <a href="https://wetransfer.com/" target="_blank">click here</a></small>
                     </div>
                 </div>
@@ -497,10 +514,10 @@
 </div>
 @php($deliveryAt = \Carbon\Carbon::parse(new \DateTime())->format('Y-m-d'))
 @if($orderRequestData && isset($orderRequestData['delivery_date']))
-    @php($tempDate = explode('-', $orderRequestData['delivery_date']))
-    @if(count($tempDate) == 3)
-    @php($deliveryAt=@$orderRequestData['delivery_date'])
-    @endif
+@php($tempDate = explode('-', $orderRequestData['delivery_date']))
+@if(count($tempDate) == 3)
+@php($deliveryAt=@$orderRequestData['delivery_date'])
+@endif
 @endif
 
 @if(session()->has('payment_status') && session('payment_status') == 'Success')
@@ -862,14 +879,15 @@ function showSummary() {
 }
 
 function saveAttachment(e) {
+    $('#attachmentErrors').html('')
     e.preventDefault();
     let attachmentList = [];
     let attachment = $('#attachment')[0].files;
 
-    
+
     let fileUploadUrl = $('#fileUploadUrl').val();
     if (attachment.length && attachment.length > 0) {
-        
+
         if (attachment.length > 5) {
             $('#attachmentErrors').html(
                 '<div class="alert alert-danger">More than 5 attchment are not allowed.<div></div></div>');
@@ -879,22 +897,37 @@ function saveAttachment(e) {
                 attachmentSize = attachmentSize + item.size;
             }
             attachmentSize = (attachmentSize / 1024) / 1024;
-            if (attachmentSize > 100) {
-                $('#attachmentErrors').html(
-                    '<div class="alert alert-danger">Attachment size more than 100 MB are not allowed.<div></div></div>'
-                );
+            
+            if (attachmentSize > 25) {
+                $('#attachmentErrors').html(`<div class="alert alert-primary d-flex align-items-center" role="alert">
+  <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" class="bi bi-exclamation-triangle-fill flex-shrink-0 me-2" viewBox="0 0 16 16" role="img" aria-label="Warning:">
+    <path d="M8.982 1.566a1.13 1.13 0 0 0-1.96 0L.165 13.233c-.457.778.091 1.767.98 1.767h13.713c.889 0 1.438-.99.98-1.767L8.982 1.566zM8 5c.535 0 .954.462.9.995l-.35 3.507a.552.552 0 0 1-1.1 0L7.1 5.995A.905.905 0 0 1 8 5zm.002 6a1 1 0 1 1 0 2 1 1 0 0 1 0-2z"/>
+  </svg>
+  <div>
+    Attachment size more than 25 MB are not allowed.
+  </div>
+</div>`);
             } else {
-                
-                sendAttachment(attachment,fileUploadUrl);
+
+                sendAttachment(attachment, fileUploadUrl);
             }
         }
-    } 
-    else if(fileUploadUrl){
+    } else if (fileUploadUrl) {
         sendAttachment(null, fileUploadUrl);
     }
 }
 
-function sendAttachment(attachmentFile, attachmentUrl)  {
+
+function uploadProgressHandler(event) {
+    // $("#loaded_n_total").html("Uploaded " + event.loaded + " bytes of " + event.total);
+    var percent = (event.loaded / event.total) * 100;
+    var progress = Math.round(percent);
+    //$("#uploadProgressBar").html(progress);
+    $("#uploadProgressBar").css("width", progress + "%");
+    //$("#status").html(progress + "% uploaded... please wait");
+}
+
+function sendAttachment(attachmentFile, attachmentUrl) {
 
     let attachmentFormData = new FormData();
     if (attachmentFile) {
@@ -902,8 +935,8 @@ function sendAttachment(attachmentFile, attachmentUrl)  {
             attachmentFormData.append('attachment_' + i, $('#attachment')[0].files[i]);
         }
         attachmentFormData.append('total_file', $('#attachment')[0].files.length);
-    } 
-    if(attachmentUrl){
+    }
+    if (attachmentUrl) {
         attachmentFormData.append('attachmentUrl', attachmentUrl);
     }
 
@@ -914,6 +947,7 @@ function sendAttachment(attachmentFile, attachmentUrl)  {
         }
     });
     var attachmentJson = [];
+    $('#uploadProgress').show();
     $.ajax({
         url: "process-attachment",
         type: "POST",
@@ -921,22 +955,61 @@ function sendAttachment(attachmentFile, attachmentUrl)  {
         processData: false,
         contentType: false,
         data: attachmentFormData,
+        xhr: function() {
+            var xhr = new window.XMLHttpRequest();
+            xhr.upload.addEventListener("progress",
+                uploadProgressHandler,
+                false
+            );
+            return xhr;
+        },
         success: function(sendAttachmentResponse) {
-            attachmentData = '<ul style="list-style: none;text-align: left;">';
-			var i=0;
+
+            $('#uploadProgress').hide();
+            attachmentData = `<ul style="background: #fff;font-size: 14px;">
+            <li class="list-group-item">
+            <b>Your Attachments</b>`;
+
+
+            attachmentData += '<ul>';
+            var i = 0;
             (sendAttachmentResponse.attachment).forEach((item) => {
-				i++;
-                attachmentData += '<li><a href="' + item + '" target="_blank">Attechemnt File'+i+'</a></li>';
-                    attachmentJson.push({url:item})
+                i++;
+                // attachmentData += '<li><a href="' + item + '" target="_blank">Attechemnt File' + i +
+                //  '</a></li>';
+
+                attachmentData += `<li>
+                <div>
+                    <a href="${item}" target="_blank" class="float-right1 download-attachment"
+                        style="overflow-wrap: anywhere;"><i class='fas fa-file-download'></i>
+                        View attachment</a>
+                </div>
+            </li>`;
+
+
+
+                attachmentJson.push({
+                    url: item
+                })
 
             });
+            attachmentData += `</li></ul>`
             $('#uploadedFile').val(JSON.stringify(attachmentJson));
             attachmentData += '</ul>'
             $('#attachment_list').html(attachmentData);
             $('#fileuploadModal').modal('hide');
         },
         error: function(sendAttachmentErrors) {
-            console.log(sendAttachmentErrors);
+            
+            $('#uploadProgress').hide();
+            $('#attachmentErrors').html(`<div class="alert alert-primary d-flex align-items-center" role="alert">
+  <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" class="bi bi-exclamation-triangle-fill flex-shrink-0 me-2" viewBox="0 0 16 16" role="img" aria-label="Warning:">
+    <path d="M8.982 1.566a1.13 1.13 0 0 0-1.96 0L.165 13.233c-.457.778.091 1.767.98 1.767h13.713c.889 0 1.438-.99.98-1.767L8.982 1.566zM8 5c.535 0 .954.462.9.995l-.35 3.507a.552.552 0 0 1-1.1 0L7.1 5.995A.905.905 0 0 1 8 5zm.002 6a1 1 0 1 1 0 2 1 1 0 0 1 0-2z"/>
+  </svg>
+  <div>
+    There was an error in file uploading. make sure you are uploading a valid file
+  </div>
+</div>`);
         }
     });
 }

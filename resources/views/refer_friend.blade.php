@@ -125,7 +125,7 @@
                                 
                                     @auth
                                         <input id="referralink" type="text" placeholder="Your referral link"
-                                    value="{{env('APP_URL')}}refer/{{$referralCode}}">
+                                    value="{{refferUrl()}}">
                                     @else
                                         <input id="referralink" type="text" placeholder="Your referral link"
                                     value="">

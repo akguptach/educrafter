@@ -21,14 +21,13 @@ $balance = $credits-$debits;
                             <span class="nav-text pull-right"><span style="float:left;"><img class="nav-icon"
                                         src="<?php echo asset('/student/');?>/img/empty-wallet.png"
                                         style="margin-right: 11px;"> Balance</span> <span
-                                    style="float:right;margin-left: 30px;">${{$balance}}</span></span>
+                                    style="float:right;margin-left: 30px;">£{{$balance}}</span></span>
                         </div>
-                        <div
-                            style="border: 1px solid #000;border-radius: 8px;padding: 10px;background: #10C379;color: #fff;">
-                            <span class="nav-text"><span style="float:left;"><img class="nav-icon"
+                        <div style="border: 1px solid #000;border-radius: 8px;padding: 10px;background: #10C379;color: #fff;">
+                            <a style="color:rgba(var(--bs-link-color-rgb), var(--bs-link-opacity, 1));" href="{{route('payment.method.index')}}#withdraw_amount"><span class="nav-text"><span style="float:left;"><img class="nav-icon"
                                         src="<?php echo asset('/student/');?>/img/empty-wallet_white.png"
                                         style="margin-right: 11px;"> Withdraw
-                                    money</span></span>
+                                    money</span></span></a>
                         </div>
                     </div>
                     <div class="card-body">

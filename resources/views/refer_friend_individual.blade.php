@@ -44,7 +44,7 @@
                                 </div>-->
 
                                 <input id="referralUrlInput" type="text" class="form-control form-control-lg"
-                                    placeholder="Your referral link" style="border-radius: 60px;" value="{{env('APP_URL')}}refer/{{$referral_code}}">
+                                    placeholder="Your referral link" style="border-radius: 60px;" value="{{refferUrl()}}">
                                     <button type="button" id="refferToEmail" class="send-btn">
                                     <img src="{{ asset('img/iconoir_send-solid.png') }}">
                                 </button> 
@@ -60,16 +60,16 @@
                                     style="background: #9071FB;border-radius: 57px;width:100%;padding-top: 7px;float: left;height: 48px;box-shadow: 3px 4px 0px 0px #000000;">
 
                                     <span style="width:25%;float: left;text-align: center;"><a
-                                            href="add-student.html"><img
+                                            href="https://wa.me/?text={{env('APP_URL')}}refer/{{$referral_code}}" target="_blank"><img
                                                 src="<?php echo asset('/student/');?>/img/whatsapp-fill.png"></a></span>
                                     <span style="width:25%;float: left;text-align: center;"><a
-                                            href="add-student.html"><img
+                                            href="http://twitter.com/share?url={{env('APP_URL')}}refer/{{$referral_code}}" target="_blank"><img
                                                 src="<?php echo asset('/student/');?>/img/t.png"></a></span>
                                     <span style="width:25%;float: left;text-align: center;"><a
-                                            href="add-student.html"><img
+                                            href="https://www.facebook.com/sharer/sharer.php?u={{env('APP_URL')}}refer/{{$referral_code}}" target="_blnak"><img
                                                 src="<?php echo asset('/student/');?>/img/f.png"></a></span>
                                     <span style="width:25%;float: left;text-align: center;"><a
-                                            href="add-student.html"><img
+                                            href="https://www.linkedin.com/sharing/share-offsite/?url={{env('APP_URL')}}refer/{{$referral_code}}" target="_blank"><img
                                                 src="<?php echo asset('/student/');?>/img/in.png"></a></span>
                                 </span>
                             </div>
@@ -99,7 +99,7 @@
                                                     <tr>
                                                         <td>{{$referral->student->first_name}}</td>
                                                         <td>{{ \Carbon\Carbon::parse($referral->created_at)->format('d/m/Y')}}</td>
-                                                        <td>${{$referral->earned}}</td>
+                                                        <td>£{{$referral->earned}}</td>
 
                                                     </tr>
                                                     @endforeach
@@ -114,12 +114,12 @@
                                 <div class="card">
                                     <div class="card-body"
                                         style="padding: 0px;border: 1px solid #000000;box-shadow: 3px 3px 0px 0px #000000;border-radius: 8px;">
-                                        <div style="border-bottom: 1px solid #000;">
+                                        <!--<div style="border-bottom: 1px solid #000;">
                                             <div style="padding: 24px;">
                                                 <span style="display: block;font-size:48px;">13(Demo)</span>
                                                 <span style="display: block;font-size:16px;">Referral sent</span>
                                             </div>
-                                        </div>
+                                        </div>-->
                                         <div style="border-bottom: 1px solid #000;">
                                             <div style="padding: 24px;">
                                                 <span style="display: block;font-size:48px;">{{count($referralsList)}}</span>
@@ -128,7 +128,7 @@
                                         </div>
                                         <div style="border-bottom: 1px solid #000;">
                                             <div style="padding: 24px;">
-                                                <span style="display: block;font-size:48px;">${{number_format($earned,2)}}</span>
+                                                <span style="display: block;font-size:48px;">£{{number_format($earned,2)}}</span>
                                                 <span style="display: block;font-size:16px;">You Earned</span>
                                             </div>
                                         </div>

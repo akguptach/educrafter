@@ -177,7 +177,8 @@ class PaymentController extends Controller
                     $referredBy = Student::where('referral_code',Auth::user()->reffered_by_code)->first();
 
                     $amount = $order->gross_price+$order->wallet_paid;
-                    $earning = $amount*10/100;
+                    $commission = ($referredBy->commission)?$referredBy->commission:'';
+                    $earning = (float)$amount*(float) $commission/100;
                     if($referredBy){
                         $referral = Referral::Create([
                             'student_id'=>Auth::user()->id,
@@ -228,6 +229,7 @@ class PaymentController extends Controller
                     'type'=>'notification'
                 ]);
 
+                // send email to admin
                 $receiver = \App\Models\User::find(1);
                 $data = ['name' => $receiver->name,'url'=>$url,'messageContent'=>$message];
                 try {
@@ -240,6 +242,20 @@ class PaymentController extends Controller
                 } catch (\Exception $e) {
                     echo $e; die;
                 }
+
+                // Send email to student
+                $data = ['name' => Auth::user()->first_name,'url'=>$url,'order'=>$order];
+                try {
+                    \Illuminate\Support\Facades\Mail::send('email.educrafter.new-order', $data, function ($message) use ($data, $receiver) {
+                        $message->from(env('MAIL_FROM_ADDRESS'), env('MAIL_FROM_NAME'));
+                        $message->subject("Order Placed Successfully");
+                        $message->to(env('TEST_EMAIL', Auth::user()->email));
+                    });
+
+                } catch (\Exception $e) {
+                    echo $e; die;
+                }
+
 
 
                 Flash::flash('payment_status','Success');

@@ -727,7 +727,7 @@ class OrderController extends Controller
                 return '<span class="badge badge-rounded badge-warning">Purchased</span>';
             })
             ->addColumn('amount', function($row) {
-                return '$'.$row->payment->amount;
+                return '£'.$row->payment->amount;
             })
             ->rawColumns(['type'])
             ->toJson();

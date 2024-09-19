@@ -28,7 +28,18 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/croppie/2.6.4/croppie.js"></script>
 <link class="main-css" rel="stylesheet" href="<?php echo asset('/student/');?>/css/tagify.css">
 <script src="<?php echo asset('/student/');?>/js/tagify.js"></script>
+<style> 
+.download-attachment{
+  cursor: pointer;
+}
+</style>
 <script>
+function downloadFromUrl(url){
+  window.open(
+  url,
+  '_blank' // <- This is what makes it open in a new window.
+);
+}
 $("div.star-wrapper i").on("mouseover", function() {
     if ($(this).siblings("i.vote-recorded").length == 0) {
         $(this)

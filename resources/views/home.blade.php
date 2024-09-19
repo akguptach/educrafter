@@ -1,6 +1,152 @@
 @extends('layout.app')
 @section('content')
 <!-- main-area -->
+<style>
+.fact__inner-wrap {
+    background: #fff;
+    padding: 0px 200px 30px;
+}
+.fact__inner-wrap h2 {
+    font-size: 2rem;
+	font-weight:bold;
+}
+.fact__inner-wrap p {
+    font-size: 16px;
+}
+.top-notch{
+	max-width:100%;
+	padding:0px;
+}
+.top-notch-hr{
+	display:none;
+}
+.support_m{
+		display:none;
+	}
+	.support_d{
+		display:block;
+	}
+	.choose__list-item {
+		display: -webkit-box;
+		display: -moz-box;
+		display: -ms-flexbox;
+		display: -webkit-flex;
+		display: flex;
+		align-items: center;
+		gap: 4px;
+		margin-bottom: 24px;
+	}
+	.featured-in{ margin:0 auto;position:Absolute;display: flex;top: 21%;z-index:10;width:100%;}
+	.featured-in-img{ width:250px;}
+@media (max-width: 1199.98px) {
+	.blog__bg{ padding:0px;}
+	.featured-in-img{ width:150px;}
+	.featured-in{ margin:0 auto;position:relative;display: flex;width:100%;margin-top: 30%;}
+    .fact__inner-wrap {
+        padding: 0px 0px 20px;
+    }
+	.fact__inner-wrap h2 {
+		font-size: 2rem;
+		font-weight:bold;
+    }
+	.top-notch{
+	max-width:100%;
+	padding:15px;
+    }
+	.top-notch-hr{
+		border-bottom: 1px solid #000;
+		display:block;
+    }
+	.support_m{
+		display:block;
+		padding: 0px;
+	}
+	.support_d{
+		display:none;
+	}
+	.choose__list-item .content .title {
+		margin-bottom: 8px;
+		font-size: 1.5rem;
+		font-weight: 400;
+	}
+	
+    .instructor__progress-wrap .list-wrap li {
+        padding: 0 10px;
+        width: 50%;
+    }
+	.instructor__details-Skill {
+			border-top: 1px solid #000;
+			background: #fff;
+			margin-bottom: 0px;
+	}
+	.progress-item .title {
+		text-align: left;
+		margin-bottom: 10px;
+		font-size: 14px;
+		font-weight: 400;
+	}
+	.testimonial-section {
+    
+    padding-top: 0em;
+    
+    }
+	.choose__img-three {
+        margin-bottom: 0px;
+    }
+}
+	
+	
+	
+}
+@media (max-width: 991.98px) {
+    .choose__img-three {
+        margin-bottom: 0px;
+    }
+}
+</style>
+ <style>
+    .perks_n {
+        width: 13%;
+        /* transform: rotate(1deg); */
+        padding: 3px 27px 11px 15px;
+        font-weight: bold;
+        font-size: 21px;
+        height: 42px;
+        background: url('img/number.png');
+        background-repeat: no-repeat;
+        background-size: 38px 38px;
+    }
+
+    .home_services {
+        /* background-color: var(--white); */
+        border-radius: 3em;
+        height: 40em;
+        margin-top: 0em;
+        margin-bottom: 1.5em;
+        display: flex;
+        position: relative;
+        overflow: hidden;
+    }
+
+    .newsletter__form-two .btn {
+        background: #FEEAA8;
+        color: var(--tg-heading-color);
+        width: 200px;
+        height: 200px;
+        border-radius: 1000px;
+        box-shadow: 5px 4px 0px 0px #000000;
+    }
+
+    .newsletter__form-two .btn:hover {
+        background: #3b71ed;
+        color: var(--tg-heading-color);
+        width: 200px;
+        height: 200px;
+        border-radius: 1000px;
+        box-shadow: 5px 4px 0px 0px #000000;
+    }
+    </style>
+    
 <main class="main-area fix">
 
     <!-- banner-area -->
@@ -20,7 +166,7 @@
                 <div class="col-xl-12 col-lg-12">
                     <div class="banner__content-three" align="center">
                         <h1 class="title" data-aos="fade-right" data-aos-delay="400"
-                            style="text-align: center;line-height: 134px;font-family: 'Sofia Pro'; font-weight: bold; font-style: normal;">
+                            style="">
                             Achieve Excellent Grades With World Class Tutors</h1>
                         <p data-aos="fade-right" data-aos-delay="600" style="text-align: center;">Our tutors can assist
                             with anything from short essays, exam notes, and research papers to proofreading and
@@ -41,9 +187,8 @@
                         </div>
                     </div>
                 </div>
-                <div class="col-xl-12 col-lg-12" align="center" style="margin-top: 100px;margin-bottom: 30px;">
-                    <div
-                        style="border: 1px solid #000000;box-shadow: 4px 4px 0px 0px #000000;border-radius: 8px;overflow: hidden;">
+                <div class="col-xl-12 col-lg-12" align="center"  id="home_logo_slider">
+                    <div style="border: 1px solid #000000;box-shadow: 4px 4px 0px 0px #000000;border-radius: 8px;overflow: hidden;">
                         <h3 style="padding-top: 20px;padding-bottom:20px;">We only hire tutors who have graduated from
                             top universities.</h3>
                         <div class="marquee_mode"  style="height:88px;margin-bottom: 20px;" id="marquee_mode_top">
@@ -111,47 +256,43 @@
                             </div>
 
                         </div>
-
-                        <div class="" data-aos="fade-right" data-aos-delay="900"
-                            style="margin-bottom:20px; width: 600px;">
-                            <div class="fact__item-wrap-two">
-                                <div class="row justify-content-center">
-                                    <div class="col-3 col-md-3 col-sm-6">
-                                        <div class="fact__item fact__item-two">
-                                            <h2 class="count">
-                                                <span class="odometer" data-count="10"></span>+
-                                            </h2>
-                                            <p style="font-size: 15px;">Years</p>
-                                        </div>
-                                    </div>
-                                    <div class="col-3 col-md-3 col-sm-6">
-                                        <div class="fact__item fact__item-two">
-                                            <h2 class="count">
-                                                <span class="odometer" data-count="250"></span>K+
-                                            </h2>
-                                            <p style="font-size: 15px;">Satisfied students</p>
-                                        </div>
-                                    </div>
-                                    <div class="col-3 col-md-3 col-sm-6">
-                                        <div class="fact__item fact__item-two">
-                                            <h2 class="count">
-                                                <span class="odometer" data-count="150"></span>+
-                                            </h2>
-                                            <p style="font-size: 15px;">Subjects</p>
-                                        </div>
-                                    </div>
-                                    <div class="col-3 col-md-3 col-sm-6">
-                                        <div class="fact__item fact__item-two">
-                                            <h2 class="count">
-                                                <span class="odometer" data-count="98"></span>%
-                                            </h2>
-                                            <p style="font-size: 15px;">Satisfaction Rate</p>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
+                        
+											<!-- fact-area -->
+							<section class="fact__area">
+								<div class="container">
+									<div class="fact__inner-wrap">
+										<div class="row">
+											<div class="col-lg-3 col-6">
+												<div class="fact__item-wrap-two">
+													<h2 class="count"><span class="odometer" data-count="10"></span>+</h2>
+													<p>Years</p>
+												</div>
+											</div>
+											<div class="col-lg-3 col-6">
+												<div class="fact__item-wrap-two">
+													<h2 class="count"><span class="odometer" data-count="250"></span>k+</h2>
+													<p>Satisfied students</p>
+												</div>
+											</div>
+											<div class="col-lg-3 col-6">
+												<div class="fact__item-wrap-two">
+													<h2 class="count"><span class="odometer" data-count="150"></span>+</h2>
+													<p>Subjects</p>
+												</div>
+											</div>
+											<div class="col-lg-3 col-6">
+												<div class="fact__item-wrap-two">
+													<h2 class="count"><span class="odometer" data-count="98"></span>%</h2>
+													<p>Satisfaction Rate</p>
+												</div>
+											</div>
+										</div>
+									</div>
+								</div>
+							</section>
+							<!-- fact-area-end -->
                     </div>
+					
                 </div>
 
 
@@ -161,18 +302,18 @@
     <!-- banner-area-end -->
     <!-- course-area -->
     <section class="courses-area section-pt-30 section-pb-30">
-        <div class="container11">
+        <div class="container top-notch">
             <div class="row">
                 <div class="col-12">
                     <div class="section__title text-center mb-25">
-                        <h2 class="title">Top-notch essay<br>writers in one place</h2>
+                        <h2 class="title">Top-Notch Essay <br>Writers In One Place</h2>
 
-                        <p>Get personalised essay help from top-notch essay writers and boost your grades.</p>
+                        <p style="line-height: 22px;font-size: 18px;">Get personalised essay help from top-notch essay writers and boost your grades.</p>
 
                     </div>
                 </div>
             </div>
-            <div class="tab-content" id="courseTabContent">
+            <div class="tab-content" id="courseTabContent1">
                 <div class="courses__nav">
                     <div class="courses-button-prev">
                         <i class="flaticon-arrow-right"></i>
@@ -254,106 +395,80 @@
                 </div>
 
             </div>
-            <div class="tab-content" id="courseTabContent" style="width: 56%;margin: 0 auto;padding-top: 26px;">
-                <div class="row">
-
-                    <div class="col-xl-3 col-lg-4 col-md-6" align="center">
-                        <div class="features__item-six features__item-seven">
-                            <img src="{{ asset('img/Lighting.svg')}}" style="width: 65px;">
-
-                        </div>
-                        <div class="features__content-six features__content-seven">
-                            <h4 class="title">Lighting fast turnaround</h4>
-
-                        </div>
-                    </div>
-                    <div class="col-xl-3 col-lg-4 col-md-6" align="center">
-                        <div class="features__item-six features__item-seven">
-                            <img src="{{ asset('img/Help with any subjects.svg')}}" style="width: 65px;">
-
-                        </div>
-                        <div class="features__content-six features__content-seven">
-                            <h4 class="title">Help with any subjects</h4>
-
-                        </div>
-                    </div>
-                    <div class="col-xl-3 col-lg-4 col-md-6" align="center">
-                        <div class="features__item-six features__item-seven">
-                            <img src="{{ asset('img/Highly unique papers.svg')}}" style="width: 65px;">
-
-                        </div>
-                        <div class="features__content-six features__content-seven">
-                            <h4 class="title">Highly unique papers</h4>
-
-                        </div>
-                    </div>
-                    <div class="col-xl-3 col-lg-4 col-md-6" align="center">
-                        <div class="features__item-six features__item-seven">
-                            <img src="{{ asset('img/USA, UK.svg')}}" style="width: 65px;">
-
-                        </div>
-                        <div class="features__content-six features__content-seven">
-                            <h4 class="title">Writers from the USA, UK and Canada</h4>
-
-                        </div>
-                    </div>
-
-                </div>
-            </div>
+            <div class="tab-content" id="courseTabContent">
+			    
+			     <div class="instructor__item-wrap">
+				            <hr class="top-notch-hr">
+                            <div class="row">
+                                <div class="col-sm-3">
+                                    <div class="instructor__item">
+                                        <div class="instructor__thumb">
+                                            <img src="{{ asset('img/Lighting.svg')}}" style="width: 65px;">
+                                        </div>
+                                        <div class="instructor__content">
+                                            <h2 class="title"><a href="instructor-datails.html">Lighting fast turnaround</a></h2>
+                                           
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-sm-3">
+                                    <div class="instructor__item">
+                                        <div class="instructor__thumb">
+                                           <img src="{{ asset('img/Help with any subjects.svg')}}" style="width: 65px;">
+                                        </div>
+                                        <div class="instructor__content">
+                                            <h2 class="title"><a href="instructor-datails.html">Help with any subjects</a></h2>
+                                            
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-sm-3">
+                                    <div class="instructor__item">
+                                        <div class="instructor__thumb">
+                                           <img src="{{ asset('img/Highly unique papers.svg')}}" style="width: 65px;">
+                                        </div>
+                                        <div class="instructor__content">
+                                            <h2 class="title"><a href="instructor-datails.html">Highly unique papers</a></h2>
+                                            
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-sm-3">
+                                    <div class="instructor__item">
+                                        <div class="instructor__thumb">
+                                            <img src="{{ asset('img/USA, UK.svg')}}" style="width: 65px;">
+                                        </div>
+                                        <div class="instructor__content">
+                                            <h2 class="title"><a href="instructor-datails.html">Writers from the USA, UK and Canada</a></h2>
+                                            
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                     <hr class="top-notch-hr">
+					</div>
+			
+			     
+			</div>
             <div class="row">
                 <div class="col-xl-12 col-lg-12 col-md-12" align="center">
-                    <p style="margin: 20px 0px 20px 0px;color: #000;font-weight: 400;font-size: 16px;"><img
-                            src="{{ asset('img/no ai.svg')}}" style="width:20px;">&nbsp;&nbsp;No AI involvement, 100%
-                        authentic guidance from tutors</p>
+                    <p style="font-weight: 400;font-size: 16px;">
+					<img src="{{ asset('img/no ai.svg')}}" style="width:20px;">
+					<br>No AI involvement, 100% authentic guidance from tutors</p>
                 </div>
             </div>
 
         </div>
     </section>
-    <!-- course-area-end -->
-    <style>
-    .perks_n {
-        width: 13%;
-        /* transform: rotate(1deg); */
-        padding: 3px 27px 11px 15px;
-        font-weight: bold;
-        font-size: 21px;
-        height: 42px;
-        background: url('img/number.png');
-        background-repeat: no-repeat;
-        background-size: 38px 38px;
-    }
-
-    .home_services {
-        /* background-color: var(--white); */
-        border-radius: 3em;
-        height: 40em;
-        margin-top: 0em;
-        margin-bottom: 1.5em;
-        display: flex;
-        position: relative;
-        overflow: hidden;
-    }
-
-    .newsletter__form-two .btn {
-        background: #FEEAA8;
-        color: var(--tg-heading-color);
-        width: 200px;
-        height: 200px;
-        border-radius: 1000px;
-        box-shadow: 5px 4px 0px 0px #000000;
-    }
-
-    .newsletter__form-two .btn:hover {
-        background: #3b71ed;
-        color: var(--tg-heading-color);
-        width: 200px;
-        height: 200px;
-        border-radius: 1000px;
-        box-shadow: 5px 4px 0px 0px #000000;
-    }
-    </style>
-    <section class="courses-area-two tg-motion-effects courses__bg" style="padding-top: 100px;margin-top:50px;">
+    <!-- course-area-end  -->
+   <!-- mobile  -->
+    <section class="courses-area-two tg-motion-effects courses__bg support_m">
+	   
+            <img src="{{ asset('img/home_support.png') }}">
+       
+    </section>
+    
+	<section class="courses-area-two tg-motion-effects courses__bg support_d" style="padding-top: 100px;margin-top:50px;">
         <div class="container">
 
             <div class="row justify-content-center"
@@ -418,35 +533,35 @@
 
         </div>
     </section>
-    <section class="brand-area">
+    
+	<section class="brand-area">
         <div class="container-fluid">
 
             <div class="marquee_mode" id="marquee_mode4">
                 <div class="brand__item">
-                    <a href="#">
+                    <a href="javascript:;">
                         <img src="{{ asset('img/blue.png') }}" style="width:10px;">&nbsp;&nbsp;&nbsp;&nbsp;PhD Experts
                     </a>
                 </div>
                 <div class="brand__item">
-                    <a href="#">
+                    <a href="javascript:;">
                         <img src="{{ asset('img/blue.png') }}" style="width:10px;">&nbsp;&nbsp;&nbsp;&nbsp;Any Topic
                     </a>
                 </div>
                 <div class="brand__item">
-                    <a href="#">
+                    <a href="javascript:;">
                         <img src="{{ asset('img/blue.png') }}" style="width:10px;">&nbsp;&nbsp;&nbsp;&nbsp;Top Quality
                     </a>
                 </div>
                 <div class="brand__item">
-                    <a href="#">
+                    <a href="javascript:;">
                         <img src="{{ asset('img/blue.png') }}" style="width:10px;">&nbsp;&nbsp;&nbsp;&nbsp;A+ Results
                     </a>
                 </div>
 
                 <div class="brand__item">
-                    <a href="#">
-                        <img src="{{ asset('img/blue.png')}}" style="width:10px;">&nbsp;&nbsp;&nbsp;&nbsp;Absolute
-                        Discretion
+                    <a href="javascript:;">
+                        <img src="{{ asset('img/blue.png')}}" style="width:10px;">&nbsp;&nbsp;&nbsp;&nbsp;Absolute Discretion
                     </a>
                 </div>
 
@@ -455,8 +570,106 @@
 
         </div>
     </section>
+    <!-- for mobile-->
+    <section class="choose__area-three support_m" style=" border-top: 3px solid #000000;border-bottom: 3px solid #000000; margin-bottom: 20px;">
+        <div class="container11">
+            <div class="row">
+                <div class="col-lg-6 col-md-12" style="border-left: 3px solid #000000;padding: 0px;background-color: #c2e3fb;">
+                    <div class="choose__img-three">
+                        
+						<img src="{{ asset('img/Group 1171274562@1x.png')}}" >
+						
+						</div>
+                </div>
+                <div class="col-lg-6" style="padding-top: 10px;">
+                    <div class="choose__content-three">
+                        <div class="section__title mb-15">
+                            <h2 class="title" style="text-align: center;font-weight:400px;">Our Guarantees</h2>
+                        </div>
 
-    <section class="choose__area-three"
+                        <div class="choose__list-wrap">
+                            <div class="choose__list-item">
+                                <div class="icon">
+
+                                    <img src="{{ asset('img/smoothinnercorner.png')}}">
+                                </div>
+                                <div class="content">
+                                    <h4 class="title">On time delivery</h4>
+                                    <span>Our essay writers make sure that all orders are submitted prior to the
+                                        deadline so that you can proofread your paper before handing it over to your
+                                        tutor.</span>
+                                </div>
+                            </div>
+                            <div class="choose__list-item">
+                                <div class="icon">
+                                    <img src="{{ asset('img/smoothinnercorner.png')}}">
+                                </div>
+                                <div class="content">
+                                    <h4 class="title">Verified Tutors</h4>
+                                    <span>All tutor profiles are meticulously checked: diplomas, identity and
+                                        background. Only profiles demonstrating academic excellence are retained,
+                                        ensuring you receive top quality essay help.</span>
+                                </div>
+                            </div>
+                            <div class="choose__list-item">
+                                <div class="icon">
+                                    <img src="{{ asset('img/smoothinnercorner.png')}}">
+                                </div>
+                                <div class="content">
+                                    <h4 class="title">100% plagiarism free!</h4>
+                                    <span>All Essay Help papers are scanned for duplicate content and are guaranteed to
+                                        be plagiarism free, providing you with unique and original content from our
+                                        expert essay writers.</span>
+                                </div>
+                            </div>
+
+                        </div>
+
+                    </div>
+                    <div class="instructor__details-Skill">
+                        <h4 class="title">Price Includes</h4>
+
+                        <div class="instructor__progress-wrap">
+                            <ul class="list-wrap">
+                                <li>
+                                    <div class="progress-item">
+                                        <h6 class="title"><span><img
+                                                    src="{{ asset('img/Checkmark.png')}}"></span>Turnitin report</h6>
+
+                                    </div>
+                                </li>
+                                <li>
+                                    <div class="progress-item">
+                                        <h6 class="title"><span><img src="{{ asset('img/Checkmark.png')}}"></span>Top
+                                            PhD Writer </h6>
+
+                                    </div>
+                                </li>
+                                <li>
+                                    <div class="progress-item">
+                                        <h6 class="title"><span><img
+                                                    src="{{ asset('img/Checkmark.png')}}"></span>Formatting </h6>
+
+                                    </div>
+                                </li>
+                                <li>
+                                    <div class="progress-item">
+                                        <h6 class="title"><span><img
+                                                    src="{{ asset('img/Checkmark.png')}}"></span>Unlimited revisions
+                                        </h6>
+
+                                    </div>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+
+                </div>
+                
+            </div>
+        </div>
+    </section>
+    <section class="choose__area-three support_d"
         style=" border-top: 3px solid #000000;border-bottom: 3px solid #000000; margin-bottom: 20px;">
         <div class="container11">
             <div class="row">
@@ -569,7 +782,7 @@
         }
         </style>
 
-        <div class="container11">
+        <div class="container top-notch">
             <div data-w-id="7dbecf2c-55a0-2342-2a55-6b8392bc8dbe" class="testimonial-section">
                 <div class="tesimonial-inner">
                     <div class="div-block-21" style="background: #FEEAA8;border: 1px solid #000000;border-radius:76px;">
@@ -714,16 +927,7 @@
                     right: auto;
                 }
 
-                .testimonial-section {
-                    flex-direction: column;
-                    justify-content: center;
-                    align-items: center;
-                    margin-bottom: 2em !important;
-                    padding-top: 20em;
-                    padding-bottom: 2em !important;
-                    display: flex;
-                    position: relative;
-                }
+                
 
                 .card-container.scott11 {
                     top: 0em;
@@ -926,8 +1130,13 @@
 
         </div>
     </section>
-    <!-- testimonial-area -->
-    <section class="testimonial__area-two section-pt-30 pb-60 testimonial__bg"
+    <!-- How it works for mobile -->
+	<section class="testimonial__area-two section-pt-30 pb-60 testimonial__bg support_m">
+        <img src="{{ asset('img/how_it_work_m.png')}}">
+    </section>
+    
+	<!-- How it works for dasktop -->
+	<section class="testimonial__area-two section-pt-30 pb-60 testimonial__bg support_d"
         style="background: #FFF4E4;border: 1px solid #000000;box-shadow: 0px 7px 0px 0px #000000;">
         <div class="container">
             <div class="row justify-content-center">
@@ -941,7 +1150,8 @@
             <div class="row">
                 <div class="col-12">
                     <div class="testimonial__item-wrap">
-                        <img src="{{ asset('img/how_it_work.png')}}">
+                        <img src="{{ asset('img/how_it_work.png')}}" >
+						
                     </div>
                 </div>
             </div>
@@ -984,7 +1194,17 @@
             </div>
         </div>
     </div>
-    <section class="about-area-three">
+    
+	
+	<!-- service we offer mobile-->
+	<section class="about-area-three support_m">
+        <div class="container">
+			<img src="{{ asset('img/service.png')}}" >
+		</div>
+    </section>
+
+    <!-- service we offer dasktop-->
+	<section class="about-area-three support_d">
         <div class="container"
             style="border: 1px solid #000000;box-shadow: 4px 4px 0px 0px #000000;border-radius:24px;">
             <div class="row">
@@ -1041,10 +1261,51 @@
     </section>
 
 
-    <section class="blog__post-area-three tg-motion-effects blog__bg"
-        style="background: #C2E3FB;margin-top: 100px;height: 100%;border: 1px solid #000000;box-shadow: 0px 4px 0px 0px #000000;">
+    <section class="blog__post-area-three tg-motion-effects blog__bg" style="background: #C2E3FB;margin-top: 5%;height: 100%;border: 1px solid #000000;box-shadow: 0px 4px 0px 0px #000000;">
 
-        <div style="margin:0 auto;position:Absolute;display: flex;top: 21%;z-index:10;width:100%;">
+        
+		
+         <div class="brand-area" style="background: #c2e3fb;">
+        <div class="marquee_mode" id="marquee_mode1">
+
+           
+                <div class="brand__item">
+                    
+                        <img src="{{ asset('img/logos/cnbc.svg')}}" class="featured-in-img">
+                    
+                </div>
+                <div class="brand__item">
+                    
+                        <img src="{{ asset('img/logos/cosmopolitian.svg')}}" class="featured-in-img">
+                    
+                </div>
+                <div class="brand__item">
+                    
+                        <img src="{{ asset('img/logos/edsurge.svg')}}" class="featured-in-img">
+                   
+                </div>
+                <div class="brand__item">
+                    
+                        <img src="{{ asset('img/logos/edutopia.svg')}}" class="featured-in-img">
+                    
+                </div>
+                <div class="brand__item">
+                   
+                        <img src="{{ asset('img/logos/forbes.svg')}}" class="featured-in-img">
+                    
+                </div>
+                <div class="brand__item">
+                    
+                        <img src="{{ asset('img/logos/lifehacker.svg')}}" class="featured-in-img">
+                    
+                </div>
+
+            
+        </div>
+		</div>
+		
+		
+		<div  class="featured-in">
             <div
                 style="width:400px;height: 400px;background: #fff;border-radius: 20px;display: flex;margin: 0 auto;/* top: 29%; */position: relative;border: 10px solid #FB9271;box-shadow: 8px 8px 0px 0px #000000;">
                 <img src="{{ asset('img/1rRk.gif')}}"
@@ -1058,43 +1319,7 @@
 
 
         </div>
-        <div class="marquee_mode" id="marquee_mode1" style="height:128px;">
-
-            <div class="row">
-                <div class="col-xl-2 col-md-2">
-                    <div class="shine__animate-item">
-                        <img src="{{ asset('img/logos/cnbc.svg')}}" style="width:250px;">
-                    </div>
-                </div>
-                <div class="col-xl-2 col-md-2">
-                    <div class="shine__animate-item">
-                        <img src="{{ asset('img/logos/cosmopolitian.svg')}}" style="width:250px;">
-                    </div>
-                </div>
-                <div class="col-xl-2 col-md-2">
-                    <div class="shine__animate-item">
-                        <img src="{{ asset('img/logos/edsurge.svg')}}" style="width:250px;">
-                    </div>
-                </div>
-                <div class="col-xl-2 col-md-2">
-                    <div class="shine__animate-item">
-                        <img src="{{ asset('img/logos/edutopia.svg')}}" style="width:250px;">
-                    </div>
-                </div>
-                <div class="col-xl-2 col-md-2">
-                    <div class="shine__animate-item">
-                        <img src="{{ asset('img/logos/forbes.svg')}}" style="width:250px;">
-                    </div>
-                </div>
-                <div class="col-xl-2 col-md-2">
-                    <div class="shine__animate-item">
-                        <img src="{{ asset('img/logos/lifehacker.svg')}}" style="width:250px;">
-                    </div>
-                </div>
-
-            </div>
-        </div>
-        <div class="marquee_mode" id="marquee_mode2" style="margin-top: 20px;">
+		<div class="marquee_mode" id="marquee_mode2" style="margin-top: 20px;">
             <div class="row">
                 <div class="col-xl-2 col-md-2">
                     <div class="shine__animate-item">

@@ -148,8 +148,10 @@
                                                     <p>{{$message['message']}}</p>
                                                     @endif
                                                     @if($message['attachment'])
-                                                    <p><a href="{{$message['attachment']}}"
-                                                            target="_blank">{{$message['attachment']}}</a></p>
+                                                    <p>
+                                                        <div><b>Admin sent an attachment</b></div>
+                                                        <div><a href="{{$message['url']}}"><i class='fas fa-file-download'></i> View attachment</a></div>
+                                                    </p>
                                                     @endif
                                                 </a>
                                             </div>
@@ -211,7 +213,9 @@
                                     </a>
                                 </div>
                             </li>
+                            @if(Auth::user()->user_type=='STUDENT')
                             <li class="nav-item"><a href="{{route('order')}}" class="btn btn-primary">New Order</a></li>
+                            @endif
                         </ul>
                     </div>
                 </nav>

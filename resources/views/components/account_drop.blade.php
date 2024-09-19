@@ -1,7 +1,8 @@
 <?php $website = \App\Models\Website::select('currency')->where('website_type','Educrafter')->first(); ?>
 <li class="nav-item dropdown user-dropdown">
-    <a class="nav-link" href="{{route('student.profile')}}" >
-        <?php echo Auth::user()->first_name.' '.Auth::user()->last_name;?>
+    <a class="nav-link" href="{{route('order.transactions')}}" >
+        <?php //echo Auth::user()->first_name.' '.Auth::user()->last_name;?>
+        Dashboard
     </a>
 </li>
 <li class="nav-item dropdown user-dropdown">

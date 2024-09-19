@@ -2808,14 +2808,14 @@ textarea.w-input, textarea.w-select {
 }
 
 .testimonial-section {
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  margin-bottom: 10em;
-  padding-top: 20em;
-  padding-bottom: 24em;
-  display: flex;
-  position: relative;
+flex-direction: column;
+justify-content: center;
+align-items: center;
+margin-bottom: 2em !important;
+padding-top: 20em;
+padding-bottom: 2em !important;
+display: flex;
+position: relative;
 }
 
 .tesimonial-inner {
@@ -4844,8 +4844,8 @@ color: #000;
   }
 
   .dot {
-    width: .7em;
-    height: .7em;
+    width: .7em !important;
+    height: .7em !important;
   }
 
   .home_services-content.off {
@@ -4972,7 +4972,7 @@ color: #000;
   }
 
   .paragraph {
-    font-size: 2.5em;
+    font-size: 1em !important;
   }
 
   .descriptor {
@@ -5049,12 +5049,12 @@ color: #000;
   }
 
   .testimonial-section {
-    padding-top: 6em;
-    padding-bottom: 6em;
+    padding-top: 0em;
+    padding-bottom: 0em;
   }
 
   .tesimonial-inner {
-    grid-row-gap: 4em;
+    grid-row-gap: 2em;
     width: auto;
   }
 
@@ -5063,9 +5063,9 @@ color: #000;
   }
 
   .div-block-21 {
-    grid-column-gap: 2em;
-    padding-left: 4em;
-    padding-right: 4em;
+    grid-column-gap: 1em;
+    padding-left: 1em;
+    padding-right: 1em;
   }
 
   .testimonial-card {
@@ -5082,8 +5082,9 @@ color: #000;
   }
 
   .testimonial-card.safepal, .testimonial-card._3, .testimonial-card.wonder-dynamics, .testimonial-card.merck {
-    width: auto;
-    transform: rotate(0);
+    width: auto !important;
+    display: none;
+    transform: rotate(0) !important;
   }
 
   .div-block-13-copy {
@@ -5174,6 +5175,7 @@ color: #000;
 
   .card-container {
     position: static;
+    display: none !important;
   }
 
   .card-container.wonder-dynamics {
@@ -5201,7 +5203,7 @@ color: #000;
   }
 
   .card-container.clutch, .card-container.pencil {
-    display: none;
+    display: none !important;
   }
 
   .card-container.chat {
@@ -5301,6 +5303,7 @@ color: #000;
   }
 
   .div-block-81 {
+    display: none !important;
     grid-column-gap: 16px;
     grid-row-gap: 16px;
     grid-template-rows: auto;
@@ -5317,7 +5320,7 @@ color: #000;
   }
 
   .large {
-    font-size: 6em;
+    font-size: 2.5em !important;
   }
 
   .medium {
@@ -5342,7 +5345,7 @@ color: #000;
   }
 
   .paragraph.slide-btn, .descriptor {
-    font-size: 3.4em;
+    font-size: 1em;
   }
 
   .descriptor.error-contact {
@@ -5481,6 +5484,7 @@ color: #000;
   }
 
   .card-container.clutch {
+    display: none;
     top: 3em;
     left: 29.7em;
   }

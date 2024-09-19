@@ -19,33 +19,35 @@ $balance = number_format($credits-$debits,2);
 
                     <span class="nav-text"><span style="float:left;"><img class="nav-icon"
                                 src="<?php echo asset('/student/');?>/img/empty-wallet.png">
-                            Balance</span> <span style="float:right;">${{$balance}}</span></span>
+                            Balance</span> <span style="float:right;">£{{$balance}}</span></span>
 
                 </a>
             </li>
             <hr>
+
+            @if(Auth::user()->user_type=='STUDENT')
             <li>
                 <a class="ai-icon" href="{{route('order.transactions')}}" aria-expanded="false">
                     <!--<i class="nav-icon fas fa-first-order"></i>-->
-
                     <span class="nav-text"><span style="float:left;"><img class="nav-icon"
                                 src="<?php echo asset('/student/');?>/img/note.png"> My orders
                         </span> 
                         <span style="float:right;" class="badge badge-primary badge-xs ms-2">{{$ordersCount}}</span></span>
-
                 </a>
             </li>
+            @endif
 
 
-            <li>
+            <?php /*<li>
                 <a class="ai-icon" href="{{route('payment.method.index')}}" aria-expanded="false">
                     <span class="nav-text">
                         <span style="float:left;"><img class="nav-icon"
                                 src="<?php echo asset('/student/');?>/img/empty-wallet.png"> Payment Method
                         </span> 
                 </a>
-            </li>
+            </li>*/ ?>
 
+            @if(Auth::user()->user_type=='STUDENT')
             <li>
                 <a class="ai-icon" href="{{route('order.statements')}}" aria-expanded="false">
                     <span class="nav-text">
@@ -54,6 +56,7 @@ $balance = number_format($credits-$debits,2);
                         </span> 
                 </a>
             </li>
+            
 
             <li><a class="ai-icon" href="" aria-expanded="false">
 
@@ -63,6 +66,7 @@ $balance = number_format($credits-$debits,2);
 
                 </a>
             </li>
+            @endif
             <li>
                 <a class="ai-icon" href="{{route('order.refer_friend')}}" aria-expanded="false">
 
@@ -73,6 +77,7 @@ $balance = number_format($credits-$debits,2);
                 </a>
 
             </li>
+            @if(Auth::user()->user_type=='STUDENT')
             <li>
                 <a class="ai-icon" href="{{route('Offers.Index')}}" aria-expanded="false">
                     <i class="la la-gift"></i>
@@ -80,6 +85,8 @@ $balance = number_format($credits-$debits,2);
                 </a>
 
             </li>
+            @endif
+
             <li>
                 <a class="ai-icon" href="{{route('contact-us')}}" aria-expanded="false">
                     <img class="nav-icon" src="<?php echo asset('/student/');?>/img/message.png">
@@ -95,14 +102,14 @@ $balance = number_format($credits-$debits,2);
         <div class="copyright">
             <div
                 style="border: 1px solid #000000;background:#FFF4E4;padding: 10px; border-radius: 10px;text-align:center;">
-                <p style="text-align:center;color:#000;font-size:15px;"><b>$50</b> for you, <b>$50</b> for them!</p>
+                <p style="text-align:center;color:#000;font-size:15px;"><b>£50</b> for you, <b>£50</b> for them!</p>
                 <img src="<?php echo asset('/student/');?>/img/Frame 1686561361.png"
                     style="margin-top:20px;margin-bottom:20px;">
                 <p style="text-align:left;color:#616161;font-size:12px;">Your friend gets $50 off their first order, and
                     you get $50 in credit when they place their first order.</p>
                 <p><input id="referralUrl" type="text" class="form form-control"
                         style="width:130px;border: 0.5px solid #000000;border-radius:4px;float:left;"
-                        value="{{env('APP_URL')}}refer/{{$referralCode}}" />
+                        value="{{refferUrl()}}" />
                     <button class="btn btn-primary" onclick="copyUrl();"
                         style="border-radius: 10px;width: 60px;padding: 6px;margin-left: 5px;">Copy</button>
                 </p>
@@ -119,7 +126,7 @@ $balance = number_format($credits-$debits,2);
             </div>
         </div>
 
-        <ul class="metismenu">
+        <?php /*<ul class="metismenu">
             <li>
                 <a class="ai-icon" href="" aria-expanded="false">
                     <img class="nav-icon" src="<?php echo asset('/student/');?>/img/message-question.png">
@@ -127,7 +134,7 @@ $balance = number_format($credits-$debits,2);
                 </a>
 
             </li>
-        </ul>
+        </ul>*/?>
 
 
     </div>

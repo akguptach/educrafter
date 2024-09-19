@@ -46,7 +46,7 @@ class StudentController extends Controller
         $student->last_name = $request->last_name;
         $student->email = $request->email;
         $student->country_code = $request->country_code;
-        $student->phone_number = $request->phone_number;
+        $student->phone_number = $request->country_code.$request->phone_number;
         $student->website_id = env('WEBSITE_ID');
         $student->password = Hash::make($request->password);
         $student->save();
@@ -186,5 +186,10 @@ class StudentController extends Controller
             $student->profile_pic = env('APP_URL').'/images/uploads/'.$safeName;
         $student->save();
         return back()->with('profileupdatedsmessage', 'Profile Updated successfully.');
+    }
+
+    public function discount(Request $request)
+    {
+        return view('discount');
     }
 }

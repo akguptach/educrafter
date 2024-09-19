@@ -80,7 +80,7 @@ class PaymentMethodController extends Controller
             if($balance == 0){
                 return redirect('/payment-method' . '#withdraw_amount')
                 ->withInput($request->all())
-                ->with('error', 'Your balance is $'.$balance);
+                ->with('error', 'Your balance is £'.$balance);
             }
 
             if($balance < $request->amount){
@@ -114,7 +114,7 @@ class PaymentMethodController extends Controller
             })
 
             ->addColumn('amount', function($row) {
-                return '$'.$row->amount;
+                return '£'.$row->amount;
             })
 
             ->addColumn('status', function($row) {

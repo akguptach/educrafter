@@ -6,6 +6,8 @@
     line-height: 2.5;
 }
 </style>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/intl-tel-input/17.0.12/css/intlTelInput.css">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/intl-tel-input/17.0.12/js/intlTelInput.min.js"></script>
 <div class="content-body">
     <!-- row -->
     <div class="container-fluid">
@@ -83,17 +85,29 @@
                                     @enderror
                                     <div class="col-md-12">
                                         <input type="tel" class="form-control form-control-lg"
-                                            placeholder="Enter your phone number" name="phone_number"
-                                            value="{{ $profile->phone_number }}">
+                                            placeholder="Enter your phone number" name="phone_number" id="phone_number"
+                                            value="<?php if(strpos($profile->phone_number, '+') !== false) {
+                                            echo $profile->phone_number;
+                                            } else{
+                                                echo '+'.$profile->phone_number;
+                                            }
+                                            
+                                            
+                                            ?>
+                                            ">
+                                            <input type="hidden" class="form-control" name="country_code" id="country_code">
+                                            <span id="phone-error" style="color: red;"></span>
                                     </div>
                                     @error('phone_number')
-                                    <div class="text-danger" style="text-align: left; font-size: small;">{{ $message }}
-                                    </div>
+                                    <div class="text-danger" style="text-align: left; font-size: small;">{{ $message }}</div>
                                     @enderror
+
+
 
                                     <div class="col-md-12">
                                         <button type="submit" class="btn btn-primary w-100">Update</button>
                                     </div>
+
                                 </div>
                             </form>
                         </div>
@@ -129,8 +143,44 @@
     </div>
 </div>
 
-
+<script src="https://cdn.jsdelivr.net/jquery.validation/1.16.0/additional-methods.min.js"></script>
 <script>
+
+$(document).ready(function() {
+    // Initialize intl-tel-input plugin
+    var input = document.querySelector("#phone_number");
+    var iti = window.intlTelInput(input, {
+        //initialCountry: "IN",
+        separateDialCode: false,
+        //utilsScript: "https://cdnjs.cloudflare.com/ajax/libs/intl-tel-input/17.0.12/js/utils.js"
+    });
+
+    input.addEventListener("countrychange", function() {
+        var selectedCountryData = iti.getSelectedCountryData();
+        var countryCode = selectedCountryData.dialCode;
+        $('#country_code').val(countryCode);
+    });
+
+    
+
+    // Validate phone number and update country code
+    $('#phone_number').on('keyup change', function() {
+        
+        var isValidNumber = iti.isValidNumber();
+        var selectedCountryData = iti.getSelectedCountryData();
+        if (!isValidNumber) {
+            $('#phone-error').text('Invalid phone number');
+        } else if (selectedCountryData == null) {
+            $('#phone-error').text('Please select a country');
+        } else {
+            $('#phone-error').text('');
+            var countryCode = selectedCountryData.dialCode;
+            
+            $('#country_code').val(countryCode);
+        }
+    });
+});
+
 $(document).ready(function() {
     $image_crop = $('#image_demo').croppie({
         enableExif: true,

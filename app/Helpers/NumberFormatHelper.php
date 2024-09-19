@@ -18,3 +18,7 @@ function thousandsCurrencyFormat($num) {
   
     return $num;
   }
+
+  function refferUrl() {
+      return env('APP_URL')."r/".Auth::user()->referral_code;
+  }

@@ -8,7 +8,7 @@
 
     <section class="singUp-area section-py-120">
         <div class="container">
-            <div class="row justify-content-center">
+            <div class="row justify-content-center"> 
                 <div class="col-xl-6 col-lg-8">
                     <div class="singUp-wrap">
                         <div align="center" style="margin-bottom: 25px;"><a href="{{ route('home') }}"><img

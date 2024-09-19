@@ -103,10 +103,10 @@
                                         
                                 </li>
 
-                                <li class="nav-item" style="margin-left: 20px;"><a href="#upi"
+                                <!--<li class="nav-item" style="margin-left: 20px;"><a href="#upi"
                                         id="upi-pane" class="btn btn-primary2" data-bs-toggle="tab"
                                         role="tab">UPI</a>
-                                </li>
+                                </li>-->
 
 
                                 <li class="nav-item" style="margin-left: 20px;"><a href="#withdraw_amount"
@@ -217,10 +217,10 @@
                                                         <!------------>
 
                                                         <div class="mb-3 row">
-                                                            <label class="col-lg-4 col-form-label" for="short_code">Short Code
+                                                            <label class="col-lg-4 col-form-label" for="short_code">Sort code
                                                             </label>
                                                             <div class="col-lg-6">
-                                                                <input type="text" class="form-control " placeholder="short code" name="short_code" value="{{old('short_code',$paymentMethods->short_code)}}" >
+                                                                <input type="text" class="form-control " placeholder="Sort code" name="short_code" value="{{old('short_code',$paymentMethods->short_code)}}" >
                                                                 @error('short_code')
                                                                 <small class="text-danger">{{ $message }}</small>
                                                                 @enderror
@@ -228,10 +228,10 @@
                                                         </div>
 
                                                         <div class="mb-3 row">
-                                                            <label class="col-lg-4 col-form-label" for="ibn_number">IBN Number
+                                                            <label class="col-lg-4 col-form-label" for="ibn_number">IBAN Number
                                                             </label>
                                                             <div class="col-lg-6">
-                                                                <input type="text" class="form-control " placeholder="ibn code" name="ibn_number" value="{{old('ibn_number',$paymentMethods->ibn_number)}}" >
+                                                                <input type="text" class="form-control " placeholder="iban code" name="ibn_number" value="{{old('ibn_number',$paymentMethods->ibn_number)}}" >
                                                                 @error('ibn_number')
                                                                 <small class="text-danger">{{ $message }}</small>
                                                                 @enderror
@@ -292,7 +292,8 @@
                                             <div class="card-footer">
                                             <input type="hidden" class="form-control" 
                                             name="default_payment" value="{{old('default_payment',$paymentMethods->default_payment)}}">
-                                                <button type="button" class="btn btn-primary formsubmit" id="bankformsubmit">Save</button>
+                                                <!--<button type="button" class="btn btn-primary formsubmit" id="bankformsubmit">Save</button>-->
+                                                <button type="submit" class="btn btn-primary formsubmit" >Save</button>
                                                 <!-- <a href="" class="btn btn-primary">Back</a> -->
                                             </div>
                                         </form> 
@@ -360,7 +361,7 @@
                                                             <div class="mb-3 row">
                                                                 <label class="col-lg-4 col-form-label" for="upi_id">Amount in wallet</label>
                                                                 <div class="col-lg-6">
-                                                                    ${{$balance}}
+                                                                £{{$balance}}
                                                                 </div>
                                                             </div>
 
@@ -392,7 +393,7 @@
                                     <div class="card-body">
                                         <div class="table-responsive">
                                             <table id="withdraw_request_table" class="table table-striped table-responsive-sm"
-                                                style="min-width: 845px">
+                                                >
                                                 <thead>
                                     <tr>
                                         <th>Sr.No.</th>

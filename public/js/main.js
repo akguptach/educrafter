@@ -195,11 +195,11 @@ var coursesSwiper = new Swiper('.courses-swiper-active', {
     observeParents: true,
     loop: true,
 	speed:3000,
-	/*direction: 'horizontal',
+	direction: 'horizontal',
 	autoplay: 
     {
       delay: 10,
-    },*/
+    },
     breakpoints: {
         '1500': {
             slidesPerView: 4,

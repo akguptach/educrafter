@@ -60,7 +60,8 @@
 
                         <div style="width:100%;float:left;">
                             <div style="width: 5%;float:left;">
-                                <a href="{{route('order.transactions')}}" style="width: 46px;padding: 15px 10px 10px 10px;/* vertical-align: middle; */height: 60px;border: 1px solid #D6D7D9;border-radius:8px;"
+                                <a href="{{route('order.transactions')}}"
+                                    style="width: 46px;padding: 15px 10px 10px 10px;/* vertical-align: middle; */height: 60px;border: 1px solid #D6D7D9;border-radius:8px;"
                                     class="btn btn-square btn-outline-light"><img
                                         src="<?php echo asset('/student/');?>/img/arrow-left.png"
                                         style="vertical-align: middle;"></a>
@@ -111,12 +112,13 @@
                                                     @endif
                                                     <span
                                                         class="msg_time">{{date('m-d-Y h:i A', strtotime($item['created_at']))}}</span>
-                                                    <p style="color: #626469;">{{$item['message']}}</p>
+                                                    <p style="color: #626469;">{!!$item['message']!!}</p>
                                                     @if($item['attachment'])
-                                                    <p>
-                                                        <a href="{{$item['attachment']}}"
-                                                            target="_blank">{{$item['attachment']}}</a>
-                                                    </p>
+                                                    @include('student_components.download_link',
+                                                    [
+                                                    'attachment'=>$item['attachment'],
+                                                    'attachmentTitle'=>""
+                                                    ])
                                                     @endif
                                                 </div>
                                             </div>

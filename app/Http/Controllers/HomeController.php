@@ -84,7 +84,7 @@ class HomeController extends Controller
         $contactData = [
             'name' => $request->input('c_name'),
             'email' => $request->input('c_email_id'),
-            'mobile_number' => $request->input('c_mobile_no'),
+            'mobile_number' => '+'.$request->input('country_code').$request->input('c_mobile_no'),
             'service' => $request->input('studylabel_id'),
             'write_us' => $request->input('c_message'),
         ];

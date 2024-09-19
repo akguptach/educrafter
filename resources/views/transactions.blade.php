@@ -137,19 +137,19 @@ p.v-data {
 
 
                         <div class="col-sm-5">
-                            Short By
+                        Sort By
 
                             <div class="bootstrap-select form form-control dropup pull-right" style="width: 100px;">
                                 <form id="sort_by_form">
                                     <select class="form form-control" tabindex="null" id="sortby" name="sortby">
                                         <option @if($orderBy=='created_at' && $order=='ASC' ) selected="selected"
-                                            @endif>Date, ASC</option>
+                                            @endif>Date, Ascending Order</option>
                                         <option @if($orderBy=='created_at' && $order=='DESC' ) selected="selected"
-                                            @endif>Date, DESC</option>
+                                            @endif>Date, Descending Order</option>
                                         <option @if($orderBy=='delivery_date' && $order=='ASC' ) selected="selected"
-                                            @endif>Deadline, ASC</option>
+                                            @endif>Deadline, Ascending Order</option>
                                         <option @if($orderBy=='delivery_date' && $order=='DESC' ) selected="selected"
-                                            @endif>Deadline, DESC</option>
+                                            @endif>Deadline, Descending Order</option>
                                     </select>
                                 </form>
                             </div>
