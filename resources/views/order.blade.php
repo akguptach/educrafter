@@ -257,8 +257,7 @@
                                 </div>
                             </div>
                         </div>
-                        <span class="title title-two">Upload your files here, if any. The file size limit is 25 Mb per
-                            file</span>
+                        <span class="title title-two">Upload any files here, with a maximum file size of 25 MB per file.</span>
                         <div class="row">
                             <div class="col-md-12">
                                 <div style="border: 1px solid #000;border-radius: 8px;margin-top: 10px;padding:10px;">
@@ -273,7 +272,7 @@
 
                         <div class="row">
                             <div class="col-md-12">
-                                <p style="text-align:center;">Choose your delivery time</p>
+                                <p style="text-align:center;">Choose your delivery date</p>
 
                                 <div class="row gy-3 hours-list mb-3">
                                     <div id="error_msg"></div>
@@ -305,7 +304,7 @@
 
                                 <li>Level of study <span class="studylabel_div">NA</span></li>
                                 <li>Grade required <span class="grade_div">NA</span></li>
-                                <li>Delivery At <span class="delivery_at_div">NA</span></li>
+                                <li>Delivery On <span class="delivery_at_div">NA</span></li>
                                 <li>Total Price <span class="total_price">0</span></li>
                                 <li id="discount_div" style="display:none;">Discount Price <span
                                         id="discountprice">0</span>
@@ -400,11 +399,10 @@
                     <div id="attachmentErrors"></div>
                     
                     <div class="form-group">
-                        <label for="attachment">Upload Zip attachment</label>
+                        <label for="attachment">Only ZIP, DOC, JPG, JPEG and PDF attachments are allowed for upload</label>
                         <input type="file" accept="application/zip, .doc, .docx,.pdf, .jpeg, .jpg"
                             class="form-control shadow-none" name="attachment" id="attachment">
-                        <small id="emailHelp" class="form-text text-muted" style="font-size: 12px;">You can upload your
-                            attecment less then 25MB. Only Zip,Doc,Pdf, JPG, JPEG</small>
+                        <small id="emailHelp" class="form-text text-muted" style="font-size: 12px;">You can upload attachments smaller than 25 MB.</small>
                     </div>
                     <div style="border: 1px #6a73fa solid;display:none;" id="uploadProgress">
                         <div id="uploadProgressBar"
@@ -414,11 +412,10 @@
 
                     <div class="text-center my-4 text-muted">AND</div>
                     <div class="form-group">
-                        <label for="fileUploadUrl">Copy/Paste WeTransfer Url</label>
+                        <label for="fileUploadUrl">Copy and paste the WeTransfer URL</label>
                         <input type="text" class="form-control shadow-none" placeholder="" name="file_upload_url"
                             id="fileUploadUrl">
-                        <small id="emailHelp" class="form-text text-muted" style="font-size: 12px;">More then 25MB file
-                            go with wetransfer <a href="https://wetransfer.com/" target="_blank">click here</a></small>
+                        <small id="emailHelp" class="form-text text-muted" style="font-size: 12px;">For files larger than 25 MB, please use WeTransfer <a href="https://wetransfer.com/" target="_blank">click here</a></small>
                     </div>
                 </div>
                 <div class="modal-footer border-top-0 d-flex justify-content-center">
@@ -491,7 +488,7 @@
 
 
                     <tr>
-                        <td>Delivery At</td>
+                        <td>Delivery On</td>
                         <td id="summary_delivery_at"></td>
                     </tr>
 

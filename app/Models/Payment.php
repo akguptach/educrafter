@@ -9,4 +9,11 @@ class Payment extends Model
 {
     use HasFactory;
     protected $table='payment';
+
+
+    public function order()
+    {
+        return $this->belongsTo('App\Models\Orders'::class, 'order_id');
+    }
+
 }

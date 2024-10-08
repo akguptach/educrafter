@@ -2,7 +2,7 @@
     <div class="form-head">
         @if($formState == 'send-email')
         <h2 class="title-heading">Reset Password!</h2>
-        <label class="label-text">Validate Your Identity to Get Reset Password Email</label>
+        <label class="label-text">Enter your email to receive an OTP for resetting your password</label>
         @endif
         @if($formState == 'verify-email')
         <h2 class="title-heading">Email Verification!</h2>
@@ -43,7 +43,7 @@
                 </div>
                 <div class="col-md-12">
                     <button type="submit" class="btn btn-primary w-100 btn-two">
-                        Send Verification Email
+                        Send OTP
                     </button>
                 </div>
             </div>

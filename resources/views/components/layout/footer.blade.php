@@ -30,7 +30,7 @@
                       <a href="https://educrafter.co/terms-and-conditions">Terms And Conditions</a>
                     </li>
                     <li>
-                      <a href="https://educrafter.co/privacy-policy">Policy Privacy</a>
+                      <a href="https://educrafter.co/privacy-policy">Privacy Policy</a>
                     </li>
                     <li>
                       <a href="https://educrafter.co/refund-policy">Refund Policy</a>
@@ -107,7 +107,7 @@
                       <a href="https://educrafter.co/faq">Faq's</a>
                     </li>
 					<li>
-                      <a href="https://mywriters.in">Become a Writer</a>
+                      <a href="javascript:;">Become a Writer</a>
                     </li>
 					
 					<li>
@@ -201,7 +201,7 @@
 	width:60px;
 	height:60px;
 	bottom:10px;
-	left:20px;
+	right:20px;
 	background-color:#25d366;
 	color:#FFF;
 	border-radius:50px;
@@ -234,10 +234,10 @@
 	<a href="https://wa.me/message/6BCQKSJORYUOL1" class="float" target="_blank">
 	<i class="fa fa-whatsapp my-float"></i>
 	</a>
-	<a href="#" class="float_right" target="_blank">
+	<!--<a href="#" class="float_right" target="_blank">
 			<img src="{{ asset('img/chat.png')}}" class="chat">
 			<img src="{{ asset('img/chat_m.png')}}" class="chat_m">
-	</a>
+	</a>-->
 	
 	
     <!-- JS here -->

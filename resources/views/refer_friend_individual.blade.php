@@ -34,7 +34,7 @@
                 <div class="card">
 
                     <div class="card-body" style="background: #f2f1f2;">
-                        <p>Refer, Earn, Repeat! It's that easy to get $50 for every friend who signs up and places their
+                        <p>Refer, Earn, Repeat! It's that easy to get £50 for every friend who signs up and places their
                             first order. No limit on referrals.</p>
                         <div class="row" style="margin-bottom: 20px;">
                             <div class="col-sm-6">

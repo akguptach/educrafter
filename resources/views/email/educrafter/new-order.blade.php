@@ -166,46 +166,41 @@ table, td { color: #000000; } #u_body a { color: #0000ee; text-decoration: under
 </table>
 
 <table id="u_content_button_1" style="font-family:'Raleway',sans-serif;" role="presentation" cellpadding="0" cellspacing="0" width="100%" border="0">
-  <tbody>
-    <tr>
-      <td class="v-container-padding-padding" style="overflow-wrap:break-word;word-break:break-word;padding:10px 10px 10px 40px;font-family:'Raleway',sans-serif;" align="left">
-        
-  <!--[if mso]><style>.v-button {background: transparent !important;}</style><![endif]-->
-	<div align="center">
-		<p><strong>1)Order Number:</strong>  {{$order->order_number}} </p>
-		<p><strong>2)Order Date:</strong> {{ \Carbon\Carbon::parse($order->created_at)->format('m-d-Y H:i:s') }}</p>
-		<p><strong>3)Total Amount:</strong> {{$order->gross_price}} </p>
-		<p><strong>4)Delivery Date:</strong> {{ \Carbon\Carbon::parse($order->delivery_date)->format('m-d-Y') }}</p>
-        <br>
-        <p>We will notify you once your order is ready. If you have any questions, feel free to contact us at info@educrafter.co or on whatsapp: +44 7845411128</p>
-		<p>Thank you for choosing Educrafter!</p>
-		<!--[if mso]></center></v:roundrect><![endif]-->
-	</div>
-
-
-
-
-
-      </td>
-    </tr>
-  </tbody>
+    <tbody>
+		<tr>
+		   <td class="v-container-padding-padding" style="overflow-wrap:break-word;word-break:break-word;padding:10px 10px 10px 40px;font-family:'Raleway',sans-serif;" align="left">
+			
+				<!--[if mso]><style>.v-button {background: transparent !important;}</style><![endif]-->
+				<div align="left">
+					<p><strong>1)Order Number:</strong>  {{$order->order_number}} </p>
+					<p><strong>2)Order Date:</strong> {{ \Carbon\Carbon::parse($order->created_at)->format('d M Y') }}</p>
+					<p><strong>3)Total Amount:</strong> {{$order->gross_price}} </p>
+					<p><strong>4)Delivery Date:</strong> {{ \Carbon\Carbon::parse($order->delivery_date)->format('d M Y') }}</p>
+					<br>
+					<p>We will notify you once your order is ready. If you have any questions, feel free to contact us at info@educrafter.co or on whatsapp: +44 7845411128</p>
+					<p>Thank you for choosing Educrafter!</p>
+					<!--[if mso]></center></v:roundrect><![endif]-->
+				</div>
+			</td>
+		</tr>
+    </tbody>
 </table>
 
 
 
 <table id="u_content_text_1" style="font-family:'Raleway',sans-serif;" role="presentation" cellpadding="0" cellspacing="0" width="100%" border="0">
-  <tbody>
-    <tr>
-      <td class="v-container-padding-padding" style="overflow-wrap:break-word;word-break:break-word;padding:20px 40px 30px;font-family:'Raleway',sans-serif;" align="left">
-        
-		<div style="font-size: 14px; line-height: 140%; text-align: left; word-wrap: break-word;">
-		<p style="line-height: 140%;"><strong>Happy crafting,</strong></p>
-		<p style="line-height: 140%;"><strong>The EduCrafter Team ✍️😊</strong></p>
-  </div>
+    <tbody>
+		<tr>
+		   <td class="v-container-padding-padding" style="overflow-wrap:break-word;word-break:break-word;padding:20px 40px 30px;font-family:'Raleway',sans-serif;" align="left">
+			
+				<div style="font-size: 14px; line-height: 140%; text-align: left; word-wrap: break-word;">
+					 <p style="line-height: 140%;"><strong>Happy crafting,</strong></p>
+					 <p style="line-height: 140%;"><strong>The EduCrafter Team ✍️😊</strong></p>
+				</div>
 
-      </td>
-    </tr>
-  </tbody>
+			</td>
+		</tr>
+    </tbody>
 </table
 
 
@@ -243,11 +238,11 @@ table, td { color: #000000; } #u_body a { color: #0000ee; text-decoration: under
   
     
     
-    <!--[if (mso)|(IE)]><td width="32" style="width:32px; padding-right: 10px;" valign="top"><![endif]-->
+     <!--[if (mso)|(IE)]><td width="32" style="width:32px; padding-right: 10px;" valign="top"><![endif]-->
     <table align="left" border="0" cellspacing="0" cellpadding="0" width="32" height="32" style="width: 32px !important;height: 32px !important;display: inline-block;border-collapse: collapse;table-layout: fixed;border-spacing: 0;mso-table-lspace: 0pt;mso-table-rspace: 0pt;vertical-align: top;margin-right: 10px">
       <tbody><tr style="vertical-align: top"><td align="left" valign="middle" style="word-break: break-word;border-collapse: collapse !important;vertical-align: top">
-        <a href="http://www.tiktok.com/@educrafter.co" title="LinkedIn" target="_blank">
-          <img src="{{ asset('email/images/image-6.png') }}" alt="LinkedIn" title="LinkedIn" width="32" style="outline: none;text-decoration: none;-ms-interpolation-mode: bicubic;clear: both;display: block !important;border: none;height: auto;float: none;max-width: 32px !important">
+        <a href="https://wa.me/message/6BCQKSJORYUOL1" title="LinkedIn" target="_blank">
+          <img src="{{ asset('email/images/whatsapp-fill.png') }}" alt="LinkedIn" title="LinkedIn" width="32" style="outline: none;text-decoration: none;-ms-interpolation-mode: bicubic;clear: both;display: block !important;border: none;height: auto;float: none;max-width: 32px !important">
         </a>
       </td></tr>
     </tbody></table>
@@ -266,13 +261,12 @@ table, td { color: #000000; } #u_body a { color: #0000ee; text-decoration: under
     <!--[if (mso)|(IE)]><td width="32" style="width:32px; padding-right: 0px;" valign="top"><![endif]-->
     <table align="left" border="0" cellspacing="0" cellpadding="0" width="32" height="32" style="width: 32px !important;height: 32px !important;display: inline-block;border-collapse: collapse;table-layout: fixed;border-spacing: 0;mso-table-lspace: 0pt;mso-table-rspace: 0pt;vertical-align: top;margin-right: 0px">
       <tbody><tr style="vertical-align: top"><td align="left" valign="middle" style="word-break: break-word;border-collapse: collapse !important;vertical-align: top">
-        <a href="https://wa.me/message/6BCQKSJORYUOL1" title="X" target="_blank">
-          <img src="{{ asset('email/images/image-3.png') }}" alt="X" title="X" width="32" style="outline: none;text-decoration: none;-ms-interpolation-mode: bicubic;clear: both;display: block !important;border: none;height: auto;float: none;max-width: 32px !important">
+        <a href="http://www.tiktok.com/@educrafter.co" title="X" target="_blank">
+          <img src="{{ asset('email/images/tiktok.png') }}" alt="X" title="X" width="32" style="outline: none;text-decoration: none;-ms-interpolation-mode: bicubic;clear: both;display: block !important;border: none;height: auto;float: none;max-width: 32px !important">
         </a>
       </td></tr>
     </tbody></table>
     <!--[if (mso)|(IE)]></td><![endif]-->
-    
     
     <!--[if (mso)|(IE)]></tr></table></td></tr></table><![endif]-->
   </div>

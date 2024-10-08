@@ -177,7 +177,12 @@ class PaymentController extends Controller
                     $referredBy = Student::where('referral_code',Auth::user()->reffered_by_code)->first();
 
                     $amount = $order->gross_price+$order->wallet_paid;
-                    $commission = ($referredBy->commission)?$referredBy->commission:'';
+
+                    $commission = 10;
+                    if($referredBy->user_type == 'AFFILIATE'){
+                        $commission = ($referredBy->commission)?$referredBy->commission:'';
+                    }
+
                     $earning = (float)$amount*(float) $commission/100;
                     if($referredBy){
                         $referral = Referral::Create([

@@ -12,9 +12,9 @@
                             
                             <h2 class="title" data-aos="fade-right" data-aos-delay="400">Edu<span>Crafter</span></h2>
 							<span class="sub-title" data-aos="fade-right" data-aos-delay="200">Your Trusted Source for <br>High-Quality,Custom Essays</span>
-                            <p data-aos="fade-right" data-aos-delay="600">Overwhelmed by essays? Educrafter's expert writers, all graduates of top universities, offer a helping hand. We understand the pressures students face, and our mission is to provide high-quality, custom papers that help you succeed. Let us simplify your journey from blank page to high grades!</p>
+                            <p data-aos="fade-right" data-aos-delay="600">Overwhelmed by essays? Educrafter’s expert writers from top universities provide high-quality, custom papers to help you succeed. Let us simplify your journey to top grades!</p>
                             <div class="banner__btn" data-aos="fade-right" data-aos-delay="800">
-                                <a href="courses.html" class="btn arrow-btn">Order Now <img src="{{asset('img/right_arrow.svg')}}" alt="img" class="injectable"></a>
+                                <a href="https://educrafter.co/order" class="btn arrow-btn">Order Now <img src="{{asset('img/right_arrow.svg')}}" alt="img" class="injectable"></a>
                             </div>
                         </div>
                     </div>
@@ -166,7 +166,7 @@
                                     <img src="{{ asset('img/Star 30.png')}}" alt="">
                                 </div>
                                 <div class="content">
-                                    <h6 class="circle rotateme">Edu Crafter . Edu Crafter . Edu Crafter .</h6>
+                                    <h6 class="circle rotateme">****Edu Crafter****Edu Crafter</h6>
                                 </div>
                             </div>
                             </div>
@@ -235,7 +235,7 @@
                         <div class="event__item-two shine__animate-item">
                             
                             <div class="event__content-two align-items-center">
-                                <h2 class="title"><a href="events-details.html">We work hard to ensure your satisfaction</a></h2>
+                                <h2 class="title">We work hard to ensure your satisfaction</h2>
                                 <p>More Than Just Essays, We Empower You to Succeed                  </p>
                                 <div class="event__meta-two">
 									<p> For over 10 years, EduCrafter has been a leading force in academic writing services. We go beyond simply providing custom-written essays. We empower students by equipping them with the tools and knowledge they need to excel in their academic journey.</p>                
@@ -251,7 +251,7 @@
 
 									<p><b>Ready to Unlock Your Potential?</b></p>
 									<p>Get started with EduCrafter today and experience the difference!</p> 
-									<a href="instructors.html" class="btn arrow-btn" style="background:#000;color:#fff;">Order Now</a>
+									<a href="https://educrafter.co/order" class="btn arrow-btn" style="background:#000;color:#fff;">Order Now</a>
                                 </div>
                             </div>
                         </div>
@@ -269,7 +269,7 @@
                     <div class="row">
                         <div class="col-lg-3 col-6">
                             <div class="fact__item">
-                                <h2 class="count"><span class="odometer" data-count="400"></span></h2>
+                                <h2 class="count"><span class="odometer" data-count="400"></span>+</h2>
                                 <p>Qualified Experts</p>
                             </div>
                         </div>
@@ -287,7 +287,7 @@
                         </div>
                         <div class="col-lg-3 col-6">
                             <div class="fact__item">
-                                <h2 class="count"><span class="odometer" data-count="10"></span></h2>
+                                <h2 class="count"><span class="odometer" data-count="10"></span>+</h2>
                                 <p>Years of experience</p>
                             </div>
                         </div>

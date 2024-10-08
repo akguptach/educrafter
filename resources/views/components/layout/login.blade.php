@@ -62,10 +62,10 @@
                             </form>
                             <div class="text-center my-4 text-muted">OR</div>
                             <div class="row gy-3 social-auth">
-                                <div class="col-sm-12" text-align="center">
-                                    <a href="#" class="btn btn-google" style="width: 38px;float: left;margin-left: 24%;"></a>
-                                    <a href="#" class="btn btn-facebook" style="width: 38px;float: left;margin-left: 3%;"></a>
-                                    <a href="#" class="btn btn-apple" style="width: 38px;float: left;margin-left: 3%;margin-right: 24%;"></a>
+                                <div class="col-sm-12">
+                                    <a href="{{route('auth.google')}}" class="btn-google" style="width: 100%;float: left;border: 1px solid #5751e1;border-radius: 25px;text-align: center;padding: 10px;"><img src="{{ asset('img/g.png')}}" alt="img"> Google</a>
+                                    <!--<a href="#" class="btn btn-facebook" style="width: 38px;float: left;margin-left: 3%;"></a>
+                                    <a href="#" class="btn btn-apple" style="width: 38px;float: left;margin-left: 3%;margin-right: 24%;"></a>-->
                                 </div>
                             </div>
                             <p class="text-center mt-4 mb-0">Don’t have an account? <a  href="{{route('signup')}}" class="link">Signup</a></p>

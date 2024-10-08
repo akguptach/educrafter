@@ -93,12 +93,12 @@
                             <div class="col-md-2  social-auth">
                                 <a href="#" class="btn btn-google "></a>
                             </div>
-                            <div class="col-md-2  social-auth">
+                            <!--<div class="col-md-2  social-auth">
                                 <a href="#" class="btn btn-facebook "></a>
                             </div>
                             <div class="col-md-2  social-auth">
                                 <a href="#" class="btn btn-apple "></a>
-                            </div>
+                            </div>-->
                         </div>
                     </div>
                     <p class="text-center mt-4 mb-0">Don’t have an account? <a href="{{route('signup')}}" class="link">Signup</a></p>

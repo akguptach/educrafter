@@ -16,14 +16,14 @@
                             <div class="courses__item">
                                 <div class="rc-post-item" style="border:0px;">
                                     <div class="rc-post-thumb">
-                                        <a href="blog-details.html">
+                                        
                                             <img src="{{$expert->image}}" alt="img">
-                                        </a>
+                                        
                                     </div>
                                     <ul class="courses__item-meta list-wrap">
                                         <li style="width:100%;">
                                             <h5>
-                                                <a href="#">{{$expert->first_name}}</a>
+                                                {{$expert->first_name}}
                                             </h5>
                                         </li>
 
@@ -216,7 +216,7 @@
                         <div class="form-grp">
                             <span><img src="{{ asset('img/Checkmark.png')}}"></span>Unlimited revision
                         </div>
-                        <button type="submit" class="btn btn-two">Connect with writer</button>
+                        <a href="https://educrafter.co/order" class="btn btn-two">Connect with writer</a>
 
 
                     </div>

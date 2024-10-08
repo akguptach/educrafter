@@ -1,72 +1,49 @@
 @extends('layout.app')
 @section('content')
 <main class="main-area fix">
-
+    <style>
+    .card p {
+          color: #404F5E;
+          font-family: "Nunito Sans", "Helvetica Neue", sans-serif;
+          font-size:20px;
+          margin: 0;
+        }
+      .card i {
+        color: #9ABC66;
+        font-size: 100px;
+        line-height: 200px;
+        margin-left:-15px;
+      }
+      .card {
+        background: white;
+        padding: 10px;
+        border-radius: 4px;
+        box-shadow: 0 2px 3px #C8D0D8;
+        display: inline-block;
+        margin: 0 auto;
+      }
+	  .navmenu{ display:none;}
+    </style>
     <!-- banner-area -->
-    <section class="banner-area banner-bg-three tg-motion-effects">
+    <section class="checkout__area section-py-120">
         <div class="container">
-            <div class="row justify-content-between align-items-start">
+            <div class="row">
                 <div class="col-lg-12">
-                    <h3>Payment  {{$order?->payment?->payment_status}}</h3>
-                    <h5>Thank You for Your Order!</h5>
-                    <table style="width:80%; margin:0 auto;" class="summary-table">
-
-                        <tr>
-                            <td width="50%">Transaction Id:</td>
-                            <td id="summary_suject">{{$order?->payment?->transaction_id}}</td>
-                        </tr>
-
-                        <?php /* <tr>
-                            <td width="50%">Subject:</td>
-                            <td id="summary_suject">{{$order?->subject?->subject_name}}</td>
-                        </tr>
-
-                        <tr>
-                            <td>Referencing Style:</td>
-                            <td id="summary_referencing_style">{{$order?->referencingStyle?->style}}</td>
-                        </tr>
-
-
-                        <tr>
-                            <td>Task type:</td>
-                            <td id="summary_task_type">{{$order?->taskType?->type_name}}</td>
-                        </tr>
-
-
-                        <tr>
-                            <td>Word count:</td>
-                            <td id="summary_word_count">{{$order?->no_of_words}}</td>
-                        </tr>
-
-                        <tr>
-                            <td>Level of study</td>
-                            <td id="summary_level_of_study">{{$order?->studyLevel?->level_name}}</td>
-                        </tr>
-
-
-                        <tr>
-                            <td>Grade required</td>
-                            <td id="summary_grade_required">{{$order?->grade?->grade_name}}</td>
-                        </tr>
-
-
-                        <tr>
-                            <td>Delivery At</td>
-                            <td id="summary_delivery_at">{{$order?->delivery_date}}</td>
-                        </tr>
-
-                        <tr>
-                            <td>Total Price:</td>
-                            <td id="summary_total_price">{{$order?->currency_code}}{{$order?->gross_price}}</td>
-                        </tr>*/ ?>
-
-                        <tr>
-                            <td colspan="2">
-                                <a href="{{route('order.receipt', $order->id)}}" class="btn btn-primary w-100">Continue to Dashboard</a>
-                            </td>
-                        </tr>
-                    </table>
-                </div>
+				<div class="" style="text-align: center;">
+					<div class="card">
+					<div style="border-radius:200px; height:200px; width:200px; background: #F8FAF5; margin:0 auto;">
+						<i class="checkmark">✓</i>
+					</div>
+						<h1>Payment Successful</h1>
+						<p>Thank You for Your Order!</p>
+						<a href="https://educrafter.co/vieworder/{{$order->id}}" class="btn btn-primary">View Your Order</a>
+						
+						<!--<p>Transaction Id</p>
+						<p>{{$order?->payment?->transaction_id}}{{$order?->payment?->payment_status}}</p>-->
+					</div>
+				</div>
+                    
+				</div>
             </div>
         </div>
     </section>

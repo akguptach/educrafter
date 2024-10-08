@@ -77,8 +77,8 @@
                                         <a style="background:#FEEAA8;border-radius:4px;padding:3px 10px 3px 10px;color:#000;font-size:14px;font-weight:400;"
                                             href="#">{{$data->status}}</a>
                                     </div>
-                                    <div style="float:left;font-size:14px;color:#000;">Delivery in
-                                        {{$data['delivery_date']}} | {{$data['no_of_words']}} words |
+                                    <div style="float:left;font-size:14px;color:#000;">Delivery on
+                                        {{date('d M Y',strtotime($data['delivery_date']))}} | {{$data['no_of_words']}} words |
                                         {{$data->taskType->type_name}}</div>
                                 </div>
                             </div>
@@ -91,8 +91,7 @@
 
                     </div>
                     <div class="card-body">
-                        <p style="text-align:center;">For added safety and your protection, keep communications and
-                            payments within Educrafter</p>
+                        <p style="text-align:center;display:none;">For added safety and your protection, keep communications and payments within Educrafter</p>
                         <div class="row">
                             <div class="col-lg-12 ">
                                 <div class="chatbox">
@@ -100,18 +99,17 @@
                                         <div class="card-body msg_card_body dlab-scroll" style="padding:0px;">
                                             @foreach($studentMessages as $index=>$item)
                                             <div class="d-flex justify-content-start mb-4">
-                                                <div class="img_cont_msg">
+                                                <!--<div class="img_cont_msg">
                                                     <img src="<?php echo asset('/student/');?>/img/1.jpg"
                                                         class="rounded-circle user_img_msg" alt="">
-                                                </div>
+                                                </div>-->
                                                 <div class="msg_cotainer">
                                                     @if ($item['sendertable_type']== 'App\Models\Student')
                                                     Me
                                                     @else
-                                                    {{$item['sendertable']['name']}}
+                                                    Emily
                                                     @endif
-                                                    <span
-                                                        class="msg_time">{{date('m-d-Y h:i A', strtotime($item['created_at']))}}</span>
+                                                    <span class="msg_time">{{date('d M Y', strtotime($item['created_at']))}}</span>
                                                     <p style="color: #626469;">{!!$item['message']!!}</p>
                                                     @if($item['attachment'])
                                                     @include('student_components.download_link',
@@ -138,8 +136,8 @@
                                                     <div class="row">
 
                                                         <div class="col-6 pt-3 pb-3">
-                                                            <span style="font-weight:bold;"> Delivery in
-                                                                {{$data['delivery_date']}}</span>
+                                                            <span style="font-weight:bold;"> Delivery on
+                                                                {{ date('d M Y',strtotime($data['delivery_date']))}}</span>
 
                                                         </div>
                                                         <div class="col-6 pt-3 pb-3">
@@ -153,6 +151,22 @@
 
                                             @endforeach
                                         </div>
+
+                                        @if($data->status == 'DELIVERED')
+                                        <div class="card-footer">
+                                        @if($data?->teacherAssigned?->attachment)
+                                                    @include('student_components.download_link',
+                                                    [
+                                                    'attachment'=>$data->teacherAssigned->attachment,
+                                                    'attachmentTitle'=>"Download your work"
+                                                    ])
+                                                    @endif
+                                        </div>
+                                        @endif
+
+
+
+
                                         <div class="card-footer type_msg">
                                             <form action="{{route('order.vieworder',['oid'=>$order_id])}}" method="post"
                                                 enctype="multipart/form-data">
@@ -170,6 +184,7 @@
                                                 </div>
                                             </form>
                                         </div>
+
                                     </div>
                                 </div>
                             </div>

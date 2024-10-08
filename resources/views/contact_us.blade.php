@@ -34,26 +34,13 @@
 										</div>
 									</div>
 
-									<div class="col-md-6">
-										<div class="form-grp">
-										    <label>Service</label>
-											<select id="studylabel_id" name="studylabel_id" required class="form-control">
-                                        <option value="">Select</option>
-                                        <option value="SOP Writing">SOP Writing</option>
-                                        <option value="Admission Essay">Admission Essay</option>
-                                        <option value="CV or Resume writing">CV or Resume writing</option>
-                                        <option value="Letter of recommendation">Letter of recommendation</option>
-                                        <option value="Personal Statement">Personal Statement</option>
-                                        <option value="Scholarship Essay Writing">Scholarship Essay Writing</option>
-                                    </select>
-										</div>
-									</div>
+									
 								
 								<div class="form-grp">
 									<textarea name="c_message" placeholder="Tell us more..." required=""></textarea>
 								</div>
 								<div>
-									<button type="submit" id="btn_checkout" class="btn btn-two btn-block btn-sm" style="background:#3B71ED;color:#fff;width:100%;text-align:center;">Submit</button>
+									<button type="button" id="btn_checkout" class="btn btn-two btn-block btn-sm" style="background:#3B71ED;color:#fff;width:100%;text-align:center;">Submit</button>
 								</div>
 								</div>
 								<p class="ajax-response mb-0"></p>
@@ -76,7 +63,7 @@
 										<div style="padding: 10px;border-bottom: 1px solid #EAEAEA;float: left;width: 100%;"><span style="width: 50%;float: left;">Email</span><span style="float: right;width: 50%;text-align: right;">info@educrafter.co</span></div>
 										<div style="padding: 10px;border-bottom: 1px solid #EAEAEA;float: left;width: 100%;"><span style="width: 50%;float: left;">Whatsapp</span><span style="float: right;width: 50%;text-align: right;">+44 (784) 541 1128</span> </div>
 										<div style="padding: 10px;border-bottom: 1px solid #EAEAEA;float: left;width: 100%;margin-bottom: 20px;"><span style="width: 50%;float: left;">Phone</span><span style="width: 50%;float: right;text-align: right;"> +44 (784) 541 1128</span> </div>
-									    <a href="#" class="btn btn-four arrow-btn btn-block btn-sm" style="background:#10C379;color:#fff;margin: 20px 20px 0px 20px;border-radius: 40px;padding: 10px;">Whatsapp us</a>
+									    <a href="https://wa.me/message/6BCQKSJORYUOL1" class="btn btn-four arrow-btn btn-block btn-sm" style="background:#10C379;color:#fff;margin: 20px 20px 0px 20px;border-radius: 40px;padding: 10px;">Whatsapp us</a>
 									</div>
 									
 								</li>
@@ -87,7 +74,7 @@
 										<h4 class="title">Educrafter</h4>
 										<div style="text-align:center;">WhatsApp Business Account</div>
 										<div style="text-align:center;">
-											<img src="https://educrafter.co/img/contect_us_qr.png">
+											<img src="https://educrafter.co/img/contect_us_qr.png?v=1" style="width:50%;">
 										</div>
 										<div style="text-align:center;">Scan this code to start a WhatsApp chat with Educrafter team directly</div>
 										

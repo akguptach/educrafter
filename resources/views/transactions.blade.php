@@ -190,8 +190,8 @@ p.v-data {
                                                         <a style="background:#FEEAA8;border-radius:4px;padding:3px 10px 3px 10px;color:#000;font-size:14px;font-weight:400;"
                                                             href="#">In Process</a>
                                                     </div>
-                                                    <div style="float:left;font-size:14px;color:#000;">Delivery in
-                                                        {{$item['delivery_date']}} | {{$item['no_of_words']}} words |
+                                                    <div style="float:left;font-size:14px;color:#000;">Delivery on
+                                                        {{date('d M Y',strtotime($item['delivery_date']))}} | {{$item['no_of_words']}} words |
                                                         {{$item->taskType->type_name}}</div>
                                                 </div>
 												<div style="width:100%;float:left;padding-top: 10px;">
@@ -253,8 +253,8 @@ p.v-data {
                                                         <a style="background:#F79E1B;border-radius:4px;padding:3px 10px 3px 10px;color:#000;font-size:14px;font-weight:400;"
                                                             href="#">Draft</a>
                                                     </div>
-                                                    <div style="float:left;font-size:14px;color:#000;">Delivery in
-                                                        {{$item['delivery_date']}} | {{$item['no_of_words']}} words |
+                                                    <div style="float:left;font-size:14px;color:#000;">Delivery on
+                                                        {{date('d M Y',strtotime($item['delivery_date']))}} | {{$item['no_of_words']}} words |
                                                         {{@$item->taskType->type_name}} | English</div>
                                                 </div>
                                             </div>
@@ -309,8 +309,8 @@ p.v-data {
                                                         <a style="background:#10C379;border-radius:4px;padding:3px 10px 3px 10px;color:#fff;font-size:14px;font-weight:400;"
                                                             href="#">Completed</a>
                                                     </div>
-                                                    <div style="float:left;font-size:14px;color:#000;">Delivery in
-                                                        {{$item['delivery_date']}} | {{$item['no_of_words']}} words |
+                                                    <div style="float:left;font-size:14px;color:#000;">Delivery on
+                                                        {{date('d M Y',strtotime($item['delivery_date']))}} | {{$item['no_of_words']}} words |
                                                         {{$item->taskType->type_name}} | English</div>
                                                 </div>
                                             </div>

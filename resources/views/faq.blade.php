@@ -41,7 +41,7 @@
 									<?php  use App\Models\Faq as Faq_Model;
 
 									$website_id = env('WEBSITE_ID');
-									$faq_datas = Faq_Model::where('website_id', $website_id)->orderBy('id', 'desc')->get()->toArray();
+									$faq_datas = Faq_Model::where('website_id', $website_id)->orderBy('id', 'ASC')->get()->toArray();
 									?>
 									@if(!empty($faq_datas))
 								     @foreach ($faq_datas as $faq)

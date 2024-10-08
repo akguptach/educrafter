@@ -26,9 +26,9 @@ class StudentController extends Controller
         $website_id = env('WEBSITE_ID');
         $validator = Validator::make($request->all(), [
             'first_name' => 'required|min:3',
-            'last_name' => 'required|min:3',
+            'last_name' => 'required|min:3 ',
             //'email' => 'required|unique:student,email',
-            'email' => ['required', 'email', Rule::unique('student', 'email')->where(function ($query) use ($website_id) {
+            'email' => ['required', 'email:rfc,dns', Rule::unique('student', 'email')->where(function ($query) use ($website_id) {
                 $query->where('website_id', '=', $website_id);
             }),],
             //'phone_number' => 'required|unique:student,phone_number',
@@ -85,8 +85,8 @@ class StudentController extends Controller
         $data = ['url'=>'https://educrafter.co/login','student'=>$request->first_name];
         try {
             Mail::send('email.signup', $data, function ($message) use ($data, $request) {
-                $message->from(env('MAIL_FROM_ADDRESS'), env('MAIL_FROM_NAME'));
-                $message->subject("Signup");
+                $message->from(env('MAIL_FROM_ADDRESS'), env('MAIL_FROM_NAME_STUDENT'));
+                $message->subject("Welcome To Educrafter, ".ucfirst($request->first_name)." ! Let's Craft Something Amazing.");
                 $message->to($request->email);
             });
 

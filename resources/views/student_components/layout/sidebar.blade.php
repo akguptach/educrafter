@@ -105,8 +105,8 @@ $balance = number_format($credits-$debits,2);
                 <p style="text-align:center;color:#000;font-size:15px;"><b>£50</b> for you, <b>£50</b> for them!</p>
                 <img src="<?php echo asset('/student/');?>/img/Frame 1686561361.png"
                     style="margin-top:20px;margin-bottom:20px;">
-                <p style="text-align:left;color:#616161;font-size:12px;">Your friend gets $50 off their first order, and
-                    you get $50 in credit when they place their first order.</p>
+                <p style="text-align:left;color:#616161;font-size:12px;">Your friend gets £50 off their first order, and
+                    you get £50 in credit when they place their first order.</p>
                 <p><input id="referralUrl" type="text" class="form form-control"
                         style="width:130px;border: 0.5px solid #000000;border-radius:4px;float:left;"
                         value="{{refferUrl()}}" />

@@ -42,13 +42,13 @@
                             </div>
 							<div class="account__social">
 							    <div class="row">
-								    <div class="col-4 col-sm-4">
+								    <div class="col-12 col-sm-12">
 										<a href="{{route('auth.google')}}" class="account__social-btn">
-											<img src="{{ asset('img/g.png')}}" alt="img">
+											<img src="{{ asset('img/g.png')}}" alt="img"> Google
 										</a>
 									</div>
 
-									<div class="col-4 col-sm-4">
+									<!--<div class="col-4 col-sm-4">
 										<a href="#" class="account__social-btn" style="background:  #3B71ED;border: 1px solid #3B71ED">
 											<img src="{{ asset('img/f.png')}}" alt="img">
 										   
@@ -58,7 +58,7 @@
 										<a href="#" class="account__social-btn" style="background: #05070F;border: 1px solid #000000;">
 											<img src="{{ asset('img/a.png')}}" alt="img">
 										</a>
-								    </div>
+								    </div>-->
 								</div>
                             </div>
                             

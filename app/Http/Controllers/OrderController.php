@@ -37,6 +37,7 @@ class OrderController extends Controller
 
     public function __construct(protected OrderService $orderService)
     {
+        $this->middleware('IsStudentBelongsTo')->only(['vieworder','paymentFailed','orderReceipt']);
     }
 
     public function index()
@@ -721,7 +722,7 @@ class OrderController extends Controller
                 return \Carbon\Carbon::parse($row->payment->created_at)->format('d/m/Y');
             })
             ->addColumn('description', function($row) {
-                return 'Demo';
+                return $row->order_number;
             })
             ->addColumn('type', function($row) {
                 return '<span class="badge badge-rounded badge-warning">Purchased</span>';

@@ -16,6 +16,7 @@ use Livewire\Livewire;
 use App\Http\Controllers\ServicesController as Services;
 use App\Http\Controllers\ErrorController as Error;
 use App\Http\Controllers\OrderRatingController as OrderRating;
+use App\Http\Controllers\SeoController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -30,6 +31,10 @@ use App\Http\Controllers\OrderRatingController as OrderRating;
 Route::get("/dashboard", function(){
     return view("dashboard");
  });
+ 
+
+ Route::get('/generate-sitemap', [SeoController::class, 'index'])->name('generate-sitemap');
+
  
 
 Route::get('/', [Home::class, 'index'])->name('home');

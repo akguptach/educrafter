@@ -67,6 +67,7 @@ class HomeController extends Controller
 
     public function dateformat()
     {
+		
         echo date('jS F, Y', strtotime($_GET['date']));
         die;
     }

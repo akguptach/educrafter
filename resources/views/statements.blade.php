@@ -38,7 +38,7 @@ $balance = $credits-$debits;
                                     <tr>
                                         <th>Sr.No.</th>
                                         <th>Date</th>
-                                        <th>Description</th>
+                                        <th>Task Id</th>
                                         <th>Type</th>
                                         <th>Amount</th>
 

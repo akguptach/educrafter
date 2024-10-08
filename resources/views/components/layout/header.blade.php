@@ -44,13 +44,23 @@ $services = \App\Models\Service::where('website_type', 'Educrafter')->where('typ
     <link rel="stylesheet" href="{{ asset('css/plyr.css') }}">
     <link rel="stylesheet" href="{{ asset('css/spacing.css') }}">
     <link rel="stylesheet" href="{{ asset('css/tg-cursor.css') }}">
-    <link rel="stylesheet" href="{{ asset('css/main.css?w=8') }}">
+    <link rel="stylesheet" href="{{ asset('css/main.css?w=10') }}">
 
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Antonio:wght@100..700&display=swap" rel="stylesheet">
 	 <script src="{{ asset('js/vendor/jquery-3.6.0.min.js') }}"></script>
      <script src="{{ asset('js/bootstrap.min.js') }}"></script>
+	 
+	 
+	<!-- Google tag (gtag.js) -->
+	<script async src="https://www.googletagmanager.com/gtag/js?id=G-WBGFJ7R17G"></script>
+	<script>
+	window.dataLayer = window.dataLayer || [];
+	function gtag(){dataLayer.push(arguments);}
+		gtag('js', new Date());
+		gtag('config', 'G-WBGFJ7R17G');
+	</script>
 </head>
 
 <body>
@@ -102,7 +112,7 @@ $services = \App\Models\Service::where('website_type', 'Educrafter')->where('typ
                                             <a href="{{route('Tutors.List')}}">Tutors</a>
                                         </li>
 
-                                        <li class="menu-item-has-children"><a href="#">Services</a>
+                                        <li class="menu-item-has-children"><a href="https://educrafter.co/services">Services</a>
                                             <ul class="sub-menu">
                                                 @foreach($services as $service)
                                                 @if($service->seo && $service->seo->seo_url_slug)

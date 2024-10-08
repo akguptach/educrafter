@@ -3627,16 +3627,19 @@ textarea {
   margin-bottom: 25px;
   font-size: 8em;
   font-weight: 700;
-  text-transform: capitalize;
+  /*text-transform: capitalize;*/
 }
 @media (max-width: 1199.98px) {
+  .banner__content-two .banner__all-recipe{
+	  display:none;
+  }
   .banner__content-two .title {
-    font-size: 6em;
+    font-size: 4em;
   }
 }
 @media (max-width: 767.98px) {
   .banner__content-two .title {
-    font-size: 4em;
+    font-size: 3em;
   }
   #home_logo_slider{
 	margin-top: 20px !important;
@@ -4537,7 +4540,6 @@ textarea {
     margin-bottom: 0;
     font-size: 18px;
     font-weight: 400;
-    width: 48%;
     color: #000;
     line-height: 25px;
 }

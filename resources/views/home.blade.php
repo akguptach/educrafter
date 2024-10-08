@@ -292,7 +292,7 @@
 
                         </div>
                         
-											<!-- fact-area -->
+						<!-- fact-area -->
 							<section class="fact__area">
 								<div class="container">
 									<div class="fact__inner-wrap">
@@ -551,7 +551,7 @@
                 <div class="col-xl-6 col-lg-6 col-md-6">
 
                     <div class="" style="position: absolute;top: 50px;/* left: 10px; */right: 40%;">
-                        <img src="{{ asset('img/Group%201000007894.svg')}}" alt="" style="width:200px;">
+                        <a href="https://educrafter.co/order"><img src="{{ asset('img/Group%201000007894.svg')}}" alt="" style="width:200px;"></a>
 
                     </div>
                     <div class="" style="position: relative;margin-top: 172px;left: -92px;">

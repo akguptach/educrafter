@@ -103,9 +103,9 @@
                     <div class="banner__content-seven" align="center">
                         <h1 class="title" data-aos="fade-right" data-aos-delay="400"
                             style="text-align: center;font-family: 'Sofia Pro'; font-weight: bold; font-style: normal;">
-                            Refer friends and earn upto $10,000</h1>
+                            Refer friends and earn upto £50,000</h1>
                         <p data-aos="fade-right" data-aos-delay="600" style="text-align: center;">
-                            Refer, Earn, Repeat! It's that easy to get $50 for every friend who signs up and places
+                            Refer, Earn, Repeat! It's that easy to get £50 for every friend who signs up and places
                             their first order. No limit on referrals.</p>
 
 
@@ -249,7 +249,7 @@
                         <div style="width:300px;font-family: 'Sofia Pro', sans-serif;">
                             <span
                                 style="font-size:48px;font-weight:bold;float: left;width: 100%;color:#000;height: 60px;">3</span>
-                            <span style="font-size:20px;;float: left;width: 100%;color:#000;">Earn $50 when your friends
+                            <span style="font-size:20px;;float: left;width: 100%;color:#000;">Earn £50 when your friends
                                 sign up and place their first order.</span>
                         </div>
                     </div>
@@ -399,7 +399,7 @@
                     <div style="width: 250px;float:left;/* height: 300px; *//* border-radius: 30px; */">
                         <div class="testimonial__item-wrap"
                             style="background:#fff;text-align: center;border-radius: 30px 0px 0px 30px;padding: 20px;">
-                            <p style="font-size:38px;text-align:center;font-family: 'Sofia Pro', sans-serif;">$250</p>
+                            <p style="font-size:38px;text-align:center;font-family: 'Sofia Pro', sans-serif;">£250</p>
                             <p style="color:#999FB2;font-size:16px;font-family: 'Inter';text-align:center;">for</p>
                             <p style="font-size:18px;text-align:center;font-family: 'Sofia Pro', sans-serif;">5 friends
                             </p>
@@ -408,9 +408,9 @@
                     </div>
                     <div style="width: 250px;float:left;margin-left: 10px;margin-right: 10px;">
                         <div class="testimonial__item-wrap" style="background:#fff;text-align: center;padding: 20px;">
-                            <p style="font-size:38px;text-align:center;font-family: 'Sofia Pro', sans-serif;">$250</p>
+                            <p style="font-size:38px;text-align:center;font-family: 'Sofia Pro', sans-serif;">£500</p>
                             <p style="color:#999FB2;font-size:16px;font-family: 'Inter';text-align:center;">for</p>
-                            <p style="font-size:18px;text-align:center;font-family: 'Sofia Pro', sans-serif;">5 friends
+                            <p style="font-size:18px;text-align:center;font-family: 'Sofia Pro', sans-serif;">10 friends
                             </p>
                             <img src="{{ asset('img/rf_3.png')}}">
                         </div>
@@ -418,9 +418,9 @@
                     <div style="width: 250px;float:left;">
                         <div class="testimonial__item-wrap"
                             style="background:#fff;text-align: center;border-radius: 0px 30px 30px 0px;padding: 20px;">
-                            <p style="font-size:38px;text-align:center;font-family: 'Sofia Pro', sans-serif;">$250</p>
+                            <p style="font-size:38px;text-align:center;font-family: 'Sofia Pro', sans-serif;">£1000</p>
                             <p style="color:#999FB2;font-size:16px;font-family: 'Inter';text-align:center;">for</p>
-                            <p style="font-size:18px;text-align:center;font-family: 'Sofia Pro', sans-serif;">5 friends
+                            <p style="font-size:18px;text-align:center;font-family: 'Sofia Pro', sans-serif;">20 friends
                             </p>
                             <img src="{{ asset('img/rf_2.png')}}">
                         </div>
@@ -431,7 +431,7 @@
                 <div class="col-12">
                     <p
                         style="font-size:24px;text-align:center;font-family: 'Sofia Pro', sans-serif;margin-top: 20px;margin-bottom: 20px;">
-                        Help your friends with their writing needs and earn $50 for every successful order they place.
+                        Help your friends with their writing needs and earn £50 for every successful order they place.
                         It's that simple!</p>
                 </div>
                 <div class="col-12" align="center"><button class="btn btn-primary" style="background:#000;">Refer a
@@ -451,7 +451,7 @@
                     <h2 class="title" style="font-family: 'Sofia Pro', sans-serif;font-weight:bold;font-size:4em;">Share
                         your referral link with friends and start earning!</h2>
                     <p style="color:#000;font-size:18px;font-weight: 500;">Refer, Earn, Repeat! It's that easy to get
-                        $50 for every friend who signs up and places their first order. No limit on referrals.</p>
+                        £50 for every friend who signs up and places their first order. No limit on referrals.</p>
                 </div>
                 <div style="width:20%">
                     <form action="#" class="newsletter__form-two">

@@ -10,7 +10,7 @@ use App\Models\Expert;
 
 class ExpertDetailsController extends Controller
 {
-    public function __construct()
+    public function __construct() 
     {
     }
 
@@ -30,6 +30,8 @@ class ExpertDetailsController extends Controller
         $experts = Expert::with(['subjects'=>function($q){
             $q->where('show_on_home', 1)->orderBy('subject_number');
         }])->get();
-        return view('expert/list',compact('experts'));
+        $page = ServiceSeo::where('seo_url_slug', 'homepage')->first();
+        $faq_page =   ServiceFaq::where('service_id', $page->service_id)->get();
+        return view('expert/list',compact('experts','faq_page'));
     }
 }
